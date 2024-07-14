@@ -1,3 +1,46 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+@layer utilities {
+  .shadow-5xl {
+    box-shadow: rgba(253, 116, 116, 0.1) 0px 54px 45px,
+      rgba(80, 245, 245, 0.05) 0px -12px 30px,
+      rgba(30, 108, 255, 0.05) 0px 4px 6px, rgba(0, 0, 0, 0.17) 0px 12px 13px,
+      rgba(0, 0, 0, 0.09) 0px -3px 5px;
+  }
+  .shadow-dropdown {
+    box-shadow: 0px 15px 10px 1px rgba(20, 20, 20, 0.3);
+  }
+
+  .shadow-inset {
+    box-shadow: rgb(190, 207, 221) 3px 3px 6px 0px inset,
+      rgba(255, 255, 255, 0.5) -3px -3px 6px 1px inset;
+  }
+
+  .glass-box-shadow {
+    box-shadow: 0px 20px 20px 1px rgba(0, 0, 0, 0.39);
+  }
+}
+
+@layer components {
+  .items-container {
+    @apply bg-white shadow-inset hover:shadow-5xl transition-all duration-1000 ease-in;
+  }
+
+  .public-nav-items {
+    @apply flex flex-col w-full text-lg sm:text-xl items-center md:flex-row md:items-center gap-12 md:gap-[6vw] xl:gap-[4vw] text-black md:items-container md:p-4 md:px-8 xl:px-6 rounded-xl hover:scale-[1.01];
+  }
+
+  .glass-container {
+    @apply md:bg-white/10 glass-box-shadow p-2;
+  }
+}
+
+* {
+  color-scheme: dark;
+}
+
+body {
+  background: #fff;
+}
