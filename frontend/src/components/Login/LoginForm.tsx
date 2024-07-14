@@ -31,6 +31,8 @@ const LoginForm = () => {
       welcomeText="Welcome back!"
       additionalText="Welcome back to the place made specifically for aspiring developers, like you, looking to take their skills to the next level."
       sideImage="/login-img.webp"
+      bottomText="Don't have an account yet? Register"
+      redirectTo="/signup"
     />
   );
 };
