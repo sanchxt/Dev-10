@@ -2,15 +2,19 @@ import { useEffect } from "react";
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
 
 import { useTheme } from "./hooks/useTheme";
-import Login from "./pages/Login";
 import NotFoundPage from "./pages/NotFoundPage";
+import Login from "./pages/Login";
 import SignUp from "./pages/SignUp";
 
 const router = createBrowserRouter([
   {
-    path: "/login",
+    path: "/",
     element: <Login />,
     errorElement: <NotFoundPage />,
+  },
+  {
+    path: "/login",
+    element: <Login />,
   },
   {
     path: "/signup",
