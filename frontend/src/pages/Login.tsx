@@ -1,4 +1,4 @@
-import LoginContainer from "../components/Login/LoginContainer";
+import LoginForm from "../components/Login/LoginForm";
 import PublicNavbar from "../components/shared/PublicNavbar";
 
 const Login = () => {
@@ -16,7 +16,7 @@ const Login = () => {
           backgroundSize: "cover",
         }}
       >
-        <LoginContainer />
+        <LoginForm />
       </div>
     </section>
   );
