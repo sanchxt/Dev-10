@@ -3,9 +3,10 @@ import { useEffect, useRef } from "react";
 
 interface ButtonProps {
   isDisabled: boolean;
+  text: string;
 }
 
-const SpotlightButton = ({ isDisabled }: ButtonProps) => {
+const SpotlightButton = ({ isDisabled, text }: ButtonProps) => {
   const btnRef = useRef<HTMLButtonElement>(null);
   const spanRef = useRef<HTMLSpanElement>(null);
 
@@ -44,7 +45,7 @@ const SpotlightButton = ({ isDisabled }: ButtonProps) => {
       disabled={isDisabled}
     >
       <span className="pointer-events-none relative z-10 mix-blend-difference">
-        {isDisabled ? "Loading..." : "Login"}
+        {isDisabled ? "Loading..." : text}
       </span>
       <span
         ref={spanRef}

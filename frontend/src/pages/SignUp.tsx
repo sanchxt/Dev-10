@@ -1,7 +1,7 @@
-import LoginForm from "../components/Login/LoginForm";
 import PublicNavbar from "../components/shared/PublicNavbar";
+import SignupForm from "../components/Sign-Up/SignupForm";
 
-const Login = () => {
+const SignUp = () => {
   return (
     <section className="w-screen h-screen overflow-hidden flex flex-col">
       <div className="h-fit shadow-xl">
@@ -16,10 +16,10 @@ const Login = () => {
           backgroundSize: "cover",
         }}
       >
-        <LoginForm />
+        <SignupForm />
       </div>
     </section>
   );
 };
 
-export default Login;
+export default SignUp;
