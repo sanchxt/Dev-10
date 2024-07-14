@@ -12,6 +12,7 @@ import { ZodSchema } from "zod";
 import "./image-hover.css";
 import SpotlightButton from "./SpotlightButton";
 import PublicSocialIcons from "./PublicSocialIcons";
+import { Link } from "react-router-dom";
 
 interface FormContainerProps<T extends FieldValues> {
   schema: ZodSchema<T>;
@@ -22,6 +23,8 @@ interface FormContainerProps<T extends FieldValues> {
   welcomeText: string;
   additionalText: string;
   sideImage: string;
+  bottomText: string;
+  redirectTo: string;
 }
 
 const FormContainer = <T extends FieldValues>({
@@ -33,6 +36,8 @@ const FormContainer = <T extends FieldValues>({
   welcomeText,
   additionalText,
   sideImage,
+  bottomText,
+  redirectTo,
 }: FormContainerProps<T>) => {
   const {
     register,
@@ -47,10 +52,13 @@ const FormContainer = <T extends FieldValues>({
 
   const isLogin = submitButtonText === "Login";
 
+  const bottomTextArray = bottomText.split(" ");
+  const remainingBottomText = bottomText.slice(0, bottomText.lastIndexOf(" "));
+
   return (
     <section className="mx-auto w-full h-full md:rounded-2xl md:w-[95%] md:h-[95%] glass-container flex flex-col">
       <h1
-        className={`text-3xl sm:text-5xl xl:text-6xl flex justify-center items-center pt-8 ${
+        className={`text-3xl sm:text-5xl xl:text-6xl flex justify-center items-center pt-8 pb-2 ${
           isLogin && "pb-8"
         }`}
       >
@@ -104,7 +112,16 @@ const FormContainer = <T extends FieldValues>({
               </div>
             ))}
 
-            <div className="flex justify-center mt-12 md:mt-16">
+            <p className="text-center text-sm text-gray-300 italic">
+              {remainingBottomText}{" "}
+              <span className="text-blue-400">
+                <Link to={redirectTo}>
+                  {bottomTextArray[bottomTextArray.length - 1]}
+                </Link>
+              </span>
+            </p>
+
+            <div className="flex justify-center mt-12 md:mt-8">
               <SpotlightButton
                 isDisabled={isSubmitting}
                 text={submitButtonText}
@@ -117,7 +134,6 @@ const FormContainer = <T extends FieldValues>({
               </div>
             )}
           </form>
-
           <PublicSocialIcons />
         </div>
 
