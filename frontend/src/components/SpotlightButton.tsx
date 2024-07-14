@@ -17,22 +17,22 @@ const SpotlightButton = ({ isDisabled, text }: ButtonProps) => {
       const offset = e.offsetX;
       const left = `${(offset / width) * 100}%`;
 
-      spanRef.current!.animate({ left }, { duration: 250, fill: "forwards" });
+      spanRef.current?.animate({ left }, { duration: 800, fill: "forwards" });
     };
 
     const handleMouseLeave = () => {
-      spanRef.current!.animate(
+      spanRef.current?.animate(
         { left: "50%" },
-        { duration: 100, fill: "forwards" }
+        { duration: 300, fill: "forwards" }
       );
     };
 
-    btnRef.current!.addEventListener("mousemove", handleMouseMove);
-    btnRef.current!.addEventListener("mouseleave", handleMouseLeave);
+    btnRef.current?.addEventListener("mousemove", handleMouseMove);
+    btnRef.current?.addEventListener("mouseleave", handleMouseLeave);
 
     return () => {
-      btnRef.current!.removeEventListener("mousemove", handleMouseMove);
-      btnRef.current!.removeEventListener("mouseleave", handleMouseLeave);
+      btnRef.current?.removeEventListener("mousemove", handleMouseMove);
+      btnRef.current?.removeEventListener("mouseleave", handleMouseLeave);
     };
   }, []);
 
