@@ -1,7 +1,17 @@
 import { useEffect } from "react";
+import { createBrowserRouter, RouterProvider } from "react-router-dom";
 
 import { useTheme } from "./hooks/useTheme";
 import Login from "./pages/Login";
+import NotFoundPage from "./pages/NotFoundPage";
+
+const router = createBrowserRouter([
+  {
+    path: "/login",
+    element: <Login />,
+    errorElement: <NotFoundPage />,
+  },
+]);
 
 const App = () => {
   const { theme } = useTheme();
@@ -9,11 +19,7 @@ const App = () => {
     document.body.className = theme === "LIGHT" ? "light-theme" : "dark-theme";
   }, [theme]);
 
-  return (
-    <div className="w-full">
-      <Login />
-    </div>
-  );
+  return <RouterProvider router={router} />;
 };
 
 export default App;
