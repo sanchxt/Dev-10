@@ -1,11 +1,10 @@
-import PrivateNavbar from "../components/PrivateNavbar";
+import Sidebar from "../components/shared/Sidebar";
 
 const Home = () => {
   return (
-    <section className="flex flex-col">
-      <header className="bg-red-300">
-        <PrivateNavbar />
-      </header>
+    <section className="md:flex">
+      <Sidebar />
+      <div className="text-black bg-green-400 flex-grow">hi</div>
     </section>
   );
 };
