@@ -32,7 +32,7 @@ const SignupForm = () => {
       errorMessage="E-mail has already been taken"
       welcomeText="Welcome!"
       additionalText="Welcome to the place made specifically for aspiring developers, like you, looking to take their skills to the next level."
-      sideImage="/login-img.webp"
+      sideImage="/login-gradient.webp"
       bottomText="Already have an account? Login"
       redirectTo="/login"
     />

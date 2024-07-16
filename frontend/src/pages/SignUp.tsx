@@ -11,7 +11,7 @@ const SignUp = () => {
       <div
         className="w-full flex-grow flex items-center"
         style={{
-          background: "url('/test-bg.webp')",
+          background: "url('/public-bg.webp')",
           backgroundRepeat: "no-repeat",
           backgroundSize: "cover",
         }}

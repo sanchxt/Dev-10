@@ -58,7 +58,7 @@ const FormContainer = <T extends FieldValues>({
   return (
     <section className="mx-auto w-full h-full md:rounded-2xl md:w-[95%] md:h-[95%] glass-container flex flex-col">
       <h1
-        className={`text-3xl sm:text-5xl xl:text-6xl flex justify-center items-center pt-8 pb-2 ${
+        className={`text-3xl lg:text-4xl flex justify-center items-center pt-4 3xl:pt-8 ${
           isLogin && "pb-8"
         }`}
       >
@@ -68,7 +68,7 @@ const FormContainer = <T extends FieldValues>({
       <div className="w-full flex-grow md:rounded-b-2xl flex">
         <div className="w-full lg:w-[60%] 2xl:w-1/2 lg:rounded-bl-2xl px-1 sm:px-2 flex flex-col">
           <p
-            className={`w-full sm:w-4/5 md:w-3/4 italic text-gray-400 text-sm lg:text-base xl:text-xl pt-1 ${
+            className={`w-full sm:w-4/5 md:w-3/4 italic text-gray-400 text-sm lg:text-base 3xl:text-xl pt-1 ${
               isLogin && "pt-2"
             }`}
           >
@@ -105,7 +105,7 @@ const FormContainer = <T extends FieldValues>({
                 </label>
 
                 {errors[id] && (
-                  <div className="text-red-300">
+                  <div className="text-red-400 text-xs">
                     {(errors[id]?.message as string) || ""}
                   </div>
                 )}
@@ -137,9 +137,9 @@ const FormContainer = <T extends FieldValues>({
           <PublicSocialIcons />
         </div>
 
-        <div className="w-0 lg:w-[40%] 2xl:w-1/2 lg:rounded-2xl flex items-center">
+        <div className="w-0 h-[95%] 3xl:w-full lg:w-[40%] 2xl:w-1/2 lg:rounded-2xl flex items-start pt-2">
           <div
-            className="w-[98%] h-[95%] bg-red-300 mx-auto rounded-2xl bg-contain bg-blend-hard-light saturate-50 bg-repeat login-img glow"
+            className="w-[98%] h-[90%] bg-blue-200 mx-auto rounded-2xl bg-blend-hard-light saturate-50 bg-no-repeat bg-cover login-img glow"
             style={{
               backgroundImage: `url(${sideImage})`,
             }}

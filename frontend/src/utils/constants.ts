@@ -9,3 +9,5 @@ export const navItems = [
   },
   { href: "/", label: "FAQs", icon: "/faq-icon.svg", width: 28, height: 28 },
 ];
+
+export const USERS_URL = "/api/users";
