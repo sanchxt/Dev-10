@@ -53,6 +53,14 @@
   .floating-label {
     @apply absolute text-sm text-gray-400 md:text-gray-600 font-semibold duration-1000 transform -translate-y-4 scale-75 top-4 z-10 origin-[0] start-2.5 peer-focus:text-blue-100 peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-4;
   }
+
+  .sidebar-link {
+    @apply p-2.5 flex rounded-md gap-6 items-center md:cursor-pointer cursor-default duration-300 font-medium;
+  }
+
+  .sidebar-link-active {
+    @apply bg-blue-100 text-blue-600;
+  }
 }
 
 * {
