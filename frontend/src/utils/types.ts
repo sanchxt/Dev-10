@@ -13,3 +13,10 @@ interface SidebarIconProps {
   className: string;
 }
 export type SidebarIconType = ComponentType<SidebarIconProps>;
+
+export interface ApiError {
+  data?: {
+    message?: string;
+  };
+  error?: string;
+}
