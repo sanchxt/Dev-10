@@ -7,14 +7,14 @@ import { useDispatch, useSelector } from "react-redux";
 import { logout } from "../../slices/authSlice";
 import { useLogoutMutation } from "../../slices/usersApiSlice";
 import { SidebarIconType } from "../../utils/types";
-import { loadTheme, setTheme } from "../../slices/themeSlice";
+import { setTheme } from "../../slices/themeSlice";
 import { RootState } from "../../store";
 
 interface SubMenuProps {
   data: {
     name: string;
     icon: SidebarIconType;
-    menu: string[];
+    menu: { label: string; url: string }[];
   };
 }
 
@@ -41,6 +41,32 @@ const SubMenu = ({ data }: SubMenuProps) => {
     dispatch(setTheme(theme === "LIGHT" ? "DARK" : "LIGHT"));
   };
 
+  const actionHandlers: { [key: string]: () => void } = {
+    logout: handleLogout,
+    theme: handleToggleTheme,
+  };
+
+  const renderMenuItem = (subMenu: { label: string; url: string }) => {
+    if (actionHandlers[subMenu.label]) {
+      return (
+        <button
+          onClick={actionHandlers[subMenu.label]}
+          className="sidebar-link !bg-transparent capitalize"
+        >
+          {subMenu.label}
+        </button>
+      );
+    }
+    return (
+      <NavLink
+        to={subMenu.url}
+        className="sidebar-link !bg-transparent capitalize"
+      >
+        {subMenu.label}
+      </NavLink>
+    );
+  };
+
   return (
     <>
       <li
@@ -59,42 +85,11 @@ const SubMenu = ({ data }: SubMenuProps) => {
       </li>
 
       <motion.ul
-        animate={
-          isSubMenuOpen
-            ? {
-                height: "fit-content",
-              }
-            : {
-                height: 0,
-              }
-        }
+        animate={isSubMenuOpen ? { height: "fit-content" } : { height: 0 }}
         className="flex flex-col pl-14 text-[0.8rem] font-normal overflow-hidden h-0"
       >
         {data.menu.map((subMenu) => (
-          <li key={subMenu}>
-            {subMenu === "logout" ? (
-              <button
-                onClick={handleLogout}
-                className="sidebar-link !bg-transparent capitalize"
-              >
-                {subMenu}
-              </button>
-            ) : subMenu === "theme" ? (
-              <button
-                onClick={handleToggleTheme}
-                className="sidebar-link !bg-transparent capitalize"
-              >
-                {subMenu}
-              </button>
-            ) : (
-              <NavLink
-                to="/"
-                className="sidebar-link !bg-transparent capitalize"
-              >
-                {subMenu}
-              </NavLink>
-            )}
-          </li>
+          <li key={subMenu.label}>{renderMenuItem(subMenu)}</li>
         ))}
       </motion.ul>
     </>
