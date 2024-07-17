@@ -23,19 +23,29 @@ export const sidebarSubMenusList = [
   {
     name: "favorites",
     icon: RxStarFilled,
-    menu: ["roadmaps", "resources"],
+    menu: [
+      { label: "roadmaps", url: "favorites/roadmaps" },
+      { label: "resources", url: "favorites/resources" },
+    ],
   },
   {
     name: "contribute",
     icon: FaCirclePlus,
-    menu: ["roadmaps", "resources"],
+    menu: [
+      { label: "roadmaps", url: "/contribute/roadmaps" },
+      { label: "resources", url: "/contribute/resources" },
+    ],
   },
 ];
 export const sidebarSettingsSubMenu = [
   {
     name: "settings",
     icon: FaCog,
-    menu: ["profile", "theme", "logout"],
+    menu: [
+      { label: "profile", url: "/settings/profile" },
+      { label: "theme", url: "" },
+      { label: "logout", url: "" },
+    ],
   },
 ];
 export const sidebarMenu = [
