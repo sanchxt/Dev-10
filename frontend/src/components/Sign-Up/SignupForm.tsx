@@ -1,20 +1,41 @@
+import { useEffect } from "react";
+import { toast } from "react-toastify";
+import { useNavigate } from "react-router-dom";
+import { UseFormSetError } from "react-hook-form";
+import { useDispatch, useSelector } from "react-redux";
+
 import FormContainer from "../FormContainer";
 import { signupSchema } from "../../utils/schema";
-import { SignupFormFields } from "../../utils/types";
-import { UseFormSetError } from "react-hook-form";
+import { setCredentials } from "../../slices/authSlice";
+import { ApiError, SignupFormFields } from "../../utils/types";
+import { useRegisterMutation } from "../../slices/usersApiSlice";
 
 const SignupForm = () => {
+  const navigate = useNavigate();
+  const dispatch = useDispatch();
+  const { userInfo } = useSelector(
+    (state: { auth: { userInfo: object | null } }) => state.auth
+  );
+  const [register, { isLoading }] = useRegisterMutation();
+
+  useEffect(() => {
+    if (userInfo) {
+      navigate("/");
+    }
+  }, [navigate, userInfo]);
+
   const onSubmit = async (
     data: SignupFormFields,
     setError: UseFormSetError<SignupFormFields>
   ) => {
     try {
-      await new Promise((resolve) => setTimeout(resolve, 1000));
-      console.log(data);
+      const { name, email, password } = data;
+      const response = await register({ name, email, password }).unwrap();
+      dispatch(setCredentials({ ...response }));
+      navigate("/");
     } catch (error) {
-      setError("root", {
-        message: "E-mail has already been taken",
-      });
+      const err = error as ApiError;
+      toast.error(err?.data?.message || err?.error);
     }
   };
 
@@ -23,8 +44,8 @@ const SignupForm = () => {
       schema={signupSchema}
       onSubmit={onSubmit}
       fields={[
+        { id: "name", label: "Your name", type: "text" },
         { id: "email", label: "Your e-mail", type: "text" },
-        { id: "confirmEmail", label: "Confirm e-mail", type: "text" },
         { id: "password", label: "Password", type: "password" },
         { id: "confirmPassword", label: "Confirm password", type: "password" },
       ]}
@@ -35,6 +56,7 @@ const SignupForm = () => {
       sideImage="/login-gradient.webp"
       bottomText="Already have an account? Login"
       redirectTo="/login"
+      isLoading={isLoading}
     />
   );
 };

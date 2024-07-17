@@ -1,19 +1,23 @@
-import { BiMenu, BiMoon, BiX } from "react-icons/bi";
-import { navItems } from "../../utils/constants";
-import logo from "/dev10-logo.webp";
 import { useState } from "react";
-import { useTheme } from "../../hooks/useTheme";
+import { BiMenu, BiMoon, BiX } from "react-icons/bi";
+import { useSelector, useDispatch } from "react-redux";
+
+import logo from "/dev10-logo.webp";
+import { RootState } from "../../store";
+import { navItems } from "../../utils/constants";
+import { setTheme } from "../../slices/themeSlice";
 
 const PublicNavbar = () => {
   const [mobileDrawerOpen, setMobileDrawerOpen] = useState<boolean>(false);
-  const { theme, setTheme } = useTheme();
+  const theme = useSelector((state: RootState) => state.theme.theme);
+  const dispatch = useDispatch();
 
   const toggleDrawer = () => {
     setMobileDrawerOpen(!mobileDrawerOpen);
   };
 
   const toggleTheme = () => {
-    setTheme(theme === "LIGHT" ? "DARK" : "LIGHT");
+    dispatch(setTheme(theme === "LIGHT" ? "DARK" : "LIGHT"));
   };
 
   return (

@@ -25,6 +25,7 @@ interface FormContainerProps<T extends FieldValues> {
   sideImage: string;
   bottomText: string;
   redirectTo: string;
+  isLoading: boolean;
 }
 
 const FormContainer = <T extends FieldValues>({
@@ -38,6 +39,7 @@ const FormContainer = <T extends FieldValues>({
   sideImage,
   bottomText,
   redirectTo,
+  isLoading,
 }: FormContainerProps<T>) => {
   const {
     register,
@@ -124,7 +126,7 @@ const FormContainer = <T extends FieldValues>({
             <div className="flex justify-center mt-12 md:mt-8">
               <SpotlightButton
                 isDisabled={isSubmitting}
-                text={submitButtonText}
+                text={isLoading ? "Loading..." : submitButtonText}
               />
             </div>
 

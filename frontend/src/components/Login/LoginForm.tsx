@@ -1,27 +1,22 @@
-import { useNavigate } from "react-router-dom";
-import { useDispatch, useSelector } from "react-redux";
+import { useEffect } from "react";
 import { toast } from "react-toastify";
+import { useNavigate } from "react-router-dom";
+import { UseFormSetError } from "react-hook-form";
+import { useDispatch, useSelector } from "react-redux";
 
 import { useLoginMutation } from "../../slices/usersApiSlice";
 import { setCredentials } from "../../slices/authSlice";
 import FormContainer from "../FormContainer";
 import { loginSchema } from "../../utils/schema";
-import { LoginFormFields } from "../../utils/types";
-import { UseFormSetError } from "react-hook-form";
-import { useEffect } from "react";
-
-interface ApiError {
-  data?: {
-    message?: string;
-  };
-  error?: string;
-}
+import { ApiError, LoginFormFields } from "../../utils/types";
 
 const LoginForm = () => {
   const navigate = useNavigate();
   const dispatch = useDispatch();
   const [login, { isLoading }] = useLoginMutation();
-  const { userInfo } = useSelector((state: { auth: any }) => state.auth);
+  const { userInfo } = useSelector(
+    (state: { auth: { userInfo: object | null } }) => state.auth
+  );
 
   useEffect(() => {
     if (userInfo) {
@@ -58,6 +53,7 @@ const LoginForm = () => {
       sideImage="/login-gradient.webp"
       bottomText="Don't have an account yet? Register"
       redirectTo="/signup"
+      isLoading={isLoading}
     />
   );
 };
