@@ -1,6 +1,7 @@
 import { z } from "zod";
 import { loginSchema, signupSchema, updateProfileSchema } from "./schema";
 import { ComponentType } from "react";
+import { FieldError } from "react-hook-form";
 
 export type ThemeType = "LIGHT" | "DARK";
 
@@ -26,4 +27,18 @@ export interface ApiError {
     message?: string;
   };
   error?: string;
+}
+
+export type UpdateFieldType =
+  | "name"
+  | "email"
+  | "oldPassword"
+  | "newPassword"
+  | "description";
+export interface UpdateFieldConfig {
+  name: UpdateFieldType;
+  type: string;
+  placeholder: string;
+  error: FieldError | undefined;
+  errorMessage: string | undefined;
 }
