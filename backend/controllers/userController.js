@@ -91,6 +91,14 @@ const updateUserProfile = asyncHandler(async (req, res) => {
     throw new Error("User not found");
   }
 
+  if (req.body.email) {
+    const existingUser = await User.findOne({ email: req.body.email });
+    if (existingUser && existingUser._id.toString() !== user._id.toString()) {
+      res.status(400);
+      throw new Error("E-mail is already taken");
+    }
+  }
+
   if (req.body.oldPassword) {
     const isMatch = await user.matchPassword(req.body.oldPassword);
 
