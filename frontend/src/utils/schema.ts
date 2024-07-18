@@ -1,4 +1,5 @@
 import { z } from "zod";
+import { maxWords } from "./helpers";
 
 export const loginSchema = z.object({
   email: z.string().email(),
@@ -36,5 +37,10 @@ export const updateProfileSchema = z.object({
     .refine((value) => !value || value.length >= 8, {
       message: "New password should be at least 8 characters long",
     }),
-  description: z.string().optional(),
+  description: z
+    .string()
+    .optional()
+    .refine((value) => maxWords(value, 50), {
+      message: "Description can't exceed 50 words",
+    }),
 });
