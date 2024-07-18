@@ -97,7 +97,7 @@ const Sidebar = () => {
 
         {/* menu */}
         <div className="flex flex-col h-full">
-          <ul className="whitespace-pre px-2.5 text-[0.9rem] py-5 flex flex-col gap-1 font-medium overflow-x-hidden h-[70%] md:h-[68%]">
+          <ul className="whitespace-pre px-2.5 text-[0.9rem] py-5 flex flex-col gap-1 font-medium overflow-x-hidden h-[70%] md:h-[68%] scrollbar-thin scrollbar-thumb-slate-700/20 scrollbar-track-slate-300/40">
             {sidebarMenu.map((item) => (
               <li key={item.name}>
                 <NavLink to={item.href} className="sidebar-link">

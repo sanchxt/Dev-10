@@ -9,13 +9,10 @@ import Login from "./pages/Login";
 import SignUp from "./pages/SignUp";
 import Home from "./pages/Home";
 import { RootState } from "./store";
+import ProfilePage from "./pages/ProfilePage";
+import PrivateRoute from "./components/PrivateRoute";
 
 const router = createBrowserRouter([
-  {
-    path: "/",
-    element: <Home />,
-    errorElement: <NotFoundPage />,
-  },
   {
     path: "/login",
     element: <Login />,
@@ -23,6 +20,23 @@ const router = createBrowserRouter([
   {
     path: "/signup",
     element: <SignUp />,
+  },
+  {
+    element: <PrivateRoute />,
+    children: [
+      {
+        path: "/",
+        element: <Home />,
+      },
+      {
+        path: "/settings/profile",
+        element: <ProfilePage />,
+      },
+    ],
+  },
+  {
+    path: "*",
+    element: <NotFoundPage />,
   },
 ]);
 
