@@ -20,6 +20,18 @@ const userSchema = mongoose.Schema(
       type: String,
       default: "",
     },
+    createdResources: [
+      {
+        type: mongoose.Schema.Types.ObjectId,
+        ref: "Resource",
+      },
+    ],
+    favoriteResources: [
+      {
+        type: mongoose.Schema.Types.ObjectId,
+        ref: "Resource",
+      },
+    ],
   },
   {
     timestamps: true,
