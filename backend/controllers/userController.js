@@ -1,6 +1,7 @@
 import asyncHandler from "express-async-handler";
 
 import User from "../models/userModel.js";
+import Resource from "../models/resourceModel.js";
 import generateToken from "../utils/generateToken.js";
 
 // desc     auth user / get token
@@ -128,10 +129,141 @@ const updateUserProfile = asyncHandler(async (req, res) => {
   });
 });
 
+// @desc Add resources to favoriteResources
+// @route POST /api/users/favorites/:id
+// @access Private
+const addFavorite = asyncHandler(async (req, res) => {
+  const user = await User.findById(req.user._id);
+  if (!user) {
+    res.status(404);
+    throw new Error("User not found");
+  }
+
+  const resource = await Resource.findById(req.params.id);
+  if (!resource) {
+    res.status(404);
+    throw new Error("Resource not found");
+  }
+
+  if (resource.user.toString() === req.user._id.toString()) {
+    res.status(403);
+    throw new Error("You cannot favorite your own resource");
+  }
+
+  if (user.favoriteResources.includes(resource._id)) {
+    res.status(400);
+    throw new Error("Resource is already favorited");
+  }
+
+  user.favoriteResources.push(resource._id);
+  resource.favoritesCount += 1;
+  await user.save();
+  await resource.save();
+
+  res.status(200).json({ message: "Resource added to favorites" });
+});
+
+// @desc Remove resource from favoriteResources
+// @route DELETE /api/users/favorites/:id
+// @access Private
+const removeFavorite = asyncHandler(async (req, res) => {
+  const user = await User.findById(req.user._id);
+  const resource = await Resource.findById(req.params.id);
+  if (!user) {
+    res.status(404);
+    throw new Error("User not found");
+  }
+
+  if (!resource) {
+    res.status(404);
+    throw new Error("Resource not found");
+  }
+
+  const resourceIndex = user.favoriteResources.indexOf(req.params.id);
+  if (resourceIndex === -1) {
+    res.status(400);
+    throw new Error("Resource not in favorites");
+  }
+
+  user.favoriteResources.splice(resourceIndex, 1);
+  resource.favoritesCount -= 1;
+  await user.save();
+  await resource.save();
+
+  res.status(200).json({ message: "Resource removed from favorites" });
+});
+
+// @desc Get all favorite resources
+// @route GET /api/users/favorites/resources
+// @access Private
+const favoriteResources = asyncHandler(async (req, res) => {
+  const user = await User.findById(req.user._id).populate({
+    path: "favoriteResources",
+    select: "_id",
+  });
+  if (!user) {
+    res.status(404);
+    throw new Error("User not found");
+  }
+
+  const favoriteResourceIds = user.favoriteResources.map(
+    (resource) => resource._id
+  );
+  res.status(200).json(favoriteResourceIds);
+});
+
+// @desc Remove all favorited resources
+// @route PUT /api/users/favorites/resources
+// @access Private
+const removeAllFavoriteResources = asyncHandler(async (req, res) => {
+  const user = await User.findById(req.user._id);
+  if (!user) {
+    res.status(404);
+    throw new Error("User not found");
+  }
+
+  const favoriteResourcesIds = user.favoriteResources;
+
+  await Resource.updateMany(
+    { _id: { $in: favoriteResourcesIds } },
+    { $inc: { favoritesCount: -1 } }
+  );
+
+  user.favoriteResources = [];
+  await user.save();
+
+  res.status(200).json({ message: "All favorites removed" });
+});
+
+// @desc Get all resources created by the user
+// @route /api/users/created-resources
+// @access Private
+const getCreatedResources = asyncHandler(async (req, res) => {
+  const user = await User.findById(req.user._id).populate({
+    path: "createdResources",
+    select: "_id",
+  });
+  if (!user) {
+    res.status(404);
+    throw new Error("User not found");
+  }
+
+  const createdResourceIds = user.createdResources.map(
+    (createdResource) => createdResource._id
+  );
+
+  res.status(200).json(createdResourceIds);
+});
+
 export {
   authUser,
   registerUser,
   logoutUser,
   getUserProfile,
   updateUserProfile,
+  addFavorite,
+  removeFavorite,
+  favoriteResources,
+  removeAllFavoriteResources,
+  getCreatedResources,
 };
