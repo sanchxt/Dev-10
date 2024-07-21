@@ -1,5 +1,11 @@
 import { z } from "zod";
-import { loginSchema, signupSchema, updateProfileSchema } from "./schema";
+import {
+  aboutResourceCollectionSchema,
+  linksResourceFormSchema,
+  loginSchema,
+  signupSchema,
+  updateProfileSchema,
+} from "./schema";
 import { ComponentType } from "react";
 import { FieldError } from "react-hook-form";
 
@@ -8,6 +14,10 @@ export type ThemeType = "LIGHT" | "DARK";
 export type LoginFormFields = z.infer<typeof loginSchema>;
 export type SignupFormFields = z.infer<typeof signupSchema>;
 export type UpdateProfileFields = z.infer<typeof updateProfileSchema>;
+export type AboutResourceCollectionFields = z.infer<
+  typeof aboutResourceCollectionSchema
+>;
+export type LinkResourceFormFields = z.infer<typeof linksResourceFormSchema>;
 
 // sidebar icons
 interface SidebarIconProps {
