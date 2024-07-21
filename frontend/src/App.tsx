@@ -4,13 +4,14 @@ import { ToastContainer } from "react-toastify";
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
 import "react-toastify/dist/ReactToastify.css";
 
-import NotFoundPage from "./pages/NotFoundPage";
+import Home from "./pages/Home";
 import Login from "./pages/Login";
 import SignUp from "./pages/SignUp";
-import Home from "./pages/Home";
 import { RootState } from "./store";
 import ProfilePage from "./pages/ProfilePage";
+import NotFoundPage from "./pages/NotFoundPage";
 import PrivateRoute from "./components/PrivateRoute";
+import ContributeResources from "./pages/ContributeResources";
 
 const router = createBrowserRouter([
   {
@@ -31,6 +32,10 @@ const router = createBrowserRouter([
       {
         path: "/settings/profile",
         element: <ProfilePage />,
+      },
+      {
+        path: "/contribute/resources",
+        element: <ContributeResources />,
       },
     ],
   },
