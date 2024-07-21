@@ -44,3 +44,37 @@ export const updateProfileSchema = z.object({
       message: "Description can't exceed 50 words",
     }),
 });
+
+export const aboutResourceCollectionSchema = z.object({
+  title: z
+    .string()
+    .min(3, { message: "Title must contain at least 3 letters" })
+    .max(20, { message: "Title can't contain more than 20 letters" }),
+  tags: z
+    .array(
+      z
+        .string()
+        .max(8, { message: "Each tag can't be more than 8 letters long" })
+    )
+    .min(1, { message: "At least one tag is required" })
+    .max(3, { message: "Can't have more than 3 tags" }),
+  description: z
+    .string()
+    .min(4, { message: "Description must be at least 4 letters long" })
+    .max(50, { message: "Description can't exceed 50 letters" }),
+  notes: z
+    .string()
+    .min(4, { message: "Notes must be at least 4 letters long" })
+    .max(80, { message: "Notes can't exceed 80 letters" }),
+});
+
+export const linksResourceFormSchema = z.object({
+  essentials: z
+    .array(z.string().url())
+    .min(2, { message: "At least 2 essential links are required" })
+    .max(5, { message: "Cannot have more than 5 essential links" }),
+  extras: z
+    .array(z.string().url())
+    .min(1, { message: "At least 1 extra resource is required" })
+    .max(5, { message: "Cannot have more than 5 extras resource links" }),
+});
