@@ -109,7 +109,7 @@ const deleteResource = asyncHandler(async (req, res) => {
       res.status(401);
       throw new Error("Not authorized to delete this resource");
     }
-    await resource.remove();
+    await Resource.deleteOne({ _id: req.params.id });
     res.json({ message: "Resource removed" });
   } else {
     res.status(404);
