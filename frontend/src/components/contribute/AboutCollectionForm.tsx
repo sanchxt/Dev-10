@@ -1,7 +1,8 @@
 import { useRef, useState } from "react";
-import { SubmitHandler, useForm } from "react-hook-form";
-import { AboutResourceCollectionFields } from "../../utils/types";
 import { zodResolver } from "@hookform/resolvers/zod";
+import { SubmitHandler, useForm } from "react-hook-form";
+
+import { AboutResourceCollectionFields } from "../../utils/types";
 import { aboutResourceCollectionSchema } from "../../utils/schema";
 
 interface AboutCollectionFormProps {
@@ -183,7 +184,7 @@ const AboutCollectionForm = ({ onSubmit }: AboutCollectionFormProps) => {
           ) : (
             <span className="absolute text-[0.6rem] md:text-[0.65rem] pl-0.5 pt-1 font-semibold text-gray-400 hidden transition-all ease-in-out group-focus-within:block bottom-0">
               Short Description About the Collection{" "}
-              <span className="font-extrabold">(Max 30 words)</span>
+              <span className="font-extrabold">(Max 150 letters)</span>
             </span>
           )}
         </div>
@@ -209,7 +210,7 @@ const AboutCollectionForm = ({ onSubmit }: AboutCollectionFormProps) => {
           ) : (
             <span className="absolute text-[0.6rem] md:text-[0.65rem] pl-0.5 pt-1 font-semibold text-gray-400 hidden transition-all ease-in-out group-focus-within:block bottom-0">
               Additional Notes for Learners{" "}
-              <span className="font-extrabold">(Max 30 words)</span>
+              <span className="font-extrabold">(Max 200 letters)</span>
             </span>
           )}
         </div>
