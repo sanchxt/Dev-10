@@ -61,20 +61,24 @@ export const aboutResourceCollectionSchema = z.object({
   description: z
     .string()
     .min(4, { message: "Description must be at least 4 letters long" })
-    .max(50, { message: "Description can't exceed 50 letters" }),
+    .max(150, { message: "Description can't exceed 50 letters" }),
   notes: z
     .string()
     .min(4, { message: "Notes must be at least 4 letters long" })
-    .max(80, { message: "Notes can't exceed 80 letters" }),
+    .max(200, { message: "Notes can't exceed 80 letters" }),
 });
 
 export const linksResourceFormSchema = z.object({
   essentials: z
-    .array(z.string().url())
-    .min(2, { message: "At least 2 essential links are required" })
-    .max(5, { message: "Cannot have more than 5 essential links" }),
+    .array(
+      z
+        .string()
+        .max(100, { message: "Each link can't have more than 100 characters" })
+    )
+    .min(1, { message: "At least one link is required" })
+    .max(5, { message: "Can't have more than 5 links" }),
   extras: z
-    .array(z.string().url())
+    .array(z.string())
     .min(1, { message: "At least 1 extra resource is required" })
     .max(5, { message: "Cannot have more than 5 extras resource links" }),
 });
