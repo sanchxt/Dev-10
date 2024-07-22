@@ -17,6 +17,7 @@ export const navItems = [
 ];
 
 export const USERS_URL = "/api/users";
+export const RESOURCS_URL = "/api/resources";
 
 // sidebar
 export const sidebarSubMenusList = [
