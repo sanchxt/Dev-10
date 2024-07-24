@@ -51,6 +51,9 @@ export const sidebarSettingsSubMenu = [
 ];
 export const sidebarMenu = [
   { name: "Home", href: "/", size: 23, icon: IoHome },
-  { name: "Resources", href: "/", size: 23, icon: GrResources },
+  { name: "Resources", href: "/resources", size: 23, icon: GrResources },
   { name: "Roadmaps", href: "/", size: 23, icon: FaCodeBranch },
 ];
+
+export const sortResourceDropdownItems = ["recent", "oldest"];
+export const filterResourceDropdownItems = ["Highest", "Lowest"];
