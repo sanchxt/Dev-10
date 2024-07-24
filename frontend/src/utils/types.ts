@@ -52,3 +52,21 @@ export interface UpdateFieldConfig {
   error: FieldError | undefined;
   errorMessage: string | undefined;
 }
+
+export interface CreateResourceRequest {
+  essentials: string[];
+  extras: string[];
+  description: string;
+  notes: string;
+  tags: string[];
+  title: string;
+}
+
+export interface GetResourcesRequest {
+  search?: string;
+  sort?: string;
+  filter?: string;
+}
+
+export type ResourceSortType = "recent" | "oldest";
+export type ResourceByRate = "highest" | "lowest";
