@@ -1,14 +1,6 @@
 import { apiSlice } from "./apiSlice";
 import { RESOURCS_URL } from "../utils/constants";
-
-interface CreateResourceRequest {
-  essentials: string[];
-  extras: string[];
-  description: string;
-  notes: string;
-  tags: string[];
-  title: string;
-}
+import { CreateResourceRequest, GetResourcesRequest } from "../utils/types";
 
 export const resourcesApiSlice = apiSlice.injectEndpoints({
   endpoints: (builder) => ({
@@ -19,7 +11,15 @@ export const resourcesApiSlice = apiSlice.injectEndpoints({
         body: data,
       }),
     }),
+    getResources: builder.query<any, GetResourcesRequest>({
+      query: ({ search, sort, filter }) => ({
+        url: `${RESOURCS_URL}`,
+        method: "GET",
+        params: { search, sort, filter },
+      }),
+    }),
   }),
 });
 
-export const { useCreateResourceMutation } = resourcesApiSlice as any;
+export const { useCreateResourceMutation, useGetResourcesQuery } =
+  resourcesApiSlice as any;
