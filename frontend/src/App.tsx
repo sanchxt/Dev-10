@@ -8,6 +8,7 @@ import Home from "./pages/Home";
 import Login from "./pages/Login";
 import SignUp from "./pages/SignUp";
 import { RootState } from "./store";
+import Resources from "./pages/Resources";
 import ProfilePage from "./pages/ProfilePage";
 import NotFoundPage from "./pages/NotFoundPage";
 import PrivateRoute from "./components/PrivateRoute";
@@ -36,6 +37,10 @@ const router = createBrowserRouter([
       {
         path: "/contribute/resources",
         element: <ContributeResources />,
+      },
+      {
+        path: "/resources",
+        element: <Resources />,
       },
     ],
   },
