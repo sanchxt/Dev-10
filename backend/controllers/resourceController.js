@@ -6,19 +6,46 @@ import {
   calculateRatingBreakdown,
 } from "../utils/calculateRatings.js";
 
-// /api/resources
-
 // @desc Get all resources
 // @route GET /api/resources
 // @access Public
 const getResources = asyncHandler(async (req, res) => {
   const pageSize = 6;
   const page = Number(req.query.pageNumber) || 1;
+  const searchQuery = req.query.search || "";
+  const sort = req.query.sort || "recent";
+  const filter = req.query.filter || "";
 
-  const count = await Resource.countDocuments({});
-  const resources = await Resource.find({})
+  const searchCriteria = searchQuery
+    ? {
+        $or: [
+          { title: { $regex: searchQuery, $options: "i" } },
+          { tags: { $regex: searchQuery, $options: "i" } },
+        ],
+      }
+    : {};
+
+  const filterCriteria = filter === "official" ? { isOfficial: true } : {};
+  const sortCriteria =
+    sort === "recent"
+      ? { createdAt: -1 }
+      : sort === "oldest"
+      ? { createdAt: 1 }
+      : {};
+
+  const count = await Resource.countDocuments({
+    ...searchCriteria,
+    ...filterCriteria,
+  });
+
+  const resources = await Resource.find({
+    ...searchCriteria,
+    ...filterCriteria,
+  })
+    .sort(sortCriteria)
     .limit(pageSize)
     .skip(pageSize * (page - 1));
+
   res.status(200).json({ resources, page, pages: Math.ceil(count / pageSize) });
 });
 
@@ -165,6 +192,22 @@ const addResourceRating = asyncHandler(async (req, res) => {
   }
 });
 
+// @desc Get resources by tag
+// @route GET /api/resources/:tag
+// @access Private
+const getResourcesByTag = asyncHandler(async (req, res) => {
+  const pageSize = 6;
+  const page = Number(req.query.pageNumber) || 1;
+  const tagId = req.params.tag;
+
+  const count = await Resource.countDocuments({ tags: { $in: [tagId] } });
+  const resources = await Resource.find({ tags: { $in: [tagId] } })
+    .limit(pageSize)
+    .skip(pageSize * (page - 1));
+
+  res.status(200).json({ resources, page, pages: Math.ceil(count / pageSize) });
+});
+
 export {
   getResources,
   createResource,
@@ -172,4 +215,5 @@ export {
   updateResource,
   deleteResource,
   addResourceRating,
+  getResourcesByTag,
 };
