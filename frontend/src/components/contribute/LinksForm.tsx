@@ -73,7 +73,7 @@ const LinksForm = ({ formData }: LinksFormProps) => {
     );
   };
 
-  const onSubmit = async (data: any) => {
+  const onSubmit = async (data: LinkResourceFormFields) => {
     const finalFormData = {
       ...formData,
       essentials: data.essentials,
