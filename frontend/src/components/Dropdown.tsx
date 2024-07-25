@@ -2,7 +2,7 @@ import { IoIosArrowForward } from "react-icons/io";
 import { useDropdown } from "../hooks/useDropdown";
 import { AnimatePresence, motion } from "framer-motion";
 
-const Dropdown = ({ label, items, selectedItem, onSelect }: any) => {
+const Dropdown = ({ label, items, onSelect }: any) => {
   const { isOpen, toggle, close } = useDropdown();
 
   return (
