@@ -14,7 +14,7 @@ const getResources = asyncHandler(async (req, res) => {
   const page = Number(req.query.pageNumber) || 1;
   const searchQuery = req.query.search || "";
   const sort = req.query.sort || "recent";
-  const filter = req.query.filter || "";
+  const filter = req.query.filter || "highest";
 
   const searchCriteria = searchQuery
     ? {
@@ -25,26 +25,30 @@ const getResources = asyncHandler(async (req, res) => {
       }
     : {};
 
-  const filterCriteria = filter === "official" ? { isOfficial: true } : {};
-  const sortCriteria =
-    sort === "recent"
-      ? { createdAt: -1 }
-      : sort === "oldest"
-      ? { createdAt: 1 }
-      : {};
+  let sortCriteria = {};
+
+  if (sort === "recent") {
+    sortCriteria.createdAt = -1;
+  } else if (sort === "oldest") {
+    sortCriteria.createdAt = 1;
+  }
 
   const count = await Resource.countDocuments({
     ...searchCriteria,
-    ...filterCriteria,
   });
 
-  const resources = await Resource.find({
+  let resources = await Resource.find({
     ...searchCriteria,
-    ...filterCriteria,
   })
     .sort(sortCriteria)
     .limit(pageSize)
     .skip(pageSize * (page - 1));
+
+  if (filter === "highest") {
+    resources = resources.sort((a, b) => b.averageRating - a.averageRating);
+  } else if (filter === "lowest") {
+    resources = resources.sort((a, b) => a.averageRating - b.averageRating);
+  }
 
   res.status(200).json({ resources, page, pages: Math.ceil(count / pageSize) });
 });
@@ -62,6 +66,8 @@ const createResource = asyncHandler(async (req, res) => {
     throw new Error(error.message);
   }
 
+  const isAdmin = req.user.isAdmin;
+
   const resource = new Resource({
     user: req.user._id,
     title,
@@ -70,6 +76,7 @@ const createResource = asyncHandler(async (req, res) => {
     essentials,
     extras,
     notes,
+    isOfficial: isAdmin ? true : false,
   });
 
   const createdResource = await resource.save();
