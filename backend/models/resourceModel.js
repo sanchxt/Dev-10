@@ -57,6 +57,10 @@ const resourceSchema = mongoose.Schema(
       type: Number,
       default: 0,
     },
+    isOfficial: {
+      type: Boolean,
+      default: false,
+    },
   },
   {
     timestamps: true,
