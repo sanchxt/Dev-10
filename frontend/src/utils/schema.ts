@@ -49,7 +49,7 @@ export const aboutResourceCollectionSchema = z.object({
   title: z
     .string()
     .min(3, { message: "Title must contain at least 3 letters" })
-    .max(20, { message: "Title can't contain more than 20 letters" }),
+    .max(40, { message: "Title can't contain more than 40 letters" }),
   tags: z
     .array(
       z
