@@ -1,6 +1,7 @@
 import { UseFormClearErrors, UseFormSetError } from "react-hook-form";
 import { linksResourceFormSchema } from "./schema";
 import { LinkResourceFormFields } from "./types";
+import { MutableRefObject, SetStateAction } from "react";
 
 export const maxWords = (value: string | undefined, max: number) => {
   if (!value) return true;
@@ -39,5 +40,15 @@ export const handleKeyDown = (
       setValue(validation.data);
       setInputValue("");
     }
+  }
+};
+
+export const focusAndClearSearch = (
+  searchInputRef: MutableRefObject<HTMLInputElement | null>,
+  setSearchQuery: React.Dispatch<SetStateAction<string>>
+) => {
+  if (searchInputRef.current) {
+    searchInputRef.current.focus();
+    setSearchQuery("");
   }
 };
