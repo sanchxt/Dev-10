@@ -66,6 +66,7 @@ export interface GetResourcesRequest {
   search?: string;
   sort?: string;
   filter?: string;
+  pageNumber?: string;
 }
 
 export type ResourceSortType = "recent" | "oldest";
