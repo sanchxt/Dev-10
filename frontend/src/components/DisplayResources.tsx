@@ -1,4 +1,4 @@
-import { FormEvent, useCallback, useMemo, useState } from "react";
+import { FormEvent, useCallback, useMemo, useState, useRef } from "react";
 import { IoIosSearch } from "react-icons/io";
 import TextFlipAnimated from "./TextFlipAnimated";
 import {
@@ -9,225 +9,25 @@ import { ResourceByRate, ResourceSortType } from "../utils/types";
 import { useGetResourcesQuery } from "../slices/resourcesApiSlice";
 import { toast } from "react-toastify";
 import Dropdown from "./Dropdown";
-
-// const DisplayResources = () => {
-//   const [isSortDropdownOpen, setIsSortDropdownOpen] = useState<boolean>(false);
-//   const [isOfficialDropdownOpen, setIsOfficialDropdownOpen] =
-//     useState<boolean>(false);
-//   const [searchQuery, setSearchQuery] = useState<string>("");
-//   const [sortResourceValue, setSortResourceValue] =
-//     useState<ResourceSortType>("recent");
-//   const [sortResourceBy, setSortResourceBy] =
-//     useState<ResourceByRate>("community");
-
-//   const [fetchParams, setFetchParams] = useState({
-//     search: "",
-//     sort: "recent" as ResourceSortType,
-//     filter: "community" as ResourceByRate,
-//   });
-//   const memoizedFetchParams = useMemo(() => fetchParams, [fetchParams]);
-
-//   const { data, error, isLoading, refetch } = useGetResourcesQuery(
-//     memoizedFetchParams,
-//     {
-//       refetchOnConnect: true,
-//     }
-//   );
-
-//   const toggleDropdown = (
-//     setDropdownOpen: React.Dispatch<React.SetStateAction<boolean>>
-//   ) => {
-//     setDropdownOpen((prevState) => !prevState);
-//   };
-
-//   const handleDropdownItemClick = <T extends string>(
-//     item: T,
-//     setValue: React.Dispatch<React.SetStateAction<T>>,
-//     setDropdownOpen: React.Dispatch<React.SetStateAction<boolean>>
-//   ) => {
-//     setValue(item);
-//     setDropdownOpen(false);
-//   };
-
-//   const handleSubmit = useCallback(
-//     (e: FormEvent) => {
-//       e.preventDefault();
-//       const newFetchParams = {
-//         search: searchQuery,
-//         sort: sortResourceValue,
-//         filter: sortResourceBy,
-//       };
-
-//       if (
-//         JSON.stringify(newFetchParams) !== JSON.stringify(memoizedFetchParams)
-//       ) {
-//         setFetchParams(newFetchParams);
-//         refetch().then(() => {
-//           if (error) {
-//             toast.error(error.message);
-//           }
-//           console.log("refetched");
-//         });
-//       }
-//     },
-//     [
-//       searchQuery,
-//       sortResourceBy,
-//       sortResourceValue,
-//       memoizedFetchParams,
-//       refetch,
-//     ]
-//   );
-
-//   return (
-//     <div className="h-full">
-//       <ToastContainer />
-//       <div className="text-center font-light py-2 text-sm sm:text-lg lg:text-xl xl:text-2xl">
-//         <TextFlipAnimated children="The perfect resources curated for devs just like you" />
-//       </div>
-
-//       <div>
-//         <form
-//           onSubmit={handleSubmit}
-//           className="py-6 lg:py-8 px-2 md:px-4 xl:px-8 flex flex-wrap"
-//         >
-//           {/* search */}
-//           <div className="w-full relative flex justify-center items-center bg-slate-300 rounded-xl group">
-//             <label htmlFor="resource-search" className="absolute left-2">
-//               <IoIosSearch size={18} color="black" />
-//             </label>
-//             <input
-//               id="resource-search"
-//               placeholder="Search for resources.."
-//               value={searchQuery}
-//               onChange={(e) => setSearchQuery(e.target.value)}
-//               className="w-full appearance-none text-gray-800 bg-transparent rounded-l-xl text-xs tracking-wider font-medium py-1.5 md:py-2 px-1 pl-8 outline-none"
-//             />
-//             <button
-//               type="submit"
-//               className="mr-1 md:mr-2 border-l-2 border-gray-600/50 pl-1 md:pl-2"
-//             >
-//               <span className="px-2 md:px-4 py-0.5 flex items-center justify-center text-xs md:text-sm font-medium transition-all duration-200 ease-in-out bg-slate-400 hover:bg-slate-600/80 rounded-lg">
-//                 Search
-//               </span>
-//             </button>
-//           </div>
-
-//           {/* dropdown */}
-//           <div className="w-full grid grid-cols-2 gap-2 place-items-center">
-//             <div className="relative inline-block px-1 md:px-2 pt-2 md:pt-3">
-//               <button
-//                 type="button"
-//                 className="px-4 py-2 w-[8.8rem] flex gap-1 justify-center items-center bg-transparent border-b text-black rounded-sm focus:outline-none text-xs capitalize"
-//                 onClick={() => toggleDropdown(setIsSortDropdownOpen)}
-//               >
-//                 {sortResourceValue} Resources
-//                 <IoIosArrowForward
-//                   className={`transition-all ease-in-out duration-300 ${
-//                     isSortDropdownOpen && "rotate-90"
-//                   }`}
-//                 />
-//               </button>
-
-//               <AnimatePresence>
-//                 {isSortDropdownOpen && (
-//                   <motion.div
-//                     initial={{ opacity: 0, y: -10 }}
-//                     animate={{ opacity: 1, y: 0 }}
-//                     exit={{ opacity: 0, y: -10 }}
-//                     className="absolute left-0 mt-2 w-full bg-white border border-gray-200 rounded-md shadow-lg z-10"
-//                   >
-//                     <div className="py-2 flex flex-col">
-//                       {sortResourceDropdownItems.map((item, index) => (
-//                         <button
-//                           key={index}
-//                           type="submit"
-//                           onClick={() =>
-//                             handleDropdownItemClick(
-//                               item as ResourceSortType,
-//                               setSortResourceValue,
-//                               setIsSortDropdownOpen
-//                             )
-//                           }
-//                           className="px-4 py-2 hover:bg-gray-100 cursor-pointer text-black text-xs capitalize"
-//                         >
-//                           {item}
-//                         </button>
-//                       ))}
-//                     </div>
-//                   </motion.div>
-//                 )}
-//               </AnimatePresence>
-//             </div>
-
-//             <div className="relative inline-block px-1 md:px-2 pt-2 md:pt-3">
-//               <button
-//                 type="button"
-//                 className="px-4 py-2 w-[8.8rem] flex gap-1 justify-center items-center bg-transparent border-b text-black rounded-sm focus:outline-none text-xs capitalize"
-//                 onClick={() => toggleDropdown(setIsOfficialDropdownOpen)}
-//               >
-//                 {sortResourceBy}
-//                 <IoIosArrowForward
-//                   className={`transition-all ease-in-out duration-300 ${
-//                     isOfficialDropdownOpen && "rotate-90"
-//                   }`}
-//                 />
-//               </button>
-
-//               <AnimatePresence>
-//                 {isOfficialDropdownOpen && (
-//                   <motion.div
-//                     initial={{ opacity: 0, y: -10 }}
-//                     animate={{ opacity: 1, y: 0 }}
-//                     exit={{ opacity: 0, y: -10 }}
-//                     className="absolute left-0 mt-2 w-full bg-white border border-gray-200 rounded-md shadow-lg z-10"
-//                   >
-//                     <div className="py-2 flex flex-col">
-//                       {filterResourceDropdownItems.map((item, index) => (
-//                         <button
-//                           key={index}
-//                           type="submit"
-//                           onClick={() =>
-//                             handleDropdownItemClick(
-//                               item as ResourceByRate,
-//                               setSortResourceBy,
-//                               setIsOfficialDropdownOpen
-//                             )
-//                           }
-//                           className="px-4 py-2 hover:bg-gray-100 cursor-pointer text-black text-xs text-center capitalize"
-//                         >
-//                           {item}
-//                         </button>
-//                       ))}
-//                     </div>
-//                   </motion.div>
-//                 )}
-//               </AnimatePresence>
-//             </div>
-//           </div>
-//         </form>
-
-//         <div className="text-black w-full bg-green-300">
-//           {isLoading
-//             ? "Loading..."
-//             : JSON.stringify(data.resources.map((idk: any) => idk._id))}
-//         </div>
-//       </div>
-//     </div>
-//   );
-// };
+import ResourceCards from "./ResourceCards";
+import NoResourcesFound from "./NoResourcesFound";
+import { focusAndClearSearch } from "../utils/helpers";
+import { MdKeyboardArrowLeft, MdKeyboardArrowRight } from "react-icons/md";
 
 const DisplayResources = () => {
   const [searchQuery, setSearchQuery] = useState<string>("");
+  const searchInputRef = useRef<HTMLInputElement>(null);
+
   const [formInputs, setFormInputs] = useState({
     search: "",
     sort: "recent" as ResourceSortType,
     filter: "highest" as ResourceByRate,
+    pageNumber: 1,
   });
 
   const memoizedFormInputs = useMemo(() => formInputs, [formInputs]);
 
-  const { data, error, isLoading, refetch } = useGetResourcesQuery(
+  const { data, error, isLoading, isFetching, refetch } = useGetResourcesQuery(
     memoizedFormInputs,
     {
       refetchOnConnect: true,
@@ -241,6 +41,7 @@ const DisplayResources = () => {
         search: searchQuery,
         sort: formInputs.sort,
         filter: formInputs.filter,
+        pageNumber: 1,
       };
 
       if (
@@ -252,6 +53,8 @@ const DisplayResources = () => {
             toast.error(error.message);
           }
           console.log("refetched");
+          console.log("data:\n", data);
+          console.log("\n");
         });
       }
     },
@@ -265,9 +68,20 @@ const DisplayResources = () => {
     ]
   );
 
+  const handleNextPage = () => {
+    setFormInputs((prev) => ({ ...prev, pageNumber: prev.pageNumber + 1 }));
+  };
+
+  const handlePrevPage = () => {
+    setFormInputs((prev) => ({
+      ...prev,
+      pageNumber: prev.pageNumber > 1 ? prev.pageNumber - 1 : 1,
+    }));
+  };
+
   return (
-    <div className="h-full">
-      <div className="text-center font-light py-2 text-sm sm:text-lg lg:text-xl xl:text-2xl">
+    <div className="h-full flex flex-col">
+      <div className="text-center font-light pt-1 md:pt-2 text-sm sm:text-lg lg:text-xl xl:text-2xl">
         <TextFlipAnimated children="The perfect resources curated for devs just like you" />
       </div>
 
@@ -281,6 +95,7 @@ const DisplayResources = () => {
             <IoIosSearch size={18} color="black" />
           </label>
           <input
+            ref={searchInputRef}
             id="resource-search"
             placeholder="Search for resources.."
             value={searchQuery}
@@ -305,7 +120,6 @@ const DisplayResources = () => {
             onSelect={(item: ResourceSortType) =>
               setFormInputs((prev) => ({ ...prev, sort: item }))
             }
-            refetch={refetch}
           />
           <Dropdown
             label={formInputs.filter}
@@ -314,15 +128,65 @@ const DisplayResources = () => {
             onSelect={(item: ResourceByRate) =>
               setFormInputs((prev) => ({ ...prev, filter: item }))
             }
-            refetch={refetch}
           />
         </div>
       </form>
 
-      <div className="text-black w-full bg-green-300">
-        {isLoading
-          ? "Loading..."
-          : JSON.stringify(data?.resources.map((idk: any) => idk._id))}
+      <div className="text-black w-full flex-grow">
+        {isLoading ? (
+          <div className="w-full h-full grid grid-cols-2 grid-rows-2">
+            {[...Array(4)].map((_, idx) => (
+              <div role="status" key={idx} className="max-w-sm animate-pulse">
+                <div className="h-2.5 bg-gray-200 rounded-full dark:bg-gray-700 w-48 mb-4"></div>
+                <div className="h-2 bg-gray-200 rounded-full dark:bg-gray-700 max-w-[360px] mb-2.5"></div>
+                <div className="h-2 bg-gray-200 rounded-full dark:bg-gray-700 mb-2.5"></div>
+                <div className="h-2 bg-gray-200 rounded-full dark:bg-gray-700 max-w-[330px] mb-2.5"></div>
+                <div className="h-2 bg-gray-200 rounded-full dark:bg-gray-700 max-w-[300px] mb-2.5"></div>
+                <div className="h-2 bg-gray-200 rounded-full dark:bg-gray-700 max-w-[360px]"></div>
+              </div>
+            ))}
+            <span className="sr-only">Loading...</span>
+          </div>
+        ) : (
+          <div className="min-w-full h-full">
+            {data?.resources.length === 0 ? (
+              <NoResourcesFound
+                onExploreResources={() =>
+                  focusAndClearSearch(searchInputRef, setSearchQuery)
+                }
+              />
+            ) : (
+              <div className="h-full w-full flex flex-col justify-between">
+                <ResourceCards />
+
+                <div className="flex justify-center items-center gap-4 md:gap-6 xl:gap-8 pb-1 lg:pb-2 bg-yellow-400">
+                  <button
+                    onClick={handlePrevPage}
+                    disabled={formInputs.pageNumber === 1}
+                    className="pagination-button"
+                  >
+                    <MdKeyboardArrowLeft color="#000" />
+                  </button>
+
+                  <div>
+                    <p className="text-gray-700 text-xs lg:text-sm font-medium">
+                      Page <span>{formInputs.pageNumber}</span> of{" "}
+                      <span>{data?.pages}</span>
+                    </p>
+                  </div>
+
+                  <button
+                    onClick={handleNextPage}
+                    disabled={data?.pages === formInputs.pageNumber}
+                    className="pagination-button"
+                  >
+                    <MdKeyboardArrowRight color="#000" />
+                  </button>
+                </div>
+              </div>
+            )}
+          </div>
+        )}
       </div>
     </div>
   );
