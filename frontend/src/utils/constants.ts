@@ -56,4 +56,4 @@ export const sidebarMenu = [
 ];
 
 export const sortResourceDropdownItems = ["recent", "oldest"];
-export const filterResourceDropdownItems = ["Highest", "Lowest"];
+export const filterResourceDropdownItems = ["highest", "lowest"];
