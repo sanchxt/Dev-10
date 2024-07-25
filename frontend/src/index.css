@@ -74,6 +74,10 @@
   .sidebar-link-active {
     @apply bg-blue-100 text-blue-600;
   }
+
+  .pagination-button {
+    @apply p-2 bg-transparent border border-black rounded-md disabled:opacity-50 transition-all duration-200 ease-in-out hover:bg-gray-200 disabled:cursor-not-allowed disabled:bg-transparent;
+  }
 }
 
 * {
