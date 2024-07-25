@@ -20,6 +20,10 @@ const userSchema = mongoose.Schema(
       type: String,
       default: "",
     },
+    isAdmin: {
+      type: Boolean,
+      default: false,
+    },
     createdResources: [
       {
         type: mongoose.Schema.Types.ObjectId,
