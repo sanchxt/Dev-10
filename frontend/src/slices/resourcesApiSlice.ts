@@ -12,10 +12,10 @@ export const resourcesApiSlice = apiSlice.injectEndpoints({
       }),
     }),
     getResources: builder.query<any, GetResourcesRequest>({
-      query: ({ search, sort, filter }) => ({
+      query: ({ search, sort, filter, pageNumber }) => ({
         url: `${RESOURCS_URL}`,
         method: "GET",
-        params: { search, sort, filter },
+        params: { search, sort, filter, pageNumber },
       }),
     }),
   }),
