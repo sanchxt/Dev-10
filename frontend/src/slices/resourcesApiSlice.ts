@@ -18,8 +18,17 @@ export const resourcesApiSlice = apiSlice.injectEndpoints({
         params: { search, sort, filter, pageNumber },
       }),
     }),
+    getResourceById: builder.query<any, string>({
+      query: (id) => ({
+        url: `${RESOURCS_URL}/details/${id}`,
+        method: "GET",
+      }),
+    }),
   }),
 });
 
-export const { useCreateResourceMutation, useGetResourcesQuery } =
-  resourcesApiSlice as any;
+export const {
+  useCreateResourceMutation,
+  useGetResourcesQuery,
+  useGetResourceByIdQuery,
+} = resourcesApiSlice as any;
