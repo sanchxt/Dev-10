@@ -1,3 +1,4 @@
+import { memo } from "react";
 import { motion } from "framer-motion";
 
 const DURATION = 0.25;
@@ -57,4 +58,4 @@ const TextFlipAnimated = ({ children }: { children: string }) => {
   );
 };
 
-export default TextFlipAnimated;
+export default memo(TextFlipAnimated);
