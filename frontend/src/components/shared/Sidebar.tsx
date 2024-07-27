@@ -100,7 +100,12 @@ const Sidebar = () => {
           <ul className="whitespace-pre px-2.5 text-[0.9rem] py-5 flex flex-col gap-1 font-medium overflow-x-hidden h-[70%] md:h-[68%] scrollbar-thin scrollbar-thumb-slate-700/20 scrollbar-track-slate-300/40">
             {sidebarMenu.map((item) => (
               <li key={item.name}>
-                <NavLink to={item.href} className="sidebar-link">
+                <NavLink
+                  to={item.href}
+                  className={`sidebar-link ${
+                    pathname === item.href ? "bg-purple-100/80" : ""
+                  }`}
+                >
                   <item.icon size={23} className="min-w-max" />
                   {item.name}
                 </NavLink>
