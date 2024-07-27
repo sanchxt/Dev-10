@@ -11,6 +11,10 @@ const resourceSchema = mongoose.Schema(
       required: true,
       ref: "User",
     },
+    authorName: {
+      type: String,
+      default: "",
+    },
     description: {
       type: String,
       required: true,
