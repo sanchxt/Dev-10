@@ -1,18 +1,19 @@
 import { FormEvent, useCallback, useMemo, useState, useRef } from "react";
-import { IoIosSearch } from "react-icons/io";
-import TextFlipAnimated from "./TextFlipAnimated";
+
+import TextFlipAnimated from "../TextFlipAnimated";
 import {
   filterResourceDropdownItems,
   sortResourceDropdownItems,
-} from "../utils/constants";
-import { ResourceByRate, ResourceSortType } from "../utils/types";
-import { useGetResourcesQuery } from "../slices/resourcesApiSlice";
-import { toast } from "react-toastify";
+} from "../../utils/constants";
+import { ResourceByRate, ResourceSortType } from "../../utils/types";
+import { useGetResourcesQuery } from "../../slices/resourcesApiSlice";
 import Dropdown from "./Dropdown";
+import { toast } from "react-toastify";
 import ResourceCards from "./ResourceCards";
 import NoResourcesFound from "./NoResourcesFound";
-import { focusAndClearSearch } from "../utils/helpers";
-import { MdKeyboardArrowLeft, MdKeyboardArrowRight } from "react-icons/md";
+import PaginationButton from "./PaginationButton";
+import { focusAndClearSearch } from "../../utils/helpers";
+import SearchIcon from "./SearchIcon";
 
 const DisplayResources = () => {
   const [searchQuery, setSearchQuery] = useState<string>("");
@@ -68,16 +69,26 @@ const DisplayResources = () => {
     ]
   );
 
-  const handleNextPage = () => {
+  const handleNextPage = useCallback(() => {
     setFormInputs((prev) => ({ ...prev, pageNumber: prev.pageNumber + 1 }));
-  };
+  }, []);
 
-  const handlePrevPage = () => {
+  const handlePrevPage = useCallback(() => {
     setFormInputs((prev) => ({
       ...prev,
       pageNumber: prev.pageNumber > 1 ? prev.pageNumber - 1 : 1,
     }));
-  };
+  }, []);
+
+  const handleSortSelect = useCallback((item: ResourceSortType) => {
+    setFormInputs((prev) => ({ ...prev, sort: item }));
+  }, []);
+
+  const handleFilterSelect = useCallback((item: ResourceByRate) => {
+    setFormInputs((prev) => ({ ...prev, filter: item }));
+  }, []);
+
+  const memoizedData = useMemo(() => data, [data]);
 
   return (
     <div className="h-full flex flex-col">
@@ -87,12 +98,12 @@ const DisplayResources = () => {
 
       <form
         onSubmit={handleSubmit}
-        className="py-6 lg:py-8 px-2 md:px-4 xl:px-8 flex flex-wrap"
+        className="py-6 md:py-6 lg:py-6 px-2 md:px-4 xl:px-8 flex flex-wrap"
       >
         {/* search */}
         <div className="w-full relative flex justify-center items-center bg-slate-300 rounded-xl">
           <label htmlFor="resource-search" className="absolute left-2">
-            <IoIosSearch size={18} color="black" />
+            <SearchIcon isFetching={isFetching} />
           </label>
           <input
             ref={searchInputRef}
@@ -116,24 +127,18 @@ const DisplayResources = () => {
           <Dropdown
             label={`${formInputs.sort} Resources`}
             items={sortResourceDropdownItems}
-            selectedItem={formInputs.sort}
-            onSelect={(item: ResourceSortType) =>
-              setFormInputs((prev) => ({ ...prev, sort: item }))
-            }
+            onSelect={handleSortSelect}
           />
           <Dropdown
             label={formInputs.filter}
             items={filterResourceDropdownItems}
-            selectedItem={formInputs.filter}
-            onSelect={(item: ResourceByRate) =>
-              setFormInputs((prev) => ({ ...prev, filter: item }))
-            }
+            onSelect={handleFilterSelect}
           />
         </div>
       </form>
 
       <div className="text-black w-full flex-grow">
-        {isLoading ? (
+        {isLoading || isFetching ? (
           <div className="w-full h-full grid grid-cols-2 grid-rows-2">
             {[...Array(4)].map((_, idx) => (
               <div role="status" key={idx} className="max-w-sm animate-pulse">
@@ -147,6 +152,10 @@ const DisplayResources = () => {
             ))}
             <span className="sr-only">Loading...</span>
           </div>
+        ) : error ? (
+          <div className="flex justify-center items-center">
+            <p>Error fetching resources</p>
+          </div>
         ) : (
           <div className="min-w-full h-full">
             {data?.resources.length === 0 ? (
@@ -156,17 +165,15 @@ const DisplayResources = () => {
                 }
               />
             ) : (
-              <div className="h-full w-full flex flex-col justify-between">
-                <ResourceCards />
+              <div className="h-full flex flex-col justify-between">
+                <ResourceCards resources={memoizedData?.resources} />
 
-                <div className="flex justify-center items-center gap-4 md:gap-6 xl:gap-8 pb-1 lg:pb-2 bg-yellow-400">
-                  <button
+                <div className="flex justify-center items-center gap-4 md:gap-6 xl:gap-8 py-1 pt-2 lg:py-1.5">
+                  <PaginationButton
                     onClick={handlePrevPage}
                     disabled={formInputs.pageNumber === 1}
-                    className="pagination-button"
-                  >
-                    <MdKeyboardArrowLeft color="#000" />
-                  </button>
+                    direction="prev"
+                  />
 
                   <div>
                     <p className="text-gray-700 text-xs lg:text-sm font-medium">
@@ -175,13 +182,11 @@ const DisplayResources = () => {
                     </p>
                   </div>
 
-                  <button
+                  <PaginationButton
                     onClick={handleNextPage}
                     disabled={data?.pages === formInputs.pageNumber}
-                    className="pagination-button"
-                  >
-                    <MdKeyboardArrowRight color="#000" />
-                  </button>
+                    direction="next"
+                  />
                 </div>
               </div>
             )}
