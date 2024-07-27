@@ -71,3 +71,21 @@ export interface GetResourcesRequest {
 
 export type ResourceSortType = "recent" | "oldest";
 export type ResourceByRate = "highest" | "lowest";
+
+export interface ResourceProps {
+  _id: string;
+  title: string;
+  isOfficial: boolean;
+  essentials: string[];
+  extras: string[];
+  description: string;
+  tags: string[];
+  authorName: string;
+}
+export interface ResourceCardProps {
+  resource: ResourceProps;
+  index: number;
+}
+export interface MultipleResourceCardsProps {
+  resources: ResourceProps[];
+}
