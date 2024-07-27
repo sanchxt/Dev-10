@@ -1,4 +1,4 @@
-import DisplayResources from "../components/DisplayResources";
+import DisplayResources from "../components/resources/DisplayResources";
 import Sidebar from "../components/shared/Sidebar";
 
 const Resources = () => {
