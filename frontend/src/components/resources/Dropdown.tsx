@@ -1,8 +1,16 @@
+import { memo } from "react";
 import { IoIosArrowForward } from "react-icons/io";
-import { useDropdown } from "../hooks/useDropdown";
 import { AnimatePresence, motion } from "framer-motion";
 
-const Dropdown = ({ label, items, onSelect }: any) => {
+import { useDropdown } from "../../hooks/useDropdown";
+
+interface DropdownProps {
+  label: string;
+  items: string[];
+  onSelect: (item: any) => void;
+}
+
+const Dropdown = memo(({ label, items, onSelect }: DropdownProps) => {
   const { isOpen, toggle, close } = useDropdown();
 
   return (
@@ -48,6 +56,6 @@ const Dropdown = ({ label, items, onSelect }: any) => {
       </AnimatePresence>
     </div>
   );
-};
+});
 
 export default Dropdown;
