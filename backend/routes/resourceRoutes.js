@@ -9,6 +9,7 @@ import {
   getResourceById,
   getResources,
   updateResource,
+  getResourcesByTag,
 } from "../controllers/resourceController.js";
 
 const router = express.Router();
@@ -23,8 +24,9 @@ router
   .route("/")
   .post(protect, createResourceRateLimiter, createResource)
   .get(protect, getResources);
+router.get("/:tag", protect, getResourcesByTag);
 router
-  .route("/:id")
+  .route("/details/:id")
   .get(protect, getResourceById)
   .put(protect, updateResource)
   .delete(protect, deleteResource);
