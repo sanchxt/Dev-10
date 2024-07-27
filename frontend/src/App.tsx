@@ -11,6 +11,7 @@ import { RootState } from "./store";
 import Resources from "./pages/Resources";
 import ProfilePage from "./pages/ProfilePage";
 import NotFoundPage from "./pages/NotFoundPage";
+import ResourceById from "./pages/ResourceById";
 import PrivateRoute from "./components/PrivateRoute";
 import ContributeResources from "./pages/ContributeResources";
 
@@ -41,6 +42,10 @@ const router = createBrowserRouter([
       {
         path: "/resources",
         element: <Resources />,
+      },
+      {
+        path: "/resource/:id",
+        element: <ResourceById />,
       },
     ],
   },
