@@ -70,6 +70,7 @@ const createResource = asyncHandler(async (req, res) => {
 
   const resource = new Resource({
     user: req.user._id,
+    authorName: req.user.name,
     title,
     description,
     tags,
@@ -94,8 +95,8 @@ const getResourceById = asyncHandler(async (req, res) => {
   const resource = await Resource.findById(req.params.id);
 
   if (resource) {
-    resource.averageRating = calculateAverageRating(resource.ratings);
-    resource.ratingBreakdown = calculateRatingBreakdown(resource.ratings);
+    // resource.averageRating = calculateAverageRating(resource.ratings);
+    // resource.ratingBreakdown = calculateRatingBreakdown(resource.ratings);
     res.status(200).json(resource);
   } else {
     res.status(404);
