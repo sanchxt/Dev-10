@@ -116,11 +116,19 @@ const updateUserProfile = asyncHandler(async (req, res) => {
     throw new Error("Old password is required to update the password");
   }
 
+  const oldName = user.name;
   user.name = req.body.name || user.name;
   user.email = req.body.email || user.email;
   user.description = req.body.description || user.description;
 
   const updatedUser = await user.save();
+
+  if (req.body.name && req.body.name !== oldName) {
+    await Resource.updateMany(
+      { user: req.user._id },
+      { authorName: req.body.name }
+    );
+  }
 
   res.status(200).json({
     _id: updatedUser._id,
