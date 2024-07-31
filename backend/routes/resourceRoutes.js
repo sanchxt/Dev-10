@@ -11,6 +11,7 @@ import {
   updateResource,
   getResourcesByTag,
   getUserReview,
+  getLatestComments,
 } from "../controllers/resourceController.js";
 
 const router = express.Router();
@@ -33,5 +34,6 @@ router
   .delete(protect, deleteResource);
 router.route("/:id/rating").post(protect, addResourceRating);
 router.get("/:id/get-review", protect, getUserReview);
+router.get("/:id/latest-comments", protect, getLatestComments);
 
 export default router;
