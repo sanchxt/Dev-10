@@ -1,5 +1,16 @@
 import mongoose from "mongoose";
 
+const ratingSchema = mongoose.Schema(
+  {
+    user: { type: mongoose.Schema.Types.ObjectId, ref: "User" },
+    rating: { type: Number, required: true },
+    comment: { type: String, default: "" },
+  },
+  {
+    timestamps: true,
+  }
+);
+
 const resourceSchema = mongoose.Schema(
   {
     title: {
@@ -35,13 +46,7 @@ const resourceSchema = mongoose.Schema(
       type: String,
       default: "",
     },
-    ratings: [
-      {
-        user: { type: mongoose.Schema.Types.ObjectId, ref: "User" },
-        rating: { type: Number, required: true },
-        comment: { type: String, default: "" },
-      },
-    ],
+    ratings: [ratingSchema],
     averageRating: {
       type: Number,
       default: 0,
