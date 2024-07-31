@@ -216,6 +216,26 @@ const getResourcesByTag = asyncHandler(async (req, res) => {
   res.status(200).json({ resources, page, pages: Math.ceil(count / pageSize) });
 });
 
+const getUserReview = asyncHandler(async (req, res) => {
+  const resource = await Resource.findById(req.params.id);
+
+  if (!resource) {
+    res.status(404);
+    throw new Error("Resource not found");
+  }
+
+  const userReview = resource.ratings.find(
+    (r) => r.user.toString() === req.user._id.toString()
+  );
+
+  if (userReview) {
+    res.status(200).json(userReview);
+  } else {
+    res.status(404);
+    throw new Error("Review not found");
+  }
+});
+
 export {
   getResources,
   createResource,
@@ -224,4 +244,5 @@ export {
   deleteResource,
   addResourceRating,
   getResourcesByTag,
+  getUserReview,
 };
