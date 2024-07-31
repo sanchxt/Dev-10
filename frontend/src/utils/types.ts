@@ -3,6 +3,7 @@ import {
   aboutResourceCollectionSchema,
   linksResourceFormSchema,
   loginSchema,
+  reviewSchema,
   signupSchema,
   updateProfileSchema,
 } from "./schema";
@@ -18,6 +19,7 @@ export type AboutResourceCollectionFields = z.infer<
   typeof aboutResourceCollectionSchema
 >;
 export type LinkResourceFormFields = z.infer<typeof linksResourceFormSchema>;
+export type ReviewFormFields = z.infer<typeof reviewSchema>;
 
 // sidebar icons
 interface SidebarIconProps {
@@ -88,4 +90,10 @@ export interface ResourceCardProps {
 }
 export interface MultipleResourceCardsProps {
   resources: ResourceProps[];
+}
+
+export interface AddResourceRatingRequest {
+  id: string;
+  rating: number;
+  comment: string;
 }
