@@ -97,3 +97,8 @@ export interface AddResourceRatingRequest {
   rating: number;
   comment: string;
 }
+
+export interface LatestCommentsProps {
+  comment: string;
+  placeholder: boolean;
+}
