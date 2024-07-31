@@ -1,6 +1,10 @@
 import { apiSlice } from "./apiSlice";
 import { RESOURCS_URL } from "../utils/constants";
-import { CreateResourceRequest, GetResourcesRequest } from "../utils/types";
+import {
+  AddResourceRatingRequest,
+  CreateResourceRequest,
+  GetResourcesRequest,
+} from "../utils/types";
 
 export const resourcesApiSlice = apiSlice.injectEndpoints({
   endpoints: (builder) => ({
@@ -24,6 +28,19 @@ export const resourcesApiSlice = apiSlice.injectEndpoints({
         method: "GET",
       }),
     }),
+    addResourceRating: builder.mutation<void, AddResourceRatingRequest>({
+      query: ({ id, rating, comment }) => ({
+        url: `${RESOURCS_URL}/${id}/rating`,
+        method: "POST",
+        body: { rating, comment },
+      }),
+    }),
+    getUserReview: builder.query<void, string>({
+      query: (id) => ({
+        url: `${RESOURCS_URL}/${id}/get-review`,
+        method: "GET",
+      }),
+    }),
   }),
 });
 
@@ -31,4 +48,6 @@ export const {
   useCreateResourceMutation,
   useGetResourcesQuery,
   useGetResourceByIdQuery,
+  useAddResourceRatingMutation,
+  useGetUserReviewQuery,
 } = resourcesApiSlice as any;
