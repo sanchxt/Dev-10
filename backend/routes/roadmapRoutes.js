@@ -1,7 +1,6 @@
 import express from 'express';
 const router = express.Router();
 import {
-  // creatorName,
   createRoadmap,
   getAllRoadmaps,
   getRoadmapById,
