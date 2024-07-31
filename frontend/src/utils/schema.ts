@@ -10,7 +10,8 @@ export const signupSchema = z
   .object({
     name: z
       .string()
-      .min(3, { message: "Name must be at least 3 characters long" }),
+      .min(3, { message: "Name must be at least 3 characters long" })
+      .max(15, { message: "Name can't contain more than 15 characters" }),
     email: z.string().email(),
     password: z.string().min(8),
     confirmPassword: z.string().min(8),
@@ -81,4 +82,11 @@ export const linksResourceFormSchema = z.object({
     .array(z.string())
     .min(1, { message: "At least 1 extra resource is required" })
     .max(5, { message: "Cannot have more than 5 extras resource links" }),
+});
+
+export const reviewSchema = z.object({
+  rating: z.number().min(1, { message: "At least 1 star is required" }),
+  comment: z
+    .string()
+    .max(100, { message: "Comment can't exceed 100 characters" }),
 });
