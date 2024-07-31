@@ -14,6 +14,7 @@ import {
 
 const Sidebar = () => {
   let isTab = useMediaQuery({ query: "(max-width: 768px)" });
+  const [sidebarIsOpen, setSidebarIsOpen] = useState<boolean>(false);
 
   const { pathname } = useLocation();
 
@@ -54,31 +55,27 @@ const Sidebar = () => {
         },
       };
 
-  useEffect(() => {
-    if (isTab) {
-      setSidebarIsOpen(false);
-    } else {
-      setSidebarIsOpen(true);
-    }
-  }, [isTab]);
-
-  const [sidebarIsOpen, setSidebarIsOpen] = useState<boolean>(
-    isTab ? false : true
-  );
+  // useEffect(() => {
+  //   if (isTab) {
+  //     setSidebarIsOpen(false);
+  //   } else {
+  //     setSidebarIsOpen(true);
+  //   }
+  // }, [isTab]);
 
   return (
     <>
       <div
         onClick={() => setSidebarIsOpen(false)}
-        className={`md:hidden fixed inset-0 max-h-screen z-[998] bg-black/50 ${
+        className={`fixed inset-0 max-h-screen z-[998] bg-black/50 ${
           sidebarIsOpen ? "block" : "hidden"
         }`}
       ></div>
-
+      {/* add md:relative */}
       <motion.div
         variants={sidebarAnimation}
         animate={sidebarIsOpen ? "open" : "close"}
-        className="bg-white text-gray-700 shadow-2xl z-[999] w-[16rem] max-w-[16rem] h-screen overflow-hidden md:relative fixed"
+        className="bg-white text-gray-700 shadow-2xl z-[999] w-[16rem] max-w-[16rem] h-screen overflow-hidden fixed"
       >
         {/* logo */}
         <div
