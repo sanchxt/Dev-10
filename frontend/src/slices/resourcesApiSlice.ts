@@ -41,6 +41,12 @@ export const resourcesApiSlice = apiSlice.injectEndpoints({
         method: "GET",
       }),
     }),
+    getLatestComments: builder.query<void, string>({
+      query: (id) => ({
+        url: `${RESOURCS_URL}/${id}/latest-comments`,
+        method: "GET",
+      }),
+    }),
   }),
 });
 
@@ -50,4 +56,5 @@ export const {
   useGetResourceByIdQuery,
   useAddResourceRatingMutation,
   useGetUserReviewQuery,
+  useGetLatestCommentsQuery,
 } = resourcesApiSlice as any;
