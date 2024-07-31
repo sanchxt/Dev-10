@@ -216,6 +216,9 @@ const getResourcesByTag = asyncHandler(async (req, res) => {
   res.status(200).json({ resources, page, pages: Math.ceil(count / pageSize) });
 });
 
+// @desc Get user review of a resource
+// @route GET /api/:id/get-review
+// @access Private
 const getUserReview = asyncHandler(async (req, res) => {
   const resource = await Resource.findById(req.params.id);
 
@@ -236,6 +239,25 @@ const getUserReview = asyncHandler(async (req, res) => {
   }
 });
 
+// @desc Get latest comments of a resource
+// @route GET /api/:id/latest-comments
+// @access Private
+const getLatestComments = asyncHandler(async (req, res) => {
+  const resource = await Resource.findById(req.params.id);
+
+  if (!resource) {
+    res.status(404);
+    throw new Error("Resource not found");
+  }
+
+  const latestComments = resource.ratings
+    .filter((rating) => rating.comment)
+    .sort((a, b) => b.createdAt - a.createdAt)
+    .slice(0, 3);
+
+  res.status(200).json(latestComments);
+});
+
 export {
   getResources,
   createResource,
@@ -245,4 +267,5 @@ export {
   addResourceRating,
   getResourcesByTag,
   getUserReview,
+  getLatestComments,
 };
