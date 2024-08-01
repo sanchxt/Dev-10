@@ -70,6 +70,12 @@ const resourceSchema = mongoose.Schema(
       type: Boolean,
       default: false,
     },
+    reports: [
+      {
+        type: mongoose.Schema.Types.ObjectId,
+        ref: "ResourceReport",
+      },
+    ],
   },
   {
     timestamps: true,

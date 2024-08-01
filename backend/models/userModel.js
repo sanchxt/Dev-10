@@ -36,6 +36,12 @@ const userSchema = mongoose.Schema(
         ref: "Resource",
       },
     ],
+    reports: [
+      {
+        type: mongoose.Schema.Types.ObjectId,
+        ref: "ResourceReport",
+      },
+    ],
   },
   {
     timestamps: true,
