@@ -90,3 +90,14 @@ export const reviewSchema = z.object({
     .string()
     .max(100, { message: "Comment can't exceed 100 characters" }),
 });
+
+export const reportResourceSchema = z.object({
+  reason: z
+    .string()
+    .min(3, { message: "Reason must be at least 3 characters long" })
+    .max(100, { message: "Reason can't exceed 100 characters" }),
+  comments: z
+    .string()
+    .max(200, { message: "Comments can't exceed 200 characters" })
+    .optional(),
+});
