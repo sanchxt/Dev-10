@@ -119,15 +119,6 @@ const UpdateProfileForm = () => {
             {/* theme toggle */}
             <div className="p-2 flex justify-end">
               <div className="inline-flex rounded-xl">
-                {" "}
-                {/* add relative here */}
-                {/* <span
-                  className={`absolute w-[30%] h-[2px] ${
-                    theme === "DARK"
-                      ? "bg-purple-400 left-[10%] top-[70%]"
-                      : "bg-purple-700 right-[10%] top-[70%]"
-                  } z-10`}
-                /> */}
                 <button
                   onClick={handleToggleTheme}
                   className={`w-1/2 transition-all duration-700 font-semibold ${

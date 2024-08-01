@@ -1,17 +1,15 @@
-// name, email, password
-
 import Sidebar from "../components/shared/Sidebar";
-import UpdateProfileForm from "../components/UpdateProfileForm";
+import CreateResourceForm from "../components/contribute/CreateResourceForm";
 
-const ProfilePage = () => {
+const ContributeResources = () => {
   return (
     <section className="flex flex-col md:flex-row h-screen">
       <Sidebar />
       <div className="flex-grow md:pl-[4rem]">
-        <UpdateProfileForm />
+        <CreateResourceForm />
       </div>
     </section>
   );
 };
 
-export default ProfilePage;
+export default ContributeResources;

@@ -14,6 +14,7 @@ import {
 
 const Sidebar = () => {
   let isTab = useMediaQuery({ query: "(max-width: 768px)" });
+  const [sidebarIsOpen, setSidebarIsOpen] = useState<boolean>(false);
 
   const { pathname } = useLocation();
 
@@ -54,31 +55,27 @@ const Sidebar = () => {
         },
       };
 
-  useEffect(() => {
-    if (isTab) {
-      setSidebarIsOpen(false);
-    } else {
-      setSidebarIsOpen(true);
-    }
-  }, [isTab]);
-
-  const [sidebarIsOpen, setSidebarIsOpen] = useState<boolean>(
-    isTab ? false : true
-  );
+  // useEffect(() => {
+  //   if (isTab) {
+  //     setSidebarIsOpen(false);
+  //   } else {
+  //     setSidebarIsOpen(true);
+  //   }
+  // }, [isTab]);
 
   return (
     <>
       <div
         onClick={() => setSidebarIsOpen(false)}
-        className={`md:hidden fixed inset-0 max-h-screen z-[998] bg-black/50 ${
+        className={`fixed inset-0 max-h-screen z-[998] bg-black/50 ${
           sidebarIsOpen ? "block" : "hidden"
         }`}
       ></div>
-
+      {/* add md:relative */}
       <motion.div
         variants={sidebarAnimation}
         animate={sidebarIsOpen ? "open" : "close"}
-        className="bg-white text-gray-700 shadow-2xl z-[999] w-[16rem] max-w-[16rem] h-screen overflow-hidden md:relative fixed"
+        className="bg-white text-gray-700 shadow-2xl z-[999] w-[16rem] max-w-[16rem] h-screen overflow-hidden fixed"
       >
         {/* logo */}
         <div
@@ -100,7 +97,12 @@ const Sidebar = () => {
           <ul className="whitespace-pre px-2.5 text-[0.9rem] py-5 flex flex-col gap-1 font-medium overflow-x-hidden h-[70%] md:h-[68%] scrollbar-thin scrollbar-thumb-slate-700/20 scrollbar-track-slate-300/40">
             {sidebarMenu.map((item) => (
               <li key={item.name}>
-                <NavLink to={item.href} className="sidebar-link">
+                <NavLink
+                  to={item.href}
+                  className={`sidebar-link ${
+                    pathname === item.href ? "bg-purple-100/80" : ""
+                  }`}
+                >
                   <item.icon size={23} className="min-w-max" />
                   {item.name}
                 </NavLink>

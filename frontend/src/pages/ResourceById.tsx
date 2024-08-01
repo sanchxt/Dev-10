@@ -1,17 +1,16 @@
-// name, email, password
-
+import DetailedResource from "../components/resources/DetailedResource";
 import Sidebar from "../components/shared/Sidebar";
-import UpdateProfileForm from "../components/UpdateProfileForm";
 
-const ProfilePage = () => {
+const ResourceById = () => {
   return (
     <section className="flex flex-col md:flex-row h-screen">
       <Sidebar />
+      {/* remove md:pl-[4rem] */}
       <div className="flex-grow md:pl-[4rem]">
-        <UpdateProfileForm />
+        <DetailedResource />
       </div>
     </section>
   );
 };
 
-export default ProfilePage;
+export default ResourceById;
