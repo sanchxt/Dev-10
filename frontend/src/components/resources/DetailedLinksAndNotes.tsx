@@ -1,10 +1,7 @@
 import { memo } from "react";
 
-interface DetailedLinksAndNotesProps {
-  essentials: [string];
-  extras: [string];
-  notes: string;
-}
+import { addHttpPrefix } from "../../utils/helpers";
+import { DetailedLinksAndNotesProps } from "../../utils/types";
 
 const DetailedLinksAndNotes = ({
   essentials,
@@ -25,7 +22,12 @@ const DetailedLinksAndNotes = ({
               key={idx}
               className="bg-purple-200 group px-2 py-0.5 md:py-1 overflow-hidden text-ellipsis whitespace-nowrap rounded-xl hover:shadow-md transition-all duration-300 ease-in-out cursor-pointer"
             >
-              <a href={link} rel="noreferrer" target="_blank" className="block">
+              <a
+                href={addHttpPrefix(link)}
+                rel="noreferrer"
+                target="_blank"
+                className="block"
+              >
                 <p className="inline relative after:bg-slate-600 after:absolute after:h-[0.1rem] after:w-0 after:bottom-0 after:left-0 group-hover:after:w-full after:transition-all after:duration-500">
                   {link}
                 </p>
@@ -47,7 +49,12 @@ const DetailedLinksAndNotes = ({
               key={idx}
               className="bg-purple-200 group px-2 py-0.5 md:py-1 overflow-hidden text-ellipsis whitespace-nowrap rounded-xl hover:shadow-md transition-all duration-300 ease-in-out cursor-pointer"
             >
-              <a href={link} rel="noreferrer" target="_blank" className="block">
+              <a
+                href={addHttpPrefix(link)}
+                rel="noreferrer"
+                target="_blank"
+                className="block"
+              >
                 <p className="inline relative after:bg-slate-600 after:absolute after:h-[0.1rem] after:w-0 after:bottom-0 after:left-0 group-hover:after:w-full after:transition-all after:duration-500">
                   {link}
                 </p>

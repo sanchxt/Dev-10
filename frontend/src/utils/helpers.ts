@@ -52,3 +52,10 @@ export const focusAndClearSearch = (
     setSearchQuery("");
   }
 };
+
+export const addHttpPrefix = (url: string) => {
+  if (!/^https?:\/\//i.test(url)) {
+    return `https://${url}`;
+  }
+  return url;
+};
