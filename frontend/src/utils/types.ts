@@ -3,6 +3,7 @@ import {
   aboutResourceCollectionSchema,
   linksResourceFormSchema,
   loginSchema,
+  reportResourceSchema,
   reviewSchema,
   signupSchema,
   updateProfileSchema,
@@ -20,6 +21,7 @@ export type AboutResourceCollectionFields = z.infer<
 >;
 export type LinkResourceFormFields = z.infer<typeof linksResourceFormSchema>;
 export type ReviewFormFields = z.infer<typeof reviewSchema>;
+export type ReportResourceFields = z.infer<typeof reportResourceSchema>;
 
 // sidebar icons
 interface SidebarIconProps {
@@ -101,4 +103,30 @@ export interface AddResourceRatingRequest {
 export interface LatestCommentsProps {
   comment: string;
   placeholder: boolean;
+}
+
+export interface FavoriteResourceRequest {
+  id: string;
+}
+
+export interface CheckFavoriteResponse {
+  isFavorite: boolean;
+}
+
+export interface ReportModalProps {
+  isOpen: boolean;
+  onRequestClose: () => void;
+  resourceId: string;
+}
+
+export interface ReportResourceRequest {
+  resourceId: string;
+  reason: string;
+  comments: string;
+}
+
+export interface DetailedLinksAndNotesProps {
+  essentials: [string];
+  extras: [string];
+  notes: string;
 }
