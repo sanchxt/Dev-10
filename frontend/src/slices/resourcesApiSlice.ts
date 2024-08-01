@@ -1,9 +1,11 @@
 import { apiSlice } from "./apiSlice";
-import { RESOURCS_URL } from "../utils/constants";
+import { RESOURCS_URL, USERS_URL } from "../utils/constants";
 import {
+  FavoriteResourceRequest,
   AddResourceRatingRequest,
   CreateResourceRequest,
   GetResourcesRequest,
+  ReportResourceRequest,
 } from "../utils/types";
 
 export const resourcesApiSlice = apiSlice.injectEndpoints({
@@ -47,6 +49,31 @@ export const resourcesApiSlice = apiSlice.injectEndpoints({
         method: "GET",
       }),
     }),
+    addFavoriteResource: builder.mutation<void, FavoriteResourceRequest>({
+      query: ({ id }) => ({
+        url: `${USERS_URL}/favorites/resources/${id}`,
+        method: "POST",
+      }),
+    }),
+    removeFavoriteResource: builder.mutation<void, FavoriteResourceRequest>({
+      query: ({ id }) => ({
+        url: `${USERS_URL}/favorites/resources/${id}`,
+        method: "DELETE",
+      }),
+    }),
+    checkIfResourceFavorited: builder.query<any, FavoriteResourceRequest>({
+      query: ({ id }) => ({
+        url: `${USERS_URL}/favorites/resources/check/${id}`,
+        method: "GET",
+      }),
+    }),
+    reportResource: builder.mutation<void, ReportResourceRequest>({
+      query: (data) => ({
+        url: `${RESOURCS_URL}/report`,
+        method: "POST",
+        body: data,
+      }),
+    }),
   }),
 });
 
@@ -57,4 +84,8 @@ export const {
   useAddResourceRatingMutation,
   useGetUserReviewQuery,
   useGetLatestCommentsQuery,
+  useAddFavoriteResourceMutation,
+  useRemoveFavoriteResourceMutation,
+  useCheckIfResourceFavoritedQuery,
+  useReportResourceMutation,
 } = resourcesApiSlice as any;
