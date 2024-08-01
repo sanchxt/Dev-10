@@ -14,7 +14,7 @@ const DetailedHeader = ({
   tags,
 }: DetailedHeaderProps) => {
   return (
-    <div className="py-2 md:py-3 xl:py-4 flex flex-wrap bg-slate-100">
+    <div className="py-2 md:py-3 xl:py-4 flex flex-wrap">
       <div className="w-full md:max-w-[15rem] xl:max-w-lg px-1 md:px-2 xl:px-8">
         <h1 className="capitalize h-fit font-semibold text-base md:text-lg xl:text-xl overflow-hidden text-ellipsis">
           {title}
