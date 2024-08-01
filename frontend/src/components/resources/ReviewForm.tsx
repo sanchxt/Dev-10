@@ -52,11 +52,10 @@ const ReviewForm = ({ id }: { id: string }) => {
       rating: getValues("rating"),
       comment: formData.comment,
     };
-    console.log(id);
 
     try {
       await addResourceRating(finalData).unwrap();
-      console.log("submitted");
+      toast.success("Review submitted");
     } catch (error) {
       const err = error as ApiError;
       toast.error(err.data?.message || err.error);
