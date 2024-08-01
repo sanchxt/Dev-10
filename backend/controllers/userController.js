@@ -138,9 +138,9 @@ const updateUserProfile = asyncHandler(async (req, res) => {
 });
 
 // @desc Add resources to favoriteResources
-// @route POST /api/users/favorites/:id
+// @route POST /api/users/favorites/resources/:id
 // @access Private
-const addFavorite = asyncHandler(async (req, res) => {
+const addFavoriteResource = asyncHandler(async (req, res) => {
   const user = await User.findById(req.user._id);
   if (!user) {
     res.status(404);
@@ -174,7 +174,7 @@ const addFavorite = asyncHandler(async (req, res) => {
 // @desc Remove resource from favoriteResources
 // @route DELETE /api/users/favorites/:id
 // @access Private
-const removeFavorite = asyncHandler(async (req, res) => {
+const removeFavoriteResource = asyncHandler(async (req, res) => {
   const user = await User.findById(req.user._id);
   const resource = await Resource.findById(req.params.id);
   if (!user) {
@@ -263,15 +263,36 @@ const getCreatedResources = asyncHandler(async (req, res) => {
   res.status(200).json(createdResourceIds);
 });
 
+// @desc Check if a resource has already been favorited
+// @route /api/users/favorites/resources/check/:id
+// @access Private
+const checkIfResourceFavorited = asyncHandler(async (req, res) => {
+  const user = await User.findById(req.user._id);
+  if (!user) {
+    res.status(404);
+    throw new Error("User not found");
+  }
+
+  const resource = await Resource.findById(req.params.id);
+  if (!resource) {
+    res.status(404);
+    throw new Error("Resource not found");
+  }
+
+  const isFavorited = user.favoriteResources.includes(resource._id);
+  res.status(200).json({ isFavorited });
+});
+
 export {
   authUser,
   registerUser,
   logoutUser,
   getUserProfile,
   updateUserProfile,
-  addFavorite,
-  removeFavorite,
+  addFavoriteResource,
+  removeFavoriteResource,
   favoriteResources,
   removeAllFavoriteResources,
   getCreatedResources,
+  checkIfResourceFavorited,
 };
