@@ -18,7 +18,7 @@ const Dropdown = memo(({ label, items, onSelect }: DropdownProps) => {
       <button
         type="button"
         onClick={toggle}
-        className="px-4 py-2 w-[8.8rem] flex gap-1 justify-center items-center bg-transparent border-b text-black rounded-sm focus:outline-none text-xs capitalize"
+        className="px-4 py-2 w-[8.8rem] flex gap-1 justify-center items-center bg-transparent border-b border-dropdown-underline text-resource-box-primary rounded-sm focus:outline-none text-xs capitalize"
       >
         {label}
         <IoIosArrowForward
@@ -34,7 +34,7 @@ const Dropdown = memo(({ label, items, onSelect }: DropdownProps) => {
             initial={{ opacity: 0, y: -10 }}
             animate={{ opacity: 1, y: 0 }}
             exit={{ opacity: 0, y: -10 }}
-            className="absolute left-0 mt-2 w-full bg-white border border-gray-200 rounded-md shadow-lg z-10"
+            className="absolute left-0 mt-2 w-full bg-resource-box-dropdown border border-resource-box-dropdown-border rounded-md shadow-lg z-10"
           >
             <div className="py-2 flex flex-col">
               {items.map((item: any, index: number) => (
@@ -45,7 +45,7 @@ const Dropdown = memo(({ label, items, onSelect }: DropdownProps) => {
                     onSelect(item);
                     close();
                   }}
-                  className="px-4 py-2 hover:bg-gray-100 cursor-pointer text-black text-xs capitalize"
+                  className="px-4 py-2 hover:bg-dropdown-border-hover-bg cursor-pointer text-resource-box-primary text-xs capitalize"
                 >
                   {item}
                 </button>
