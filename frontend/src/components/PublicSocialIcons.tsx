@@ -3,11 +3,11 @@ import { FaInstagram, FaTwitter } from "react-icons/fa6";
 const socialIcons = [
   {
     link: "https://www.twitter.com",
-    icon: <FaTwitter size={24} color="#000" />,
+    icon: <FaTwitter size={24} className="text-socials-icon" />,
   },
   {
     link: "https://www.instagram.com",
-    icon: <FaInstagram size={24} color="#000" />,
+    icon: <FaInstagram size={24} className="text-socials-icon" />,
   },
 ];
 
@@ -18,7 +18,7 @@ const PublicSocialIcons = () => {
         <a
           href={item.link}
           key={idx}
-          className="bg-white/70 p-2 rounded-full"
+          className="bg-socials-bg p-2 rounded-full"
           target="_blank"
           rel="noreferrer"
         >

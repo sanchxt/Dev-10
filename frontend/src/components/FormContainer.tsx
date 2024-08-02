@@ -60,7 +60,7 @@ const FormContainer = <T extends FieldValues>({
   return (
     <section className="mx-auto w-full h-full md:rounded-2xl md:w-[95%] md:h-[95%] glass-container flex flex-col">
       <h1
-        className={`text-3xl lg:text-4xl flex justify-center items-center pt-4 3xl:pt-8 ${
+        className={`text-3xl lg:text-4xl flex justify-center items-center pt-4 3xl:pt-8 text-primary-public-heading font-bold transition-colors duration-300 ${
           isLogin && "pb-8"
         }`}
       >
@@ -70,16 +70,20 @@ const FormContainer = <T extends FieldValues>({
       <div className="w-full flex-grow md:rounded-b-2xl flex">
         <div className="w-full lg:w-[60%] 2xl:w-1/2 lg:rounded-bl-2xl px-1 sm:px-2 flex flex-col">
           <p
-            className={`w-full sm:w-4/5 md:w-3/4 italic text-gray-400 text-sm lg:text-base 3xl:text-xl pt-1 ${
+            className={`w-full sm:w-4/5 md:w-3/4 italic text-secondary-public-text transition-colors duration-300 text-sm lg:text-base 3xl:text-xl pt-1 ${
               isLogin && "pt-2"
             }`}
           >
             {additionalText}
           </p>
 
-          <p className={`pt-8 ${isLogin && "pt-16"} text-gray-300 flex gap-2`}>
+          <p
+            className={`pt-8 ${
+              isLogin && "pt-16"
+            } text-xs md:text-sm text-secondary-public-text font-medium flex gap-2`}
+          >
             <span>
-              <FaHandSparkles color="#54e7f7" />
+              <FaHandSparkles color="#d987fa" />
             </span>
             {submitButtonText === "Login"
               ? "Please login to continue"
@@ -99,10 +103,13 @@ const FormContainer = <T extends FieldValues>({
                   {...register(id)}
                   type={type}
                   id={String(id)}
-                  className="floating-input peer"
+                  className="floating-input peer bg-public-input-bg text-xs md:text-sm text-public-input-text"
                   placeholder=""
                 />
-                <label htmlFor={String(id)} className="floating-label">
+                <label
+                  htmlFor={String(id)}
+                  className="floating-label text-public-placeholder tracking-wider text-xs md:text-sm"
+                >
                   {label}
                 </label>
 
@@ -114,7 +121,7 @@ const FormContainer = <T extends FieldValues>({
               </div>
             ))}
 
-            <p className="text-center text-sm text-gray-300 italic">
+            <p className="text-center text-sm text-gray-300 italic tracking-wide text-tertiary-public-text font-medium">
               {remainingBottomText}{" "}
               <span className="text-blue-400">
                 <Link to={redirectTo}>

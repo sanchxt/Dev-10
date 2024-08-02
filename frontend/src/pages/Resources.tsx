@@ -3,7 +3,7 @@ import Sidebar from "../components/shared/Sidebar";
 
 const Resources = () => {
   return (
-    <section className="flex flex-col md:flex-row h-screen">
+    <section className="flex flex-col md:flex-row h-screen bg-resources-pg-bg theme-transition">
       <Sidebar />
       <div className="flex-grow md:pl-[4rem]">
         <DisplayResources />

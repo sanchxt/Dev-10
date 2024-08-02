@@ -40,16 +40,16 @@ const SpotlightButton = ({ isDisabled, text }: ButtonProps) => {
     <motion.button
       whileTap={{ scale: 0.985 }}
       ref={btnRef}
-      className="relative w-full overflow-hidden rounded-lg bg-gradient-to-r from-[#fff]/80 via-[#d1cdcd]/90 to-[#b3afaf]/50 px-4 py-3 text-lg font-medium text-white"
+      className="relative w-full overflow-hidden rounded-lg bg-gradient-to-r from-spotlight-bg-1 via-spotlight-bg-2 to-spotlight-bg-3 px-4 py-2 md:py-3 text-lg font-medium text-white"
       type="submit"
       disabled={isDisabled}
     >
-      <span className="pointer-events-none relative z-10 mix-blend-difference">
+      <span className="pointer-events-none relative z-10 text-spotlight-text mix-blend-difference text-sm md:text-base">
         {isDisabled ? "Loading..." : text}
       </span>
       <span
         ref={spanRef}
-        className="pointer-events-none absolute left-[50%] top-[50%] h-32 w-32 -translate-x-[50%] -translate-y-[50%] rounded-full bg-slate-950"
+        className="pointer-events-none absolute left-[50%] top-[50%] h-32 w-32 -translate-x-[50%] -translate-y-[50%] rounded-full bg-spotlight-circle"
       />
     </motion.button>
   );

@@ -71,7 +71,7 @@ const SubMenu = ({ data }: SubMenuProps) => {
     <>
       <li
         className={`sidebar-link ${
-          pathname.includes(data.name) && "bg-purple-100"
+          pathname.includes(data.name) && "bg-sidebar-active"
         }`}
         onClick={() => setIsSubMenuOpen(!isSubMenuOpen)}
       >

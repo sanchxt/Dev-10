@@ -13,7 +13,7 @@ const ResourceBox: React.FC<ResourceCardProps> = ({ resource, index }) => {
   return (
     <div
       onClick={() => handleNavigation(resource._id)}
-      className={`bg-gradient-to-b from-slate-300 via-slate-200 to-slate-200 cursor-pointer
+      className={`resource-box-gradient theme-transition cursor-pointer
       ${index === 0 && "rounded-b-lg h-1/2 md:h-3/5 xl:h-[58%]"} 
       ${
         index === 1 &&
@@ -35,10 +35,10 @@ const ResourceBox: React.FC<ResourceCardProps> = ({ resource, index }) => {
     >
       {/* heading */}
       <div className="flex gap-1 md:gap-2 items-center max-w-[9rem] md:max-w-[10rem] xl:max-w-64">
-        <h1 className="text-[0.68rem] md:text-sm lg:text-base font-medium md:font-bold max-w-2/3 whitespace-nowrap overflow-hidden text-ellipsis">
+        <h1 className="text-[0.68rem] md:text-sm lg:text-base font-medium md:font-bold max-w-2/3 whitespace-nowrap overflow-hidden text-ellipsis text-resource-box-title">
           {resource?.title}
         </h1>
-        <p className="text-[0.55rem] border border-purple-600/30 md:text-[0.65rem] tracking-wide bg-purple-300 font-medium px-1 md:px-2 md:py-0.5 rounded-3xl text-gray-600">
+        <p className="text-[0.55rem] md:text-[0.65rem] tracking-wide bg-resource-box-by-bg font-medium px-1 md:px-2 md:py-0.5 rounded-3xl text-resource-box-by-text italic">
           {resource?.isOfficial ? "Official" : "Community"}
         </p>
       </div>

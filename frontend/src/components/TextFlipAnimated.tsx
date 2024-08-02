@@ -24,7 +24,7 @@ const TextFlipAnimated = ({ children }: { children: string }) => {
                 ease: "easeInOut",
                 delay: STAGGER * idx,
               }}
-              className="inline-block whitespace-pre bg-gradient-to-r text-transparent bg-clip-text from-gray-800 to-gray-700"
+              className="inline-block whitespace-pre bg-gradient-to-r text-transparent bg-clip-text from-flip-primary-1 to-flip-primary-2 theme-transition"
               key={idx}
             >
               {letter}
@@ -46,7 +46,7 @@ const TextFlipAnimated = ({ children }: { children: string }) => {
                 ease: "easeInOut",
                 delay: STAGGER * idx,
               }}
-              className="inline-block whitespace-pre bg-gradient-to-r text-transparent bg-clip-text from-cyan-950 to-cyan-800"
+              className="inline-block whitespace-pre bg-gradient-to-r text-transparent bg-clip-text from-flip-secondary-1 to-flip-secondary-2 theme-transition"
               key={idx}
             >
               {letter}

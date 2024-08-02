@@ -14,8 +14,8 @@
   }
 
   .shadow-inset {
-    box-shadow: rgb(190, 207, 221) 3px 3px 6px 0px inset,
-      rgba(255, 255, 255, 0.5) -3px -3px 6px 1px inset;
+    box-shadow: var(--public-nav-shadow-1) 3px 3px 6px 0px inset,
+      var(--public-nav-shadow-2) -3px -3px 6px 1px inset;
   }
 
   .glass-box-shadow {
@@ -44,11 +44,23 @@
     -webkit-backdrop-filter: blur(5px);
     border: 1px solid rgba(255, 255, 255, 0.3);
   }
+
+  .theme-transition {
+    @apply transition-colors duration-300;
+  }
+
+  .resource-box-gradient {
+    background: linear-gradient(
+      112.1deg,
+      var(--resource-box-bg-1) 11.4%,
+      var(--resource-box-bg-2) 70.2%
+    );
+  }
 }
 
 @layer components {
   .items-container {
-    @apply bg-white shadow-inset hover:shadow-5xl transition-all duration-1000 ease-in;
+    @apply bg-gradient-to-r from-public-nav-1 to-public-nav-2 shadow-inset hover:shadow-5xl transition-all duration-700 ease-in-out;
   }
 
   .public-nav-items {
@@ -76,14 +88,96 @@
   }
 
   .pagination-button {
-    @apply p-2 bg-transparent border border-black rounded-md disabled:opacity-50 transition-all duration-200 ease-in-out hover:bg-gray-200 disabled:cursor-not-allowed disabled:bg-transparent;
+    @apply p-2 bg-transparent border border-pagination-btn rounded-md disabled:opacity-50 transition-all duration-200 ease-in-out hover:bg-gray-200 disabled:cursor-not-allowed disabled:bg-transparent;
   }
 }
 
-* {
-  color-scheme: dark;
+.dark-theme {
+  --public-nav-bg-1: #444;
+  --public-nav-bg-2: #222;
+  --public-nav-shadow-1: rgba(81, 137, 190, 0.7);
+  --public-nav-shadow-2: rgba(66, 66, 66, 0);
+
+  --primary-public-heading: #eee;
+  --secondary-public-text: rgb(179, 184, 184);
+  --public-input-bg: rgba(69, 69, 69, 0.76);
+  --public-placeholder: #bbb;
+  --public-input-text: #eee;
+  --tertiary-public-text: rgba(255, 255, 255, 0.6);
+
+  --spotlight-btn-bg-1: rgba(0, 0, 0, 0.7);
+  --spotlight-btn-bg-2: rgba(28, 27, 27, 0.7);
+  --spotlight-btn-bg-3: rgba(0, 0, 0, 0.4);
+  --spotlight-circle: rgb(230, 230, 230);
+  --spotlight-text: #ffffff;
+
+  --socials-bg: #333;
+  --socials-icon: #fff;
+
+  --sidebar-bg-1: rgb(22, 22, 22);
+  --sidebar-bg-2: rgb(47, 44, 44);
+  --sidebar-text: #d3d2d4;
+  --sidebar-active-bg: rgba(207, 165, 218, 0.5);
+  --sidebar-scrollbar-bg: rgba(238, 245, 255, 0.2);
+  --sidebar-scrollbar-fg: rgba(255, 255, 255, 0.4);
+  --sidebar-menu-btn: rgb(230, 230, 230);
+
+  --text-flip-primary-1: #e2e2e2;
+  --text-flip-primary-2: #e1eeee;
+  --text-flip-secondary-1: #ecd4fc;
+  --text-flip-secondary-2: #e7b4ff;
+
+  --resources-page-bg: #222;
+  --pagination-btn: #eee;
+  --page-text: #ccc;
+  --resource-box-bg-1: rgb(32, 38, 57);
+  --resource-box-bg-2: rgba(69, 86, 102, 0.8);
+  --resource-box-title: #dedddd;
+  --resource-box-by-bg: #9c0ae6;
+  --resource-box-by-text: #cac7c7;
 }
 
-body {
-  background: #fff;
+.light-theme {
+  --public-nav-bg-1: #fff;
+  --public-nav-bg-2: #ddd;
+  --public-nav-shadow-1: rgb(190, 207, 221);
+  --public-nav-shadow-2: rgba(255, 255, 255, 0.5);
+
+  --primary-public-heading: #111;
+  --secondary-public-text: rgb(29, 29, 29);
+  --public-input-bg: rgba(213, 213, 213, 0.659);
+  --public-placeholder: #555;
+  --public-input-text: #111;
+  --tertiary-public-text: rgba(22, 21, 21, 0.9);
+
+  --spotlight-btn-bg-1: rgba(255, 255, 255, 0.7);
+  --spotlight-btn-bg-2: rgba(220, 220, 220, 0.7);
+  --spotlight-btn-bg-3: rgba(255, 255, 255, 0.4);
+  --spotlight-circle: rgb(230, 230, 230);
+  --spotlight-text: #fff;
+
+  --socials-bg: #ccc;
+  --socials-icon: #000;
+
+  --sidebar-bg-1: rgb(255, 255, 255, 1);
+  --sidebar-bg-2: rgba(240, 240, 240, 1);
+  --sidebar-text: #171617;
+  --sidebar-active-bg: rgba(242, 190, 255, 0.8);
+  --sidebar-scrollbar-bg: rgba(51, 65, 85, 0.2);
+  --sidebar-scrollbar-fg: rgba(203, 213, 225, 0.4);
+  --sidebar-menu-btn: rgb(20, 20, 20);
+
+  --text-flip-primary-1: #282727;
+  --text-flip-primary-2: #2f2932;
+  --text-flip-secondary-1: #094645;
+  --text-flip-secondary-2: #11706d;
+
+  --resources-page-bg: #eee;
+  --pagination-btn: #222;
+  --page-text: #555;
+  --resource-box-bg-1: rgba(247, 247, 247, 0.95);
+  --resource-box-bg-2: rgba(221, 221, 245, 0.95);
+  --resource-box-title: #111;
+  --resource-box-by-bg: #ebd3f8;
+  --resource-box-by-text: #585858;
 }

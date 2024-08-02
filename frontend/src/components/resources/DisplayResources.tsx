@@ -176,7 +176,7 @@ const DisplayResources = () => {
                   />
 
                   <div>
-                    <p className="text-gray-700 text-xs lg:text-sm font-medium">
+                    <p className="text-page-text text-xs lg:text-sm font-medium">
                       Page <span>{formInputs.pageNumber}</span> of{" "}
                       <span>{data?.pages}</span>
                     </p>

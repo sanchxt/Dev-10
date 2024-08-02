@@ -75,7 +75,7 @@ const Sidebar = () => {
       <motion.div
         variants={sidebarAnimation}
         animate={sidebarIsOpen ? "open" : "close"}
-        className="bg-white text-gray-700 shadow-2xl z-[999] w-[16rem] max-w-[16rem] h-screen overflow-hidden fixed"
+        className="bg-gradient-to-b from-sidebar-bg-1 to-sidebar-bg-2 text-sidebar-text shadow-2xl z-[999] w-[16rem] max-w-[16rem] h-screen overflow-hidden fixed transition-colors duration-300"
       >
         {/* logo */}
         <div
@@ -94,13 +94,13 @@ const Sidebar = () => {
 
         {/* menu */}
         <div className="flex flex-col h-full">
-          <ul className="whitespace-pre px-2.5 text-[0.9rem] py-5 flex flex-col gap-1 font-medium overflow-x-hidden h-[70%] md:h-[68%] scrollbar-thin scrollbar-thumb-slate-700/20 scrollbar-track-slate-300/40">
+          <ul className="whitespace-pre px-2.5 text-[0.9rem] py-5 flex flex-col gap-1 font-medium overflow-x-hidden h-[70%] md:h-[68%] scrollbar-thin scrollbar-thumb-sidebar-scroll-bg scrollbar-track-sidebar-scroll-fg">
             {sidebarMenu.map((item) => (
               <li key={item.name}>
                 <NavLink
                   to={item.href}
                   className={`sidebar-link ${
-                    pathname === item.href ? "bg-purple-100/80" : ""
+                    pathname === item.href ? "bg-sidebar-active" : ""
                   }`}
                 >
                   <item.icon size={23} className="min-w-max" />
@@ -160,8 +160,11 @@ const Sidebar = () => {
         </motion.button>
       </motion.div>
 
-      <div className="p-3 md:hidden" onClick={() => setSidebarIsOpen(true)}>
-        <MdMenu size={25} color="black" />
+      <div
+        className="p-3 md:hidden bg-gradient-to-r from-sidebar-bg-1 to-sidebar-bg-2"
+        onClick={() => setSidebarIsOpen(true)}
+      >
+        <MdMenu size={25} className="text-sidebar-menu" />
       </div>
     </>
   );

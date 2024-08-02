@@ -22,9 +22,9 @@ const PublicNavbar = () => {
 
   return (
     <header
-      className={`bg-white ${
+      className={`bg-gradient-to-tr from-public-nav-1 to-public-nav-2 ${
         mobileDrawerOpen ? "shadow-none" : "shadow-5xl"
-      } md:bg-transparent md:shadow-none`}
+      } md:shadow-none theme-transition`}
     >
       <nav className="flex justify-between items-center p-1 sm:w-[92%] mx-auto">
         <div className="">
@@ -36,11 +36,11 @@ const PublicNavbar = () => {
         </div>
 
         <div
-          className={`md:static absolute py-12 sm:py-20 md:py-2 md:min-h-fit left-0 bg-white z-50 ${
+          className={`md:static absolute py-12 sm:py-20 md:py-2 md:min-h-fit left-0 bg-public-nav-1 md:bg-transparent z-50 theme-transition ${
             mobileDrawerOpen ? "shadow-dropdown" : "shadow-none"
           } 
           ${
-            mobileDrawerOpen ? "top-[8%]" : "top-[-100%]"
+            mobileDrawerOpen ? "top-[9%]" : "top-[-100%]"
           } md:w-auto w-full flex items-center px-5`}
         >
           <ul className="public-nav-items">

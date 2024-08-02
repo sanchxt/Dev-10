@@ -18,9 +18,9 @@ const PaginationButton = memo(
         className="pagination-button"
       >
         {direction === "prev" ? (
-          <MdKeyboardArrowLeft color="#000" />
+          <MdKeyboardArrowLeft className="text-pagination-btn" />
         ) : (
-          <MdKeyboardArrowRight color="#000" />
+          <MdKeyboardArrowRight className="text-pagination-btn" />
         )}
       </button>
     );
