@@ -101,7 +101,7 @@ const DisplayResources = () => {
         className="py-6 md:py-6 lg:py-6 px-2 md:px-4 xl:px-8 flex flex-wrap"
       >
         {/* search */}
-        <div className="w-full relative flex justify-center items-center bg-slate-300 rounded-xl">
+        <div className="w-full relative flex justify-center items-center bg-resource-search-bg rounded-xl">
           <label htmlFor="resource-search" className="absolute left-2">
             <SearchIcon isFetching={isFetching} />
           </label>
@@ -111,13 +111,13 @@ const DisplayResources = () => {
             placeholder="Search for resources.."
             value={searchQuery}
             onChange={(e) => setSearchQuery(e.target.value)}
-            className="w-full appearance-none text-gray-800 bg-transparent rounded-l-xl text-xs tracking-wider font-medium py-1.5 md:py-2 px-1 pl-8 outline-none"
+            className="w-full appearance-none text-resource-search-text bg-transparent rounded-l-xl text-xs tracking-wider font-medium py-1.5 md:py-2 px-1 pl-8 outline-none"
           />
           <button
             type="submit"
             className="mr-1 md:mr-2 border-l-2 border-gray-600/50 pl-1 md:pl-2"
           >
-            <span className="px-2 md:px-4 py-0.5 flex items-center justify-center text-xs md:text-sm font-medium transition-all duration-200 ease-in-out bg-slate-400 hover:bg-slate-600/80 rounded-lg">
+            <span className="px-2 md:px-4 py-0.5 flex items-center justify-center text-xs md:text-sm font-medium transition-all duration-200 ease-in-out text-search-btn-text bg-search-btn-bg hover:bg-search-btn-hover-bg rounded-lg">
               Search
             </span>
           </button>

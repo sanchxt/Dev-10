@@ -29,7 +29,7 @@ const SearchIcon = memo(({ isFetching }: { isFetching: boolean }) => {
   return isFetching ? (
     <SearchSpinner />
   ) : (
-    <IoIosSearch size={18} color="#000" />
+    <IoIosSearch size={18} className="text-search-icon" />
   );
 });
 

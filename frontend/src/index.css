@@ -127,14 +127,25 @@
   --text-flip-secondary-1: #ecd4fc;
   --text-flip-secondary-2: #e7b4ff;
 
-  --resources-page-bg: #222;
+  --resources-page-bg: #19191a;
   --pagination-btn: #eee;
   --page-text: #ccc;
   --resource-box-bg-1: rgb(32, 38, 57);
   --resource-box-bg-2: rgba(69, 86, 102, 0.8);
-  --resource-box-title: #dedddd;
+  --resource-box-primary: #dedddd;
   --resource-box-by-bg: #9c0ae6;
   --resource-box-by-text: #cac7c7;
+  --resource-box-secondary: #c2c0c0;
+  --resource-box-dropdown: #222;
+  --resource-box-dropdown-border: #555;
+  --dropdown-border-hover-bg: #333;
+  --dropdown-underline: #bbb;
+  --resource-search-bg: #222323;
+  --resource-search-text: #dfe6e6;
+  --search-icon: #eee;
+  --search-btn-bg: rgb(12, 71, 129);
+  --search-btn-text: #d3d7db;
+  --search-btn-hover-bg: rgb(7, 40, 72);
 }
 
 .light-theme {
@@ -177,7 +188,18 @@
   --page-text: #555;
   --resource-box-bg-1: rgba(247, 247, 247, 0.95);
   --resource-box-bg-2: rgba(221, 221, 245, 0.95);
-  --resource-box-title: #111;
+  --resource-box-primary: #111;
   --resource-box-by-bg: #ebd3f8;
   --resource-box-by-text: #585858;
+  --resource-box-secondary: #252222;
+  --resource-box-dropdown: #ebedf0;
+  --resource-box-dropdown-border: #ccc;
+  --dropdown-border-hover-bg: #dfe1e6;
+  --dropdown-underline: #7a7a7a;
+  --resource-search-bg: #d0d3d9;
+  --resource-search-text: #161717;
+  --search-icon: #111;
+  --search-btn-bg: #81c0ff;
+  --search-btn-text: #1a1b1c;
+  --search-btn-hover-bg: rgb(105, 160, 215);
 }
