@@ -70,6 +70,10 @@ const resourceSchema = mongoose.Schema(
       type: Boolean,
       default: false,
     },
+    views: {
+      type: Number,
+      default: 0,
+    },
     reports: [
       {
         type: mongoose.Schema.Types.ObjectId,

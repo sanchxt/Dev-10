@@ -97,13 +97,14 @@ const getResourceById = asyncHandler(async (req, res) => {
   if (resource) {
     // resource.averageRating = calculateAverageRating(resource.ratings);
     // resource.ratingBreakdown = calculateRatingBreakdown(resource.ratings);
+    resource.views += 1;
+    await resource.save();
     res.status(200).json(resource);
   } else {
     res.status(404);
     throw new Error("Resource not found");
   }
 });
-
 // @desc Update an existing resource
 // @route PUT /api/resources/:id
 // @access Private
@@ -256,6 +257,29 @@ const getLatestComments = asyncHandler(async (req, res) => {
     .slice(0, 3);
 
   res.status(200).json(latestComments);
+  const getTopViewedResources = asyncHandler(async (req, res) => {
+    const pageSize = 10;
+    const page = Number(req.query.pageNumber) || 1;
+
+    // Calculate the date for one month ago
+    const oneMonthAgo = new Date();
+    oneMonthAgo.setMonth(oneMonthAgo.getMonth() - 1);
+
+    const count = await Resource.countDocuments({
+      createdAt: { $gte: oneMonthAgo },
+    });
+
+    const resources = await Resource.find({
+      createdAt: { $gte: oneMonthAgo },
+    })
+      .sort({ views: -1 })
+      .limit(pageSize)
+      .skip(pageSize * (page - 1));
+
+    res
+      .status(200)
+      .json({ resources, page, pages: Math.ceil(count / pageSize) });
+  });
 });
 
 export {
@@ -268,4 +292,5 @@ export {
   getResourcesByTag,
   getUserReview,
   getLatestComments,
+  getTopViewedResources,
 };
