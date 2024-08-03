@@ -89,15 +89,17 @@ const createResource = asyncHandler(async (req, res) => {
 });
 
 // @desc Get resource by resource ID
-// @route GET /api/resources/:id
+// @route PUT /api/resources/details/:id
 // @access Public
 const getResourceById = asyncHandler(async (req, res) => {
   const resource = await Resource.findById(req.params.id);
 
   if (resource) {
-    // resource.averageRating = calculateAverageRating(resource.ratings);
-    // resource.ratingBreakdown = calculateRatingBreakdown(resource.ratings);
-    res.status(200).json(resource);
+    resource.totalViews += 1;
+    resource.monthlyViews += 1;
+    const updatedViewsResource = await resource.save();
+
+    res.status(200).json(updatedViewsResource);
   } else {
     res.status(404);
     throw new Error("Resource not found");
@@ -105,7 +107,7 @@ const getResourceById = asyncHandler(async (req, res) => {
 });
 
 // @desc Update an existing resource
-// @route PUT /api/resources/:id
+// @route PUT /api/resources/:id/modify
 // @access Private
 const updateResource = asyncHandler(async (req, res) => {
   const { title, description, tags, essentials, extras, notes } = req.body;
@@ -134,7 +136,7 @@ const updateResource = asyncHandler(async (req, res) => {
 });
 
 // @desc Delete a resource
-// @route DELETE /api/resources/:id
+// @route DELETE /api/resources/:id/modify
 // @access Private
 const deleteResource = asyncHandler(async (req, res) => {
   const resource = await Resource.findById(req.params.id);
@@ -217,7 +219,7 @@ const getResourcesByTag = asyncHandler(async (req, res) => {
 });
 
 // @desc Get user review of a resource
-// @route GET /api/:id/get-review
+// @route GET /api/resources/:id/get-review
 // @access Private
 const getUserReview = asyncHandler(async (req, res) => {
   const resource = await Resource.findById(req.params.id);
@@ -240,7 +242,7 @@ const getUserReview = asyncHandler(async (req, res) => {
 });
 
 // @desc Get latest comments of a resource
-// @route GET /api/:id/latest-comments
+// @route GET /api/resources/:id/latest-comments
 // @access Private
 const getLatestComments = asyncHandler(async (req, res) => {
   const resource = await Resource.findById(req.params.id);
@@ -258,6 +260,34 @@ const getLatestComments = asyncHandler(async (req, res) => {
   res.status(200).json(latestComments);
 });
 
+// @desc Get total views of a resource
+// @route GET /api/resources/:id/total-views
+// @access Private
+const getTotalViewsById = asyncHandler(async (req, res) => {
+  const resource = await Resource.findById(req.params.id);
+
+  if (resource) {
+    if (resource.user.toString() !== req.user._id.toString()) {
+      res.status(401);
+      throw new Error("Not authorized to see the total views of this resource");
+    }
+
+    res.status(200).json({ totalViews: resource.totalViews });
+  } else {
+    res.status(404);
+    throw new Error("Resource not found");
+  }
+});
+
+// @desc Get toop 6 viewed resources of the month
+// @route GET /api/resources/top/monthly
+// @access Private
+const getTopMonthlyViewedResources = asyncHandler(async (req, res) => {
+  const resources = await Resource.find().sort({ monthlyViews: -1 }).limit(6);
+
+  res.status(200).json(resources);
+});
+
 export {
   getResources,
   createResource,
@@ -268,4 +298,6 @@ export {
   getResourcesByTag,
   getUserReview,
   getLatestComments,
+  getTotalViewsById,
+  getTopMonthlyViewedResources,
 };
