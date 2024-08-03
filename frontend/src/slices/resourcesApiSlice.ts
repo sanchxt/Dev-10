@@ -27,7 +27,7 @@ export const resourcesApiSlice = apiSlice.injectEndpoints({
     getResourceById: builder.query<any, string>({
       query: (id) => ({
         url: `${RESOURCS_URL}/details/${id}`,
-        method: "GET",
+        method: "PUT",
       }),
     }),
     addResourceRating: builder.mutation<void, AddResourceRatingRequest>({
