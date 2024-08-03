@@ -12,6 +12,8 @@ import {
   getResourcesByTag,
   getUserReview,
   getLatestComments,
+  getTotalViewsById,
+  getTopMonthlyViewedResources,
 } from "../controllers/resourceController.js";
 
 const router = express.Router();
@@ -27,13 +29,15 @@ router
   .post(protect, createResourceRateLimiter, createResource)
   .get(protect, getResources);
 router.get("/:tag", protect, getResourcesByTag);
+router.put("/details/:id", getResourceById);
 router
-  .route("/details/:id")
-  .get(protect, getResourceById)
+  .route("/:id/modify")
   .put(protect, updateResource)
   .delete(protect, deleteResource);
 router.route("/:id/rating").post(protect, addResourceRating);
 router.get("/:id/get-review", protect, getUserReview);
 router.get("/:id/latest-comments", protect, getLatestComments);
+router.get("/:id/total-views", protect, getTotalViewsById);
+router.get("/top/monthly", protect, getTopMonthlyViewedResources);
 
 export default router;
