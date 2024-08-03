@@ -76,6 +76,14 @@ const resourceSchema = mongoose.Schema(
         ref: "ResourceReport",
       },
     ],
+    totalViews: {
+      type: Number,
+      default: 0,
+    },
+    monthlyViews: {
+      type: Number,
+      default: 0,
+    },
   },
   {
     timestamps: true,
