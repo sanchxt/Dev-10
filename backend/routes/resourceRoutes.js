@@ -12,6 +12,7 @@ import {
   getResourcesByTag,
   getUserReview,
   getLatestComments,
+  getTopViewedResources,
 } from "../controllers/resourceController.js";
 
 const router = express.Router();
@@ -35,5 +36,6 @@ router
 router.route("/:id/rating").post(protect, addResourceRating);
 router.get("/:id/get-review", protect, getUserReview);
 router.get("/:id/latest-comments", protect, getLatestComments);
+router.get("/top/views", protect, getTopViewedResources);
 
 export default router;
