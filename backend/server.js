@@ -1,9 +1,11 @@
 import dotenv from "dotenv";
+import cron from "node-cron";
 import express from "express";
 import cookieParser from "cookie-parser";
 
 import connectDB from "./config/db.js";
 import userRoutes from "./routes/userRoutes.js";
+import Resource from "./models/resourceModel.js";
 import resourceRoutes from "./routes/resourceRoutes.js";
 import resourceReportRoutes from "./routes/resourceReportRoutes.js";
 
@@ -20,6 +22,15 @@ const app = express();
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 app.use(cookieParser());
+
+cron.schedule("0 0 1 * *", async () => {
+  try {
+    await Resource.updateMany({}, { $set: { monthlyViews: 0 } });
+    console.log("Monthly views reset to 0");
+  } catch (error) {
+    console.error("error resetting monthly views:", error);
+  }
+});
 
 app.use("/api/users", userRoutes);
 app.use("/api/resources", resourceRoutes);
