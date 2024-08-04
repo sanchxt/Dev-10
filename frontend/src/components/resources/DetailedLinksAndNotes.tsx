@@ -16,11 +16,11 @@ const DetailedLinksAndNotes = ({
           Essentials
         </h2>
 
-        <ul className="w-full text-left font-thin tracking-wider text-[0.68rem] md:text-xs lg:text-sm 2xl:text-base pt-3 md:pt-6 xl:pt-8 px-0.5 md:px-2 flex flex-col gap-2">
+        <ul className="w-full text-left font-thin tracking-wider text-[0.68rem] md:text-xs lg:text-sm 2xl:text-base pt-3 md:pt-6 xl:pt-8 px-0.5 md:px-2 grid gap-2">
           {essentials?.map((link: string, idx: number) => (
             <li
               key={idx}
-              className="bg-purple-200 group px-2 py-0.5 md:py-1 overflow-hidden text-ellipsis whitespace-nowrap rounded-xl hover:shadow-md transition-all duration-300 ease-in-out cursor-pointer"
+              className="bg-purple-200 group px-2 py-0.5 md:py-1 overflow-hidden text-ellipsis whitespace-pre rounded-xl hover:shadow-md transition-all duration-300 ease-in-out cursor-pointer"
             >
               <a
                 href={addHttpPrefix(link)}
