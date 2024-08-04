@@ -95,11 +95,13 @@ const getResourceById = asyncHandler(async (req, res) => {
   const resource = await Resource.findById(req.params.id);
 
   if (resource) {
-    resource.totalViews += 1;
-    resource.monthlyViews += 1;
-    const updatedViewsResource = await resource.save();
+    if (req.user && req.user._id.toString() !== resource.user.toString()) {
+      resource.totalViews += 1;
+      resource.monthlyViews += 1;
+      await resource.save();
+    }
 
-    res.status(200).json(updatedViewsResource);
+    res.status(200).json(resource);
   } else {
     res.status(404);
     throw new Error("Resource not found");
