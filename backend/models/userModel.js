@@ -42,6 +42,12 @@ const userSchema = mongoose.Schema(
         ref: "ResourceReport",
       },
     ],
+    notes: [
+      {
+        type: mongoose.Schema.Types.ObjectId,
+        ref: "Note",
+      },
+    ],
   },
   {
     timestamps: true,
