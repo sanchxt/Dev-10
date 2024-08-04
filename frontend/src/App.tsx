@@ -1,19 +1,22 @@
-import { useEffect } from "react";
+import { useEffect, lazy, Suspense, useState } from "react";
 import { useSelector } from "react-redux";
 import { ToastContainer } from "react-toastify";
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
 import "react-toastify/dist/ReactToastify.css";
 
-import Home from "./pages/Home";
+import { RootState } from "./store";
+import PrivateRoute from "./components/PrivateRoute";
+import LoaderAnimation from "./components/LoaderAnimation";
+
+const Home = lazy(() => import("./pages/Home"));
 import Login from "./pages/Login";
 import SignUp from "./pages/SignUp";
-import { RootState } from "./store";
 import Resources from "./pages/Resources";
 import ProfilePage from "./pages/ProfilePage";
 import NotFoundPage from "./pages/NotFoundPage";
 import ResourceById from "./pages/ResourceById";
-import PrivateRoute from "./components/PrivateRoute";
 import ContributeResources from "./pages/ContributeResources";
+import { LOADER_DURATION } from "./utils/constants";
 
 const router = createBrowserRouter([
   {
@@ -29,7 +32,11 @@ const router = createBrowserRouter([
     children: [
       {
         path: "/",
-        element: <Home />,
+        element: (
+          <Suspense fallback={<LoaderAnimation onComplete={() => {}} />}>
+            <Home />
+          </Suspense>
+        ),
       },
       {
         path: "/settings/profile",
@@ -57,13 +64,31 @@ const router = createBrowserRouter([
 
 const App = () => {
   const theme = useSelector((state: RootState) => state.theme.theme);
+  const [loading, setLoading] = useState<boolean>(true);
+
   useEffect(() => {
     document.body.className = theme === "LIGHT" ? "light-theme" : "dark-theme";
+
+    const handleLoad = () => {
+      setTimeout(() => setLoading(false), LOADER_DURATION);
+    };
+
+    window.addEventListener("load", handleLoad);
+
+    return () => {
+      window.removeEventListener("load", handleLoad);
+    };
   }, [theme]);
+
+  const handleLoaderComplete = () => {
+    setLoading(false);
+  };
 
   return (
     <>
-      <RouterProvider router={router} />
+      {/* <LoaderAnimation /> */}
+      {loading && <LoaderAnimation onComplete={handleLoaderComplete} />}
+      {!loading && <RouterProvider router={router} />}
       <ToastContainer />
     </>
   );
