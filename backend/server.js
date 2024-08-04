@@ -6,6 +6,8 @@ import cookieParser from "cookie-parser";
 import connectDB from "./config/db.js";
 import userRoutes from "./routes/userRoutes.js";
 import Resource from "./models/resourceModel.js";
+
+import noteRoutes from "./routes/noteRoutes.js";
 import resourceRoutes from "./routes/resourceRoutes.js";
 import resourceReportRoutes from "./routes/resourceReportRoutes.js";
 
@@ -35,6 +37,7 @@ cron.schedule("0 0 1 * *", async () => {
 app.use("/api/users", userRoutes);
 app.use("/api/resources", resourceRoutes);
 app.use("/api/resources/report", resourceReportRoutes);
+app.use("/api/notes", noteRoutes);
 app.get("/", (req, res) => res.send("server is ready"));
 
 app.use(notFound);
