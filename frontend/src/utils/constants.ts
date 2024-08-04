@@ -57,3 +57,5 @@ export const sidebarMenu = [
 
 export const sortResourceDropdownItems = ["recent", "oldest"];
 export const filterResourceDropdownItems = ["highest", "lowest"];
+
+export const LOADER_DURATION = 7000;
