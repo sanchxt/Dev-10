@@ -56,6 +56,15 @@
       var(--resource-box-bg-2) 70.2%
     );
   }
+
+  .home-page-bg {
+    background-color: #e6ebf1;
+    background-image: linear-gradient(
+      160deg,
+      var(--home-page-bg-1) 0%,
+      var(--home-page-bg-2) 100%
+    );
+  }
 }
 
 @layer components {
@@ -154,6 +163,11 @@
   --no-resources-btn-1-text: black;
   --no-resources-btn-2-text: #bbb;
   --no-resources-btn-2-border: #444;
+
+  --home-link-underline: #81ccfb;
+  --home-link-text: #f5efef;
+  --home-page-bg-1: #31034c;
+  --home-page-bg-2: #0f0615;
 }
 
 .light-theme {
@@ -218,4 +232,9 @@
   --no-resources-btn-1-text: black;
   --no-resources-btn-2-text: #555;
   --no-resources-btn-2-border: #999;
+
+  --home-link-underline: #c25ef7;
+  --home-link-text: #141414;
+  --home-page-bg-1: #e6ebf1;
+  --home-page-bg-2: #e8d6f7;
 }
