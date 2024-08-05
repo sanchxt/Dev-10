@@ -17,6 +17,7 @@ import NotFoundPage from "./pages/NotFoundPage";
 import ResourceById from "./pages/ResourceById";
 import ContributeResources from "./pages/ContributeResources";
 import { LOADER_DURATION } from "./utils/constants";
+import FavouriteResources from "./pages/FavouriteResources";
 
 const router = createBrowserRouter([
   {
@@ -53,6 +54,10 @@ const router = createBrowserRouter([
       {
         path: "/resource/:id",
         element: <ResourceById />,
+      },
+      {
+        path: "/favorites/resources",
+        element: <FavouriteResources />,
       },
     ],
   },
