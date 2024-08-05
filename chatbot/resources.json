@@ -1,0 +1,115 @@
+{
+    "languages": [
+      {
+        "language": "JavaScript",
+        "resources": [
+          {
+            "title": "MDN Web Docs (Mozilla Developer Network)",
+            "description": "Comprehensive documentation and tutorials",
+            "link": "https://developer.mozilla.org/en-US/docs/Web/JavaScript"
+          },
+          {
+            "title": "freeCodeCamp",
+            "description": "Free, interactive curriculum with video tutorials",
+            "link": "https://www.freecodecamp.org/learn/javascript-algorithms-and-data-structures/"
+          },
+          {
+            "title": "JavaScript.info",
+            "description": "In-depth tutorials covering basics to advanced topics",
+            "link": "https://javascript.info/"
+          },
+          {
+            "title": "Codecademy's JavaScript Course",
+            "description": "Interactive learning platform with hands-on exercises",
+            "link": "https://www.codecademy.com/learn/introduction-to-javascript"
+          },
+          {
+            "title": "JavaScript: The Definitive Guide by David Flanagan",
+            "description": "Comprehensive book covering JavaScript in detail (Available as a physical book or e-book)",
+            "link": "https://www.oreilly.com/library/view/javascript-the-definitive/9781491952016/" 
+          },
+          {
+            "title": "Code with harry youtube course (Detailed & Long course - Hindi)",
+            "description": "Detailed Long Course in Hindi by Code with Harry Youtube Channel", 
+            "link": "https://youtube.com/playlist?list=PLu0W_9lII9ahR1blWXxgSlL4y9iQBnLpR&feature=shared"
+          },
+          {
+            "title": "Java Script Crash Course - Apna College (Hindi and english)",
+            "description": "Detailed Course for  Beginners to advances developers by Apna College Youtube Channel",
+            "link": "https://youtu.be/VlPiVmYuoqw?feature=shared"
+          },
+          {
+            "title": "12 Hour Crash Course for JavaScript",
+            "description": "Highly detailed 12 Hour Crash Course on JavaScirpt (Beginner Friendly)",
+            "link": "https://youtu.be/lfmg-EJ8gm4?feature=shared"
+          },
+          {
+            "title": "JavaScript Short Course (2 Hours)",
+            "description": "JavaScript crash course 2 Hours Youtube",
+            "link": "https://youtu.be/g7T23Xzys-A?feature=shared"
+          },
+          {
+            "title": "Basic JavaScript Course (Youtube)",
+            "description": "Javascript Mini Course 1 Hour",
+            "link": "https://youtu.be/W6NZfCO5SI?feature=shared"
+          }
+        ]
+      },
+      {
+        "language": "Python",
+        "resources": [
+          {
+            "title": "Python.org Official Documentation",
+            "description": "Comprehensive, official documentation and tutorials",
+            "link": "https://docs.python.org/3/tutorial/"
+          },
+          {
+            "title": "GeeksforGeeks Python Programming Language",
+            "description": "Extensive tutorials, articles, and practice problems",
+            "link": "https://www.geeksforgeeks.org/python-programming-language/"
+          },
+          {
+            "title": "Real Python",
+            "description": "In-depth tutorials, articles, and video courses",
+            "link": "https://realpython.com/"
+          },
+          {
+            "title": "Coursera's \"Python for Everybody\" Specialization",
+            "description": "Popular online course series by Dr. Charles Severance",
+            "link": "https://www.coursera.org/specializations/python"
+          },
+          {
+            "title": "\"Automate the Boring Stuff with Python\" by Al Sweigart",
+            "description": "Free online book with practical Python projects",
+            "link": "https://automatetheboringstuff.com/"
+          },
+          {
+            "title": "Python Course Hindi by Code with Harry",
+            "description": "Full Playlist of programming language by Code with harry youtue Channel in Hindi Language",
+            "link": "https://youtu.be/UrsmFxEIp5k?feature=shared"
+          },
+          {
+            "title": "Python Detailed Course Youtube",
+            "description": "Python Course Fully Detailed by Telusko Youtube Channel",
+            "link": "https://www.youtube.com/watch?v=QXeEoD0pB3E&list=PLsyeobzWxl7poL9JTVyndKe62ieoN-MZ3"
+          },
+          {
+            "title":"Python Detailed Course",
+            "description"  : "Python detailed Course by Jenny’s Lectures",
+            "link": "https://www.youtube.com/watch?v=6i3EGqOBRiU&list=PLdo5W4Nhv31bZSiqiOL5ta39vSnBxpOPT"
+          },
+          {
+            "title": "Harvard Full Python Course by FreeCodeCamp",
+            "description": "Full Python course by Harward Univeristy presented on youtube by FreeCodeCamp youtube Channel",
+            "link": "https://www.youtube.com/watch?v=nLRL_NcnK-4"
+          },
+          {
+            "title":"Udemy 100 days of code pyhton",
+            "description"  : "100 Days of code udemy course  which includes high hands on labs and work along with good theoritical knowledge",
+            "link": "https://www.udemy.com/course/100-days-of-code/?couponCode=LEARNNOWPLANS"
+          }
+
+        ]
+    }
+]
+}
