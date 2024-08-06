@@ -23,7 +23,7 @@ const createNote = asyncHandler(async (req, res) => {
 
     const createdNote = await note.save({ session });
 
-    await User.findById(
+    await User.findByIdAndUpdate(
       req.user._id,
       { $push: { notes: createdNote._id } },
       { new: true, session }
@@ -34,11 +34,13 @@ const createNote = asyncHandler(async (req, res) => {
 
     res.status(201).json(createdNote);
   } catch (error) {
+    console.error("Error creating note:", error);
     await session.abortTransaction();
     session.endSession();
 
-    res.status(400);
-    throw new Error("Note creation failed");
+    res
+      .status(400)
+      .json({ message: "Note creation failed", error: error.message });
   }
 });
 
@@ -92,7 +94,7 @@ const deleteNote = asyncHandler(async (req, res) => {
       throw new Error("Not authorized to delete this note");
     }
 
-    await note.remove();
+    await Note.deleteOne({ _id: req.params.id });
     res.json({ message: "Note has been removed" });
   } else {
     res.status(404);
