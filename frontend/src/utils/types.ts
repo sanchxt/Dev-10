@@ -124,6 +124,7 @@ export interface ReportModalProps {
 export interface AddNoteModalProps {
   isOpen: boolean;
   onRequestClose: () => void;
+  requestRefetch: () => void;
 }
 
 export interface ReportResourceRequest {
@@ -148,4 +149,16 @@ export interface CreateNoteProps {
   title: string;
   content: string;
   color: string;
+}
+
+export type Note = {
+  color: string;
+  content: string;
+  title: string;
+  _id: string;
+};
+
+export interface DisplayNotesProps {
+  notes: Note[];
+  handleCreateNote: () => void;
 }
