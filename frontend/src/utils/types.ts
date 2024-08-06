@@ -1,6 +1,7 @@
 import { z } from "zod";
 import {
   aboutResourceCollectionSchema,
+  addNoteSchema,
   linksResourceFormSchema,
   loginSchema,
   reportResourceSchema,
@@ -22,6 +23,7 @@ export type AboutResourceCollectionFields = z.infer<
 export type LinkResourceFormFields = z.infer<typeof linksResourceFormSchema>;
 export type ReviewFormFields = z.infer<typeof reviewSchema>;
 export type ReportResourceFields = z.infer<typeof reportResourceSchema>;
+export type AddNoteFields = z.infer<typeof addNoteSchema>;
 
 // sidebar icons
 interface SidebarIconProps {
@@ -119,6 +121,11 @@ export interface ReportModalProps {
   resourceId: string;
 }
 
+export interface AddNoteModalProps {
+  isOpen: boolean;
+  onRequestClose: () => void;
+}
+
 export interface ReportResourceRequest {
   resourceId: string;
   reason: string;
@@ -129,4 +136,16 @@ export interface DetailedLinksAndNotesProps {
   essentials: [string];
   extras: [string];
   notes: string;
+}
+
+export interface ColorPickerProps {
+  color: string;
+  onChange: (color: string) => void;
+  clicked: boolean;
+}
+
+export interface CreateNoteProps {
+  title: string;
+  content: string;
+  color: string;
 }
