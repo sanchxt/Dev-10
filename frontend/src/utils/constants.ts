@@ -60,3 +60,8 @@ export const sortResourceDropdownItems = ["recent", "oldest"];
 export const filterResourceDropdownItems = ["highest", "lowest"];
 
 export const LOADER_DURATION = 4000;
+
+export const HomePageHeaderLinks = [
+  { url: "/resources", text: "Explore Resources", id: 1 },
+  { url: "/roadmaps", text: "Explore Roadmaps", id: 2 },
+];
