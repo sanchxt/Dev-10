@@ -1,9 +1,20 @@
+import { FaPlus } from "react-icons/fa6";
+
 import HomeHeader from "./HomeHeader";
+import AddNoteModal from "./AddNoteModal";
 import WelcomeBanner from "./WelcomeBanner";
+import { useState } from "react";
 
 const HomePage = () => {
+  const [isCreateNoteModalOpen, setIsCreateNoteModalOpen] =
+    useState<boolean>(false);
+
+  const handleCreateNote = () => {
+    setIsCreateNoteModalOpen(true);
+  };
+
   return (
-    <div className="px-1">
+    <div className="px-1 h-full">
       <HomeHeader />
       <WelcomeBanner />
 
@@ -18,8 +29,12 @@ const HomePage = () => {
                 </h2>
               </div>
               <div className="bg-blue-400 h-32 lg:h-48 rounded-lg">b</div>
-              <div className="col-span-2 lg:col-span-1 bg-blue-600 h-32 lg:h-48 rounded-lg">
-                c
+
+              <div
+                className="col-span-2 lg:col-span-1 bg-gray-400/80 h-32 lg:h-48 rounded-lg flex justify-center items-center cursor-pointer"
+                onClick={handleCreateNote}
+              >
+                <FaPlus className="text-gray-500 text-5xl bg-slate-300 border-black/30 border-2 rounded-full p-1" />
               </div>
             </div>
           </div>
@@ -30,6 +45,11 @@ const HomePage = () => {
           </div>
         </div>
       </div>
+
+      <AddNoteModal
+        isOpen={isCreateNoteModalOpen}
+        onRequestClose={() => setIsCreateNoteModalOpen(false)}
+      />
     </div>
   );
 };
