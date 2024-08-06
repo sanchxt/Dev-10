@@ -10,6 +10,12 @@ import Note from "../models/notesModel.js";
 const createNote = asyncHandler(async (req, res) => {
   const { title, content, color } = req.body;
 
+  const noteCount = await Note.countDocuments({ user: req.user._id });
+  if (noteCount >= 9) {
+    res.status(400);
+    throw new Error("You cannot have more than 9 notes.");
+  }
+
   const session = await mongoose.startSession();
   session.startTransaction();
 
@@ -48,7 +54,9 @@ const createNote = asyncHandler(async (req, res) => {
 // @route GET /api/notes
 // @access Private
 const getNotes = asyncHandler(async (req, res) => {
-  const notes = await Note.find({ user: req.user._id });
+  const notes = await Note.find({ user: req.user._id }).select(
+    "color content _id title"
+  );
   if (notes) {
     res.json(notes);
   } else {
