@@ -33,11 +33,12 @@ const AddNoteModal = ({
     handleSubmit,
     setValue,
     formState: { errors },
+    reset,
   } = useForm<AddNoteFields>({
     resolver: zodResolver(addNoteSchema),
   });
 
-  const [createNewNote, { isLoading, reset }] = useCreateNoteMutation();
+  const [createNewNote, { isLoading }] = useCreateNoteMutation();
 
   const onSubmit = async (data: AddNoteFields) => {
     try {
