@@ -29,7 +29,7 @@ const ShowAllNotes = ({
             <div
               className="h-32 md:h-36 lg:h-40 rounded sm:rounded-lg p-1 overflow-hidden relative group"
               style={{ backgroundColor: `${note.color}` }}
-              key={idx}
+              key={note._id}
             >
               <h2 className="pb-1 text-[0.7rem] md:text-xs lg:text-sm text-center font-bold md:font-black capitalize md:tracking-wide overflow-hidden whitespace-pre text-ellipsis">
                 {note.title}
