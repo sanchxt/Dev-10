@@ -9,7 +9,11 @@ import { AddNoteFields, AddNoteModalProps, ApiError } from "../../utils/types";
 import { useCreateNoteMutation } from "../../slices/notesApiSlice";
 import { toast } from "react-toastify";
 
-const AddNoteModal = ({ isOpen, onRequestClose }: AddNoteModalProps) => {
+const AddNoteModal = ({
+  isOpen,
+  onRequestClose,
+  requestRefetch,
+}: AddNoteModalProps) => {
   const [color, setColor] = useState<string>("#444444");
   const [showColorPicker, setShowColorPicker] = useState<boolean>(false);
 
@@ -41,6 +45,8 @@ const AddNoteModal = ({ isOpen, onRequestClose }: AddNoteModalProps) => {
       await createNewNote(notesData).unwrap();
       toast.success("A new note has been created");
       reset();
+      onRequestClose();
+      requestRefetch();
     } catch (error) {
       const err = error as ApiError;
       toast.error(err?.data?.message || err?.error);
