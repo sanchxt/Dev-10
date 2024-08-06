@@ -54,9 +54,9 @@ const createNote = asyncHandler(async (req, res) => {
 // @route GET /api/notes
 // @access Private
 const getNotes = asyncHandler(async (req, res) => {
-  const notes = await Note.find({ user: req.user._id }).select(
-    "color content _id title"
-  );
+  const notes = await Note.find({ user: req.user._id })
+    .select("color content _id title")
+    .sort({ createdAt: -1 });
   if (notes) {
     res.json(notes);
   } else {
@@ -68,7 +68,7 @@ const getNotes = asyncHandler(async (req, res) => {
 // @route PUT /api/notes/:id
 // @access Private
 const updateNote = asyncHandler(async (req, res) => {
-  const { title, content, color } = req.body;
+  const { color } = req.body;
 
   const note = await Note.findById(req.params.id);
 
@@ -78,12 +78,10 @@ const updateNote = asyncHandler(async (req, res) => {
       throw new Error("Not authorized to update this note");
     }
 
-    note.title = title || note.title;
-    note.content = content || note.content;
     note.color = color || note.color;
 
     const updatedNote = await note.save();
-    res.json(updateNote);
+    res.json(updatedNote);
   } else {
     res.status(404);
     throw new Error("Note not found");
