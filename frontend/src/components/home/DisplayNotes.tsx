@@ -4,7 +4,7 @@ import { DisplayNotesProps } from "../../utils/types";
 const DisplayNotes = ({ notes, handleCreateNote }: DisplayNotesProps) => {
   return (
     <>
-      {notes?.slice(0, 2).map((note) => (
+      {notes.map((note) => (
         <div
           key={note._id}
           className="h-32 lg:h-48 rounded-lg p-1 overflow-hidden"
