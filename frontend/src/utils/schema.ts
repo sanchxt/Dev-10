@@ -101,3 +101,18 @@ export const reportResourceSchema = z.object({
     .max(200, { message: "Comments can't exceed 200 characters" })
     .optional(),
 });
+
+export const addNoteSchema = z.object({
+  title: z
+    .string()
+    .min(3, { message: "Title must be at least 3 characters long" })
+    .max(40, { message: "Title can't exceed 40 characters" }),
+  content: z
+    .string()
+    .min(10, { message: "Content must be at least 10 characters long" })
+    .max(150, { message: "Content can't exceed 150 characters" }),
+  color: z
+    .string()
+    .regex(/^#[0-9A-F]{6}$/i, { message: "Color must be a valid hex code" })
+    .optional(),
+});

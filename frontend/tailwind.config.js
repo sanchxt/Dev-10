@@ -65,6 +65,8 @@ export default {
         "no-resources-btn-1-text": "var(--no-resources-btn-1-text)",
         "no-resources-btn-2-text": "var(--no-resources-btn-2-text)",
         "no-resources-btn-2-border": "var(--no-resources-btn-2-border)",
+        "home-link-underline": "var(--home-link-underline)",
+        "home-link-text": "var(--home-link-text)",
       },
     },
   },

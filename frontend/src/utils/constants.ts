@@ -18,6 +18,7 @@ export const navItems = [
 
 export const USERS_URL = "/api/users";
 export const RESOURCS_URL = "/api/resources";
+export const NOTES_URL = "/api/notes";
 
 // sidebar
 export const sidebarSubMenusList = [
@@ -58,4 +59,9 @@ export const sidebarMenu = [
 export const sortResourceDropdownItems = ["recent", "oldest"];
 export const filterResourceDropdownItems = ["highest", "lowest"];
 
-export const LOADER_DURATION = 7000;
+export const LOADER_DURATION = 4000;
+
+export const HomePageHeaderLinks = [
+  { url: "/resources", text: "Explore Resources", id: 1 },
+  { url: "/roadmaps", text: "Explore Roadmaps", id: 2 },
+];
