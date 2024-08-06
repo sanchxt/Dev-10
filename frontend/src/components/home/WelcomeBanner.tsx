@@ -3,6 +3,7 @@ import { BsArrowRight } from "react-icons/bs";
 
 import { RootState } from "../../store";
 import { Link } from "react-router-dom";
+import { memo } from "react";
 
 const WelcomeBanner = () => {
   const { userInfo } = useSelector((state: RootState) => state.auth);
@@ -63,4 +64,4 @@ const WelcomeBanner = () => {
   );
 };
 
-export default WelcomeBanner;
+export default memo(WelcomeBanner);
