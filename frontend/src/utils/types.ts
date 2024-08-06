@@ -127,6 +127,13 @@ export interface AddNoteModalProps {
   requestRefetch: () => void;
 }
 
+export interface ShowAllNotesProps {
+  isOpen: boolean;
+  notes: Note[];
+  onRequestClose: () => void;
+  requestRefetch: () => void;
+}
+
 export interface ReportResourceRequest {
   resourceId: string;
   reason: string;
@@ -161,4 +168,25 @@ export type Note = {
 export interface DisplayNotesProps {
   notes: Note[];
   handleCreateNote: () => void;
+}
+
+export interface UpdateNoteProps {
+  id: string;
+  color: string;
+}
+
+export interface ModifyNoteProps {
+  note: {
+    color: string;
+    _id: string;
+  };
+  requestRefetch: () => void;
+}
+
+export interface NotesSectionProps {
+  isError: boolean;
+  isLoading: boolean;
+  handleViewAllNotes: () => void;
+  handleCreateNote: () => void;
+  data: Note[];
 }
