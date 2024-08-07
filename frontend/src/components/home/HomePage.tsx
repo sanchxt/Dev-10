@@ -9,6 +9,7 @@ import { RootState } from "../../store";
 import NotesSection from "./NotesSection";
 import { useTotalContributionsQuery } from "../../slices/usersApiSlice";
 import { Link } from "react-router-dom";
+import FloatingChatbotButton from "../FloatingChatbotButton";
 
 const HomePage = () => {
   const [isCreateNoteModalOpen, setIsCreateNoteModalOpen] =
@@ -40,7 +41,6 @@ const HomePage = () => {
     <div className="px-1 h-full flex flex-col">
       <HomeHeader />
       <WelcomeBanner />
-
       <div className="pt-4 w-full md:pl-2 lg:pl-4 xl:pl-6 pb-4">
         <div className="w-full grid md:grid-cols-2 xl:grid-cols-3">
           <div className="w-full xl:col-span-2 px-1 lg:pr-4 xl:pr-8">
@@ -61,7 +61,6 @@ const HomePage = () => {
           </div>
         </div>
       </div>
-
       <div className="md:px-2 lg:px-4 xl:px-6 pt-2 flex-grow h-fit grid gap-4 grid-cols-1 md:grid-cols-3">
         <div className="flex items-end">
           <div className="w-full h-full bg-gradient-to-br from-purple-300 to-purple-500 rounded-lg md:rounded-b-none"></div>
@@ -109,19 +108,18 @@ const HomePage = () => {
           </div>
         </div>
       </div>
-
       <AddNoteModal
         isOpen={isCreateNoteModalOpen}
         onRequestClose={() => setIsCreateNoteModalOpen(false)}
         requestRefetch={refetch}
       />
-
       <ShowAllNotes
         isOpen={isAllNotesModalOpen}
         notes={data}
         onRequestClose={() => setIsAllNotesModalOpen(false)}
         requestRefetch={refetch}
       />
+      <FloatingChatbotButton /> {/* Add the floating button */}
     </div>
   );
 };
