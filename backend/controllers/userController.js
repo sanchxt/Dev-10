@@ -171,6 +171,46 @@ const addFavoriteResource = asyncHandler(async (req, res) => {
   res.status(200).json({ message: "Resource added to favorites" });
 });
 
+// @desc Get all favorite resources
+// @route GET /api/users/favorites/resources
+// @access Private
+// const favoriteResources = asyncHandler(async (req, res) => {
+//   const user = await User.findById(req.user._id).populate({
+//     path: "favoriteResources",
+//     select: "_id name description", // Select the necessary fields
+//   });
+//   if (!user) {
+//     res.status(404);
+//     throw new Error("User not found");
+//   }
+
+//   res.status(200).json(user.favoriteResources);
+// });
+
+// @desc Get all favorite resources
+// @route GET /api/users/favorites/resources
+// @access Private
+const favoriteResources = asyncHandler(async (req, res) => {
+  const user = await User.findById(req.user._id).populate({
+    path: "favoriteResources",
+    select: "_id title description", // Ensure these fields are selected
+  });
+
+  if (!user) {
+    res.status(404);
+    throw new Error("User not found");
+  }
+
+  const favoriteResources = user.favoriteResources.map((resource) => ({
+    _id: resource._id,
+    title: resource.title,
+    description: resource.description,
+    // Add other fields if needed
+  }));
+
+  res.status(200).json(favoriteResources);
+});
+
 // @desc Remove resource from favoriteResources
 // @route DELETE /api/users/favorites/:id
 // @access Private
@@ -201,24 +241,24 @@ const removeFavoriteResource = asyncHandler(async (req, res) => {
   res.status(200).json({ message: "Resource removed from favorites" });
 });
 
-// @desc Get all favorite resources
-// @route GET /api/users/favorites/resources
-// @access Private
-const favoriteResources = asyncHandler(async (req, res) => {
-  const user = await User.findById(req.user._id).populate({
-    path: "favoriteResources",
-    select: "_id",
-  });
-  if (!user) {
-    res.status(404);
-    throw new Error("User not found");
-  }
+// // @desc Get all favorite resources
+// // @route GET /api/users/favorites/resources
+// // @access Private
+// const favoriteResources = asyncHandler(async (req, res) => {
+//   const user = await User.findById(req.user._id).populate({
+//     path: "favoriteResources",
+//     select: "_id",
+//   });
+//   if (!user) {
+//     res.status(404);
+//     throw new Error("User not found");
+//   }
 
-  const favoriteResourceIds = user.favoriteResources.map(
-    (resource) => resource._id
-  );
-  res.status(200).json(favoriteResourceIds);
-});
+//   const favoriteResourceIds = user.favoriteResources.map(
+//     (resource) => resource._id
+//   );
+//   res.status(200).json(favoriteResourceIds);
+// });
 
 // @desc Remove all favorited resources
 // @route PUT /api/users/favorites/resources
