@@ -283,6 +283,19 @@ const checkIfResourceFavorited = asyncHandler(async (req, res) => {
   res.status(200).json({ isFavorited });
 });
 
+const getUserContributions = asyncHandler(async (req, res) => {
+  const user = await User.findById(req.user._id).populate("createdResources");
+
+  if (!user) {
+    res.status(404);
+    throw new Error("User not found");
+  }
+
+  const contributions = user.createdResources.length;
+
+  res.status(200).json({ totalContributions: contributions });
+});
+
 export {
   authUser,
   registerUser,
@@ -295,4 +308,5 @@ export {
   removeAllFavoriteResources,
   getCreatedResources,
   checkIfResourceFavorited,
+  getUserContributions,
 };
