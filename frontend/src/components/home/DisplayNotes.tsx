@@ -7,7 +7,7 @@ const DisplayNotes = ({ notes, handleCreateNote }: DisplayNotesProps) => {
       {notes.map((note) => (
         <div
           key={note._id}
-          className="h-32 lg:h-48 rounded-lg p-1 overflow-hidden"
+          className="h-32 lg:h-48 rounded-lg p-1 overflow-hidden shadow-lg"
           style={{ backgroundColor: `${note.color}` }}
         >
           <h2 className="pb-1 text-[0.7rem] md:text-xs lg:text-sm text-center font-bold md:font-black capitalize md:tracking-wide overflow-hidden whitespace-pre text-ellipsis">

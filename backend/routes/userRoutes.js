@@ -11,6 +11,7 @@ import {
   addFavoriteResource,
   removeFavoriteResource,
   checkIfResourceFavorited,
+  getUserContributions,
 } from "../controllers/userController.js";
 import { protect } from "../middleware/authMiddleware.js";
 
@@ -35,5 +36,6 @@ router.route("/created-resources").get(protect, getCreatedResources);
 router
   .route("/favorites/resources/check/:id")
   .get(protect, checkIfResourceFavorited);
+router.get("/get-contributions", protect, getUserContributions);
 
 export default router;

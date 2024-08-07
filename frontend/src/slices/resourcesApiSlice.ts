@@ -74,6 +74,12 @@ export const resourcesApiSlice = apiSlice.injectEndpoints({
         body: data,
       }),
     }),
+    getFavoriteResources: builder.query<any, void>({
+      query: () => ({
+        url: `${USERS_URL}/favorites/resources`,
+        method: "GET",
+      }),
+    }),
   }),
 });
 
@@ -88,4 +94,5 @@ export const {
   useRemoveFavoriteResourceMutation,
   useCheckIfResourceFavoritedQuery,
   useReportResourceMutation,
+  useGetFavoriteResourcesQuery,
 } = resourcesApiSlice as any;
