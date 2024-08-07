@@ -8,7 +8,7 @@ type Resource = {
   _id: string;
   title: string;
   description?: string;
-  // Add other properties if needed
+  imageUrl?: string;
 };
 
 const DisplayFavoriteResources: React.FC = () => {
@@ -35,27 +35,32 @@ const DisplayFavoriteResources: React.FC = () => {
     navigate(`/resource/${resourceId}`);
   };
 
+  const handleExploreResources = () => {
+    // Implement the logic for exploring other resources
+    console.log("Explore other resources clicked");
+    // For example, you can navigate to a different page
+    navigate("/resources");
+  };
+
   return (
-    <div className="h-full flex flex-col bg-gradient-to-r from-purple-50 to-blue-50">
-      <div className="text-center font-extrabold pt-4 pb-6 text-2xl md:text-3xl lg:text-4xl">
-        <TextFlipAnimated>
-          Discover Your Top Favorite Resources
-        </TextFlipAnimated>
+    <div className="h-full flex flex-col bg-gradient-to-r from-white to-purple-500 border">
+      <div className="text-base sm:text-lg md:text-xl lg:text-2xl pt-2 md:pt-4 lg:pt-5 w-full">
+        <TextFlipAnimated children="Your Favourite Resources" />
       </div>
 
-      <div className="w-full flex-grow p-4">
+      <div className="w-full flex-grow p-4 border border-gray-300 bg-gradient-to-r from-white to-purple-200 rounded-lg shadow-md mt-6">
         {isLoading ? (
-          <div className="w-full h-full grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 p-6">
+          <div className="w-full h-full grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 p-8">
             {[...Array(6)].map((_, idx) => (
               <div
                 role="status"
                 key={idx}
-                className="max-w-sm bg-white p-4 rounded-lg shadow-md animate-pulse"
+                className="max-w-md bg-gray-100 p-8 rounded-lg shadow-md animate-pulse transition-all duration-300"
               >
-                <div className="h-3 bg-gray-300 rounded-full mb-4"></div>
-                <div className="h-2 bg-gray-300 rounded-full max-w-[300px] mb-3"></div>
-                <div className="h-2 bg-gray-300 rounded-full max-w-[250px] mb-3"></div>
-                <div className="h-2 bg-gray-300 rounded-full max-w-[200px]"></div>
+                <div className="h-6 bg-gray-300 rounded-full mb-6"></div>
+                <div className="h-4 bg-gray-300 rounded-full max-w-[300px] mb-4"></div>
+                <div className="h-4 bg-gray-300 rounded-full max-w-[250px] mb-4"></div>
+                <div className="h-4 bg-gray-300 rounded-full max-w-[200px]"></div>
               </div>
             ))}
             <span className="sr-only">Loading...</span>
@@ -67,23 +72,36 @@ const DisplayFavoriteResources: React.FC = () => {
             </p>
           </div>
         ) : (
-          <div className="w-full p-4">
-            {favoriteResources.length === 0 ? (
-              <NoResourcesFound />
+          <div className="w-full">
+            {favoriteResources?.length === 0 ? (
+              <NoResourcesFound onExploreResources={handleExploreResources} />
             ) : (
-              <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-                {favoriteResources.map((resource: Resource) => (
+              <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-2 xl:grid-cols-3 gap-8 p-8">
+                {favoriteResources?.map((resource: Resource) => (
                   <div
                     key={resource._id}
-                    className="bg-white p-6 rounded-lg shadow-lg border border-gray-200 hover:shadow-2xl transition-shadow duration-300 cursor-pointer"
+                    className="bg-white p-8 rounded-lg shadow-lg border border-gray-300 hover:shadow-2xl transition-shadow duration-300 transform hover:scale-105"
                     onClick={() => handleResourceClick(resource._id)}
                   >
-                    <h3 className="text-2xl font-semibold text-gray-900 mb-3">
-                      {resource.title}
-                    </h3>
-                    <p className="text-gray-700 text-base">
-                      {resource.description || "No description available."}
-                    </p>
+                    <div className="relative pb-2/3 mb-4">
+                      {resource.imageUrl ? (
+                        <img
+                          src={resource.imageUrl}
+                          alt={resource.title}
+                          className="absolute inset-0 w-full h-full object-cover rounded-lg transition-opacity duration-300"
+                        />
+                      ) : (
+                        <div className="absolute inset-0 bg-gray-200 rounded-lg"></div>
+                      )}
+                    </div>
+                    <div>
+                      <h3 className="text-sm md:text-lg lg:text-2xl font-bold text-gray-900 mb-4 capitalize break-words overflow-hidden whitespace-pre text-ellipsis align-middle">
+                        {resource.title}
+                      </h3>
+                      <p className="text-xs md:text-sm text-gray-900 mb-4 overflow-hidden break-words whitespace-break-spaces">
+                        {resource.description}
+                      </p>
+                    </div>
                   </div>
                 ))}
               </div>
