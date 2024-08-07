@@ -8,6 +8,7 @@ import { useSelector } from "react-redux";
 import { RootState } from "../../store";
 import NotesSection from "./NotesSection";
 import { useTotalContributionsQuery } from "../../slices/usersApiSlice";
+import FloatingChatbotButton from "../FloatingChatbotButton";
 
 const HomePage = () => {
   const [isCreateNoteModalOpen, setIsCreateNoteModalOpen] =
@@ -105,6 +106,8 @@ const HomePage = () => {
         onRequestClose={() => setIsAllNotesModalOpen(false)}
         requestRefetch={refetch}
       />
+      <FloatingChatbotButton /> {/* Add the floating button */}
+      
     </div>
   );
 };
