@@ -26,8 +26,8 @@ export const sidebarSubMenusList = [
     name: "favorites",
     icon: RxStarFilled,
     menu: [
-      { label: "roadmaps", url: "favorites/roadmaps" },
-      { label: "resources", url: "favorites/resources" },
+      { label: "roadmaps", url: "/favorites/roadmaps" },
+      { label: "resources", url: "/favorites/resources" },
     ],
   },
   {
