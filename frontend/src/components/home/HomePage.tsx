@@ -8,6 +8,7 @@ import { useSelector } from "react-redux";
 import { RootState } from "../../store";
 import NotesSection from "./NotesSection";
 import { useTotalContributionsQuery } from "../../slices/usersApiSlice";
+import { Link } from "react-router-dom";
 
 const HomePage = () => {
   const [isCreateNoteModalOpen, setIsCreateNoteModalOpen] =
@@ -84,9 +85,25 @@ const HomePage = () => {
                 <h3>Loading..</h3>
               </div>
             ) : (
-              <div>
-                <h1>Your Contributions</h1>
-                <h2 className="">{totalContributions?.totalContributions}</h2>
+              <div className="h-full w-full grid grid-rows-3">
+                <h1 className="text-center py-2 text-lg lg:text-xl tracking-wide font-medium">
+                  Your Contributions
+                </h1>
+                <h2 className="text-center text-4xl md:text-5xl lg:text-6xl xl:text-7xl font-black">
+                  {totalContributions?.totalContributions}
+                </h2>
+                <p className="flex items-end text-[0.58rem] md:text-xs italic text-gray-700 px-2 py-1">
+                  <p>
+                    Contribute{" "}
+                    <span className="text-blue-700 cursor-pointer font-medium">
+                      <Link to="/resources">resources</Link>
+                    </span>{" "}
+                    or{" "}
+                    <span className="text-blue-700 cursor-pointer font-medium">
+                      <Link to="/roadmaps">roadmaps</Link>
+                    </span>
+                  </p>
+                </p>
               </div>
             )}
           </div>
