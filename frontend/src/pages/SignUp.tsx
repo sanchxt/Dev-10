@@ -11,9 +11,10 @@ const SignUp = () => {
       <div
         className="w-full flex-grow flex items-center"
         style={{
-          background: "url('/public-bg.webp')",
-          backgroundRepeat: "no-repeat",
-          backgroundSize: "cover",
+          backgroundImage:
+            "linear-gradient(var(--loginbackdrop1), var(--loginbackdrop2)), url('/bg.jpg')",
+          backgroundRepeat: 'no-repeat',
+          backgroundSize: 'cover',
         }}
       >
         <SignupForm />
