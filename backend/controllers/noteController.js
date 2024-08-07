@@ -10,6 +10,12 @@ import Note from "../models/notesModel.js";
 const createNote = asyncHandler(async (req, res) => {
   const { title, content, color } = req.body;
 
+  const noteCount = await Note.countDocuments({ user: req.user._id });
+  if (noteCount >= 9) {
+    res.status(400);
+    throw new Error("You cannot have more than 9 notes.");
+  }
+
   const session = await mongoose.startSession();
   session.startTransaction();
 
@@ -23,7 +29,7 @@ const createNote = asyncHandler(async (req, res) => {
 
     const createdNote = await note.save({ session });
 
-    await User.findById(
+    await User.findByIdAndUpdate(
       req.user._id,
       { $push: { notes: createdNote._id } },
       { new: true, session }
@@ -34,11 +40,13 @@ const createNote = asyncHandler(async (req, res) => {
 
     res.status(201).json(createdNote);
   } catch (error) {
+    console.error("Error creating note:", error);
     await session.abortTransaction();
     session.endSession();
 
-    res.status(400);
-    throw new Error("Note creation failed");
+    res
+      .status(400)
+      .json({ message: "Note creation failed", error: error.message });
   }
 });
 
@@ -46,7 +54,9 @@ const createNote = asyncHandler(async (req, res) => {
 // @route GET /api/notes
 // @access Private
 const getNotes = asyncHandler(async (req, res) => {
-  const notes = await Note.find({ user: req.user._id });
+  const notes = await Note.find({ user: req.user._id })
+    .select("color content _id title")
+    .sort({ createdAt: -1 });
   if (notes) {
     res.json(notes);
   } else {
@@ -58,7 +68,7 @@ const getNotes = asyncHandler(async (req, res) => {
 // @route PUT /api/notes/:id
 // @access Private
 const updateNote = asyncHandler(async (req, res) => {
-  const { title, content, color } = req.body;
+  const { color } = req.body;
 
   const note = await Note.findById(req.params.id);
 
@@ -68,12 +78,10 @@ const updateNote = asyncHandler(async (req, res) => {
       throw new Error("Not authorized to update this note");
     }
 
-    note.title = title || note.title;
-    note.content = content || note.content;
     note.color = color || note.color;
 
     const updatedNote = await note.save();
-    res.json(updateNote);
+    res.json(updatedNote);
   } else {
     res.status(404);
     throw new Error("Note not found");
@@ -92,7 +100,7 @@ const deleteNote = asyncHandler(async (req, res) => {
       throw new Error("Not authorized to delete this note");
     }
 
-    await note.remove();
+    await Note.deleteOne({ _id: req.params.id });
     res.json({ message: "Note has been removed" });
   } else {
     res.status(404);

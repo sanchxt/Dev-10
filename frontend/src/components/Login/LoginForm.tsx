@@ -50,7 +50,7 @@ const LoginForm = () => {
       errorMessage="Incorrect email or password"
       welcomeText="Welcome back!"
       additionalText="Welcome back to the place made specifically for aspiring developers, like you, looking to take their skills to the next level."
-      sideImage="/login-gradient.webp"
+      sideImage="/card.jpg"
       bottomText="Don't have an account yet? Register"
       redirectTo="/signup"
       isLoading={isLoading}

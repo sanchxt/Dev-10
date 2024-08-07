@@ -1,7 +1,7 @@
 import { memo } from "react";
 import { IoIosSearch } from "react-icons/io";
 
-const SearchSpinner = () => {
+export const Spinner = () => {
   return (
     <div role="status">
       <svg
@@ -27,7 +27,7 @@ const SearchSpinner = () => {
 
 const SearchIcon = memo(({ isFetching }: { isFetching: boolean }) => {
   return isFetching ? (
-    <SearchSpinner />
+    <Spinner />
   ) : (
     <IoIosSearch size={18} className="text-search-icon" />
   );
