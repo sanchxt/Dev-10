@@ -75,7 +75,7 @@ const AboutCollectionForm = ({ onSubmit }: AboutCollectionFormProps) => {
   return (
     <>
       <h1 className="text-center text-2xl lg:text-3xl 2xl:text-4xl py-2 font-semibold">
-        About the Collection
+        Create Resource Collection
       </h1>
 
       <form
