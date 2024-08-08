@@ -1,42 +1,45 @@
-import asyncHandler from 'express-async-handler';
-import Roadmap from '../models/roadmapSchema.js';
-import User from '../models/userModel.js';
+import asyncHandler from "express-async-handler";
+import Roadmap from "../models/roadmapModel.js";
+import User from "../models/userModel.js";
+import validateRoadmapFields from "../utils/validateRoadmapFields.js";
 
-// desc     create new roadmap
-// route    POST /api/roadmaps
-// access   private
+// @desc     create new roadmap
+// @route    POST /api/roadmaps
+// @access   Private
 const createRoadmap = asyncHandler(async (req, res) => {
-  const {
-    title,
-    description,
-    steps,
-    duration,
-    category,
-    difficultyLevel,
-    tags,
-    visibility,
-  } = req.body;
+  const { title, description, tags, steps } = req.body;
+
+  try {
+    validateRoadmapFields(title, description, tags, steps);
+  } catch (error) {
+    res.status(400);
+    throw new Error(error.message);
+  }
+
+  const isAdmin = req.user.isAdmin;
 
   const roadmap = new Roadmap({
+    user: req.user._id,
+    authorName: req.user.name,
     title,
-    id: req.user._id,
     description,
-    steps,
-    duration,
-    category,
-    difficultyLevel,
-    createdBy: req.user._id,
     tags,
-    visibility,
+    steps,
+    isOfficial: isAdmin ? true : false,
   });
 
   const createdRoadmap = await roadmap.save();
+
+  req.user.createdRoadmaps = req.user.createdRoadmaps || [];
+  req.user.createdRoadmaps.push(createdRoadmap._id);
+  await req.user.save();
+
   res.status(201).json(createdRoadmap);
 });
 
-// desc     Get all roadmaps
-// route    GET /api/roadmaps
-// access   PUBLIC
+// @desc     Get all roadmaps
+// @route    GET /api/roadmaps
+// @access   Private
 const getAllRoadmaps = asyncHandler(async (req, res) => {
   const roadmaps = await Roadmap.find({});
   res.json(roadmaps);
@@ -52,7 +55,7 @@ const getRoadmapById = asyncHandler(async (req, res) => {
     res.json(roadmap);
   } else {
     res.status(404);
-    throw new Error('Roadmap not found');
+    throw new Error("Roadmap not found");
   }
 });
 
@@ -65,7 +68,7 @@ const updateRoadmap = asyncHandler(async (req, res) => {
   if (roadmap) {
     if (roadmap.id.toString() !== req.user._id.toString()) {
       res.status(401);
-      throw new Error('User not authorized');
+      throw new Error("User not authorized");
     }
 
     roadmap.title = req.body.title || roadmap.title;
@@ -82,7 +85,7 @@ const updateRoadmap = asyncHandler(async (req, res) => {
     res.json(updatedRoadmap);
   } else {
     res.status(404);
-    throw new Error('Roadmap not found');
+    throw new Error("Roadmap not found");
   }
 });
 
@@ -95,14 +98,14 @@ const deleteRoadmap = asyncHandler(async (req, res) => {
   if (roadmap) {
     if (roadmap.id.toString() !== req.user._id.toString()) {
       res.status(401);
-      throw new Error('User not authorized');
+      throw new Error("User not authorized");
     }
 
     await roadmap.deleteOne({ _id: req.params.id });
-    res.json({ message: 'Roadmap removed' });
+    res.json({ message: "Roadmap removed" });
   } else {
     res.status(404);
-    throw new Error('Roadmap not found');
+    throw new Error("Roadmap not found");
   }
 });
 
@@ -122,7 +125,7 @@ const rateRoadmap = asyncHandler(async (req, res) => {
 
     if (alreadyRated) {
       res.status(400);
-      throw new Error('You have already rated this roadmap');
+      throw new Error("You have already rated this roadmap");
     }
 
     const newRating = {
@@ -141,10 +144,10 @@ const rateRoadmap = asyncHandler(async (req, res) => {
     user.ratedRoadmaps.push({ roadmap: roadmap._id, rating }); // Ensure rating is added
     await user.save();
 
-    res.status(201).json({ message: 'Roadmap rated' });
+    res.status(201).json({ message: "Roadmap rated" });
   } else {
     res.status(404);
-    throw new Error('Roadmap not found');
+    throw new Error("Roadmap not found");
   }
 });
 
