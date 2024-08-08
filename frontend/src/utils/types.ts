@@ -2,6 +2,7 @@ import { z } from "zod";
 import {
   aboutResourceCollectionSchema,
   addNoteSchema,
+  createRoadmapSchema,
   linksResourceFormSchema,
   loginSchema,
   reportResourceSchema,
@@ -24,8 +25,8 @@ export type LinkResourceFormFields = z.infer<typeof linksResourceFormSchema>;
 export type ReviewFormFields = z.infer<typeof reviewSchema>;
 export type ReportResourceFields = z.infer<typeof reportResourceSchema>;
 export type AddNoteFields = z.infer<typeof addNoteSchema>;
+export type CreateRoadmapFields = z.infer<typeof createRoadmapSchema>;
 
-// sidebar icons
 interface SidebarIconProps {
   size: number;
   className: string;
@@ -199,4 +200,15 @@ export interface RecentResourcesState {
 export interface RecentlyVisitedState {
   resources: RecentResourcesState[];
   roadmaps: RecentResourcesState[];
+}
+
+export interface CreateRoadmapProps {
+  title: string;
+  description: string;
+  tags: string[];
+  steps: {
+    title: string;
+    description: string;
+    resources: string;
+  }[];
 }
