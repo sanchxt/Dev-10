@@ -1,13 +1,8 @@
-import { useSelector } from "react-redux";
+import { memo } from "react";
+import { Link } from "react-router-dom";
 import { BsArrowRight } from "react-icons/bs";
 
-import { RootState } from "../../store";
-import { Link } from "react-router-dom";
-import { memo } from "react";
-
-const WelcomeBanner = () => {
-  const { userInfo } = useSelector((state: RootState) => state.auth);
-
+const WelcomeBanner = ({ name }: { name: string }) => {
   return (
     <div className="pt-4 w-full md:pl-2 lg:pl-4 xl:pl-6 md:pr-12 lg:pr-20 xl:pr-28">
       <div className="w-full max-w-[1280px] bg-white rounded-lg px-1 md:px-6 lg:px-8 xl:px-10 flex gap-1 sm:gap-3 md:gap-4">
@@ -16,7 +11,7 @@ const WelcomeBanner = () => {
             Welcome,
           </h2>
           <h1 className="text-base capitalize sm:text-lg md:text-3xl lg:text-4xl xl:text-5xl text-center font-medium sm:text-right overflow-hidden text-ellipsis whitespace-nowrap">
-            {userInfo?.name}
+            {name}
           </h1>
         </div>
 

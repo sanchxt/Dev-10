@@ -1,7 +1,9 @@
 import { toast } from "react-toastify";
-import { useSelector } from "react-redux";
+import { BsEye } from "react-icons/bs";
+import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import { FaRegBookmark } from "react-icons/fa";
+import { useDispatch, useSelector } from "react-redux";
 import { GoBookmarkFill, GoBookmarkSlashFill, GoReport } from "react-icons/go";
 
 import ReviewForm from "./ReviewForm";
@@ -16,11 +18,13 @@ import {
   useRemoveFavoriteResourceMutation,
 } from "../../slices/resourcesApiSlice";
 import { LatestCommentsProps } from "../../utils/types";
-import { useState } from "react";
 import ReportModal from "./ReportModal";
-import { BsEye } from "react-icons/bs";
+import {
+  addVisitedResource,
+  addVisitedRoadmap,
+} from "../../slices/recentlyVisitedSlice";
 
-const DetailedResource = () => {
+const DetailedResource: React.FC = () => {
   const { id } = useParams<{ id: string }>();
   const { data, error, isLoading } = useGetResourceByIdQuery(id);
   const {
@@ -38,7 +42,7 @@ const DetailedResource = () => {
   const [removeFavoriteResource] = useRemoveFavoriteResourceMutation();
 
   const currentUserId = useSelector(
-    (state: RootState) => state?.auth?.userInfo?._id
+    (state: RootState) => state.auth.userInfo?._id
   );
 
   const filledComments = (comments || []).concat(
@@ -65,6 +69,13 @@ const DetailedResource = () => {
   const handleReportClick = () => {
     setIsReportModalOpen(true);
   };
+
+  const dispatch = useDispatch();
+  useEffect(() => {
+    if (id && data?.title) {
+      dispatch(addVisitedResource({ id, title: data.title }));
+    }
+  }, [id, data?.title]);
 
   if (isLoading) return <div>Loading data..</div>;
   if (error) return <div>{error.toString()}</div>;

@@ -1,8 +1,8 @@
-import React, { useEffect } from "react";
-import { useGetFavoriteResourcesQuery } from "../../slices/resourcesApiSlice";
-import TextFlipAnimated from "../TextFlipAnimated";
-import NoResourcesFound from "./NoResourcesFound";
 import { useNavigate } from "react-router-dom";
+
+import NoResourcesFound from "./NoResourcesFound";
+import TextFlipAnimated from "../TextFlipAnimated";
+import { useGetFavoriteResourcesQuery } from "../../slices/resourcesApiSlice";
 
 type Resource = {
   _id: string;
@@ -11,34 +11,20 @@ type Resource = {
   imageUrl?: string;
 };
 
-const DisplayFavoriteResources: React.FC = () => {
+const DisplayFavoriteResources = () => {
   const navigate = useNavigate();
 
   const {
     data: favoriteResources = [],
     error,
     isLoading,
-    refetch,
   } = useGetFavoriteResourcesQuery();
-
-  useEffect(() => {
-    refetch(); // Fetch resources on component mount
-  }, [refetch]);
-
-  useEffect(() => {
-    if (favoriteResources.length > 0) {
-      console.log("Fetched Favorite Resources:", favoriteResources);
-    }
-  }, [favoriteResources]);
 
   const handleResourceClick = (resourceId: string) => {
     navigate(`/resource/${resourceId}`);
   };
 
   const handleExploreResources = () => {
-    // Implement the logic for exploring other resources
-    console.log("Explore other resources clicked");
-    // For example, you can navigate to a different page
     navigate("/resources");
   };
 
