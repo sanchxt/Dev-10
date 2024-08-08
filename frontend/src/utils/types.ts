@@ -190,3 +190,13 @@ export interface NotesSectionProps {
   handleCreateNote: () => void;
   data: Note[];
 }
+
+export interface RecentResourcesState {
+  id: string;
+  title: string;
+}
+
+export interface RecentlyVisitedState {
+  resources: RecentResourcesState[];
+  roadmaps: RecentResourcesState[];
+}
