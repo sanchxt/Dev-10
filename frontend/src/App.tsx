@@ -18,6 +18,7 @@ import ResourceById from "./pages/ResourceById";
 import ContributeResources from "./pages/ContributeResources";
 import { LOADER_DURATION } from "./utils/constants";
 import FavouriteResources from "./pages/FavouriteResources";
+import ProjectStructure from "./components/home/ProjectStructure";
 
 const router = createBrowserRouter([
   {
@@ -58,6 +59,10 @@ const router = createBrowserRouter([
       {
         path: "/favorites/resources",
         element: <FavouriteResources />,
+      },
+      {
+        path: "/projects",
+        element: <ProjectStructure />,
       },
     ],
   },
