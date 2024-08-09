@@ -18,6 +18,7 @@ import ResourceById from "./pages/ResourceById";
 import ContributeResources from "./pages/ContributeResources";
 import { LOADER_DURATION } from "./utils/constants";
 import FavouriteResources from "./pages/FavouriteResources";
+import Trending from "./pages/Trending";
 import ContributeRoadmaps from "./pages/ContributeRoadmaps";
 import LandingPage from "./pages/LandingPage";
 
@@ -68,6 +69,10 @@ const router = createBrowserRouter([
       {
         path: "/favorites/resources",
         element: <FavouriteResources />,
+      },
+      {
+        path: "/trending",
+        element: <Trending />,
       },
     ],
   },

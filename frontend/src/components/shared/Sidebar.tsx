@@ -84,7 +84,7 @@ const Sidebar = () => {
           } flex items-center gap-2.5 font-medium border-b border-slate-300 py-3 mx-3`}
         >
           <img
-            src="/dev10-logo.webp"
+            src="/Dev10-Logo2.png"
             alt="Dev-10 Logo"
             width={45}
             className=""

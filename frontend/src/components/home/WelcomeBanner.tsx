@@ -1,6 +1,6 @@
-import { memo } from "react";
-import { Link } from "react-router-dom";
-import { BsArrowRight } from "react-icons/bs";
+import { memo } from 'react';
+import { Link } from 'react-router-dom';
+import { BsArrowRight } from 'react-icons/bs';
 
 const WelcomeBanner = ({ name }: { name: string }) => {
   return (
@@ -26,7 +26,10 @@ const WelcomeBanner = ({ name }: { name: string }) => {
               <div className="hidden h-2 w-2 sm:flex sm:justify-center sm:items-center bg-gradient-to-r from-purple-400 to-purple-500 rounded-full">
                 <div className="h-1.5 w-1.5 bg-gray-300 rounded-full mx-auto"></div>
               </div>
-              <Link to="/" className="flex-grow px-1 md:px-2 lg:px-3 xl:px-4">
+              <Link
+                to="/trending"
+                className="flex-grow px-1 md:px-2 lg:px-3 xl:px-4"
+              >
                 Trending this month
               </Link>
               <BsArrowRight />
