@@ -29,9 +29,9 @@ const DisplayFavoriteResources = () => {
   };
 
   return (
-    <div className="h-full flex flex-col bg-gradient-to-r from-white to-purple-500 border">
-      <div className="text-base sm:text-lg md:text-xl lg:text-2xl pt-2 md:pt-4 lg:pt-5 w-full">
-        <TextFlipAnimated children="Your Favourite Resources" />
+    <div className="h-full bg-gradient-to-r from-white to-purple-300 p-6">
+      <div className="text-base sm:text-lg md:text-xl lg:text-2xl pt-2 md:pt-4 lg:pt-5 w-full mb-4">
+        <TextFlipAnimated children="BOOKMARKED RESOURCES" />
       </div>
 
       <div className="w-full flex-grow p-4 border border-gray-300 bg-gradient-to-r from-white to-purple-200 rounded-lg shadow-md mt-6">
