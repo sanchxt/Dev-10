@@ -51,7 +51,7 @@
 
   .resource-box-gradient {
     background: linear-gradient(
-      112.1deg,
+      0deg,
       var(--resource-box-bg-1) 11.4%,
       var(--resource-box-bg-2) 70.2%
     );
@@ -104,7 +104,7 @@
 .dark-theme {
   --public-nav-bg-1: #44318D;
   --public-nav-bg-2: #2A1B3D;
-  --public-nav-shadow-1: #c54edb;
+  --public-nav-shadow-1: #dbcf4e;
   --public-nav-shadow-2: #1b0620;
 
   --glass: rgba(0, 0, 0, 0.3);
@@ -135,37 +135,37 @@
   --sidebar-scrollbar-fg:rgba(36, 4, 49, 0.4) ;
   --sidebar-menu-btn: #bebe19;
 
-  --text-flip-primary-1: #a5629d;
+  --text-flip-primary-1: #62a5a4;
   --text-flip-primary-2: #e1eeee;
-  --text-flip-secondary-1: #c2d136;
-  --text-flip-secondary-2: #bebe19;
+  --text-flip-secondary-1: #d13679;
+  --text-flip-secondary-2: #be1958;
 
   --resources-page-bg: #22042e;
   --pagination-btn: #bebe19;
   --page-text: #bebe19;
-  --resource-box-bg-1: rgb(61, 9, 74);
-  --resource-box-bg-2: rgba(60, 17, 97, 0.8);
-  --resource-box-primary: #d4c0c0;
-  --resource-box-by-bg: #d83f87;
-  --resource-box-by-text: #4b0441;
-  --resource-box-secondary: #c4cd1a;
-  --resource-box-dropdown: #222;
-  --resource-box-dropdown-border: #555;
-  --dropdown-border-hover-bg: #e51515;
-  --dropdown-underline: #bbb;
-  --resource-search-bg: #222323;
-  --resource-search-text: #dfe6e6;
-  --search-icon: #eee;
-  --search-btn-bg: rgb(12, 71, 129);
+  --resource-box-bg-1: #3c1d52;
+  --resource-box-bg-2:#3e0845 ;
+  --resource-box-primary: #ddcccc;
+  --resource-box-by-bg: #cd2e88;
+  --resource-box-by-text: #efe1ed;
+  --resource-box-secondary: #c8c9c2;
+  --resource-box-dropdown: #7d0469;
+  --resource-box-dropdown-border: #460351;
+  --dropdown-border-hover-bg:#610752 ;
+  --dropdown-underline: #bcc92d;
+  --resource-search-bg: #4c2850;
+  --resource-search-text: #c3c7c9;
+  --search-icon: #d3d0d5;
+  --search-btn-bg: rgb(56, 3, 80);
   --search-btn-text: #d3d7db;
-  --search-btn-hover-bg: rgb(7, 40, 72);
+  --search-btn-hover-bg: #340238;
 
   --no-resources-text: #bbb;
-  --no-resources-link: #7da6f6;
-  --no-resources-btn-bg-1: #527acb;
-  --no-resources-btn-bg-2: #b4c4e3;
-  --no-resources-btn-1-text: black;
-  --no-resources-btn-2-text: #bbb;
+  --no-resources-link: #f6ea7d;
+  --no-resources-btn-bg-1: #3f1d89;
+  --no-resources-btn-bg-2: #3f1d89;
+  --no-resources-btn-1-text: rgb(44, 45, 41);
+  --no-resources-btn-2-text: #f6ea7d;
   --no-resources-btn-2-border: #444;
 
   --home-link-underline: #bebe19;
@@ -175,8 +175,8 @@
 }
 
 .light-theme {
-  --public-nav-bg-1: rgb(147, 117, 180);
-  --public-nav-bg-2: #6a4994;
+  --public-nav-bg-1: rgb(234, 226, 222);
+  --public-nav-bg-2: #ded4ea;
   --public-nav-shadow-1: rgb(87, 45, 102);
   --public-nav-shadow-2: rgba(255, 255, 255, 0.5);
   --loginbackdrop1:rgba(217, 200, 230,0.8);
@@ -189,47 +189,47 @@
   --public-input-text: #111;
   --tertiary-public-text: rgba(22, 21, 21, 0.9);
 
-  --spotlight-btn-bg-1: rgba(255, 255, 255, 0.7);
-  --spotlight-btn-bg-2: rgba(220, 220, 220, 0.7);
-  --spotlight-btn-bg-3: rgba(255, 255, 255, 0.4);
+  --spotlight-btn-bg-1: rgba(123, 56, 143, 0.7);
+  --spotlight-btn-bg-2: rgba(134, 92, 147, 0.7);
+  --spotlight-btn-bg-3: rgba(123, 56, 143, 0.7) ;
   --spotlight-circle: rgb(230, 230, 230);
   --spotlight-text: #fff;
 
-  --socials-bg: #ccc;
+  --socials-bg: #bb7fd2;
   --socials-icon: #000;
 
-  --sidebar-bg-1: rgb(255, 255, 255, 1);
-  --sidebar-bg-2: rgba(240, 240, 240, 1);
-  --sidebar-text: #171617;
-  --sidebar-active-bg: rgba(242, 190, 255, 0.8);
-  --sidebar-scrollbar-bg: rgba(51, 65, 85, 0.2);
-  --sidebar-scrollbar-fg: rgba(203, 213, 225, 0.4);
-  --sidebar-menu-btn: rgb(20, 20, 20);
+  --sidebar-bg-1:rgb(225, 208, 226) ;
+  --sidebar-bg-2:rgb(150, 115, 153) ;
+  --sidebar-text: #400140;
+  --sidebar-active-bg: rgba(187, 147, 197, 0.8);
+  --sidebar-scrollbar-bg: rgba(32, 1, 40, 0.2);
+  --sidebar-scrollbar-fg: rgba(220, 216, 221, 0.4);
+  --sidebar-menu-btn: #400140;
 
-  --text-flip-primary-1: #282727;
-  --text-flip-primary-2: #2f2932;
-  --text-flip-secondary-1: #094645;
-  --text-flip-secondary-2: #11706d;
+  --text-flip-primary-1: #637aa3;
+  --text-flip-primary-2: #11706d;
+  --text-flip-secondary-1:#d13679 ;
+  --text-flip-secondary-2:#be1958 ;
 
-  --resources-page-bg: #eee;
-  --pagination-btn: #222;
-  --page-text: #555;
-  --resource-box-bg-1: rgba(247, 247, 247, 0.95);
-  --resource-box-bg-2: rgba(221, 221, 245, 0.95);
-  --resource-box-primary: #111;
-  --resource-box-by-bg: #ebd3f8;
-  --resource-box-by-text: #585858;
-  --resource-box-secondary: #252222;
-  --resource-box-dropdown: #ebedf0;
-  --resource-box-dropdown-border: #ccc;
-  --dropdown-border-hover-bg: #dfe1e6;
-  --dropdown-underline: #7a7a7a;
-  --resource-search-bg: #d0d3d9;
-  --resource-search-text: #161717;
-  --search-icon: #111;
-  --search-btn-bg: #81c0ff;
-  --search-btn-text: #1a1b1c;
-  --search-btn-hover-bg: rgb(105, 160, 215);
+  --resources-page-bg:rgb(243, 227, 245) ;
+  --pagination-btn: rgb(128, 95, 131) ;
+  --page-text:rgb(129, 80, 133) ;
+  --resource-box-bg-1: #d6b8e5 ;
+  --resource-box-bg-2: rgba(231, 196, 237, 0.95);
+  --resource-box-primary: #400140;
+  --resource-box-by-bg: #c894c9;
+  --resource-box-by-text: #430937;
+  --resource-box-secondary: #400140;
+  --resource-box-dropdown: #eceada;
+  --resource-box-dropdown-border: #d9a1d5;
+  --dropdown-border-hover-bg: #e0e5cb;
+  --dropdown-underline: #8a6b10;
+  --resource-search-bg: rgba(187, 147, 197, 0.8);
+  --resource-search-text: #400140;
+  --search-icon: #400140;
+  --search-btn-bg: #eeeba0;
+  --search-btn-text: #400140;
+  --search-btn-hover-bg: #e2df89;
 
   --no-resources-text: #222;
   --no-resources-link: #245ed2;
