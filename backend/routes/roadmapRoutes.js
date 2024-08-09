@@ -1,4 +1,4 @@
-import express from 'express';
+import express from "express";
 const router = express.Router();
 import {
   createRoadmap,
@@ -7,17 +7,17 @@ import {
   updateRoadmap,
   deleteRoadmap,
   rateRoadmap,
-} from '../controllers/roadmapController.js';
-import { protect } from '../middleware/authMiddleware.js';
+} from "../controllers/roadmapController.js";
+import { protect } from "../middleware/authMiddleware.js";
 
-router.route('/').post(protect, createRoadmap).get(getAllRoadmaps);
+router.route("/").post(protect, createRoadmap).get(protect, getAllRoadmaps);
 
 router
-  .route('/:id')
-  .get(getRoadmapById)
+  .route("/:id")
+  .get(protect, getRoadmapById)
   .put(protect, updateRoadmap)
   .delete(protect, deleteRoadmap);
 
-router.route('/:id/rate').post(protect, rateRoadmap);
+router.route("/:id/rate").post(protect, rateRoadmap);
 
 export default router;

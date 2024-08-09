@@ -116,3 +116,44 @@ export const addNoteSchema = z.object({
     .regex(/^#[0-9A-F]{6}$/i, { message: "Color must be a valid hex code" })
     .optional(),
 });
+
+export const createRoadmapSchema = z.object({
+  title: z
+    .string()
+    .min(3, { message: "Title must contain at least 3 characters" })
+    .max(40, { message: "Title cannot exceed 40 characters" }),
+  description: z
+    .string()
+    .min(4, { message: "Description must contain at least 4 characters" })
+    .max(150, { message: "Description cannot exceed 150 characters" }),
+  tags: z
+    .array(
+      z
+        .string()
+        .max(8, { message: "Each tag can't exceed more than 8 characters" })
+    )
+    .min(1, { message: "At least one tag is required" })
+    .max(3, { message: "Can't have more than 3 tags" }),
+  steps: z
+    .array(
+      z.object({
+        title: z
+          .string()
+          .min(3, { message: "Step title must contain at least 3 characters" })
+          .max(30, { message: "Step title can't exceed 30 characters" }),
+        description: z
+          .string()
+          .min(4, {
+            message: "Step description must be at least 4 characters long",
+          })
+          .max(100, {
+            message: "Step description can't exceed 100 characters",
+          }),
+        resources: z
+          .array(z.string().url({ message: "Resource must be a valid URL" }))
+          .min(1, { message: "At least one resource link is required" })
+          .max(4, { message: "Each step can't have more than 4 links" }),
+      })
+    )
+    .min(3, { message: "At least 3 steps are required" }),
+});

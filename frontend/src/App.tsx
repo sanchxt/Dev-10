@@ -19,8 +19,14 @@ import ContributeResources from './pages/ContributeResources';
 import { LOADER_DURATION } from './utils/constants';
 import FavouriteResources from './pages/FavouriteResources';
 import Trending from './pages/Trending';
+import ContributeRoadmaps from "./pages/ContributeRoadmaps";
+import LandingPage from "./pages/LandingPage";
 
 const router = createBrowserRouter([
+  {
+    path: "/",
+    element: <LandingPage />,
+  },
   {
     path: '/login',
     element: <Login />,
@@ -47,6 +53,10 @@ const router = createBrowserRouter([
       {
         path: '/contribute/resources',
         element: <ContributeResources />,
+      },
+      {
+        path: "/contribute/roadmaps",
+        element: <ContributeRoadmaps />,
       },
       {
         path: '/resources',
