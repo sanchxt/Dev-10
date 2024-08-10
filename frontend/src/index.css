@@ -2,6 +2,14 @@
 @tailwind components;
 @tailwind utilities;
 
+@layer {
+  :root {
+    --header-row-height: 44px;
+    --header-height: calc(var(--header-row-height) * 2);
+    --hero-height: calc(100svh - var(--header-height));
+  }
+}
+
 @layer utilities {
   .shadow-5xl {
     box-shadow: rgba(253, 116, 116, 0.1) 0px 54px 45px,
@@ -102,26 +110,26 @@
 }
 
 .dark-theme {
-  --public-nav-bg-1: #44318D;
-  --public-nav-bg-2: #2A1B3D;
+  --public-nav-bg-1: #44318d;
+  --public-nav-bg-2: #2a1b3d;
   --public-nav-shadow-1: #dbcf4e;
   --public-nav-shadow-2: #1b0620;
 
   --glass: rgba(0, 0, 0, 0.3);
---loginbackdrop1:rgba(217, 200, 230,0);
---loginbackdrop2: rgba(9, 138, 143,0);
+  --loginbackdrop1: rgba(217, 200, 230, 0);
+  --loginbackdrop2: rgba(9, 138, 143, 0);
 
-  --primary-public-heading: #A4B3B6;
+  --primary-public-heading: #a4b3b6;
   --secondary-public-text: rgb(179, 184, 184);
   --public-input-bg: #39313b;
   --public-placeholder: #bbb;
   --public-input-text: #eee;
   --tertiary-public-text: rgba(255, 255, 255, 0.6);
 
-  --spotlight-btn-bg-1: #2A1B3D;
-  --spotlight-btn-bg-2: #44318D;
-  --spotlight-btn-bg-3: #2A1B3D;
-  --spotlight-circle: #A4B3B6;
+  --spotlight-btn-bg-1: #2a1b3d;
+  --spotlight-btn-bg-2: #44318d;
+  --spotlight-btn-bg-3: #2a1b3d;
+  --spotlight-circle: #a4b3b6;
   --spotlight-text: #d3dd14;
 
   --socials-bg: #333333;
@@ -132,7 +140,7 @@
   --sidebar-text: #d3d2d4;
   --sidebar-active-bg: rgba(143, 143, 139, 0.5);
   --sidebar-scrollbar-bg: rgba(194, 190, 195, 0.5);
-  --sidebar-scrollbar-fg:rgba(36, 4, 49, 0.4) ;
+  --sidebar-scrollbar-fg: rgba(36, 4, 49, 0.4);
   --sidebar-menu-btn: #bebe19;
 
   --text-flip-primary-1: #62a5a4;
@@ -144,14 +152,14 @@
   --pagination-btn: #bebe19;
   --page-text: #bebe19;
   --resource-box-bg-1: #3c1d52;
-  --resource-box-bg-2:#3e0845 ;
+  --resource-box-bg-2: #3e0845;
   --resource-box-primary: #ddcccc;
   --resource-box-by-bg: #cd2e88;
   --resource-box-by-text: #efe1ed;
   --resource-box-secondary: #c8c9c2;
   --resource-box-dropdown: #7d0469;
   --resource-box-dropdown-border: #460351;
-  --dropdown-border-hover-bg:#610752 ;
+  --dropdown-border-hover-bg: #610752;
   --dropdown-underline: #bcc92d;
   --resource-search-bg: #4c2850;
   --resource-search-text: #c3c7c9;
@@ -179,8 +187,8 @@
   --public-nav-bg-2: #ded4ea;
   --public-nav-shadow-1: rgb(87, 45, 102);
   --public-nav-shadow-2: rgba(255, 255, 255, 0.5);
-  --loginbackdrop1:rgba(217, 200, 230,0.8);
---loginbackdrop2: rgba(63, 9, 143, 0.7);
+  --loginbackdrop1: rgba(217, 200, 230, 0.8);
+  --loginbackdrop2: rgba(63, 9, 143, 0.7);
 
   --primary-public-heading: #111;
   --secondary-public-text: rgb(29, 29, 29);
@@ -191,15 +199,15 @@
 
   --spotlight-btn-bg-1: rgba(123, 56, 143, 0.7);
   --spotlight-btn-bg-2: rgba(134, 92, 147, 0.7);
-  --spotlight-btn-bg-3: rgba(123, 56, 143, 0.7) ;
+  --spotlight-btn-bg-3: rgba(123, 56, 143, 0.7);
   --spotlight-circle: rgb(230, 230, 230);
   --spotlight-text: #fff;
 
   --socials-bg: #bb7fd2;
   --socials-icon: #000;
 
-  --sidebar-bg-1:rgb(225, 208, 226) ;
-  --sidebar-bg-2:rgb(150, 115, 153) ;
+  --sidebar-bg-1: rgb(225, 208, 226);
+  --sidebar-bg-2: rgb(150, 115, 153);
   --sidebar-text: #400140;
   --sidebar-active-bg: rgba(187, 147, 197, 0.8);
   --sidebar-scrollbar-bg: rgba(32, 1, 40, 0.2);
@@ -208,13 +216,13 @@
 
   --text-flip-primary-1: #637aa3;
   --text-flip-primary-2: #11706d;
-  --text-flip-secondary-1:#d13679 ;
-  --text-flip-secondary-2:#be1958 ;
+  --text-flip-secondary-1: #d13679;
+  --text-flip-secondary-2: #be1958;
 
-  --resources-page-bg:rgb(243, 227, 245) ;
-  --pagination-btn: rgb(128, 95, 131) ;
-  --page-text:rgb(129, 80, 133) ;
-  --resource-box-bg-1: #d6b8e5 ;
+  --resources-page-bg: rgb(243, 227, 245);
+  --pagination-btn: rgb(128, 95, 131);
+  --page-text: rgb(129, 80, 133);
+  --resource-box-bg-1: #d6b8e5;
   --resource-box-bg-2: rgba(231, 196, 237, 0.95);
   --resource-box-primary: #400140;
   --resource-box-by-bg: #c894c9;
