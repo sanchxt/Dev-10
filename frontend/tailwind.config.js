@@ -13,6 +13,10 @@ export default {
     },
     extend: {
       colors: {
+        "landing-bg": "#000",
+        "landing-bg-contrast": "#111",
+        "landing-text": "#1d1d1f",
+
         "public-nav-1": "var(--public-nav-bg-1)",
         "public-nav-2": "var(--public-nav-bg-2)",
         "primary-public-heading": "var(--primary-public-heading)",
