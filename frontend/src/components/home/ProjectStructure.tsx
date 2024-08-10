@@ -231,7 +231,6 @@ const ProjectStructure: React.FC = () => {
       url: "https://example.com/habit-tracker",
     },
   ];
-
   const filteredProjects =
     selectedType === "All Types"
       ? projects
@@ -241,31 +240,31 @@ const ProjectStructure: React.FC = () => {
     <>
       <section className="flex flex-col md:flex-row h-full min-h-screen bg-resources-pg-bg theme-transition">
         <Sidebar />
-        <div className="flex flex-col items-center w-full pt-1 md:pt-6 ml-4 md:ml-20">
-          <div className="bg-gradient-to-r from-white to-purple-500 py-2 md:py-3 px-4 w-full flex justify-center mt-2">
-            <h1 className="text-3xl md:text-4xl lg:text-5xl font-extrabold text-transparent bg-clip-text bg-gradient-to-r from-purple-700 to-pink-600 text-center">
+        <div className="flex flex-col items-center w-full pt-1 md:pt-6 ml-1 md:ml-12">
+          <div className="py-2 md:py-3 px-4 w-full flex justify-center">
+            <h1 className="text-3xl md:text-4xl lg:text-5xl font-extrabold text-purple-700 text-center">
               Explore Amazing Projects Here
             </h1>
           </div>
-          <div className="bg-gradient-to-r from-white to-purple-500 py-2 px-4 w-full flex justify-center items-center shadow-md mt-2">
+          <div className="py-2 px-4 w-full flex flex-col justify-center items-center shadow-md mt-2">
             <label
-              className="text-lg md:text-xl lg:text-2xl font-semibold text-black mr-4"
+              className="block w-full text-lg md:text-xl lg:text-2xl font-semibold text-black text-center mb-2"
               htmlFor="projectType"
             >
               Choose Project Type:
             </label>
-            <div className="flex flex-wrap justify-center space-x-2 sm:space-x-4">
+            <div className="w-full flex flex-wrap justify-center space-x-0 space-y-2 sm:space-x-4 sm:space-y-0">
               <button
                 onClick={() => handleTypeChange("All Types")}
-                className={`appearance-none bg-white border border-purple-300 text-black text-sm sm:text-base md:text-lg lg:text-xl rounded-md px-2 py-1 sm:px-4 sm:py-2 shadow-sm focus:outline-none focus:ring-2 focus:ring-purple-500 focus:border-transparent ${
+                className={`appearance-none w-auto bg-white border border-purple-300 text-black text-sm sm:text-base md:text-lg lg:text-xl rounded-md px-3 py-2 shadow-sm focus:outline-none focus:ring-2 focus:ring-purple-500 focus:border-transparent ${
                   selectedType === "All Types" ? "bg-purple-100" : ""
                 }`}
               >
-                All Types
+                All
               </button>
               <button
                 onClick={() => handleTypeChange("Game Dev")}
-                className={`appearance-none bg-white border border-purple-300 text-black text-sm sm:text-base md:text-lg lg:text-xl rounded-md px-2 py-1 sm:px-4 sm:py-2 shadow-sm focus:outline-none focus:ring-2 focus:ring-purple-500 focus:border-transparent ${
+                className={`appearance-none w-auto bg-white border border-purple-300 text-black text-sm sm:text-base md:text-lg lg:text-xl rounded-md px-3 py-2 shadow-sm focus:outline-none focus:ring-2 focus:ring-purple-500 focus:border-transparent ${
                   selectedType === "Game Dev" ? "bg-purple-100" : ""
                 }`}
               >
@@ -273,7 +272,7 @@ const ProjectStructure: React.FC = () => {
               </button>
               <button
                 onClick={() => handleTypeChange("Web Dev")}
-                className={`appearance-none bg-white border border-purple-300 text-black text-sm sm:text-base md:text-lg lg:text-xl rounded-md px-2 py-1 sm:px-4 sm:py-2 shadow-sm focus:outline-none focus:ring-2 focus:ring-purple-500 focus:border-transparent ${
+                className={`appearance-none w-auto bg-white border border-purple-300 text-black text-sm sm:text-base md:text-lg lg:text-xl rounded-md px-3 py-2 shadow-sm focus:outline-none focus:ring-2 focus:ring-purple-500 focus:border-transparent ${
                   selectedType === "Web Dev" ? "bg-purple-100" : ""
                 }`}
               >
@@ -281,7 +280,7 @@ const ProjectStructure: React.FC = () => {
               </button>
               <button
                 onClick={() => handleTypeChange("Android Dev")}
-                className={`appearance-none bg-white border border-purple-300 text-black text-sm sm:text-base md:text-lg lg:text-xl rounded-md px-2 py-1 sm:px-4 sm:py-2 shadow-sm focus:outline-none focus:ring-2 focus:ring-purple-500 focus:border-transparent ${
+                className={`appearance-none w-auto bg-white border border-purple-300 text-black text-sm sm:text-base md:text-lg lg:text-xl rounded-md px-3 py-2 shadow-sm focus:outline-none focus:ring-2 focus:ring-purple-500 focus:border-transparent ${
                   selectedType === "Android Dev" ? "bg-purple-100" : ""
                 }`}
               >
