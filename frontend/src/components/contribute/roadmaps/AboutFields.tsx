@@ -5,6 +5,7 @@ import TextArea from "./TextArea";
 import TextInput from "./TextInput";
 import { createRoadmapSchema } from "../../../utils/schema";
 import { CreateRoadmapFieldsProps } from "../../../utils/types";
+import RoadmapColumnHeading from "./RoadmapColumnHeading";
 
 const AboutFields = ({
   register,
@@ -52,10 +53,10 @@ const AboutFields = ({
 
   return (
     <div className="bg-slate-200 rounded-lg p-2">
-      <h3 className="text-center font-semibold tracking-wide text-sm md:text-base lg:text-lg">
-        About the Roadmap
-      </h3>
-
+      <RoadmapColumnHeading text="About the Roadmap" />
+      <h4 className="text-center pt-4 text-xs text-gray-500 italic tracking-wide">
+        General information about the roadmap you're submitting
+      </h4>
       <TextInput
         label="Title"
         id="title"
