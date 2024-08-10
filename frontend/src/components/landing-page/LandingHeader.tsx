@@ -1,17 +1,27 @@
 import { Link } from "react-router-dom";
+import Container from "./Container";
+import Button from "./Button";
 
 const LandingHeader = () => {
   return (
     <>
-      <header className="bg-landing-bg-contrast px-6 min-h-11 flex items-center text-green-50">
-        <Link to="/home" className="h-11 flex items-center px-6 -ml-6">
-          <img src="/Dev10-Logo2.png" alt="" className="w-8" />
-          <span className="sr-only">Go to home page</span>
-        </Link>
+      <header className="bg-landing-bg-contrast text-green-50 relative z-20">
+        <Container className="flex items-center min-h-[--header-row-height]">
+          <Link
+            to="/home"
+            className="h-[--header-row-height] flex items-center px-6 -ml-6"
+          >
+            <img src="/Dev10-Logo2.png" alt="" className="w-7" />
+            <span className="sr-only">Go to home page</span>
+          </Link>
+        </Container>
       </header>
 
-      <div className="bg-landing-bg-contrast px-6 text-green-50 min-h-11 flex items-center">
-        Dev-10
+      <div className="sticky top-0 bg-landing-bg-contrast text-green-50 z-20">
+        <Container className="flex justify-between items-center min-h-11">
+          <p className="text-xl font-semibold">Dev-10</p>
+          <Button size="small">Join Now</Button>
+        </Container>
       </div>
     </>
   );
