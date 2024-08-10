@@ -1,17 +1,15 @@
-import { useRef, useState } from "react";
-import { SubmitHandler, useFieldArray, useForm } from "react-hook-form";
-import { zodResolver } from "@hookform/resolvers/zod";
-
-import { ApiError, CreateRoadmapFields } from "../../../utils/types";
-import { createRoadmapSchema } from "../../../utils/schema";
-import { useCreateRoadmapMutation } from "../../../slices/roadmapApiSlice";
 import { toast } from "react-toastify";
 import { useNavigate } from "react-router-dom";
+import { zodResolver } from "@hookform/resolvers/zod";
+import { SubmitHandler, useForm } from "react-hook-form";
+
+import AboutFields from "./AboutFields";
+import StepsFields from "./StepsFields";
+import { createRoadmapSchema } from "../../../utils/schema";
+import { ApiError, CreateRoadmapFields } from "../../../utils/types";
+import { useCreateRoadmapMutation } from "../../../slices/roadmapApiSlice";
 
 const CreateRoadmapForm = () => {
-  const [tagInput, setTagInput] = useState<string>("");
-  const tagInputRef = useRef<HTMLInputElement | null>(null);
-
   const navigate = useNavigate();
 
   const {
@@ -25,57 +23,12 @@ const CreateRoadmapForm = () => {
     formState: { errors, isSubmitting },
   } = useForm<CreateRoadmapFields>({
     resolver: zodResolver(createRoadmapSchema),
+    defaultValues: {
+      steps: [{ title: "", description: "", resources: [] }],
+    },
   });
 
-  const {
-    fields: stepFields,
-    append: appendStep,
-    remove: removeStep,
-  } = useFieldArray({
-    control,
-    name: "steps",
-  });
-
-  const watchTags = watch("tags", []);
-
-  const handleTagKeyDown = (e: React.KeyboardEvent<HTMLInputElement>) => {
-    if (e.key === "," || e.key === "Enter") {
-      e.preventDefault();
-      const newTags = tagInput
-        .split(",")
-        .map((tag) => tag.trim())
-        .filter((tag) => tag);
-
-      const validation = createRoadmapSchema.shape.tags.safeParse([
-        ...watchTags,
-        ...newTags,
-      ]);
-
-      if (!validation.success) {
-        validation.error.errors.forEach((issue) => {
-          setError("tags", { type: "manual", message: issue.message });
-        });
-      } else {
-        clearErrors("tags");
-        setValue("tags", validation.data);
-        setTagInput("");
-      }
-    }
-  };
-
-  const handleRemoveTag = (index: number) => {
-    setValue(
-      "tags",
-      watchTags.filter((_, i) => i !== index)
-    );
-  };
-
-  const handleDivClick = () => {
-    tagInputRef.current?.focus();
-  };
-
-  const [newRoadmap, { isError, isLoading, reset }] =
-    useCreateRoadmapMutation();
+  const [newRoadmap, { isLoading }] = useCreateRoadmapMutation();
 
   const onSubmit: SubmitHandler<CreateRoadmapFields> = async (data) => {
     try {
@@ -89,127 +42,47 @@ const CreateRoadmapForm = () => {
   };
 
   return (
-    <>
+    <section className="h-full flex flex-col">
       <h1 className="text-center text-2xl lg:text-3xl 2xl:text-4xl py-2 font-semibold">
-        Create Roadmap
+        Create a Roadmap
       </h1>
 
-      <form onSubmit={handleSubmit(onSubmit)}>
-        {/* title */}
-        <div>
-          <label htmlFor="title">Title</label>
-          <input
-            {...register("title")}
-            id="title"
-            placeholder="Enter roadmap's title"
+      <form
+        onSubmit={handleSubmit(onSubmit)}
+        className="flex-grow flex flex-col px-2 md:px-8 py-4 lg:py-8 gap-2"
+      >
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-1">
+          <AboutFields
+            register={register}
+            errors={errors}
+            watch={watch}
+            setError={setError}
+            clearErrors={clearErrors}
+            setValue={setValue}
           />
-          {errors.title && <p>{errors.title.message}</p>}
-        </div>
 
-        {/* description */}
-        <div>
-          <label htmlFor="description">Description</label>
-          <textarea
-            {...register("description")}
-            id="description"
-            placeholder="Enter roadmap description"
+          <StepsFields
+            register={register}
+            errors={errors}
+            watch={watch}
+            control={control}
+            setError={setError}
+            clearErrors={clearErrors}
+            setValue={setValue}
           />
-          {errors.description && <p>{errors.description.message}</p>}
         </div>
 
-        {/* tags */}
-        <div>
-          <label htmlFor="tags">Tags</label>
-          <div onClick={handleDivClick}>
-            {watchTags.map((tag, idx) => (
-              <span key={idx}>
-                {tag}
-                <button type="button" onClick={() => handleRemoveTag(idx)}>
-                  &times;
-                </button>
-              </span>
-            ))}
-            <input
-              type="text"
-              ref={tagInputRef}
-              value={tagInput}
-              id="tags"
-              onChange={(e) => setTagInput(e.target.value)}
-              onKeyDown={handleTagKeyDown}
-              disabled={watchTags.length >= 3}
-              placeholder="Enter comma-separated tags"
-            />
-          </div>
-          {errors.tags && <p>{errors.tags.message}</p>}
-        </div>
-
-        {/* steps */}
-        <div>
-          <label>Steps</label>
-          {stepFields.map((step, idx) => (
-            <div key={step.id}>
-              <div>
-                <label htmlFor={`steps.${idx}.title`}>Step Title</label>
-                <input
-                  {...register(`steps.${idx}.title`)}
-                  placeholder="Enter step title"
-                />
-                {errors.steps?.[idx]?.title && (
-                  <p>{errors.steps[idx]?.title?.message}</p>
-                )}
-              </div>
-
-              <div>
-                <label htmlFor={`steps.${idx}.description`}>
-                  Step Description
-                </label>
-                <textarea
-                  {...register(`steps.${idx}.description`)}
-                  placeholder="Enter step description"
-                />
-                {errors.steps?.[idx]?.description && (
-                  <p>{errors.steps[idx]?.description?.message}</p>
-                )}
-              </div>
-
-              <div>
-                <label htmlFor={`steps.${idx}.resources`}>Resources</label>
-                <input
-                  {...register(`steps.${idx}.resources.0`)}
-                  placeholder="Enter resource URL"
-                />
-                {errors.steps?.[idx]?.resources?.[0] && (
-                  <p>{errors.steps[idx]?.resources?.[0]?.message}</p>
-                )}
-              </div>
-
-              <button type="button" onClick={() => removeStep(idx)}>
-                Remove Step
-              </button>
-            </div>
-          ))}
-
-          {errors.steps && <p>{errors.steps.message}</p>}
-
+        <div className="md:py-8">
           <button
-            type="button"
-            onClick={() =>
-              appendStep({
-                title: "",
-                description: "",
-                resources: [""],
-              })
-            }
+            type="submit"
+            disabled={isSubmitting}
+            className="bg-teal-300 w-full hover:bg-teal-400 hover:tracking-wide transition-all duration-300 md:col-span-2 rounded-lg font-semibold py-1 md:py-1.5 xl:py-2 shadow-xl shadow-blue-300/50"
           >
-            Add Step
+            {isLoading ? "Creating.." : "Create Roadmap"}
           </button>
         </div>
-
-        <button type="submit" disabled={isSubmitting}>
-          {isLoading ? "Creating" : "Submit"}
-        </button>
       </form>
-    </>
+    </section>
   );
 };
 

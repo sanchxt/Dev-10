@@ -10,8 +10,18 @@ import {
   signupSchema,
   updateProfileSchema,
 } from "./schema";
-import { ComponentType } from "react";
-import { FieldError } from "react-hook-form";
+import React, { ComponentType, RefObject } from "react";
+import {
+  Control,
+  FieldError,
+  FieldErrors,
+  Path,
+  UseFormClearErrors,
+  UseFormRegister,
+  UseFormSetError,
+  UseFormSetValue,
+  UseFormWatch,
+} from "react-hook-form";
 
 export type ThemeType = "LIGHT" | "DARK";
 
@@ -211,4 +221,55 @@ export interface CreateRoadmapProps {
     description: string;
     resources: string;
   }[];
+}
+
+export interface CreateRoadmapFieldsProps {
+  register: UseFormRegister<CreateRoadmapFields>;
+  errors: FieldErrors<CreateRoadmapFields>;
+  control?: Control<CreateRoadmapFields>;
+  watch: UseFormWatch<CreateRoadmapFields>;
+  setValue: UseFormSetValue<CreateRoadmapFields>;
+  setError: UseFormSetError<CreateRoadmapFields>;
+  clearErrors: UseFormClearErrors<CreateRoadmapFields>;
+}
+
+export interface RoadmapTextInputProps {
+  label: string;
+  id: Path<CreateRoadmapFields>;
+  placeholder: string;
+  register: UseFormRegister<CreateRoadmapFields>;
+  error?: FieldError;
+}
+
+export interface RoadmapTextAreaProps {
+  label: string;
+  id: Path<CreateRoadmapFields>;
+  placeholder: string;
+  register: UseFormRegister<CreateRoadmapFields>;
+  error?: FieldError;
+}
+
+export interface RoadmapTagInputProps {
+  watchTags: string[];
+  errors: FieldErrors<CreateRoadmapFields>;
+  tagInput: string;
+  setTagInput: React.Dispatch<React.SetStateAction<string>>;
+  tagInputRef: RefObject<HTMLInputElement>;
+  handleTagKeyDown: (e: React.KeyboardEvent<HTMLInputElement>) => void;
+  handleRemoveTag: (index: number) => void;
+}
+
+export interface ResourceInputProps {
+  label: string;
+  id: Path<CreateRoadmapFields>;
+  resources: string[];
+  resourceInput: string;
+  onResourceInputChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
+  onResourceKeyDown: (e: React.KeyboardEvent<HTMLInputElement>) => void;
+  onRemoveResource: (resourceIdx: number) => void;
+  onDivClick: () => void;
+  disabled: boolean;
+  resourceRef: HTMLInputElement | null;
+  error?: string;
+  placeholder: string;
 }
