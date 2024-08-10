@@ -83,7 +83,7 @@ const LinksForm = ({ formData }: LinksFormProps) => {
     try {
       await createResource(finalFormData).unwrap();
       toast.success("Resource collection created successfully");
-      navigate("/");
+      navigate("/home");
     } catch (error) {
       const err = error as ApiError;
       toast.error(err?.data?.message || err?.error);

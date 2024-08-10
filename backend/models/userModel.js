@@ -30,6 +30,12 @@ const userSchema = mongoose.Schema(
         ref: "Resource",
       },
     ],
+    createdRoadmaps: [
+      {
+        type: mongoose.Schema.Types.ObjectId,
+        ref: "Roadmaps",
+      },
+    ],
     favoriteResources: [
       {
         type: mongoose.Schema.Types.ObjectId,

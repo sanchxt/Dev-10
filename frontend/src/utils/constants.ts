@@ -19,6 +19,7 @@ export const navItems = [
 export const USERS_URL = "/api/users";
 export const RESOURCS_URL = "/api/resources";
 export const NOTES_URL = "/api/notes";
+export const ROADMAPS_URL = "/api/roadmaps";
 
 // sidebar
 export const sidebarSubMenusList = [
@@ -51,7 +52,7 @@ export const sidebarSettingsSubMenu = [
   },
 ];
 export const sidebarMenu = [
-  { name: "Home", href: "/", size: 23, icon: IoHome },
+  { name: "Home", href: "/home", size: 23, icon: IoHome },
   { name: "Resources", href: "/resources", size: 23, icon: GrResources },
   { name: "Roadmaps", href: "/roadmaps", size: 23, icon: FaCodeBranch },
 ];

@@ -25,7 +25,7 @@ const ShowAllNotes = ({
         </h2>
 
         <div className="grid grid-cols-3 gap-0.5 sm:gap-1">
-          {notes?.map((note, idx) => (
+          {notes?.map((note) => (
             <div
               className="h-32 md:h-36 lg:h-40 rounded sm:rounded-lg p-1 overflow-hidden relative group"
               style={{ backgroundColor: `${note.color}` }}

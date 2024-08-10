@@ -2,6 +2,7 @@ import { z } from "zod";
 import {
   aboutResourceCollectionSchema,
   addNoteSchema,
+  createRoadmapSchema,
   linksResourceFormSchema,
   loginSchema,
   reportResourceSchema,
@@ -9,8 +10,18 @@ import {
   signupSchema,
   updateProfileSchema,
 } from "./schema";
-import { ComponentType } from "react";
-import { FieldError } from "react-hook-form";
+import React, { ComponentType, RefObject } from "react";
+import {
+  Control,
+  FieldError,
+  FieldErrors,
+  Path,
+  UseFormClearErrors,
+  UseFormRegister,
+  UseFormSetError,
+  UseFormSetValue,
+  UseFormWatch,
+} from "react-hook-form";
 
 export type ThemeType = "LIGHT" | "DARK";
 
@@ -24,8 +35,8 @@ export type LinkResourceFormFields = z.infer<typeof linksResourceFormSchema>;
 export type ReviewFormFields = z.infer<typeof reviewSchema>;
 export type ReportResourceFields = z.infer<typeof reportResourceSchema>;
 export type AddNoteFields = z.infer<typeof addNoteSchema>;
+export type CreateRoadmapFields = z.infer<typeof createRoadmapSchema>;
 
-// sidebar icons
 interface SidebarIconProps {
   size: number;
   className: string;
@@ -199,4 +210,66 @@ export interface RecentResourcesState {
 export interface RecentlyVisitedState {
   resources: RecentResourcesState[];
   roadmaps: RecentResourcesState[];
+}
+
+export interface CreateRoadmapProps {
+  title: string;
+  description: string;
+  tags: string[];
+  steps: {
+    title: string;
+    description: string;
+    resources: string;
+  }[];
+}
+
+export interface CreateRoadmapFieldsProps {
+  register: UseFormRegister<CreateRoadmapFields>;
+  errors: FieldErrors<CreateRoadmapFields>;
+  control?: Control<CreateRoadmapFields>;
+  watch: UseFormWatch<CreateRoadmapFields>;
+  setValue: UseFormSetValue<CreateRoadmapFields>;
+  setError: UseFormSetError<CreateRoadmapFields>;
+  clearErrors: UseFormClearErrors<CreateRoadmapFields>;
+}
+
+export interface RoadmapTextInputProps {
+  label: string;
+  id: Path<CreateRoadmapFields>;
+  placeholder: string;
+  register: UseFormRegister<CreateRoadmapFields>;
+  error?: FieldError;
+}
+
+export interface RoadmapTextAreaProps {
+  label: string;
+  id: Path<CreateRoadmapFields>;
+  placeholder: string;
+  register: UseFormRegister<CreateRoadmapFields>;
+  error?: FieldError;
+}
+
+export interface RoadmapTagInputProps {
+  watchTags: string[];
+  errors: FieldErrors<CreateRoadmapFields>;
+  tagInput: string;
+  setTagInput: React.Dispatch<React.SetStateAction<string>>;
+  tagInputRef: RefObject<HTMLInputElement>;
+  handleTagKeyDown: (e: React.KeyboardEvent<HTMLInputElement>) => void;
+  handleRemoveTag: (index: number) => void;
+}
+
+export interface ResourceInputProps {
+  label: string;
+  id: Path<CreateRoadmapFields>;
+  resources: string[];
+  resourceInput: string;
+  onResourceInputChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
+  onResourceKeyDown: (e: React.KeyboardEvent<HTMLInputElement>) => void;
+  onRemoveResource: (resourceIdx: number) => void;
+  onDivClick: () => void;
+  disabled: boolean;
+  resourceRef: HTMLInputElement | null;
+  error?: string;
+  placeholder: string;
 }

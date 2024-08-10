@@ -8,6 +8,7 @@ import userRoutes from "./routes/userRoutes.js";
 import Resource from "./models/resourceModel.js";
 
 import noteRoutes from "./routes/noteRoutes.js";
+import roadmapRoutes from "./routes/roadmapRoutes.js";
 import resourceRoutes from "./routes/resourceRoutes.js";
 import resourceReportRoutes from "./routes/resourceReportRoutes.js";
 
@@ -38,6 +39,7 @@ app.use("/api/users", userRoutes);
 app.use("/api/resources", resourceRoutes);
 app.use("/api/resources/report", resourceReportRoutes);
 app.use("/api/notes", noteRoutes);
+app.use("/api/roadmaps", roadmapRoutes);
 app.get("/", (req, res) => res.send("server is ready"));
 
 app.use(notFound);
