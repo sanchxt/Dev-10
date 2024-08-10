@@ -5,7 +5,8 @@ const Project = () => {
   return (
     <section className="flex flex-col md:flex-row h-screen bg-resources-pg-bg theme-transition">
       <Sidebar />
-      <div className="flex-grow md:pl-[4rem]">
+      <div>
+        {/* <div className="flex-grow md:pl-[4rem]"> */}
         <ProjectStructure />
       </div>
     </section>
