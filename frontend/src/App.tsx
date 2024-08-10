@@ -21,25 +21,26 @@ import FavouriteResources from "./pages/FavouriteResources";
 import Trending from "./pages/Trending";
 import ContributeRoadmaps from "./pages/ContributeRoadmaps";
 import LandingPage from "./pages/LandingPage";
+import Roadmap from "./pages/Roadmap";
 
 const router = createBrowserRouter([
+  // {
+  //   path: '/',
+  //   element: <LandingPage />,
+  // },
   {
-    path: "/",
-    element: <LandingPage />,
-  },
-  {
-    path: "/login",
+    path: '/login',
     element: <Login />,
   },
   {
-    path: "/signup",
+    path: '/signup',
     element: <SignUp />,
   },
   {
     element: <PrivateRoute />,
     children: [
       {
-        path: "/home",
+        path: '/home',
         element: (
           <Suspense fallback={<LoaderAnimation onComplete={() => {}} />}>
             <Home />
@@ -47,37 +48,41 @@ const router = createBrowserRouter([
         ),
       },
       {
-        path: "/settings/profile",
+        path: '/settings/profile',
         element: <ProfilePage />,
       },
       {
-        path: "/contribute/resources",
+        path: '/contribute/resources',
         element: <ContributeResources />,
       },
       {
-        path: "/contribute/roadmaps",
+        path: '/contribute/roadmaps',
         element: <ContributeRoadmaps />,
       },
       {
-        path: "/resources",
+        path: '/resources',
         element: <Resources />,
       },
       {
-        path: "/resource/:id",
+        path: '/roadmaps',
+        element: <Roadmap/>,
+      },
+      {
+        path: '/resource/:id',
         element: <ResourceById />,
       },
       {
-        path: "/favorites/resources",
+        path: '/favorites/resources',
         element: <FavouriteResources />,
       },
       {
-        path: "/trending",
+        path: '/trending',
         element: <Trending />,
       },
     ],
   },
   {
-    path: "*",
+    path: '*',
     element: <NotFoundPage />,
   },
 ]);
