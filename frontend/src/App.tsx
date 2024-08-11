@@ -1,7 +1,11 @@
 import { useEffect, lazy, Suspense, useState } from "react";
 import { useSelector } from "react-redux";
 import { ToastContainer } from "react-toastify";
-import { createBrowserRouter, RouterProvider } from "react-router-dom";
+import {
+  createBrowserRouter,
+  RouterProvider,
+  useLocation,
+} from "react-router-dom";
 import "react-toastify/dist/ReactToastify.css";
 
 import { RootState } from "./store";
@@ -22,20 +26,37 @@ import ProjectStructure from "./components/home/ProjectStructure";
 import Trending from "./pages/Trending";
 import ContributeRoadmaps from "./pages/ContributeRoadmaps";
 import LandingPage from "./pages/LandingPage";
+import TransitionComponent from "./components/TransitionComponent";
+import TransitionRoutes from "./components/TransitionRoutes";
 
 const router = createBrowserRouter([
   {
     path: "/",
     element: <LandingPage />,
   },
+
   {
-    path: "/login",
-    element: <Login />,
+    element: <TransitionRoutes />,
+    children: [
+      {
+        path: "/login",
+        element: (
+          <TransitionComponent>
+            <Login />
+          </TransitionComponent>
+        ),
+      },
+      {
+        path: "/signup",
+        element: (
+          <TransitionComponent>
+            <SignUp />
+          </TransitionComponent>
+        ),
+      },
+    ],
   },
-  {
-    path: "/signup",
-    element: <SignUp />,
-  },
+
   {
     element: <PrivateRoute />,
     children: [
