@@ -22,6 +22,7 @@ import {
   UseFormSetValue,
   UseFormWatch,
 } from "react-hook-form";
+import { MotionValue } from "framer-motion";
 
 export type ThemeType = "LIGHT" | "DARK";
 
@@ -283,4 +284,21 @@ export interface LandingButtonProps {
   children: ReactNode;
   size?: "small" | "medium" | "large";
   className?: string;
+}
+
+export interface LandingFadeInProps {
+  children: ReactNode;
+}
+
+export interface LandingCarouselProps {
+  image: string;
+  name: string;
+  id: number;
+}
+
+export interface LandingWordsProps {
+  children: ReactNode;
+  range: [number, number];
+  progress: MotionValue<number>;
+  isLastWord: boolean;
 }
