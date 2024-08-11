@@ -56,37 +56,76 @@ const getResources = asyncHandler(async (req, res) => {
 // @desc Create resource collection
 // @route POST /api/resources
 // @access Private
+// const createResource = asyncHandler(async (req, res) => {
+//   const { title, description, tags, essentials, extras, notes } = req.body;
+
+//   try {
+//     validateResourceFields(title, description, tags, essentials, extras);
+//   } catch (error) {
+//     res.status(400);
+//     throw new Error(error.message);
+//   }
+
+//   const isAdmin = req.user.isAdmin;
+
+//   const resource = new Resource({
+//     user: req.user._id,
+//     authorName: req.user.name,
+//     title,
+//     description,
+//     tags,
+//     essentials,
+//     extras,
+//     notes,
+//     isOfficial: isAdmin ? true : false,
+//   });
+
+//   const createdResource = await resource.save();
+
+//   req.user.createdResources.push(createdResource._id);
+//   await req.user.save();
+
+//   res.status(201).json(createdResource);
+// });
+
+// @desc Create resource collection
+// @route POST /api/resources
+// @access Private
 const createResource = asyncHandler(async (req, res) => {
-  const { title, description, tags, essentials, extras, notes } = req.body;
-
   try {
-    validateResourceFields(title, description, tags, essentials, extras);
+    const { title, language, description, link } = req.body;
+
+    console.log('Received data:', { title, language, description, link });
+
+    // Validate the input
+    if (!title || !language || !description || !link) {
+      res.status(400);
+      throw new Error('All fields are required');
+    }
+
+    // Create the resource
+    const resource = new Resource({
+      user: req.user._id,
+      authorName: req.user.name,
+      title,
+      language,
+      description,
+      link,
+    });
+
+    const createdResource = await resource.save();
+
+    console.log('Resource created:', createdResource);
+
+    res.status(201).json(createdResource);
   } catch (error) {
-    res.status(400);
-    throw new Error(error.message);
+    console.error('Error in createResource:', error);
+    res.status(500);
+    throw new Error('Server error: ' + error.message);
   }
-
-  const isAdmin = req.user.isAdmin;
-
-  const resource = new Resource({
-    user: req.user._id,
-    authorName: req.user.name,
-    title,
-    description,
-    tags,
-    essentials,
-    extras,
-    notes,
-    isOfficial: isAdmin ? true : false,
-  });
-
-  const createdResource = await resource.save();
-
-  req.user.createdResources.push(createdResource._id);
-  await req.user.save();
-
-  res.status(201).json(createdResource);
 });
+
+
 
 // @desc Get resource by resource ID
 // @route PUT /api/resources/details/:id

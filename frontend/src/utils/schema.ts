@@ -46,27 +46,46 @@ export const updateProfileSchema = z.object({
     }),
 });
 
+// export const aboutResourceCollectionSchema = z.object({
+//   title: z
+//     .string()
+//     .min(3, { message: "Title must contain at least 3 letters" })
+//     .max(40, { message: "Title can't contain more than 40 letters" }),
+//   tags: z
+//     .array(
+//       z
+//         .string()
+//         .max(8, { message: "Each tag can't be more than 8 letters long" })
+//     )
+//     .min(1, { message: "At least one tag is required" })
+//     .max(3, { message: "Can't have more than 3 tags" }),
+//   description: z
+//     .string()
+//     .min(4, { message: "Description must be at least 4 letters long" })
+//     .max(150, { message: "Description can't exceed 50 letters" }),
+//   notes: z
+//     .string()
+//     .min(4, { message: "Notes must be at least 4 letters long" })
+//     .max(200, { message: "Notes can't exceed 80 letters" }),
+// });
+
 export const aboutResourceCollectionSchema = z.object({
   title: z
     .string()
     .min(3, { message: "Title must contain at least 3 letters" })
     .max(40, { message: "Title can't contain more than 40 letters" }),
-  tags: z
-    .array(
-      z
-        .string()
-        .max(8, { message: "Each tag can't be more than 8 letters long" })
-    )
-    .min(1, { message: "At least one tag is required" })
-    .max(3, { message: "Can't have more than 3 tags" }),
+  language: z
+    .string()
+    .min(2, { message: "Language must be at least 2 characters long" })
+    .max(20, { message: "Language can't exceed 20 characters" }),
   description: z
     .string()
     .min(4, { message: "Description must be at least 4 letters long" })
-    .max(150, { message: "Description can't exceed 50 letters" }),
-  notes: z
+    .max(150, { message: "Description can't exceed 150 letters" }),
+  link: z
     .string()
-    .min(4, { message: "Notes must be at least 4 letters long" })
-    .max(200, { message: "Notes can't exceed 80 letters" }),
+    .url({ message: "Please enter a valid URL" })
+    .max(200, { message: "Link can't exceed 200 characters" }),
 });
 
 export const linksResourceFormSchema = z.object({
