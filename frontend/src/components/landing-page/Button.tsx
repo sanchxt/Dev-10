@@ -1,5 +1,6 @@
 import { twMerge } from "tailwind-merge";
 import { LandingButtonProps } from "../../utils/types";
+import { Link } from "react-router-dom";
 
 const Button = ({
   children,
@@ -20,7 +21,7 @@ const Button = ({
         className
       )}
     >
-      {children}
+      <Link to="/signup">{children}</Link>
     </button>
   );
 };
