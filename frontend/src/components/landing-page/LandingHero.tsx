@@ -15,7 +15,7 @@ const LandingHero = () => {
   const opacity = useTransform(scrollYProgress, [0, 0.7, 1], [1, 1, 0]);
 
   return (
-    <div className="relative h-[300vh] bg-black text-white">
+    <div className="relative bg-black text-white">
       <motion.div
         style={{ opacity }}
         ref={videoContainerRef}
@@ -39,7 +39,7 @@ const LandingHero = () => {
           animate="hidden"
           viewport={{ amount: 0.9 }}
         >
-          <h1 className="text-7xl font-bold leading-[1.15] mb-10">
+          <h1 className="text-4xl sm:text-5xl md:text-6xl 2xl:text-7xl font-bold leading-[1.15] mb-10">
             Aspiring Developer?
             <br />
             Dev-10 is All You Need.
