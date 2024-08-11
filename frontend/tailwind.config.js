@@ -72,6 +72,15 @@ export default {
         "home-link-underline": "var(--home-link-underline)",
         "home-link-text": "var(--home-link-text)",
       },
+      keyframes: {
+        "carousel-move": {
+          "0%": { transform: "translateX(0)" },
+          "100%": { transform: "translateX(-100%)" },
+        },
+      },
+      animation: {
+        "carousel-move": "carousel-move var(--duration, 80s) infinite",
+      },
     },
   },
   plugins: [require("tailwind-scrollbar")],
