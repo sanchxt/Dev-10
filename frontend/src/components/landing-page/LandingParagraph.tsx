@@ -14,13 +14,14 @@ const LandingParagraph = ({ text }: { text: string }) => {
   const words = text.split(" ");
 
   return (
-    <div className="text-5xl font-bold h-[200vh] flex items-center justify-center bg-slate-50">
+    <div className="text-xl sm:text-2xl md:text-3xl lg:text-4xl xl:text-5xl font-bold h-[200vh] flex items-center justify-center bg-slate-50">
       <Container>
         <p ref={element} className="flex flex-wrap">
           {words.map((word, idx) => {
             const start = idx / words.length;
             const end = start + 1 / words.length;
-            const isLastWord = idx === words.length - 1;
+            const isLastWord =
+              idx === words.length - 1 || idx === words.length - 2;
 
             return (
               <Word
