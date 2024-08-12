@@ -60,6 +60,10 @@ export const sidebarMenu = [
 export const sortResourceDropdownItems = ["recent", "oldest"];
 export const filterResourceDropdownItems = ["highest", "lowest"];
 
+export const sortRoadmapDropdownItems = ['recent', 'oldest'];
+export const filterRoadmapDropdownItems = ['highest', 'lowest'];
+
+
 export const LOADER_DURATION = 4000;
 
 export const HomePageHeaderLinks = [
