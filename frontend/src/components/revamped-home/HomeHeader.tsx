@@ -30,7 +30,7 @@ const HomeHeader = ({ name }: { name: string }) => {
 
           <div>
             <img
-              src="/public/Dev10-Logo2.png"
+              src="/Dev10-Logo2.png"
               alt=""
               className="w-8 xl:w-10 cursor-pointer"
               onClick={() => navigate("/settings/profile")}
