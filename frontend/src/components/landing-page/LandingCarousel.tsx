@@ -80,8 +80,8 @@ const LandingCarousel = () => {
               className="shrink-0 w-[300px] md:w-[60vw] aspect-[9/16] md:aspect-video rounded-2xl overflow-clip relative"
             >
               <img
-                src={landingCarouselImages[0].image}
-                alt={landingCarouselImages[0].name}
+                src={landingCarouselImages[1].image}
+                alt={landingCarouselImages[1].name}
                 className="w-full h-full object-cover"
               />
               <motion.div
@@ -101,8 +101,8 @@ const LandingCarousel = () => {
               className="shrink-0 w-[300px] md:w-[60vw] aspect-[9/16] md:aspect-video rounded-2xl overflow-clip"
             >
               <img
-                src={landingCarouselImages[0].image}
-                alt={landingCarouselImages[0].name}
+                src={landingCarouselImages[2].image}
+                alt={landingCarouselImages[2].name}
                 className="w-full h-full object-cover"
               />
             </motion.div>
