@@ -10,7 +10,7 @@ import {
   signupSchema,
   updateProfileSchema,
 } from "./schema";
-import React, { ComponentType, RefObject } from "react";
+import React, { ComponentType, ReactNode, RefObject } from "react";
 import {
   Control,
   FieldError,
@@ -22,6 +22,7 @@ import {
   UseFormSetValue,
   UseFormWatch,
 } from "react-hook-form";
+import { MotionValue } from "framer-motion";
 
 export type ThemeType = "LIGHT" | "DARK";
 
@@ -272,4 +273,32 @@ export interface ResourceInputProps {
   resourceRef: HTMLInputElement | null;
   error?: string;
   placeholder: string;
+}
+
+export interface ContainerProps {
+  children: ReactNode;
+  className?: string;
+}
+
+export interface LandingButtonProps {
+  children: ReactNode;
+  size?: "small" | "medium" | "large";
+  className?: string;
+}
+
+export interface LandingFadeInProps {
+  children: ReactNode;
+}
+
+export interface LandingCarouselProps {
+  image: string;
+  name: string;
+  id: number;
+}
+
+export interface LandingWordsProps {
+  children: ReactNode;
+  range: [number, number];
+  progress: MotionValue<number>;
+  isLastWord: boolean;
 }
