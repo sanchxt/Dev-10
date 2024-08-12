@@ -118,6 +118,12 @@ export interface MultipleResourceCardsProps {
 }
 
 export interface RoadmapCardProps {
+  _id(_id: any): void;
+  title: ReactNode;
+  isOfficial: any;
+  description: string;
+  tags: any;
+  authorName: ReactNode;
   resource: RoadmapCardProps;
   index: number;
 }

@@ -3,7 +3,11 @@ import { RoadmapCardProps } from '../../../utils/types';
 import MultiLineEllipsis from '../../resources/MultiLineEllipsis';
 import { useNavigate } from 'react-router-dom';
 
-const RoadmapBox: React.FC<RoadmapCardProps> = ({ resource, index }) => {
+const RoadmapBox: React.FC<any> = ({ resource, index }) => {
+
+  if (!resource || resource.length === 0){
+    return <div>No roadmaps available...</div>
+  }
   const navigate = useNavigate();
 
   const handleNavigation = (id: string) => {
@@ -44,10 +48,10 @@ const RoadmapBox: React.FC<RoadmapCardProps> = ({ resource, index }) => {
       </div>
 
       {/* links */}
-      <div className="hidden lg:flex justify-end text-[0.6rem] md:text-xs pr-2 md:pr-4 xl:pr-6 italic text-resource-box-secondary theme-transition">
+      {/* <div className="hidden lg:flex justify-end text-[0.6rem] md:text-xs pr-2 md:pr-4 xl:pr-6 italic text-resource-box-secondary theme-transition">
         ({resource?.essentials.length} essentials, {resource?.extras.length}{' '}
         extras)
-      </div>
+      </div> */}
 
       {/* description */}
       <div>
