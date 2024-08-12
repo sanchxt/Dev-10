@@ -1,9 +1,7 @@
-import { Link, useNavigate } from "react-router-dom";
+import { Link } from "react-router-dom";
 import { homeHeaderButtons } from "../../utils/constants";
 
 const HomeHeader = ({ name }: { name: string }) => {
-  const navigate = useNavigate();
-
   return (
     <header className="bg-gradient-to-b from-purple-100 via-slate-100 to-slate-100 shadow flex gap-x-2 justify-between items-center px-0.5 sm:px-1 md:px-2 py-1">
       <h3 className="block text-lg sm:text-xl md:text-2xl w-full overflow-hidden font-base">
@@ -28,14 +26,13 @@ const HomeHeader = ({ name }: { name: string }) => {
             ))}
           </div>
 
-          <div>
+          <Link to="/settings/profile">
             <img
               src="/Dev10-Logo2.png"
-              alt=""
+              alt="Dev10's Logo"
               className="w-8 xl:w-10 cursor-pointer"
-              onClick={() => navigate("/settings/profile")}
             />
-          </div>
+          </Link>
         </div>
       </div>
     </header>
