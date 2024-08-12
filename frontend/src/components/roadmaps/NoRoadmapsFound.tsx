@@ -1,8 +1,7 @@
 import { Link } from 'react-router-dom';
 import { BiPlusCircle, BiSearch } from 'react-icons/bi';
 
-import NoResults from '../../../assets/NoResults.gif';
-
+import NoResults from '../../assets/NoResults.gif';
 interface NoRoadmapFoundProps {
   onExploreRoadmap: () => void;
 }

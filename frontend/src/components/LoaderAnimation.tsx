@@ -51,13 +51,13 @@ const LoaderAnimation = ({ onComplete }: { onComplete: () => void }) => {
         <motion.div
           custom={isReversing}
           variants={itemVariants(0)}
-          className="h-full bg-blue-100"
+          className="h-full bg-indigo-700"
         />
         <motion.div
           custom={isReversing}
           variants={itemVariants(1)}
           onAnimationComplete={() => setIsMiddleDivAnimated(true)}
-          className="h-full bg-blue-200 relative blur-[10px] contrast-[10px] flex justify-center items-center"
+          className="h-full bg-indigo-800 relative blur-[10px] contrast-[10px] flex justify-center items-center"
         >
           <div className="flex justify-center items-center relative">
             <motion.div
@@ -83,7 +83,7 @@ const LoaderAnimation = ({ onComplete }: { onComplete: () => void }) => {
         <motion.div
           custom={isReversing}
           variants={itemVariants(0.3)}
-          className="h-full bg-blue-100"
+          className="h-full bg-indigo-700"
         />
       </motion.div>
     </div>

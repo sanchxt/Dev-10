@@ -1,5 +1,5 @@
 import Sidebar from '../components/shared/Sidebar';
-import DisplayRoadmap from "../components/contribute/roadmaps/DisplayRoadmap";
+import DisplayRoadmap from '../components/roadmaps/DisplayRoadmap';
 
 const Roadmap = () => {
   return (

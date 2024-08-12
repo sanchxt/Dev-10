@@ -1,19 +1,19 @@
 import { FormEvent, useCallback, useMemo, useState, useRef } from 'react';
 
-import TextFlipAnimated from '../../TextFlipAnimated';
+import TextFlipAnimated from '../TextFlipAnimated';
 import {
   filterRoadmapDropdownItems,
   sortRoadmapDropdownItems,
-} from '../../../utils/constants';
-import { RoadmapByRate, RoadmapSortType } from '../../../utils/types';
-import { useGetRoadmapQuery } from '../../../slices/roadmapApiSlice';
-import Dropdown from '../../resources/Dropdown';
+} from '../../utils/constants';
+import { RoadmapByRate, RoadmapSortType } from '../../utils/types';
+import { useGetRoadmapQuery } from '../../slices/roadmapApiSlice';
+import Dropdown from '../resources/Dropdown';
 import { toast } from 'react-toastify';
 import RoadmapCard from './RoadmapCard';
-import NoRoadmapsFound from './NoRoadmapsFound'
-import PaginationButton from '../../resources/PaginationButton';
-import { focusAndClearSearch } from '../../../utils/helpers';
-import SearchIcon from '../../resources/SearchIcon';
+import NoRoadmapsFound from './NoRoadmapsFound';
+import PaginationButton from '../resources/PaginationButton';
+import { focusAndClearSearch } from '../../utils/helpers';
+import SearchIcon from '../resources/SearchIcon';
 
 const DisplayRoadmaps = () => {
   const [searchQuery, setSearchQuery] = useState<string>('');

@@ -1,37 +1,63 @@
-import { useEffect, lazy, Suspense, useState } from "react";
-import { useSelector } from "react-redux";
-import { ToastContainer } from "react-toastify";
-import { createBrowserRouter, RouterProvider } from "react-router-dom";
-import "react-toastify/dist/ReactToastify.css";
+import { useEffect, lazy, Suspense, useState } from 'react';
+import { useSelector } from 'react-redux';
+import { ToastContainer } from 'react-toastify';
+import {
+  createBrowserRouter,
+  RouterProvider,
+  useLocation,
+} from 'react-router-dom';
+import 'react-toastify/dist/ReactToastify.css';
 
-import { RootState } from "./store";
-import PrivateRoute from "./components/PrivateRoute";
-import LoaderAnimation from "./components/LoaderAnimation";
+import { RootState } from './store';
+import PrivateRoute from './components/PrivateRoute';
+import LoaderAnimation from './components/LoaderAnimation';
 
-const Home = lazy(() => import("./pages/Home"));
-import Login from "./pages/Login";
-import SignUp from "./pages/SignUp";
-import Resources from "./pages/Resources";
-import ProfilePage from "./pages/ProfilePage";
-import NotFoundPage from "./pages/NotFoundPage";
-import ResourceById from "./pages/ResourceById";
-import ContributeResources from "./pages/ContributeResources";
-import { LOADER_DURATION } from "./utils/constants";
-import FavouriteResources from "./pages/FavouriteResources";
-import Trending from "./pages/Trending";
-import ContributeRoadmaps from "./pages/ContributeRoadmaps";
-import LandingPage from "./pages/LandingPage";
-import Roadmap from "./pages/Roadmap";
+const Home = lazy(() => import('./pages/Home'));
+import Login from './pages/Login';
+import SignUp from './pages/SignUp';
+import Resources from './pages/Resources';
+import ProfilePage from './pages/ProfilePage';
+import NotFoundPage from './pages/NotFoundPage';
+import ResourceById from './pages/ResourceById';
+import ContributeResources from './pages/ContributeResources';
+import { LOADER_DURATION } from './utils/constants';
+import FavouriteResources from './pages/FavouriteResources';
+import ProjectStructure from './components/home/ProjectStructure';
+import Trending from './pages/Trending';
+import ContributeRoadmaps from './pages/ContributeRoadmaps';
+import LandingPage from './pages/LandingPage';
+import TransitionComponent from './components/TransitionComponent';
+import TransitionRoutes from './components/TransitionRoutes';
+import DisplayRoadmaps from './components/roadmaps/DisplayRoadmap';
 
 const router = createBrowserRouter([
-  // {
-  //   path: '/',
-  //   element: <Landing
-  },
   {
-    path: '/signup',
-    element: <SignUp />,
+    path: '/',
+    element: <LandingPage />,
   },
+
+  {
+    element: <TransitionRoutes />,
+    children: [
+      {
+        path: '/login',
+        element: (
+          <TransitionComponent>
+            <Login />
+          </TransitionComponent>
+        ),
+      },
+      {
+        path: '/signup',
+        element: (
+          <TransitionComponent>
+            <SignUp />
+          </TransitionComponent>
+        ),
+      },
+    ],
+  },
+
   {
     element: <PrivateRoute />,
     children: [
@@ -56,12 +82,13 @@ const router = createBrowserRouter([
         element: <ContributeRoadmaps />,
       },
       {
+        path: '/roadmaps',
+        element: <DisplayRoadmaps />,
+      },
+
+      {
         path: '/resources',
         element: <Resources />,
-      },
-      {
-        path: '/roadmaps',
-        element: <Roadmap/>,
       },
       {
         path: '/resource/:id',
@@ -70,6 +97,10 @@ const router = createBrowserRouter([
       {
         path: '/favorites/resources',
         element: <FavouriteResources />,
+      },
+      {
+        path: '/projects',
+        element: <ProjectStructure />,
       },
       {
         path: '/trending',
@@ -88,16 +119,16 @@ const App = () => {
   const [loading, setLoading] = useState<boolean>(true);
 
   useEffect(() => {
-    document.body.className = theme === "LIGHT" ? "light-theme" : "dark-theme";
+    document.body.className = theme === 'LIGHT' ? 'light-theme' : 'dark-theme';
 
     const handleLoad = () => {
       setTimeout(() => setLoading(false), LOADER_DURATION);
     };
 
-    window.addEventListener("load", handleLoad);
+    window.addEventListener('load', handleLoad);
 
     return () => {
-      window.removeEventListener("load", handleLoad);
+      window.removeEventListener('load', handleLoad);
     };
   }, [theme]);
 

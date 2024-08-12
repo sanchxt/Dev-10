@@ -1,11 +1,10 @@
 import RoadmapBox from './RoadmapBox';
-import { MultipleRoadmapCardsProps } from '../../../utils/types';
+import { MultipleRoadmapCardsProps } from '../../utils/types';
 import { memo } from 'react';
 
 const RoadmapCards: React.FC<MultipleRoadmapCardsProps> = ({ resources }) => {
-
-  if(!resources || resources.length === 0){
-    return <div> No roadmaps available... </div>
+  if (!resources || resources.length === 0) {
+    return <div> No roadmaps available... </div>;
   }
   const numColumns =
     resources.length > 4 ? '3' : resources.length > 2 ? '2' : '1';

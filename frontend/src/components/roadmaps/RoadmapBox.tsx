@@ -1,12 +1,18 @@
-import { JSXElementConstructor, Key, memo, ReactElement, ReactNode, ReactPortal } from 'react';
-import { RoadmapCardProps } from '../../../utils/types';
-import MultiLineEllipsis from '../../resources/MultiLineEllipsis';
+import {
+  JSXElementConstructor,
+  Key,
+  memo,
+  ReactElement,
+  ReactNode,
+  ReactPortal,
+} from 'react';
+import { RoadmapCardProps } from '../../utils/types';
+import MultiLineEllipsis from '../resources/MultiLineEllipsis';
 import { useNavigate } from 'react-router-dom';
 
 const RoadmapBox: React.FC<any> = ({ resource, index }) => {
-
-  if (!resource || resource.length === 0){
-    return <div>No roadmaps available...</div>
+  if (!resource || resource.length === 0) {
+    return <div>No roadmaps available...</div>;
   }
   const navigate = useNavigate();
 
@@ -63,14 +69,27 @@ const RoadmapBox: React.FC<any> = ({ resource, index }) => {
         <div className="w-full md:w-fit font-medium tracking-wide">
           <h6 className="text-resource-box-primary theme-transition">Tags:</h6>
         </div>
-        {resource?.tags.map((tag: string | number | boolean | ReactElement<any, string | JSXElementConstructor<any>> | Iterable<ReactNode> | ReactPortal | null | undefined, idx: Key | null | undefined) => (
-          <p
-            key={idx}
-            className="bg-orange-200 text-[0.5rem] md:text-[0.6rem] xl:text-xs px-1 md:px-2 xl:px-3 xl:py-1 rounded-lg"
-          >
-            {tag}
-          </p>
-        ))}
+        {resource?.tags.map(
+          (
+            tag:
+              | string
+              | number
+              | boolean
+              | ReactElement<any, string | JSXElementConstructor<any>>
+              | Iterable<ReactNode>
+              | ReactPortal
+              | null
+              | undefined,
+            idx: Key | null | undefined
+          ) => (
+            <p
+              key={idx}
+              className="bg-orange-200 text-[0.5rem] md:text-[0.6rem] xl:text-xs px-1 md:px-2 xl:px-3 xl:py-1 rounded-lg"
+            >
+              {tag}
+            </p>
+          )
+        )}
       </div>
 
       {/* author */}
