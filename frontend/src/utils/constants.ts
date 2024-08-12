@@ -136,6 +136,7 @@ export const landingCarouselImages = [
     name: 'Side Coding Image',
     id: 13,
   },
+
 ];
 
 export const homeHeaderButtons = [
