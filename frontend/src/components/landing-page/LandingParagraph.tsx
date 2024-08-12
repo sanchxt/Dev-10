@@ -20,8 +20,7 @@ const LandingParagraph = ({ text }: { text: string }) => {
           {words.map((word, idx) => {
             const start = idx / words.length;
             const end = start + 1 / words.length;
-            const isLastWord =
-              idx === words.length - 1 || idx === words.length - 2;
+            const isLastWord = idx === words.length - 1;
 
             return (
               <Word
@@ -61,7 +60,7 @@ const Word = ({ children, range, progress, isLastWord }: LandingWordsProps) => {
 
   return (
     <span className="flex flex-wrap relative">
-      <span className="absolute opacity-[0.1] p-2 pb-3">{children}</span>
+      <span className="absolute opacity-[0.1] px-2 py-3">{children}</span>
       <motion.span
         style={{
           opacity,
@@ -70,7 +69,7 @@ const Word = ({ children, range, progress, isLastWord }: LandingWordsProps) => {
           textDecoration,
           textUnderlineOffset,
         }}
-        className="p-2 pb-3"
+        className="px-2 py-3"
       >
         {children}
       </motion.span>
