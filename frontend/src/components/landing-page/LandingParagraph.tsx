@@ -20,7 +20,8 @@ const LandingParagraph = ({ text }: { text: string }) => {
           {words.map((word, idx) => {
             const start = idx / words.length;
             const end = start + 1 / words.length;
-            const isLastWord = idx === words.length - 1;
+            const isLastWord =
+              idx === words.length - 1 || idx === words.length - 2;
 
             return (
               <Word
@@ -56,7 +57,7 @@ const Word = ({ children, range, progress, isLastWord }: LandingWordsProps) => {
   const color = createTransform(["#000", "#000", "#fff"]);
   const backgroundColor = createTransform(["#fff", "#fff", "#000"]);
   const textDecoration = createTransform(["none", "none", "underline"]);
-  const textUnderlineOffset = createTransform(["auto", "auto", "4px"]);
+  const textUnderlineOffset = createTransform(["auto", "auto", "10px"]);
 
   return (
     <span className="flex flex-wrap relative">
