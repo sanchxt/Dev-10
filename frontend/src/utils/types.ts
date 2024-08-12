@@ -97,8 +97,8 @@ export interface GetRoadmapRequest {
   pageNumber?: string;
 }
 
-export type RoadmapSortType = 'recent' | 'oldest';
-export type RoadmapByRate = 'highest' | 'lowest';
+export type RoadmapSortType = "recent" | "oldest";
+export type RoadmapByRate = "highest" | "lowest";
 
 export interface ResourceProps {
   _id: string;
@@ -131,7 +131,6 @@ export interface RoadmapCardProps {
 export interface MultipleRoadmapCardsProps {
   resources: RoadmapCardProps[];
 }
-
 
 export interface AddResourceRatingRequest {
   id: string;

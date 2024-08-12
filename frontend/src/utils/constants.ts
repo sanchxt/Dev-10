@@ -60,9 +60,8 @@ export const sidebarMenu = [
 export const sortResourceDropdownItems = ["recent", "oldest"];
 export const filterResourceDropdownItems = ["highest", "lowest"];
 
-export const sortRoadmapDropdownItems = ['recent', 'oldest'];
-export const filterRoadmapDropdownItems = ['highest', 'lowest'];
-
+export const sortRoadmapDropdownItems = ["recent", "oldest"];
+export const filterRoadmapDropdownItems = ["highest", "lowest"];
 
 export const LOADER_DURATION = 4000;
 
@@ -102,4 +101,9 @@ export const landingCarouselImages = [
     name: "Side Coding Image",
     id: 6,
   },
+];
+
+export const homeHeaderButtons = [
+  { text: "About Dev-10", url: "/" },
+  { text: "Contact Us", url: "/" },
 ];
