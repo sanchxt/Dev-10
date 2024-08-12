@@ -73,33 +73,68 @@ export const HomePageHeaderLinks = [
 
 export const landingCarouselImages = [
   {
-    image: "/landing-page/carousel/main-code-img.webp",
-    name: "Main Coding Image",
+    image: '/landing-page/carousel/tech.jpeg',
+    name: 'Main Coding Image',
     id: 1,
   },
   {
-    image: "/landing-page/carousel/code-img-1.webp",
-    name: "Side Coding Image",
+    image: '/landing-page/carousel/c5.jpeg',
+    name: 'Side Coding Image',
     id: 2,
   },
   {
-    image: "/landing-page/carousel/code-img-1.webp",
-    name: "Side Coding Image",
+    image: '/landing-page/carousel/c6.jpeg',
+    name: 'Side Coding Image',
     id: 3,
   },
   {
-    image: "/landing-page/carousel/code-img-1.webp",
-    name: "Side Coding Image",
+    image: '/landing-page/carousel/c7.jpeg',
+    name: 'Side Coding Image',
     id: 4,
   },
   {
-    image: "/landing-page/carousel/code-img-1.webp",
-    name: "Side Coding Image",
+    image: '/landing-page/carousel/mac.jpeg',
+    name: 'Side Coding Image',
     id: 5,
   },
   {
-    image: "/landing-page/carousel/code-img-1.webp",
-    name: "Side Coding Image",
+    image: '/landing-page/carousel/web.jpeg',
+    name: 'Side Coding Image',
     id: 6,
+  },
+  {
+    image: '/landing-page/carousel/c10.jpeg',
+    name: 'Side Coding Image',
+    id: 7,
+  },
+  {
+    image: '/landing-page/carousel/coded.jpeg',
+    name: 'Side Coding Image',
+    id: 8,
+  },
+  {
+    image: '/landing-page/carousel/mac.jpeg',
+    name: 'Side Coding Image',
+    id: 9,
+  },
+  {
+    image: '/landing-page/carousel/aesthetic.jpeg',
+    name: 'Side Coding Image',
+    id: 10,
+  },
+  {
+    image: '/landing-page/carousel/code.jpeg',
+    name: 'Side Coding Image',
+    id: 11,
+  },
+  {
+    image: '/landing-page/carousel/study.jpeg',
+    name: 'Side Coding Image',
+    id: 12,
+  },
+  {
+    image: '/landing-page/carousel/binary.jpeg',
+    name: 'Side Coding Image',
+    id: 13,
   },
 ];
