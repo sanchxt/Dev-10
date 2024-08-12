@@ -20,8 +20,7 @@ const LandingParagraph = ({ text }: { text: string }) => {
           {words.map((word, idx) => {
             const start = idx / words.length;
             const end = start + 1 / words.length;
-            const isLastWord =
-              idx === words.length - 1 || idx === words.length - 2;
+            const isLastWord = idx === words.length - 1;
 
             return (
               <Word
