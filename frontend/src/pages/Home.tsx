@@ -1,5 +1,5 @@
+import HomePage from "../components/revamped-home/HomePage";
 import Sidebar from "../components/shared/Sidebar";
-import HomePage from "../components/home/HomePage";
 
 const Home = () => {
   return (
