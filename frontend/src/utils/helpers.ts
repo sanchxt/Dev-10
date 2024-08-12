@@ -2,6 +2,7 @@ import { UseFormClearErrors, UseFormSetError } from "react-hook-form";
 import { linksResourceFormSchema } from "./schema";
 import { LinkResourceFormFields } from "./types";
 import { MutableRefObject, SetStateAction } from "react";
+import { landingCarouselImages } from "./constants";
 
 export const maxWords = (value: string | undefined, max: number) => {
   if (!value) return true;
@@ -68,3 +69,14 @@ export const getItem = (key: string) => {
   const value = localStorage.getItem(key);
   return value ? JSON.parse(value) : null;
 };
+
+export const randomCarouselSet1 = landingCarouselImages
+  .sort(() => Math.random() - 0.5)
+  .concat(landingCarouselImages.sort(() => Math.random() - 0.5))
+  .concat(landingCarouselImages.sort(() => Math.random() - 0.5));
+
+export const randomCarouselSet2 = landingCarouselImages
+  .sort(() => Math.random() - 0.5)
+  .concat(landingCarouselImages.sort(() => Math.random() - 0.5))
+  .concat(landingCarouselImages.sort(() => Math.random() - 0.5))
+  .sort(() => Math.random() - 0.5);

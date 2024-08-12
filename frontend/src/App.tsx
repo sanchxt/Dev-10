@@ -26,11 +26,7 @@ import Roadmap from "./pages/Roadmap";
 const router = createBrowserRouter([
   // {
   //   path: '/',
-  //   element: <LandingPage />,
-  // },
-  {
-    path: '/login',
-    element: <Login />,
+  //   element: <Landing
   },
   {
     path: '/signup',

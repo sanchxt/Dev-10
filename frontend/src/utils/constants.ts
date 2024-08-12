@@ -70,3 +70,36 @@ export const HomePageHeaderLinks = [
   { url: "/resources", text: "Explore Resources", id: 1 },
   { url: "/roadmaps", text: "Explore Roadmaps", id: 2 },
 ];
+
+export const landingCarouselImages = [
+  {
+    image: "/landing-page/carousel/main-code-img.webp",
+    name: "Main Coding Image",
+    id: 1,
+  },
+  {
+    image: "/landing-page/carousel/code-img-1.webp",
+    name: "Side Coding Image",
+    id: 2,
+  },
+  {
+    image: "/landing-page/carousel/code-img-1.webp",
+    name: "Side Coding Image",
+    id: 3,
+  },
+  {
+    image: "/landing-page/carousel/code-img-1.webp",
+    name: "Side Coding Image",
+    id: 4,
+  },
+  {
+    image: "/landing-page/carousel/code-img-1.webp",
+    name: "Side Coding Image",
+    id: 5,
+  },
+  {
+    image: "/landing-page/carousel/code-img-1.webp",
+    name: "Side Coding Image",
+    id: 6,
+  },
+];
