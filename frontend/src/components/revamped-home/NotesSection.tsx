@@ -7,8 +7,8 @@ const NotesSkeletonLoader = () => {
     <>
       {[1, 2, 3].map((_, idx) => (
         <div
-          className={`h-32 lg:h-48 rounded-lg grid gap-2 grid-cols-1 grid-rows-3 ${
-            idx === 2 ? "col-span-2 md:col-span-1" : ""
+          className={`h-24 sm:h-28 md:h-32 lg:h-40 rounded-lg grid gap-2 grid-cols-1 grid-rows-3 ${
+            idx === 2 ? "col-span-2" : ""
           } w-full bg-slate-100 shadow-md p-2`}
           key={idx}
         >
