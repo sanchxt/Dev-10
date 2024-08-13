@@ -35,10 +35,10 @@ export const usersApiSlice = apiSlice.injectEndpoints({
         body: data,
       }),
     }),
-    totalContributions: builder.query({
+    userStats: builder.mutation({
       query: () => ({
-        url: `${USERS_URL}/get-contributions`,
-        method: "GET",
+        url: `${USERS_URL}/get-stats`,
+        method: "PUT",
       }),
     }),
   }),
@@ -49,5 +49,5 @@ export const {
   useLogoutMutation,
   useRegisterMutation,
   useUpdateUserMutation,
-  useTotalContributionsQuery,
+  useUserStatsMutation,
 } = usersApiSlice as any;
