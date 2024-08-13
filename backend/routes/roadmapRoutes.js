@@ -2,15 +2,15 @@ import express from "express";
 const router = express.Router();
 import {
   createRoadmap,
-  getAllRoadmaps,
+  getRoadmaps,
   getRoadmapById,
   updateRoadmap,
   deleteRoadmap,
-  rateRoadmap,
+  addRoadmapRating,
 } from "../controllers/roadmapController.js";
 import { protect } from "../middleware/authMiddleware.js";
 
-router.route("/").post(protect, createRoadmap).get(protect, getAllRoadmaps);
+router.route("/").post(protect, createRoadmap).get(protect, getRoadmaps);
 
 router
   .route("/:id")
@@ -18,6 +18,6 @@ router
   .put(protect, updateRoadmap)
   .delete(protect, deleteRoadmap);
 
-router.route("/:id/rate").post(protect, rateRoadmap);
+router.route("/:id/rate").post(protect, addRoadmapRating);
 
 export default router;

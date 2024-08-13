@@ -22,7 +22,7 @@ const LandingHero = () => {
         className="absolute -top-[--header-height] left-0 w-full h-[200vh]"
       >
         <img
-          src="/landing-page/landing-main-bg-2.webp"
+          src="/landing-page/carousel/c3.jpeg"
           className="sticky top-0 h-screen object-cover w-full"
         />
       </motion.div>

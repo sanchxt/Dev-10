@@ -90,6 +90,16 @@ export interface GetResourcesRequest {
 export type ResourceSortType = "recent" | "oldest";
 export type ResourceByRate = "highest" | "lowest";
 
+export interface GetRoadmapRequest {
+  search?: string;
+  sort?: string;
+  filter?: string;
+  pageNumber?: string;
+}
+
+export type RoadmapSortType = "recent" | "oldest";
+export type RoadmapByRate = "highest" | "lowest";
+
 export interface ResourceProps {
   _id: string;
   title: string;
@@ -106,6 +116,20 @@ export interface ResourceCardProps {
 }
 export interface MultipleResourceCardsProps {
   resources: ResourceProps[];
+}
+
+export interface RoadmapCardProps {
+  _id(_id: any): void;
+  title: ReactNode;
+  isOfficial: any;
+  description: string;
+  tags: any;
+  authorName: ReactNode;
+  resource: RoadmapCardProps;
+  index: number;
+}
+export interface MultipleRoadmapCardsProps {
+  resources: RoadmapCardProps[];
 }
 
 export interface AddResourceRatingRequest {

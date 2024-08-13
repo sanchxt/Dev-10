@@ -1,3 +1,5 @@
+@import url("https://fonts.googleapis.com/css2?family=Nunito+Sans:ital,opsz,wght@0,6..12,200..1000;1,6..12,200..1000&display=swap");
+
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
@@ -106,6 +108,12 @@
 
   .pagination-button {
     @apply p-2 bg-transparent border border-pagination-btn rounded-md disabled:opacity-50 transition-all duration-200 ease-in-out hover:bg-gray-200 disabled:cursor-not-allowed disabled:bg-transparent;
+  }
+}
+
+@layer base {
+  body {
+    font-family: "Nunito Sans", sans-serif;
   }
 }
 

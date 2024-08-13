@@ -1,11 +1,7 @@
 import { useEffect, lazy, Suspense, useState } from "react";
 import { useSelector } from "react-redux";
 import { ToastContainer } from "react-toastify";
-import {
-  createBrowserRouter,
-  RouterProvider,
-  useLocation,
-} from "react-router-dom";
+import { createBrowserRouter, RouterProvider } from "react-router-dom";
 import "react-toastify/dist/ReactToastify.css";
 
 import { RootState } from "./store";
@@ -28,6 +24,7 @@ import ContributeRoadmaps from "./pages/ContributeRoadmaps";
 import LandingPage from "./pages/LandingPage";
 import TransitionComponent from "./components/TransitionComponent";
 import TransitionRoutes from "./components/TransitionRoutes";
+import Roadmap from "./pages/Roadmap";
 
 const router = createBrowserRouter([
   {
@@ -80,6 +77,11 @@ const router = createBrowserRouter([
         path: "/contribute/roadmaps",
         element: <ContributeRoadmaps />,
       },
+      {
+        path: "/roadmaps",
+        element: <Roadmap />,
+      },
+
       {
         path: "/resources",
         element: <Resources />,

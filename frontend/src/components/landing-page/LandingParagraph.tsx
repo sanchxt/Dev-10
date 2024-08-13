@@ -57,11 +57,11 @@ const Word = ({ children, range, progress, isLastWord }: LandingWordsProps) => {
   const color = createTransform(["#000", "#000", "#fff"]);
   const backgroundColor = createTransform(["#fff", "#fff", "#000"]);
   const textDecoration = createTransform(["none", "none", "underline"]);
-  const textUnderlineOffset = createTransform(["auto", "auto", "4px"]);
+  const textUnderlineOffset = createTransform(["auto", "auto", "10px"]);
 
   return (
     <span className="flex flex-wrap relative">
-      <span className="absolute opacity-[0.1] p-2 pb-3">{children}</span>
+      <span className="absolute opacity-[0.1] px-2 py-3">{children}</span>
       <motion.span
         style={{
           opacity,
@@ -70,7 +70,7 @@ const Word = ({ children, range, progress, isLastWord }: LandingWordsProps) => {
           textDecoration,
           textUnderlineOffset,
         }}
-        className="p-2 pb-3"
+        className="px-2 py-3"
       >
         {children}
       </motion.span>
