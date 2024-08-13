@@ -29,7 +29,7 @@ router
   .post(protect, createResourceRateLimiter, createResource)
   .get(protect, getResources);
 router.get("/:tag", protect, getResourcesByTag);
-router.put("/details/:id", getResourceById);
+router.put("/details/:id", protect, getResourceById);
 router
   .route("/:id/modify")
   .put(protect, updateResource)
