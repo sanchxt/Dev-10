@@ -38,15 +38,21 @@ const DisplayTotalContributions = () => {
 
       <p className="col-span-2 text-center italic font-extralight text-[0.67rem] sm:text-xs lg:text-sm p-1">
         Give back to the community by contributing your own{" "}
-        <span className="text-blue-600 font-semibold relative group cursor-pointer hover:text-black hover:font-black transition-all duration-500 ease-in-out">
-          <Link to="/resources">resources</Link>
+        <Link
+          to="/resources"
+          className="text-blue-600 inline-flex font-semibold relative group cursor-pointer hover:text-black hover:font-black transition-all duration-500 ease-in-out"
+        >
+          resources
           <span className="absolute left-0 top-0 h-full w-0 group-hover:w-full bg-purple-300/40 transition-all duration-500 ease-in-out"></span>
-        </span>{" "}
+        </Link>{" "}
         or{" "}
-        <span className="text-blue-600 font-semibold relative group hover:text-black hover:font-black transition-all duration-500 ease-in-out">
+        <Link
+          to="/roadmaps"
+          className="text-blue-600 inline-flex font-semibold relative group cursor-pointer hover:text-black hover:font-black transition-all duration-500 ease-in-out"
+        >
           roadmaps
           <span className="absolute left-0 top-0 h-full w-0 group-hover:w-full bg-purple-300/40 transition-all duration-500 ease-in-out"></span>
-        </span>{" "}
+        </Link>{" "}
         for other developers to access.
       </p>
     </div>
