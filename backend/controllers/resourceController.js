@@ -5,6 +5,7 @@ import {
   calculateAverageRating,
   calculateRatingBreakdown,
 } from "../utils/calculateRatings.js";
+import User from "../models/userModel.js";
 
 // @desc Get all resources
 // @route GET /api/resources
@@ -95,7 +96,7 @@ const getResourceById = asyncHandler(async (req, res) => {
   const resource = await Resource.findById(req.params.id);
 
   if (resource) {
-    if (req.user && req.user._id.toString() !== resource.user.toString()) {
+    if (resource.user.toString() !== req.user._id.toString()) {
       resource.totalViews += 1;
       resource.monthlyViews += 1;
       await resource.save();
@@ -149,6 +150,10 @@ const deleteResource = asyncHandler(async (req, res) => {
       throw new Error("Not authorized to delete this resource");
     }
     await Resource.deleteOne({ _id: req.params.id });
+    await User.updateOne(
+      { _id: req.user._id },
+      { $pull: { createdResources: req.params.id } }
+    );
     res.json({ message: "Resource removed" });
   } else {
     res.status(404);
