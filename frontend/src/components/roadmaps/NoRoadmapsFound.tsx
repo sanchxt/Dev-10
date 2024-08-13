@@ -1,13 +1,13 @@
-import { Link } from 'react-router-dom';
-import { BiPlusCircle, BiSearch } from 'react-icons/bi';
+import { Link } from "react-router-dom";
+import { BiPlusCircle, BiSearch } from "react-icons/bi";
 
-import NoResults from '../../assets/NoResults.gif';
+import NoResults from "../../assets/NoResults.gif";
 interface NoRoadmapFoundProps {
   onExploreRoadmap: () => void;
 }
 
 const NoRoadmapFound: React.FC<NoRoadmapFoundProps> = ({
-onExploreRoadmap,
+  onExploreRoadmap,
 }) => {
   return (
     <div className="mx-4 h-full grid grid-rows-2 rounded-xl">
@@ -21,9 +21,9 @@ onExploreRoadmap,
             No matching roadmap could be found.
           </p>
           <p className="font-extralight text-no-roadmap-text">
-            Did you mean to{' '}
-            <Link to="/roadmaps" className="text-no-roadmap-link font-light">
-              search roadmaps?
+            Did you mean to{" "}
+            <Link to="/resources" className="text-no-roadmap-link font-light">
+              search resources?
             </Link>
           </p>
         </div>

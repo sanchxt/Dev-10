@@ -1,10 +1,11 @@
-import asyncHandler from 'express-async-handler';
-import Roadmap from '../models/roadmapModel.js';
-import validateRoadmapFields from '../utils/validateRoadmapFields.js';
+import asyncHandler from "express-async-handler";
+import Roadmap from "../models/roadmapModel.js";
+import validateRoadmapFields from "../utils/validateRoadmapFields.js";
 import {
   calculateAverageRating,
   calculateRatingBreakdown,
-} from '../utils/calculateRatings.js';
+} from "../utils/calculateRatings.js";
+import User from "../models/userModel.js";
 
 // @desc Get all roadmaps
 // @route GET /api/roadmaps
@@ -12,24 +13,24 @@ import {
 const getRoadmaps = asyncHandler(async (req, res) => {
   const pageSize = 6;
   const page = Number(req.query.pageNumber) || 1;
-  const searchQuery = req.query.search || '';
-  const sort = req.query.sort || 'recent';
-  const filter = req.query.filter || 'highest';
+  const searchQuery = req.query.search || "";
+  const sort = req.query.sort || "recent";
+  const filter = req.query.filter || "highest";
 
   const searchCriteria = searchQuery
     ? {
         $or: [
-          { title: { $regex: searchQuery, $options: 'i' } },
-          { tags: { $regex: searchQuery, $options: 'i' } },
+          { title: { $regex: searchQuery, $options: "i" } },
+          { tags: { $regex: searchQuery, $options: "i" } },
         ],
       }
     : {};
 
   let sortCriteria = {};
 
-  if (sort === 'recent') {
+  if (sort === "recent") {
     sortCriteria.createdAt = -1;
-  } else if (sort === 'oldest') {
+  } else if (sort === "oldest") {
     sortCriteria.createdAt = 1;
   }
 
@@ -44,9 +45,9 @@ const getRoadmaps = asyncHandler(async (req, res) => {
     .limit(pageSize)
     .skip(pageSize * (page - 1));
 
-  if (filter === 'highest') {
+  if (filter === "highest") {
     roadmaps = roadmaps.sort((a, b) => b.averageRating - a.averageRating);
-  } else if (filter === 'lowest') {
+  } else if (filter === "lowest") {
     roadmaps = roadmaps.sort((a, b) => a.averageRating - b.averageRating);
   }
 
@@ -102,7 +103,7 @@ const getRoadmapById = asyncHandler(async (req, res) => {
     res.status(200).json(roadmap);
   } else {
     res.status(404);
-    throw new Error('Roadmap not found');
+    throw new Error("Roadmap not found");
   }
 });
 
@@ -117,7 +118,7 @@ const updateRoadmap = asyncHandler(async (req, res) => {
   if (roadmap) {
     if (roadmap.user.toString() !== req.user._id.toString()) {
       res.status(401);
-      throw new Error('Not authorized to update this roadmap');
+      throw new Error("Not authorized to update this roadmap");
     }
 
     roadmap.title = title || roadmap.title;
@@ -129,7 +130,7 @@ const updateRoadmap = asyncHandler(async (req, res) => {
     res.json(updatedRoadmap);
   } else {
     res.status(404);
-    throw new Error('Roadmap not found');
+    throw new Error("Roadmap not found");
   }
 });
 
@@ -142,13 +143,17 @@ const deleteRoadmap = asyncHandler(async (req, res) => {
   if (roadmap) {
     if (roadmap.user.toString() !== req.user._id.toString()) {
       res.status(401);
-      throw new Error('Not authorized to delete this roadmap');
+      throw new Error("Not authorized to delete this roadmap");
     }
     await Roadmap.deleteOne({ _id: req.params.id });
-    res.json({ message: 'Roadmap removed' });
+    await User.updateOne(
+      { _id: req.user._id },
+      { $pull: { createdRoadmaps: req.params.id } }
+    );
+    res.json({ message: "Roadmap removed" });
   } else {
     res.status(404);
-    throw new Error('Roadmap not found');
+    throw new Error("Roadmap not found");
   }
 });
 
@@ -159,11 +164,11 @@ const addRoadmapRating = asyncHandler(async (req, res) => {
   const { rating, comment } = req.body;
 
   if (!rating || !comment) {
-    throw new Error('Both rating and comment need to be provided');
+    throw new Error("Both rating and comment need to be provided");
   }
 
   if (rating > 5 || rating < 0) {
-    throw new Error('Rating needs to be between 0 and 5');
+    throw new Error("Rating needs to be between 0 and 5");
   }
 
   const roadmap = await Roadmap.findById(req.params.id);
@@ -171,7 +176,7 @@ const addRoadmapRating = asyncHandler(async (req, res) => {
   if (roadmap) {
     if (roadmap.user.toString() === req.user._id.toString()) {
       res.status(403);
-      throw new Error('You cannot rate or comment on your own roadmap');
+      throw new Error("You cannot rate or comment on your own roadmap");
     }
 
     const alreadyRated = roadmap.ratings.find(
@@ -193,10 +198,10 @@ const addRoadmapRating = asyncHandler(async (req, res) => {
     roadmap.ratingBreakdown = calculateRatingBreakdown(roadmap.ratings);
 
     await roadmap.save();
-    res.status(201).json({ message: 'Rating added' });
+    res.status(201).json({ message: "Rating added" });
   } else {
     res.status(404);
-    throw new Error('Roadmap not found');
+    throw new Error("Roadmap not found");
   }
 });
 
@@ -224,7 +229,7 @@ const getUserReview = asyncHandler(async (req, res) => {
 
   if (!roadmap) {
     res.status(404);
-    throw new Error('Roadmap not found');
+    throw new Error("Roadmap not found");
   }
 
   const userReview = roadmap.ratings.find(
@@ -235,7 +240,7 @@ const getUserReview = asyncHandler(async (req, res) => {
     res.status(200).json(userReview);
   } else {
     res.status(404);
-    throw new Error('Review not found');
+    throw new Error("Review not found");
   }
 });
 
@@ -247,7 +252,7 @@ const getLatestComments = asyncHandler(async (req, res) => {
 
   if (!roadmap) {
     res.status(404);
-    throw new Error('Roadmap not found');
+    throw new Error("Roadmap not found");
   }
 
   const latestComments = roadmap.ratings
@@ -267,13 +272,13 @@ const getTotalViewsById = asyncHandler(async (req, res) => {
   if (roadmap) {
     if (roadmap.user.toString() !== req.user._id.toString()) {
       res.status(401);
-      throw new Error('Not authorized to see the total views of this roadmap');
+      throw new Error("Not authorized to see the total views of this roadmap");
     }
 
     res.status(200).json({ totalViews: roadmap.totalViews });
   } else {
     res.status(404);
-    throw new Error('Roadmap not found');
+    throw new Error("Roadmap not found");
   }
 });
 

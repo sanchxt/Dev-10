@@ -65,7 +65,7 @@ const DetailedLinksAndNotes = ({
       </div>
 
       {/* notes */}
-      <div className="w-full md:w-1/3 grid py-2 xl:py-4">
+      <div className="w-full md:w-1/3 flex flex-col py-2 xl:py-4">
         <h2 className="w-full h-fit text-center tracking-wide font-normal text-sm md:text-base lg:text-lg xl:text-2xl">
           Author Notes
         </h2>

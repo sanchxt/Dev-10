@@ -33,7 +33,7 @@ const userSchema = mongoose.Schema(
     createdRoadmaps: [
       {
         type: mongoose.Schema.Types.ObjectId,
-        ref: "Roadmaps",
+        ref: "Roadmap",
       },
     ],
     favoriteResources: [
@@ -54,6 +54,10 @@ const userSchema = mongoose.Schema(
         ref: "Note",
       },
     ],
+    averageRating: {
+      type: Number,
+      default: 0,
+    },
   },
   {
     timestamps: true,

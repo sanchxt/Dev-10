@@ -5,13 +5,14 @@ import {
   logoutUser,
   getUserProfile,
   updateUserProfile,
-  favoriteResources,
+  getFavoriteResources,
   removeAllFavoriteResources,
   getCreatedResources,
   addFavoriteResource,
   removeFavoriteResource,
   checkIfResourceFavorited,
   getUserContributions,
+  getUserStats,
 } from "../controllers/userController.js";
 import { protect } from "../middleware/authMiddleware.js";
 
@@ -30,12 +31,13 @@ router
   .delete(protect, removeFavoriteResource);
 router
   .route("/favorites/resources")
-  .get(protect, favoriteResources)
+  .get(protect, getFavoriteResources)
   .put(protect, removeAllFavoriteResources);
 router.route("/created-resources").get(protect, getCreatedResources);
 router
   .route("/favorites/resources/check/:id")
   .get(protect, checkIfResourceFavorited);
 router.get("/get-contributions", protect, getUserContributions);
+router.put("/get-stats", protect, getUserStats);
 
 export default router;

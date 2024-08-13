@@ -101,6 +101,11 @@ const deleteNote = asyncHandler(async (req, res) => {
     }
 
     await Note.deleteOne({ _id: req.params.id });
+    await User.updateOne(
+      { _id: req.user._id },
+      { $pull: { notes: req.params.id } }
+    );
+
     res.json({ message: "Note has been removed" });
   } else {
     res.status(404);
