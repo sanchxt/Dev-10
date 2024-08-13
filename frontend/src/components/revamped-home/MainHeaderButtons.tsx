@@ -22,7 +22,7 @@ const MainHeaderButtons = () => {
             <span className="relative z-[1]">
               &lt; {button.text} &#x2215;&gt;
             </span>
-            <span className="absolute z-10 left-0 top-0 h-full w-0 rounded-full flex items-center justify-center group-hover:w-full transition-all duration-700 ease-in-out bg-gradient-to-tr from-gray-500 to-gray-800 text-white shadow-2xl overflow-clip">
+            <span className="absolute z-10 left-0 top-0 h-full w-0 rounded-full flex items-center justify-center group-hover:w-full transition-all duration-700 ease-in-out bg-gradient-to-tr from-gray-500/90 to-gray-800/90 text-white shadow-2xl overflow-clip">
               <LuArrowUpRight />
             </span>
           </Link>
