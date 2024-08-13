@@ -34,7 +34,7 @@ const DetailedHeader = ({
           Tags
         </h4>
         <ul className="flex flex-wrap justify-end gap-2 text-[0.58rem] sm:text-[0.67rem] md:text-[0.7rem] lg:text-xs px-2 md:py-1">
-          {tags.map((tag: string, idx: number) => (
+          {tags?.map((tag: string, idx: number) => (
             <li
               key={idx}
               className={`${
