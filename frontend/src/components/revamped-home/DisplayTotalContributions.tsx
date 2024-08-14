@@ -36,7 +36,7 @@ const DisplayTotalContributions = () => {
         </p>
       </div>
 
-      <p className="col-span-2 text-center italic font-extralight text-[0.67rem] sm:text-xs lg:text-sm p-1">
+      <p className="col-span-2 text-center italic font-extralight text-[0.67rem] sm:text-xs lg:text-sm p-1 text-gray-700">
         Give back to the community by contributing your own{" "}
         <Link
           to="/resources"
