@@ -326,3 +326,9 @@ export interface LandingWordsProps {
   progress: MotionValue<number>;
   isLastWord: boolean;
 }
+
+export interface SponsorDetailsProps {
+  eventName: string;
+  eventDate: string;
+  eventLink: string;
+}
