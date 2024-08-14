@@ -1,13 +1,12 @@
+import React, { useEffect, useState } from "react";
+import { useParams } from "react-router-dom";
+import { useDispatch, useSelector } from "react-redux";
 import { toast } from "react-toastify";
 import { BsEye } from "react-icons/bs";
-import { useEffect, useState } from "react";
-import { useParams } from "react-router-dom";
 import { FaRegBookmark } from "react-icons/fa";
-import { useDispatch, useSelector } from "react-redux";
 import { GoBookmarkFill, GoBookmarkSlashFill, GoReport } from "react-icons/go";
-
 import ReviewForm from "./ReviewForm";
-import { RootState } from "../../store";
+import ReportModal from "./ReportModal";
 import DetailedHeader from "./DetailedHeader";
 import DetailedLinksAndNotes from "./DetailedLinksAndNotes";
 import {
@@ -17,16 +16,14 @@ import {
   useAddFavoriteResourceMutation,
   useRemoveFavoriteResourceMutation,
 } from "../../slices/resourcesApiSlice";
+import { RootState } from "../../store";
+import { addVisitedResource } from "../../slices/recentlyVisitedSlice";
 import { LatestCommentsProps } from "../../utils/types";
-import ReportModal from "./ReportModal";
-import {
-  addVisitedResource,
-  addVisitedRoadmap,
-} from "../../slices/recentlyVisitedSlice";
+import UpdateResourceForm from "./UpdateResourceForm";
 
 const DetailedResource: React.FC = () => {
   const { id } = useParams<{ id: string }>();
-  const { data, error, isLoading } = useGetResourceByIdQuery(id);
+  const { data, error, isLoading, refetch: test } = useGetResourceByIdQuery(id);
   const {
     data: comments,
     error: commentsError,
@@ -45,14 +42,16 @@ const DetailedResource: React.FC = () => {
     (state: RootState) => state.auth.userInfo?._id
   );
 
-  const filledComments = (comments || []).concat(
-    Array.from({ length: Math.max(0, 3 - (comments?.length || 0)) }).map(
-      () => ({
-        comment: "Encourage people to review this collection",
-        placeholder: true,
-      })
-    )
-  );
+  const [isUpdateFormOpen, setIsUpdateFormOpen] = useState(false);
+  const [isReportModalOpen, setIsReportModalOpen] = useState(false);
+
+  const handleUpdateClick = () => {
+    setIsUpdateFormOpen(true);
+  };
+
+  const handleReportClick = () => {
+    setIsReportModalOpen(true);
+  };
 
   const handleFavoriteClick = async () => {
     if (isFavoritedData?.isFavorited) {
@@ -65,11 +64,6 @@ const DetailedResource: React.FC = () => {
     refetchFavoriteStatus();
   };
 
-  const [isReportModalOpen, setIsReportModalOpen] = useState(false);
-  const handleReportClick = () => {
-    setIsReportModalOpen(true);
-  };
-
   const dispatch = useDispatch();
   useEffect(() => {
     if (id && data?.title) {
@@ -77,7 +71,7 @@ const DetailedResource: React.FC = () => {
     }
   }, [id, data?.title]);
 
-  if (isLoading) return <div>Loading data..</div>;
+  if (isLoading) return <div>Loading data...</div>;
   if (error) return <div>{error.toString()}</div>;
 
   return (
@@ -98,7 +92,7 @@ const DetailedResource: React.FC = () => {
           />
 
           <div className="max-w-full grid grid-cols-2 pt-1 md:pt-2 md:gap-2 lg:gap-4 xl:gap-6">
-            {/* comments */}
+            {/* Comments Section */}
             <div>
               <h2 className="text-center text-[0.8rem] md:text-sm lg:text-base xl:text-xl font-medium md:tracking-wide">
                 Latest Comments
@@ -107,13 +101,13 @@ const DetailedResource: React.FC = () => {
               <div className="p-0.5 md:pt-1 xl:pt-2 px-1 md:px-2">
                 <div className="pt-1 md:pt-2 grid grid-cols-2 grid-rows-2 gap-1 gap-y-5">
                   {commentsLoading ? (
-                    <div>Loading comments..</div>
+                    <div>Loading comments...</div>
                   ) : commentsError ? (
                     <div>
-                      Some error occured while trying to load the comments
+                      Some error occurred while trying to load the comments.
                     </div>
                   ) : (
-                    filledComments.map(
+                    (comments || []).map(
                       (comment: LatestCommentsProps, idx: number) => (
                         <div
                           key={idx}
@@ -140,12 +134,21 @@ const DetailedResource: React.FC = () => {
               </div>
             </div>
 
-            {/* review */}
-            {currentUserId === data?.user ? (
-              <div>hi</div>
-            ) : (
-              <ReviewForm id={id!} />
-            )}
+            {/* Review or Update Resource */}
+            <div>
+              {currentUserId === data?.user ? (
+                <div className="flex justify-end">
+                  <button
+                    onClick={handleUpdateClick}
+                    className="bg-purple-500 text-white px-4 py-2 rounded-lg"
+                  >
+                    Update Resource
+                  </button>
+                </div>
+              ) : (
+                <ReviewForm id={id!} />
+              )}
+            </div>
           </div>
         </section>
 
@@ -184,6 +187,16 @@ const DetailedResource: React.FC = () => {
         </div>
       </div>
 
+      {/* Update Resource Form */}
+      {isUpdateFormOpen && (
+        <UpdateResourceForm
+          resourceId={id!}
+          onClose={() => setIsUpdateFormOpen(false)}
+          refetchResources={test}
+        />
+      )}
+
+      {/* Report Modal */}
       <ReportModal
         isOpen={isReportModalOpen}
         onRequestClose={() => setIsReportModalOpen(false)}
