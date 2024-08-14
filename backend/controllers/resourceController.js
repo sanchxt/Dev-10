@@ -164,15 +164,60 @@ const deleteResource = asyncHandler(async (req, res) => {
 // @desc Add a rating / comment to a resource
 // @route POST /api/resources/:id/rating
 // @access Private
+// const addResourceRating = asyncHandler(async (req, res) => {
+//   const { rating, comment } = req.body;
+
+//   if (!rating || !comment) {
+//     throw new Error("Both rating and comment need to be provided");
+//   }
+
+//   if (rating > 5 || rating < 0) {
+//     throw new Error("Rating needs to be between 0 and 5");
+//   }
+
+//   const resource = await Resource.findById(req.params.id);
+
+//   if (resource) {
+//     if (resource.user.toString() === req.user._id.toString()) {
+//       res.status(403);
+//       throw new Error("You cannot rate or comment on your own collection");
+//     }
+
+//     const alreadyRated = resource.ratings.find(
+//       (r) => r.user.toString() === req.user._id.toString()
+//     );
+//     if (alreadyRated) {
+//       res.status(400);
+//       throw new Error("You've already rated this collection");
+//     }
+
+//     const ratingObject = {
+//       user: req.user._id,
+//       rating: Number(rating),
+//       comment,
+//     };
+//     resource.ratings.push(ratingObject);
+
+//     resource.averageRating = calculateAverageRating(resource.ratings);
+//     resource.ratingBreakdown = calculateRatingBreakdown(resource.ratings);
+
+//     await resource.save();
+//     res.status(201).json({ message: "Rating added" });
+//   } else {
+//     res.status(404);
+//     throw new Error("Resource not found");
+//   }
+// });
+
 const addResourceRating = asyncHandler(async (req, res) => {
   const { rating, comment } = req.body;
 
-  if (!rating || !comment) {
-    throw new Error("Both rating and comment need to be provided");
+  if (!rating) {
+    throw new Error("Rating needs to be provided");
   }
 
-  if (rating > 5 || rating < 0) {
-    throw new Error("Rating needs to be between 0 and 5");
+  if (rating > 5 || rating < 1) {
+    throw new Error("Rating needs to be between 1 and 5");
   }
 
   const resource = await Resource.findById(req.params.id);
@@ -180,29 +225,32 @@ const addResourceRating = asyncHandler(async (req, res) => {
   if (resource) {
     if (resource.user.toString() === req.user._id.toString()) {
       res.status(403);
-      throw new Error("You cannot rate or comment on your own collection");
+      throw new Error("You cannot rate or comment on your own resource");
     }
 
-    const alreadyRated = resource.ratings.find(
+    const ratingIndex = resource.ratings.findIndex(
       (r) => r.user.toString() === req.user._id.toString()
     );
-    if (alreadyRated) {
-      res.status(400);
-      throw new Error("You've already rated this collection");
-    }
 
     const ratingObject = {
       user: req.user._id,
       rating: Number(rating),
-      comment,
+      comment: comment || "",
     };
-    resource.ratings.push(ratingObject);
+
+    if (ratingIndex > -1) {
+      // Update existing rating
+      resource.ratings[ratingIndex] = ratingObject;
+    } else {
+      // Add new rating
+      resource.ratings.push(ratingObject);
+    }
 
     resource.averageRating = calculateAverageRating(resource.ratings);
     resource.ratingBreakdown = calculateRatingBreakdown(resource.ratings);
 
     await resource.save();
-    res.status(201).json({ message: "Rating added" });
+    res.status(200).json({ message: "Rating added/updated", resource });
   } else {
     res.status(404);
     throw new Error("Resource not found");
