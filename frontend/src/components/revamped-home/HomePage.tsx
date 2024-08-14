@@ -51,7 +51,7 @@ const HomePage = () => {
         </div>
 
         <div className="px-0.5 py-2 md:px-2 md:py-3">
-          <div className="grid grid-cols-2 md:grid-cols-1 md:grid-rows-2 bg-blue-100 rounded-xl p-1">
+          <div className="grid grid-cols-2 md:grid-cols-1 md:grid-rows-2 bg-blue-200 rounded-xl p-1">
             <div>
               <NotesSection
                 isError={isError}
