@@ -9,6 +9,7 @@ import { useEffect, useState } from "react";
 import AddNoteModal from "./AddNoteModal";
 import ShowAllNotes from "./ShowAllNotes";
 import DisplayTotalContributions from "./DisplayTotalContributions";
+import DisplaySponsors from "./DisplaySponsors";
 
 const HomePage = () => {
   const userInfo = useSelector((state: RootState) => state.auth.userInfo);
@@ -39,11 +40,11 @@ const HomePage = () => {
 
           <div className="col-span-2 px-0.5 pt-2 md:px-2 md:pt-3 h-fit">
             <div className="grid grid-cols-1 lg:grid-cols-2 gap-2 px-1">
-              <div className="order-2 md:order-1 bg-slate-200 shadow-md rounded-xl">
+              <div className="order-2 md:order-1 bg-slate-200 shadow-md rounded-xl p-1">
                 <DisplayTotalContributions />
               </div>
-              <div className="order-1 md:order-2 bg-slate-200 shadow-md rounded-xl">
-                sponsors
+              <div className="order-1 md:order-2 bg-slate-200 shadow-md rounded-xl p-1">
+                <DisplaySponsors />
               </div>
             </div>
           </div>
