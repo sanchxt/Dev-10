@@ -12,7 +12,6 @@ const CodeModal = ({ isOpen, onRequestClose, code }: CodeModalProps) => {
     setFileIndex(Number(e.target.value));
   };
 
-  console.log("file:", fileIndex);
   if (!isOpen) return null;
   return createPortal(
     <div
