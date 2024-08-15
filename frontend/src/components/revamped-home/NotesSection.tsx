@@ -37,7 +37,7 @@ const NotesSection = ({
   }
 
   return (
-    <div className="w-full max-w-full">
+    <div className="w-full max-w-full h-full">
       <div className="flex justify-end items-center px-2 py-0.5">
         <h3 className="flex-grow text-center text-xs lg:text-sm font-light italic">
           Sticky Notes
