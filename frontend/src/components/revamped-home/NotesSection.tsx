@@ -39,9 +39,9 @@ const NotesSection = ({
   return (
     <div className="w-full max-w-full">
       <div className="flex justify-end items-center px-2 py-0.5">
-        <p className="flex-grow text-center text-xs lg:text-sm font-light italic">
+        <h3 className="flex-grow text-center text-xs lg:text-sm font-light italic">
           Sticky Notes
-        </p>
+        </h3>
         <RiMenu3Line
           className="cursor-pointer text-xs lg:text-sm"
           onClick={handleViewAllNotes}
