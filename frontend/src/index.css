@@ -190,6 +190,15 @@
   --home-page-bg-2: rgb(16, 16, 16);
 
   --home-text: #ebe7ea;
+  --home-text-secondary: #d3d2d2;
+  --home-text-link: #83bdfe;
+  --home-bg: #090914;
+  --home-primary: #0d0b27;
+  --home-secondary: #303341;
+  --home-tertiary: #0f121d;
+  --home-quaternary: #3e426c;
+  --home-accent: #1d1d34;
+  --home-note-add: #6b6b6b80;
 }
 
 .light-theme {
@@ -265,4 +274,15 @@
   --glass: rgba(255, 255, 255, 0.1);
 
   --home-quinary: #e9e9f1;
+
+  --home-text: #0d020c;
+  --home-text-secondary: #acabac;
+  --home-text-link: #83bdfe;
+  --home-bg: #f0f0f8;
+  --home-primary: #d8d6f3;
+  --home-secondary: #dbdee9;
+  --home-tertiary: #fbfbfb;
+  --home-quaternary: #ced2ff;
+  --home-accent: #e6e6f1;
+  --home-note-add: #6767675a;
 }
