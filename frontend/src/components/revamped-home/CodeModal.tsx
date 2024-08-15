@@ -51,14 +51,13 @@ const CodeModal = ({ isOpen, onRequestClose, code }: CodeModalProps) => {
               <SyntaxHighlighter
                 language="javascript"
                 customStyle={{
-                  background: "none",
                   padding: 0,
                   fontFamily: "cursive",
                   overflowY: "hidden",
                 }}
                 style={materialLight}
                 showLineNumbers
-                wrapLongLines
+                // wrapLongLines
               >
                 {code?.data[fileIndex].code || ""}
               </SyntaxHighlighter>
