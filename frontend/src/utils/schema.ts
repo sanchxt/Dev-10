@@ -158,6 +158,29 @@ export const createRoadmapSchema = z.object({
     .min(3, { message: "At least 3 steps are required" }),
 });
 
+export const apiCodeGeneratorSchema = z
+  .object({
+    route: z.string().url({ message: "Enter a valid URL." }),
+    method: z.enum(["GET", "POST", "PUT", "DELETE", "PATCH"], {
+      required_error: "HTTP method is required",
+    }),
+    body: z.string().optional(),
+    approach: z.enum(["RTK Query", "fetch", "axios"], {
+      required_error: "Approach is required",
+    }),
+  })
+  .refine(
+    (data) => {
+      if (["POST", "PUT", "PATCH"].includes(data.method) && !data.body) {
+        return false;
+      }
+      return true;
+    },
+    {
+      message: "Request body is required for POST, PUT, PATCH methods.",
+    }
+  );
+
 export const updateResourceSchema = z.object({
   title: z
     .string()
@@ -190,3 +213,4 @@ export const updateResourceSchema = z.object({
     .max(500, { message: "Notes can't exceed 500 characters" })
     .optional(),
 });
+

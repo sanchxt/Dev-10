@@ -10,6 +10,7 @@ import AddNoteModal from "./AddNoteModal";
 import ShowAllNotes from "./ShowAllNotes";
 import DisplayTotalContributions from "./DisplayTotalContributions";
 import DisplaySponsors from "./DisplaySponsors";
+import ApiCodeGenerator from "./ApiCodeGenerator";
 
 const HomePage = () => {
   const userInfo = useSelector((state: RootState) => state.auth.userInfo);
@@ -63,7 +64,9 @@ const HomePage = () => {
             </div>
 
             <div className="pt-2 md:pt-3 h-fit">
-              <div className="bg-green-400 rounded-xl px-1">calendar</div>
+              <div className="bg-slate-200 rounded-xl p-1">
+                <ApiCodeGenerator />
+              </div>
             </div>
           </div>
         </div>

@@ -2,6 +2,7 @@ import { z } from "zod";
 import {
   aboutResourceCollectionSchema,
   addNoteSchema,
+  apiCodeGeneratorSchema,
   createRoadmapSchema,
   linksResourceFormSchema,
   loginSchema,
@@ -37,6 +38,7 @@ export type ReviewFormFields = z.infer<typeof reviewSchema>;
 export type ReportResourceFields = z.infer<typeof reportResourceSchema>;
 export type AddNoteFields = z.infer<typeof addNoteSchema>;
 export type CreateRoadmapFields = z.infer<typeof createRoadmapSchema>;
+export type ApiCodeGeneratorFields = z.infer<typeof apiCodeGeneratorSchema>;
 
 interface SidebarIconProps {
   size: number;
@@ -332,3 +334,18 @@ export interface SponsorDetailsProps {
   eventDate: string;
   eventLink: string;
 }
+
+
+export type ApiCode = {
+  data: {
+    fileName: string;
+    code: string;
+  }[];
+};
+
+export interface CodeModalProps {
+  isOpen: boolean;
+  onRequestClose: () => void;
+  code: ApiCode | null;
+}
+
