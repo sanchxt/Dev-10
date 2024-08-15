@@ -23,11 +23,11 @@ import {
   addVisitedResource,
   addVisitedRoadmap,
 } from "../../slices/recentlyVisitedSlice";
+import UpdateResourceForm from "./UpdateResourceForm";
 
 const DetailedResource: React.FC = () => {
   const { id } = useParams<{ id: string }>();
 
-  // Using the mutation hook instead of the query
   const [getResourceById, { data, error, isLoading }] =
     useGetResourceByIdMutation();
   const {
@@ -71,6 +71,11 @@ const DetailedResource: React.FC = () => {
   const [isReportModalOpen, setIsReportModalOpen] = useState(false);
   const handleReportClick = () => {
     setIsReportModalOpen(true);
+  };
+
+  const [isUpdateFormVisible, setIsUpdateFormVisible] = useState(false);
+  const handleUpdateFormClick = () => {
+    setIsUpdateFormVisible(!isUpdateFormVisible);
   };
 
   const dispatch = useDispatch();
@@ -151,7 +156,21 @@ const DetailedResource: React.FC = () => {
 
             {/* review */}
             {currentUserId === data?.user ? (
-              <div>hi</div>
+              <>
+                <button
+                  className="bg-purple-600 text-white py-1 px-2 text-sm rounded-full shadow-md hover:bg-purple-700 focus:outline-none focus:ring-2 focus:ring-purple-500 focus:ring-opacity-50 transition-colors duration-300 w-15 h-10"
+                  onClick={handleUpdateFormClick}
+                >
+                  Update Resource
+                </button>
+                {isUpdateFormVisible && (
+                  <UpdateResourceForm
+                    resourceId={id!}
+                    onClose={() => setIsUpdateFormVisible(false)}
+                    refetchResources={() => getResourceById(id)}
+                  />
+                )}
+              </>
             ) : (
               <ReviewForm id={id!} />
             )}
