@@ -269,6 +269,7 @@ export const generateRtkQueryCode = (
   body?: string
 ) => {
   const isGetRequest = method === "GET";
+  const isMutation = !isGetRequest;
   const requestBody = body ? `body: ${body},` : "";
   const dataToReturn = {
     data: [
@@ -292,7 +293,7 @@ export const apiSlice = createApi({
             }),
           })`
         : `builder.mutation({
-            query: () => ({
+            query: (${body}) => ({
               url: '${url}',
               method: '${method}',
               ${requestBody}
@@ -305,7 +306,9 @@ export const apiSlice = createApi({
 });
 
 // Export hooks for usage in functional components
-export const { useFetchDataQuery, useFetchDataMutation } = apiSlice;
+export const { ${
+          isGetRequest ? "useFetchDataQuery" : "useFetchDataMutation"
+        } } = apiSlice;
         `,
       },
       {
@@ -329,7 +332,9 @@ export const store = configureStore({
         fileName: "DataFetching.jsx",
         code: `
 import React from 'react';
-import { useFetchDataQuery } from './apiSlice';
+import { ${
+          isGetRequest ? "useFetchDataQuery" : "useFetchDataMutation"
+        } } from './apiSlice';
 
 interface DataFetchingProps {
   url: string;
@@ -339,6 +344,23 @@ interface DataFetchingProps {
 
 const DataFetchingComponent: React.FC<DataFetchingProps> = ({ url, method, body }) => {
   const { data, error, isLoading } = useFetchDataQuery();
+  const ${
+    isGetRequest
+      ? "{ data, isError, isLoading }"
+      : `[${method.toLowerCase()}Data, { data, isError, isLoading }]`
+  } = ${isGetRequest ? `useFetchDataQuery()` : `useFetchDataMutation()`};
+
+  ${
+    isMutation
+      ? `const handle${method} = async () => {
+    try {
+      await ${method.toLowerCase()}Data(${body});
+    } catch (err) {
+      console.error(err);
+    }
+  };`
+      : ""
+  }
 
   if (isLoading) return <p>Loading...</p>;
   if (error) return <p>Error: {error.message}</p>;
@@ -347,6 +369,7 @@ const DataFetchingComponent: React.FC<DataFetchingProps> = ({ url, method, body 
     <div>
       <h1>Fetched Data</h1>
       <pre>{JSON.stringify(data, null, 2)}</pre>
+      ${isMutation ? `<button onClick={handle${method}}>Submit</button>` : ""}
     </div>
   );
 };
