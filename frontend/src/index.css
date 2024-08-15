@@ -189,6 +189,7 @@
   --home-page-bg-1: rgb(60, 1, 71);
   --home-page-bg-2: rgb(16, 16, 16);
 
+  --home-text: #ebe7ea;
 }
 
 .light-theme {
@@ -263,4 +264,5 @@
 
   --glass: rgba(255, 255, 255, 0.1);
 
+  --home-quinary: #e9e9f1;
 }
