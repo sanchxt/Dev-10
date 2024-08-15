@@ -19,7 +19,7 @@ const DisplaySponsors = () => {
         You can{" "}
         <Link
           to="/contact"
-          className="font-black inline-flex relative group cursor-pointer hover:text-black hover:underline decoration-[1.5px] transition-all duration-500 ease-in-out"
+          className="font-black relative group cursor-pointer hover:text-black hover:underline decoration-[1.5px] transition-all duration-500 ease-in-out"
         >
           contact us
           <span className="absolute left-0 top-0 h-full w-0 group-hover:w-full bg-purple-300/40 transition-all duration-500 ease-in-out"></span>
