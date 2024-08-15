@@ -7,7 +7,6 @@ import {
   GetResourcesRequest,
   ReportResourceRequest,
 } from "../utils/types";
-import { AnyZodTuple } from "zod";
 
 export const resourcesApiSlice = apiSlice.injectEndpoints({
   endpoints: (builder) => ({

@@ -1,12 +1,13 @@
-import React, { useEffect, useState } from "react";
-import { useParams } from "react-router-dom";
-import { useDispatch, useSelector } from "react-redux";
 import { toast } from "react-toastify";
 import { BsEye } from "react-icons/bs";
+import { useEffect, useState } from "react";
+import { useParams } from "react-router-dom";
 import { FaRegBookmark } from "react-icons/fa";
+import { useDispatch, useSelector } from "react-redux";
 import { GoBookmarkFill, GoBookmarkSlashFill, GoReport } from "react-icons/go";
+
 import ReviewForm from "./ReviewForm";
-import ReportModal from "./ReportModal";
+import { RootState } from "../../store";
 import DetailedHeader from "./DetailedHeader";
 import DetailedLinksAndNotes from "./DetailedLinksAndNotes";
 import {
@@ -16,16 +17,18 @@ import {
   useAddFavoriteResourceMutation,
   useRemoveFavoriteResourceMutation,
 } from "../../slices/resourcesApiSlice";
-import { RootState } from "../../store";
-import { addVisitedResource } from "../../slices/recentlyVisitedSlice";
 import { LatestCommentsProps } from "../../utils/types";
+import ReportModal from "./ReportModal";
+import {
+  addVisitedResource,
+  addVisitedRoadmap,
+} from "../../slices/recentlyVisitedSlice";
 import UpdateResourceForm from "./UpdateResourceForm";
 
 const DetailedResource: React.FC = () => {
   const { id } = useParams<{ id: string }>();
 
-  // Using the mutation hook instead of the query
-  const [getResourceById, { data, error, isLoading, refetch: test }] =
+  const [getResourceById, { data, error, isLoading }] =
     useGetResourceByIdMutation();
   const {
     data: comments,
@@ -45,16 +48,14 @@ const DetailedResource: React.FC = () => {
     (state: RootState) => state.auth.userInfo?._id
   );
 
-  const [isUpdateFormOpen, setIsUpdateFormOpen] = useState(false);
-  const [isReportModalOpen, setIsReportModalOpen] = useState(false);
-
-  const handleUpdateClick = () => {
-    setIsUpdateFormOpen(true);
-  };
-
-  const handleReportClick = () => {
-    setIsReportModalOpen(true);
-  };
+  const filledComments = (comments || []).concat(
+    Array.from({ length: Math.max(0, 3 - (comments?.length || 0)) }).map(
+      () => ({
+        comment: "Encourage people to review this collection",
+        placeholder: true,
+      })
+    )
+  );
 
   const handleFavoriteClick = async () => {
     if (isFavoritedData?.isFavorited) {
@@ -65,6 +66,16 @@ const DetailedResource: React.FC = () => {
       toast.success("Added to favorites");
     }
     refetchFavoriteStatus();
+  };
+
+  const [isReportModalOpen, setIsReportModalOpen] = useState(false);
+  const handleReportClick = () => {
+    setIsReportModalOpen(true);
+  };
+
+  const [isUpdateFormVisible, setIsUpdateFormVisible] = useState(false);
+  const handleUpdateFormClick = () => {
+    setIsUpdateFormVisible(!isUpdateFormVisible);
   };
 
   const dispatch = useDispatch();
@@ -80,7 +91,7 @@ const DetailedResource: React.FC = () => {
     }
   }, [id, data?.title]);
 
-  if (isLoading) return <div>Loading data...</div>;
+  if (isLoading) return <div>Loading data..</div>;
   if (error) return <div>{error.toString()}</div>;
 
   return (
@@ -101,7 +112,7 @@ const DetailedResource: React.FC = () => {
           />
 
           <div className="max-w-full grid grid-cols-2 pt-1 md:pt-2 md:gap-2 lg:gap-4 xl:gap-6">
-            {/* Comments Section */}
+            {/* comments */}
             <div>
               <h2 className="text-center text-[0.8rem] md:text-sm lg:text-base xl:text-xl font-medium md:tracking-wide">
                 Latest Comments
@@ -110,13 +121,13 @@ const DetailedResource: React.FC = () => {
               <div className="p-0.5 md:pt-1 xl:pt-2 px-1 md:px-2">
                 <div className="pt-1 md:pt-2 grid grid-cols-2 grid-rows-2 gap-1 gap-y-5">
                   {commentsLoading ? (
-                    <div>Loading comments...</div>
+                    <div>Loading comments..</div>
                   ) : commentsError ? (
                     <div>
-                      Some error occurred while trying to load the comments.
+                      Some error occured while trying to load the comments
                     </div>
                   ) : (
-                    (comments || [])?.map(
+                    filledComments?.map(
                       (comment: LatestCommentsProps, idx: number) => (
                         <div
                           key={idx}
@@ -143,21 +154,26 @@ const DetailedResource: React.FC = () => {
               </div>
             </div>
 
-            {/* Review or Update Resource */}
-            <div>
-              {currentUserId === data?.user ? (
-                <div className="flex justify-end">
-                  <button
-                    onClick={handleUpdateClick}
-                    className="bg-purple-500 text-white px-4 py-2 rounded-lg"
-                  >
-                    Update Resource
-                  </button>
-                </div>
-              ) : (
-                <ReviewForm id={id!} />
-              )}
-            </div>
+            {/* review */}
+            {currentUserId === data?.user ? (
+              <>
+                <button
+                  className="bg-purple-600 text-white py-1 px-2 text-sm rounded-full shadow-md hover:bg-purple-700 focus:outline-none focus:ring-2 focus:ring-purple-500 focus:ring-opacity-50 transition-colors duration-300 w-15 h-10"
+                  onClick={handleUpdateFormClick}
+                >
+                  Update Resource
+                </button>
+                {isUpdateFormVisible && (
+                  <UpdateResourceForm
+                    resourceId={id!}
+                    onClose={() => setIsUpdateFormVisible(false)}
+                    refetchResources={() => getResourceById(id)}
+                  />
+                )}
+              </>
+            ) : (
+              <ReviewForm id={id!} />
+            )}
           </div>
         </section>
 
@@ -196,16 +212,6 @@ const DetailedResource: React.FC = () => {
         </div>
       </div>
 
-      {/* Update Resource Form */}
-      {isUpdateFormOpen && (
-        <UpdateResourceForm
-          resourceId={id!}
-          onClose={() => setIsUpdateFormOpen(false)}
-          refetchResources={test}
-        />
-      )}
-
-      {/* Report Modal */}
       <ReportModal
         isOpen={isReportModalOpen}
         onRequestClose={() => setIsReportModalOpen(false)}

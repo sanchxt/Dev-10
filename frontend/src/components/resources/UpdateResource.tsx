@@ -32,7 +32,7 @@ const UpdateResource: React.FC<{ resourceId: string }> = ({ resourceId }) => {
     <>
       <button
         onClick={handleUpdateClick}
-        className="px-2 py-1 text-xl font-medium bg-purple-500 text-white rounded shadow hover:bg-purple-600 w-1/4 h-1/2"
+        className="px-4 py-2 text-sm font-medium bg-purple-500 text-white rounded shadow hover:bg-purple-600"
       >
         Update Resource
       </button>
