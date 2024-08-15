@@ -39,10 +39,15 @@ const NotesSection = ({
   return (
     <div className="w-full max-w-full">
       <div className="flex justify-end items-center px-2 py-0.5">
-        <p className="flex-grow text-center">Recent Notes</p>
-        <RiMenu3Line className="cursor-pointer" onClick={handleViewAllNotes} />
+        <p className="flex-grow text-center text-xs lg:text-sm font-light italic">
+          Sticky Notes
+        </p>
+        <RiMenu3Line
+          className="cursor-pointer text-xs lg:text-sm"
+          onClick={handleViewAllNotes}
+        />
       </div>
-      <div className="grid grid-cols-2 lg:grid-cols-3 gap-1">
+      <div className="grid grid-cols-2 gap-1">
         {isLoading ? (
           <NotesSkeletonLoader />
         ) : (

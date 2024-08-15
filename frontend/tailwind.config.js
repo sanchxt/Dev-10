@@ -13,6 +13,10 @@ export default {
     },
     extend: {
       colors: {
+        "landing-bg": "#000",
+        "landing-bg-contrast": "#111",
+        "landing-text": "#1d1d1f",
+
         "public-nav-1": "var(--public-nav-bg-1)",
         "public-nav-2": "var(--public-nav-bg-2)",
         "primary-public-heading": "var(--primary-public-heading)",
@@ -67,6 +71,15 @@ export default {
         "no-resources-btn-2-border": "var(--no-resources-btn-2-border)",
         "home-link-underline": "var(--home-link-underline)",
         "home-link-text": "var(--home-link-text)",
+      },
+      keyframes: {
+        "carousel-move": {
+          "0%": { transform: "translateX(0)" },
+          "100%": { transform: "translateX(-100%)" },
+        },
+      },
+      animation: {
+        "carousel-move": "carousel-move var(--duration, 80s) infinite",
       },
     },
   },

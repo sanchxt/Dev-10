@@ -10,7 +10,7 @@ import {
   signupSchema,
   updateProfileSchema,
 } from "./schema";
-import React, { ComponentType, RefObject } from "react";
+import React, { ComponentType, ReactNode, RefObject } from "react";
 import {
   Control,
   FieldError,
@@ -22,6 +22,7 @@ import {
   UseFormSetValue,
   UseFormWatch,
 } from "react-hook-form";
+import { MotionValue } from "framer-motion";
 
 export type ThemeType = "LIGHT" | "DARK";
 
@@ -89,6 +90,16 @@ export interface GetResourcesRequest {
 export type ResourceSortType = "recent" | "oldest";
 export type ResourceByRate = "highest" | "lowest";
 
+export interface GetRoadmapRequest {
+  search?: string;
+  sort?: string;
+  filter?: string;
+  pageNumber?: string;
+}
+
+export type RoadmapSortType = "recent" | "oldest";
+export type RoadmapByRate = "highest" | "lowest";
+
 export interface ResourceProps {
   _id: string;
   title: string;
@@ -105,6 +116,20 @@ export interface ResourceCardProps {
 }
 export interface MultipleResourceCardsProps {
   resources: ResourceProps[];
+}
+
+export interface RoadmapCardProps {
+  _id(_id: any): void;
+  title: ReactNode;
+  isOfficial: any;
+  description: string;
+  tags: any;
+  authorName: ReactNode;
+  resource: RoadmapCardProps;
+  index: number;
+}
+export interface MultipleRoadmapCardsProps {
+  resources: RoadmapCardProps[];
 }
 
 export interface AddResourceRatingRequest {
@@ -272,4 +297,38 @@ export interface ResourceInputProps {
   resourceRef: HTMLInputElement | null;
   error?: string;
   placeholder: string;
+}
+
+export interface ContainerProps {
+  children: ReactNode;
+  className?: string;
+}
+
+export interface LandingButtonProps {
+  children: ReactNode;
+  size?: "small" | "medium" | "large";
+  className?: string;
+}
+
+export interface LandingFadeInProps {
+  children: ReactNode;
+}
+
+export interface LandingCarouselProps {
+  image: string;
+  name: string;
+  id: number;
+}
+
+export interface LandingWordsProps {
+  children: ReactNode;
+  range: [number, number];
+  progress: MotionValue<number>;
+  isLastWord: boolean;
+}
+
+export interface SponsorDetailsProps {
+  eventName: string;
+  eventDate: string;
+  eventLink: string;
 }

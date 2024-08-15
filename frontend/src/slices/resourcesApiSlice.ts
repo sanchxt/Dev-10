@@ -25,7 +25,7 @@ export const resourcesApiSlice = apiSlice.injectEndpoints({
         params: { search, sort, filter, pageNumber },
       }),
     }),
-    getResourceById: builder.query<any, string>({
+    getResourceById: builder.mutation<any, any>({
       query: (id) => ({
         url: `${RESOURCS_URL}/details/${id}`,
         method: "PUT",
@@ -81,7 +81,6 @@ export const resourcesApiSlice = apiSlice.injectEndpoints({
         method: "GET",
       }),
     }),
-
     getTrending: builder.query<any, void>({
       query: () => ({
         url: `${RESOURCS_URL}/top/monthly`,
@@ -101,7 +100,7 @@ export const resourcesApiSlice = apiSlice.injectEndpoints({
 export const {
   useCreateResourceMutation,
   useGetResourcesQuery,
-  useGetResourceByIdQuery,
+  useGetResourceByIdMutation,
   useAddResourceRatingMutation,
   useGetUserReviewQuery,
   useGetLatestCommentsQuery,

@@ -1,4 +1,4 @@
-import CreateRoadmapForm from "../components/contribute/roadmaps/CreateRoadmapForm";
+import CreateRoadmapForm from "../components/contribute/roadmap/CreateRoadmapForm";
 import Sidebar from "../components/shared/Sidebar";
 
 const ContributeRoadmaps = () => {

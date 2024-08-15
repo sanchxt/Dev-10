@@ -171,29 +171,10 @@ const addFavoriteResource = asyncHandler(async (req, res) => {
   res.status(200).json({ message: "Resource added to favorites" });
 });
 
-// @desc Get all favorite resources
-// @route GET /api/users/favorites/resources
-// @access Private
-// const favoriteResources = asyncHandler(async (req, res) => {
-//   const user = await User.findById(req.user._id).populate({
-//     path: "favoriteResources",
-//     select: "_id name description", // Select the necessary fields
-//   });
-//   if (!user) {
-//     res.status(404);
-//     throw new Error("User not found");
-//   }
-
-//   res.status(200).json(user.favoriteResources);
-// });
-
-// @desc Get all favorite resources
-// @route GET /api/users/favorites/resources
-// @access Private
-const favoriteResources = asyncHandler(async (req, res) => {
+const getFavoriteResources = asyncHandler(async (req, res) => {
   const user = await User.findById(req.user._id).populate({
     path: "favoriteResources",
-    select: "_id title description", // Ensure these fields are selected
+    select: "_id title description",
   });
 
   if (!user) {
@@ -205,7 +186,6 @@ const favoriteResources = asyncHandler(async (req, res) => {
     _id: resource._id,
     title: resource.title,
     description: resource.description,
-    // Add other fields if needed
   }));
 
   res.status(200).json(favoriteResources);
@@ -240,25 +220,6 @@ const removeFavoriteResource = asyncHandler(async (req, res) => {
 
   res.status(200).json({ message: "Resource removed from favorites" });
 });
-
-// // @desc Get all favorite resources
-// // @route GET /api/users/favorites/resources
-// // @access Private
-// const favoriteResources = asyncHandler(async (req, res) => {
-//   const user = await User.findById(req.user._id).populate({
-//     path: "favoriteResources",
-//     select: "_id",
-//   });
-//   if (!user) {
-//     res.status(404);
-//     throw new Error("User not found");
-//   }
-
-//   const favoriteResourceIds = user.favoriteResources.map(
-//     (resource) => resource._id
-//   );
-//   res.status(200).json(favoriteResourceIds);
-// });
 
 // @desc Remove all favorited resources
 // @route PUT /api/users/favorites/resources
@@ -336,6 +297,43 @@ const getUserContributions = asyncHandler(async (req, res) => {
   res.status(200).json({ totalContributions: contributions });
 });
 
+const getUserStats = asyncHandler(async (req, res) => {
+  const user = await User.findById(req.user._id).populate(
+    "createdResources createdRoadmaps"
+  );
+
+  if (!user) {
+    res.status(404);
+    throw new Error("User not found");
+  }
+
+  const totalContributions =
+    user.createdResources.length + user.createdRoadmaps.length;
+
+  let totalRatings = 0;
+  let ratingCount = 0;
+
+  user.createdResources.forEach((resource) => {
+    totalRatings += resource.averageRating * resource.ratings.length;
+    ratingCount += resource.ratings.length;
+  });
+
+  user.createdRoadmaps.forEach((roadmap) => {
+    totalRatings += roadmap.averageRating * roadmap.ratings.length;
+    ratingCount += roadmap.ratings.length;
+  });
+
+  const averageRating = ratingCount ? totalRatings / ratingCount : 0;
+
+  user.averageRating = averageRating;
+  await user.save();
+
+  res.status(200).json({
+    averageRating: user.averageRating,
+    totalContributions,
+  });
+});
+
 export {
   authUser,
   registerUser,
@@ -344,9 +342,10 @@ export {
   updateUserProfile,
   addFavoriteResource,
   removeFavoriteResource,
-  favoriteResources,
+  getFavoriteResources,
   removeAllFavoriteResources,
   getCreatedResources,
   checkIfResourceFavorited,
   getUserContributions,
+  getUserStats,
 };

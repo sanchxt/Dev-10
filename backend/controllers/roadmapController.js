@@ -1,11 +1,62 @@
 import asyncHandler from "express-async-handler";
 import Roadmap from "../models/roadmapModel.js";
-import User from "../models/userModel.js";
 import validateRoadmapFields from "../utils/validateRoadmapFields.js";
+import {
+  calculateAverageRating,
+  calculateRatingBreakdown,
+} from "../utils/calculateRatings.js";
+import User from "../models/userModel.js";
 
-// @desc     create new roadmap
-// @route    POST /api/roadmaps
-// @access   Private
+// @desc Get all roadmaps
+// @route GET /api/roadmaps
+// @access Public
+const getRoadmaps = asyncHandler(async (req, res) => {
+  const pageSize = 6;
+  const page = Number(req.query.pageNumber) || 1;
+  const searchQuery = req.query.search || "";
+  const sort = req.query.sort || "recent";
+  const filter = req.query.filter || "highest";
+
+  const searchCriteria = searchQuery
+    ? {
+        $or: [
+          { title: { $regex: searchQuery, $options: "i" } },
+          { tags: { $regex: searchQuery, $options: "i" } },
+        ],
+      }
+    : {};
+
+  let sortCriteria = {};
+
+  if (sort === "recent") {
+    sortCriteria.createdAt = -1;
+  } else if (sort === "oldest") {
+    sortCriteria.createdAt = 1;
+  }
+
+  const count = await Roadmap.countDocuments({
+    ...searchCriteria,
+  });
+
+  let roadmaps = await Roadmap.find({
+    ...searchCriteria,
+  })
+    .sort(sortCriteria)
+    .limit(pageSize)
+    .skip(pageSize * (page - 1));
+
+  if (filter === "highest") {
+    roadmaps = roadmaps.sort((a, b) => b.averageRating - a.averageRating);
+  } else if (filter === "lowest") {
+    roadmaps = roadmaps.sort((a, b) => a.averageRating - b.averageRating);
+  }
+
+  res.status(200).json({ roadmaps, page, pages: Math.ceil(count / pageSize) });
+});
+
+// @desc Create a roadmap
+// @route POST /api/roadmaps
+// @access Private
 const createRoadmap = asyncHandler(async (req, res) => {
   const { title, description, tags, steps } = req.body;
 
@@ -30,56 +81,50 @@ const createRoadmap = asyncHandler(async (req, res) => {
 
   const createdRoadmap = await roadmap.save();
 
-  req.user.createdRoadmaps = req.user.createdRoadmaps || [];
   req.user.createdRoadmaps.push(createdRoadmap._id);
   await req.user.save();
 
   res.status(201).json(createdRoadmap);
 });
 
-// @desc     Get all roadmaps
-// @route    GET /api/roadmaps
-// @access   Private
-const getAllRoadmaps = asyncHandler(async (req, res) => {
-  const roadmaps = await Roadmap.find({});
-  res.json(roadmaps);
-});
-
-// desc     Get single roadmap
-// route    GET /api/roadmaps/:id
-// access   PUBLIC
+// @desc Get roadmap by roadmap ID
+// @route GET /api/roadmaps/:id
+// @access Public
 const getRoadmapById = asyncHandler(async (req, res) => {
   const roadmap = await Roadmap.findById(req.params.id);
 
   if (roadmap) {
-    res.json(roadmap);
+    if (req.user && req.user._id.toString() !== roadmap.user.toString()) {
+      roadmap.totalViews += 1;
+      roadmap.monthlyViews += 1;
+      await roadmap.save();
+    }
+
+    res.status(200).json(roadmap);
   } else {
     res.status(404);
     throw new Error("Roadmap not found");
   }
 });
 
-// desc     Update roadmap
-// route    PUT /api/roadmaps/:id
-// access   PRIVATE
+// @desc Update an existing roadmap
+// @route PUT /api/roadmaps/:id/modify
+// @access Private
 const updateRoadmap = asyncHandler(async (req, res) => {
+  const { title, description, tags, steps } = req.body;
+
   const roadmap = await Roadmap.findById(req.params.id);
 
   if (roadmap) {
-    if (roadmap.id.toString() !== req.user._id.toString()) {
+    if (roadmap.user.toString() !== req.user._id.toString()) {
       res.status(401);
-      throw new Error("User not authorized");
+      throw new Error("Not authorized to update this roadmap");
     }
 
-    roadmap.title = req.body.title || roadmap.title;
-    roadmap.description = req.body.description || roadmap.description;
-    roadmap.steps = req.body.steps || roadmap.steps;
-    roadmap.duration = req.body.duration || roadmap.duration;
-    roadmap.category = req.body.category || roadmap.category;
-    roadmap.difficultyLevel =
-      req.body.difficultyLevel || roadmap.difficultyLevel;
-    roadmap.tags = req.body.tags || roadmap.tags;
-    roadmap.visibility = req.body.visibility || roadmap.visibility;
+    roadmap.title = title || roadmap.title;
+    roadmap.description = description || roadmap.description;
+    roadmap.tags = tags || roadmap.tags;
+    roadmap.steps = steps || roadmap.steps;
 
     const updatedRoadmap = await roadmap.save();
     res.json(updatedRoadmap);
@@ -89,19 +134,22 @@ const updateRoadmap = asyncHandler(async (req, res) => {
   }
 });
 
-// desc     Delete roadmap
-// route    DELETE /api/roadmaps/:id
-// access   PRIVATE
+// @desc Delete a roadmap
+// @route DELETE /api/roadmaps/:id/modify
+// @access Private
 const deleteRoadmap = asyncHandler(async (req, res) => {
   const roadmap = await Roadmap.findById(req.params.id);
 
   if (roadmap) {
-    if (roadmap.id.toString() !== req.user._id.toString()) {
+    if (roadmap.user.toString() !== req.user._id.toString()) {
       res.status(401);
-      throw new Error("User not authorized");
+      throw new Error("Not authorized to delete this roadmap");
     }
-
-    await roadmap.deleteOne({ _id: req.params.id });
+    await Roadmap.deleteOne({ _id: req.params.id });
+    await User.updateOne(
+      { _id: req.user._id },
+      { $pull: { createdRoadmaps: req.params.id } }
+    );
     res.json({ message: "Roadmap removed" });
   } else {
     res.status(404);
@@ -109,53 +157,150 @@ const deleteRoadmap = asyncHandler(async (req, res) => {
   }
 });
 
-//desc   rating roadmap
-//route   POST/api/roadmaps/:id/rate
-//access private
+// @desc Add a rating / comment to a roadmap
+// @route POST /api/roadmaps/:id/rating
+// @access Private
+const addRoadmapRating = asyncHandler(async (req, res) => {
+  const { rating, comment } = req.body;
 
-const rateRoadmap = asyncHandler(async (req, res) => {
-  const { rating } = req.body;
+  if (!rating || !comment) {
+    throw new Error("Both rating and comment need to be provided");
+  }
+
+  if (rating > 5 || rating < 0) {
+    throw new Error("Rating needs to be between 0 and 5");
+  }
+
   const roadmap = await Roadmap.findById(req.params.id);
-  const user = await User.findById(req.user._id);
 
   if (roadmap) {
-    const alreadyRated = user.ratedRoadmaps.find(
-      (r) => r.roadmap.toString() === roadmap._id.toString()
-    );
-
-    if (alreadyRated) {
-      res.status(400);
-      throw new Error("You have already rated this roadmap");
+    if (roadmap.user.toString() === req.user._id.toString()) {
+      res.status(403);
+      throw new Error("You cannot rate or comment on your own roadmap");
     }
 
-    const newRating = {
-      user: req.user._id,
-      rating,
-    };
+    const alreadyRated = roadmap.ratings.find(
+      (r) => r.user.toString() === req.user._id.toString()
+    );
+    if (alreadyRated) {
+      res.status(400);
+      throw new Error("You've already rated this roadmap");
+    }
 
-    roadmap.ratings.push(newRating);
-    roadmap.numRatings = roadmap.ratings.length;
-    roadmap.averageRating =
-      roadmap.ratings.reduce((acc, item) => item.rating + acc, 0) /
-      roadmap.ratings.length;
+    const ratingObject = {
+      user: req.user._id,
+      rating: Number(rating),
+      comment,
+    };
+    roadmap.ratings.push(ratingObject);
+
+    roadmap.averageRating = calculateAverageRating(roadmap.ratings);
+    roadmap.ratingBreakdown = calculateRatingBreakdown(roadmap.ratings);
 
     await roadmap.save();
-
-    user.ratedRoadmaps.push({ roadmap: roadmap._id, rating }); // Ensure rating is added
-    await user.save();
-
-    res.status(201).json({ message: "Roadmap rated" });
+    res.status(201).json({ message: "Rating added" });
   } else {
     res.status(404);
     throw new Error("Roadmap not found");
   }
 });
 
+// @desc Get roadmaps by tag
+// @route GET /api/roadmaps/tag/:tag
+// @access Public
+const getRoadmapsByTag = asyncHandler(async (req, res) => {
+  const pageSize = 6;
+  const page = Number(req.query.pageNumber) || 1;
+  const tagId = req.params.tag;
+
+  const count = await Roadmap.countDocuments({ tags: { $in: [tagId] } });
+  const roadmaps = await Roadmap.find({ tags: { $in: [tagId] } })
+    .limit(pageSize)
+    .skip(pageSize * (page - 1));
+
+  res.status(200).json({ roadmaps, page, pages: Math.ceil(count / pageSize) });
+});
+
+// @desc Get user review of a roadmap
+// @route GET /api/roadmaps/:id/get-review
+// @access Private
+const getUserReview = asyncHandler(async (req, res) => {
+  const roadmap = await Roadmap.findById(req.params.id);
+
+  if (!roadmap) {
+    res.status(404);
+    throw new Error("Roadmap not found");
+  }
+
+  const userReview = roadmap.ratings.find(
+    (r) => r.user.toString() === req.user._id.toString()
+  );
+
+  if (userReview) {
+    res.status(200).json(userReview);
+  } else {
+    res.status(404);
+    throw new Error("Review not found");
+  }
+});
+
+// @desc Get latest comments of a roadmap
+// @route GET /api/roadmaps/:id/latest-comments
+// @access Private
+const getLatestComments = asyncHandler(async (req, res) => {
+  const roadmap = await Roadmap.findById(req.params.id);
+
+  if (!roadmap) {
+    res.status(404);
+    throw new Error("Roadmap not found");
+  }
+
+  const latestComments = roadmap.ratings
+    .filter((rating) => rating.comment)
+    .sort((a, b) => b.createdAt - a.createdAt)
+    .slice(0, 3);
+
+  res.status(200).json(latestComments);
+});
+
+// @desc Get total views of a roadmap
+// @route GET /api/roadmaps/:id/total-views
+// @access Private
+const getTotalViewsById = asyncHandler(async (req, res) => {
+  const roadmap = await Roadmap.findById(req.params.id);
+
+  if (roadmap) {
+    if (roadmap.user.toString() !== req.user._id.toString()) {
+      res.status(401);
+      throw new Error("Not authorized to see the total views of this roadmap");
+    }
+
+    res.status(200).json({ totalViews: roadmap.totalViews });
+  } else {
+    res.status(404);
+    throw new Error("Roadmap not found");
+  }
+});
+
+// @desc Get top 6 viewed roadmaps of the month
+// @route GET /api/roadmaps/top/monthly
+// @access Private
+const getTopMonthlyViewedRoadmaps = asyncHandler(async (req, res) => {
+  const roadmaps = await Roadmap.find().sort({ monthlyViews: -1 }).limit(6);
+
+  res.status(200).json(roadmaps);
+});
+
 export {
   createRoadmap,
-  getAllRoadmaps,
   getRoadmapById,
   updateRoadmap,
   deleteRoadmap,
-  rateRoadmap,
+  addRoadmapRating,
+  getRoadmapsByTag,
+  getUserReview,
+  getLatestComments,
+  getTotalViewsById,
+  getTopMonthlyViewedRoadmaps,
+  getRoadmaps,
 };

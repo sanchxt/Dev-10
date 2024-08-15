@@ -10,7 +10,7 @@ import ReportModal from "./ReportModal";
 import DetailedHeader from "./DetailedHeader";
 import DetailedLinksAndNotes from "./DetailedLinksAndNotes";
 import {
-  useGetResourceByIdQuery,
+  useGetResourceByIdMutation,
   useGetLatestCommentsQuery,
   useCheckIfResourceFavoritedQuery,
   useAddFavoriteResourceMutation,
@@ -23,7 +23,10 @@ import UpdateResourceForm from "./UpdateResourceForm";
 
 const DetailedResource: React.FC = () => {
   const { id } = useParams<{ id: string }>();
-  const { data, error, isLoading, refetch: test } = useGetResourceByIdQuery(id);
+
+  // Using the mutation hook instead of the query
+  const [getResourceById, { data, error, isLoading, refetch: test }] =
+    useGetResourceByIdMutation();
   const {
     data: comments,
     error: commentsError,
@@ -66,6 +69,12 @@ const DetailedResource: React.FC = () => {
 
   const dispatch = useDispatch();
   useEffect(() => {
+    if (id) {
+      getResourceById(id);
+    }
+  }, [id, getResourceById]);
+
+  useEffect(() => {
     if (id && data?.title) {
       dispatch(addVisitedResource({ id, title: data.title }));
     }
@@ -107,7 +116,7 @@ const DetailedResource: React.FC = () => {
                       Some error occurred while trying to load the comments.
                     </div>
                   ) : (
-                    (comments || []).map(
+                    (comments || [])?.map(
                       (comment: LatestCommentsProps, idx: number) => (
                         <div
                           key={idx}

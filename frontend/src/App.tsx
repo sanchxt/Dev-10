@@ -22,20 +22,38 @@ import ProjectStructure from "./components/home/ProjectStructure";
 import Trending from "./pages/Trending";
 import ContributeRoadmaps from "./pages/ContributeRoadmaps";
 import LandingPage from "./pages/LandingPage";
+import TransitionComponent from "./components/TransitionComponent";
+import TransitionRoutes from "./components/TransitionRoutes";
+import Roadmap from "./pages/Roadmap";
 
 const router = createBrowserRouter([
   {
     path: "/",
     element: <LandingPage />,
   },
+
   {
-    path: "/login",
-    element: <Login />,
+    element: <TransitionRoutes />,
+    children: [
+      {
+        path: "/login",
+        element: (
+          <TransitionComponent>
+            <Login />
+          </TransitionComponent>
+        ),
+      },
+      {
+        path: "/signup",
+        element: (
+          <TransitionComponent>
+            <SignUp />
+          </TransitionComponent>
+        ),
+      },
+    ],
   },
-  {
-    path: "/signup",
-    element: <SignUp />,
-  },
+
   {
     element: <PrivateRoute />,
     children: [
@@ -59,6 +77,11 @@ const router = createBrowserRouter([
         path: "/contribute/roadmaps",
         element: <ContributeRoadmaps />,
       },
+      {
+        path: "/roadmaps",
+        element: <Roadmap />,
+      },
+
       {
         path: "/resources",
         element: <Resources />,
