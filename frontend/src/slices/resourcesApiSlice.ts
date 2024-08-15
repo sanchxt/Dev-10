@@ -86,6 +86,13 @@ export const resourcesApiSlice = apiSlice.injectEndpoints({
         method: "GET",
       }),
     }),
+    updateResource: builder.mutation({
+      query: ({ id, data }) => ({
+        url: `${RESOURCS_URL}/${id}/modify`,
+        method: "PUT",
+        body: data,
+      }),
+    }),
   }),
 });
 
@@ -102,4 +109,5 @@ export const {
   useReportResourceMutation,
   useGetFavoriteResourcesQuery,
   useGetTrendingQuery,
+  useUpdateResourceMutation,
 } = resourcesApiSlice as any;

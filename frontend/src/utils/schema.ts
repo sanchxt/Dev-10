@@ -180,3 +180,37 @@ export const apiCodeGeneratorSchema = z
       message: "Request body is required for POST, PUT, PATCH methods.",
     }
   );
+
+export const updateResourceSchema = z.object({
+  title: z
+    .string()
+    .min(3, { message: "Title must contain at least 3 characters" })
+    .max(40, { message: "Title cannot exceed 40 characters" })
+    .optional(),
+  description: z
+    .string()
+    .min(4, { message: "Description must contain at least 4 characters" })
+    .max(150, { message: "Description cannot exceed 150 characters" })
+    .optional(),
+  tags: z
+    .array(
+      z
+        .string()
+        .max(8, { message: "Each tag can't exceed more than 8 characters" })
+    )
+    .min(1, { message: "At least one tag is required" })
+    .max(5, { message: "Can't have more than 5 tags" })
+    .optional(),
+  essentials: z
+    .array(z.string().url({ message: "Essential must be a valid URL" }))
+    .min(1, { message: "At least one essential link is required" })
+    .optional(),
+  extras: z
+    .array(z.string().url({ message: "Extra must be a valid URL" }))
+    .optional(),
+  notes: z
+    .string()
+    .max(500, { message: "Notes can't exceed 500 characters" })
+    .optional(),
+});
+

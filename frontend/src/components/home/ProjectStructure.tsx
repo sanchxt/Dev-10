@@ -9,7 +9,6 @@ const ProjectStructure: React.FC = () => {
   };
 
   const projects = [
-    // Web Dev Projects
     {
       id: 1,
       type: "Web Dev",
@@ -83,8 +82,6 @@ const ProjectStructure: React.FC = () => {
       description: "An online platform for courses and learning resources.",
       url: "https://example.com/online-learning-platform",
     },
-
-    // Game Dev Projects
     {
       id: 11,
       type: "Game Dev",
@@ -157,8 +154,6 @@ const ProjectStructure: React.FC = () => {
       description: "A space shooter game with fast-paced action.",
       url: "https://example.com/space-shooter",
     },
-
-    // Android Dev Projects
     {
       id: 21,
       type: "Android Dev",

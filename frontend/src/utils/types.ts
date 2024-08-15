@@ -335,6 +335,7 @@ export interface SponsorDetailsProps {
   eventLink: string;
 }
 
+
 export type ApiCode = {
   data: {
     fileName: string;
@@ -347,3 +348,4 @@ export interface CodeModalProps {
   onRequestClose: () => void;
   code: ApiCode | null;
 }
+
