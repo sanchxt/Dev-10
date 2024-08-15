@@ -19,10 +19,7 @@ import {
 } from "../../slices/resourcesApiSlice";
 import { LatestCommentsProps } from "../../utils/types";
 import ReportModal from "./ReportModal";
-import {
-  addVisitedResource,
-  addVisitedRoadmap,
-} from "../../slices/recentlyVisitedSlice";
+import { addVisitedItem } from "../../slices/recentlyVisitedSlice";
 import UpdateResourceForm from "./UpdateResourceForm";
 
 const DetailedResource: React.FC = () => {
@@ -87,7 +84,7 @@ const DetailedResource: React.FC = () => {
 
   useEffect(() => {
     if (id && data?.title) {
-      dispatch(addVisitedResource({ id, title: data.title }));
+      dispatch(addVisitedItem({ id, title: data.title, type: "resource" }));
     }
   }, [id, data?.title]);
 
