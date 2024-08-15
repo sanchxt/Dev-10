@@ -11,6 +11,7 @@ import ShowAllNotes from "./ShowAllNotes";
 import DisplayTotalContributions from "./DisplayTotalContributions";
 import DisplaySponsors from "./DisplaySponsors";
 import ApiCodeGenerator from "./ApiCodeGenerator";
+import RecentVisits from "./RecentVisits";
 
 const HomePage = () => {
   const userInfo = useSelector((state: RootState) => state.auth.userInfo);
@@ -73,6 +74,9 @@ const HomePage = () => {
 
         <div className="bg-blue-400">blogs</div>
         <div className="bg-blue-300">recents</div>
+        <div className="px-0.5 py-2 md:px-2 md:py-3">
+          <RecentVisits />
+        </div>
       </div>
 
       <AddNoteModal
