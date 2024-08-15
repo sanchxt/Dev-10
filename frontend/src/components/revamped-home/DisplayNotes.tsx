@@ -38,10 +38,10 @@ const DisplayNotes = ({ notes, handleCreateNote }: DisplayNotesProps) => {
       )}
 
       <div
-        className="col-span-2 bg-gray-800/80 h-32 rounded-lg flex justify-center items-center cursor-pointer"
+        className="col-span-2 bg-home-note-add h-32 rounded-lg flex justify-center items-center cursor-pointer theme-transition"
         onClick={handleCreateNote}
       >
-        <FaPlus className="text-gray-500 text-3xl bg-slate-300 border-black/30 border-2 rounded-full p-1" />
+        <FaPlus className="text-home-text-secondary text-3xl bg-home-secondary border-black/30 border-2 rounded-full p-1 theme-transition" />
       </div>
     </>
   );

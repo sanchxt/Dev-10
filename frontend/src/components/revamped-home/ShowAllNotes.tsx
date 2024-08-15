@@ -17,10 +17,10 @@ const ShowAllNotes = ({
       onClick={onRequestClose}
     >
       <div
-        className="bg-white p-1 md:px-2 rounded-lg shadow-xl max-w-md w-full"
+        className="bg-home-secondary p-1 md:px-2 rounded-lg shadow-xl max-w-md w-full"
         onClick={(e) => e.stopPropagation()}
       >
-        <h2 className="text-center pb-4 font-medium tracking-wide sm:text-lg md:text-xl">
+        <h2 className="text-center text-home-text pb-4 font-medium tracking-wide sm:text-lg md:text-xl">
           Your Notes
         </h2>
 

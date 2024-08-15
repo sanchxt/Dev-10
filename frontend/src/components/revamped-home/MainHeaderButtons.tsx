@@ -17,12 +17,12 @@ const MainHeaderButtons = () => {
         >
           <Link
             to={button.url}
-            className="bg-white text-black font-semibold rounded-full p-1.5 lg:px-2 lg:py-1.5 relative group overflow-hidden"
+            className="bg-home-quaternary text-home-text font-semibold rounded-full p-1.5 lg:px-2 lg:py-1.5 relative group overflow-hidden"
           >
             <span className="relative z-[1]">
               &lt; {button.text} &#x2215;&gt;
             </span>
-            <span className="absolute z-10 left-0 top-0 h-full w-0 rounded-full flex items-center justify-center group-hover:w-full transition-all duration-700 ease-in-out bg-gradient-to-tr from-gray-500/90 to-gray-800/90 text-white shadow-2xl overflow-clip">
+            <span className="absolute z-10 left-0 top-0 h-full w-0 rounded-full flex items-center justify-center group-hover:w-full transition-all duration-700 ease-in-out bg-gradient-to-tr from-home-primary to-home-tertiary text-home-text shadow-2xl overflow-clip">
               <LuArrowUpRight />
             </span>
           </Link>

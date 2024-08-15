@@ -20,30 +20,30 @@ const DisplayTotalContributions = () => {
   return (
     <div className="grid grid-rows-[1fr_1fr_1fr] py-2 gap-y-4 h-full">
       <div className="grid grid-cols-2">
-        <h3 className="text-center italic text-sm md:text-base lg:text-lg font-light">
+        <h3 className="text-center text-home-text theme-transition italic text-sm md:text-base lg:text-lg font-light">
           Ratings
         </h3>
 
-        <h3 className="text-center italic text-sm md:text-base lg:text-lg font-light">
+        <h3 className="text-center text-home-text theme-transition italic text-sm md:text-base lg:text-lg font-light">
           Contributions
         </h3>
       </div>
 
-      <div className="bg-slate-200 grid grid-cols-2">
-        <h2 className="flex justify-center items-start font-black text-3xl sm:text-4xl lg:text-5xl">
+      <div className="grid grid-cols-2">
+        <h2 className="flex justify-center items-start font-black text-3xl sm:text-4xl lg:text-5xl text-home-text theme-transition">
           {data?.averageRating.toFixed(1) || "N/A"}
         </h2>
-        <h2 className="flex justify-center items-start font-black text-3xl sm:text-4xl lg:text-5xl">
+        <h2 className="flex justify-center items-start font-black text-3xl sm:text-4xl lg:text-5xl text-home-text theme-transition">
           {data?.totalContributions || "N/A"}
         </h2>
       </div>
 
       <div>
-        <p className="col-span-2 text-center italic font-extralight text-[0.67rem] sm:text-xs lg:text-sm p-1 text-gray-700">
+        <p className="col-span-2 text-center italic font-extralight text-[0.67rem] sm:text-xs lg:text-sm p-1 text-home-text-secondary">
           Give back to the community by contributing your own{" "}
           <Link
             to="/resources"
-            className="text-blue-600 inline-flex font-semibold relative group cursor-pointer hover:text-black hover:font-black transition-all duration-500 ease-in-out"
+            className="text-home-text-link inline-flex font-semibold relative group cursor-pointer hover:text-home-text hover:font-black transition-all duration-500 ease-in-out"
           >
             resources
             <span className="absolute left-0 top-0 h-full w-0 group-hover:w-full bg-purple-300/40 transition-all duration-500 ease-in-out"></span>
@@ -51,7 +51,7 @@ const DisplayTotalContributions = () => {
           or{" "}
           <Link
             to="/roadmaps"
-            className="text-blue-600 inline-flex font-semibold relative group cursor-pointer hover:text-black hover:font-black transition-all duration-500 ease-in-out"
+            className="text-home-text-link inline-flex font-semibold relative group cursor-pointer hover:text-home-text hover:font-black transition-all duration-500 ease-in-out"
           >
             roadmaps
             <span className="absolute left-0 top-0 h-full w-0 group-hover:w-full bg-purple-300/40 transition-all duration-500 ease-in-out"></span>

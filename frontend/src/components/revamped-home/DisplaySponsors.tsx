@@ -15,11 +15,11 @@ const DisplaySponsors = () => {
         eventLink="https://code-cubicle.devfolio.co/"
       />
 
-      <p className="text-center italic font-extralight text-[0.67rem] sm:text-xs lg:text-sm p-1 text-gray-700">
+      <p className="text-center italic font-extralight text-[0.67rem] sm:text-xs lg:text-sm p-1 text-home-text-secondary theme-transition">
         You can{" "}
         <Link
           to="/contact"
-          className="font-black relative group cursor-pointer hover:text-black hover:underline decoration-[1.5px] transition-all duration-500 ease-in-out"
+          className="font-black relative group cursor-pointer text-home-text-link hover:text-home-text hover:underline decoration-[1.5px] transition-all duration-500 ease-in-out"
         >
           contact us
           <span className="absolute left-0 top-0 h-full w-0 group-hover:w-full bg-purple-300/40 transition-all duration-500 ease-in-out"></span>

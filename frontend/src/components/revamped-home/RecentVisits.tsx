@@ -8,13 +8,13 @@ const RecentVisits = () => {
   const { recents } = useSelector((state: RootState) => state.recentlyVisited);
 
   return (
-    <div className="bg-slate-200 rounded-xl shadow-xl">
-      <h1 className="italic text-center pt-2 pb-1 font-medium lg:tracking-wide text-base lg:text-xl">
+    <div className="bg-gradient-to-br from-home-secondary via-home-bg to-home-accent rounded-xl shadow-md shadow-black/10 theme-transition">
+      <h1 className="italic text-center pt-2 pb-1 font-medium lg:tracking-wide text-base lg:text-xl text-home-text">
         Recently Viewed Resources
       </h1>
 
       {recents.length !== 0 && (
-        <p className="text-[0.65rem] md:text-xs italic text-gray-600 font-light text-center tracking-wide">
+        <p className="text-[0.65rem] md:text-xs italic text-home-text-secondary font-light text-center tracking-wide">
           Continue where you left off !
         </p>
       )}
@@ -30,7 +30,7 @@ const RecentVisits = () => {
             >
               <Link
                 to={`/${recent.type}/${recent.id}`}
-                className="p-2 w-full capitalize whitespace-pre overflow-hidden text-ellipsis relative flex items-center group"
+                className="p-2 w-full capitalize whitespace-pre overflow-hidden text-ellipsis relative flex items-center group text-home-text"
               >
                 {recent.title}
 

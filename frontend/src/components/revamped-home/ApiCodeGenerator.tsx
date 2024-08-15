@@ -40,16 +40,19 @@ const ApiCodeGenerator = () => {
   const method = watch("method");
 
   return (
-    <div>
-      <h3 className="text-center text-xs lg:text-sm font-light italic">
+    <div className="h-full flex flex-col">
+      <h3 className="text-center text-xs lg:text-sm font-light italic text-home-text theme-transition">
         API Code Generator
       </h3>
-      <form onSubmit={handleSubmit(onSubmit)}>
+      <form
+        onSubmit={handleSubmit(onSubmit)}
+        className="flex-grow px-0.5 md:px-1 flex flex-col justify-around"
+      >
         <div className="md:grid md:grid-cols-2 md:gap-1">
           <div className="flex flex-col group relative pb-5">
             <label
               htmlFor="route"
-              className="text-[0.6rem] lg:text-xs pb-1 pl-0.5 font-medium text-gray-500 transition-all duration-500 ease-in-out group-focus-within:text-purple-500"
+              className="text-[0.6rem] lg:text-xs pb-1 pl-0.5 font-medium text-home-text-secondary transition-all duration-500 ease-in-out group-focus-within:text-purple-500"
             >
               Route / Endpoint
             </label>
@@ -57,7 +60,8 @@ const ApiCodeGenerator = () => {
               id="route"
               {...register("route")}
               type="text"
-              className="peer focus:placeholder-purple-500/80 placeholder:text-xs rounded-lg bg-gray-100 py-2 px-2 text-sm font-light outline-none drop-shadow-sm transition-all duration-500 ease-in-out focus:ring-2 focus:ring-purple-400/40"
+              placeholder="API endpoint's URL"
+              className="peer focus:placeholder-purple-500/80 placeholder:text-xs rounded-lg text-home-text bg-home-secondary py-2 px-2 text-sm font-light outline-none drop-shadow-sm transition-all duration-500 ease-in-out focus:ring-2 focus:ring-purple-400/40"
             />
             {errors.route && (
               <span className="text-[0.6rem] md:text-[0.65rem] text-red-500 absolute pl-0.5 pt-1 font-semibold bottom-0">
@@ -69,14 +73,14 @@ const ApiCodeGenerator = () => {
           <div className="flex flex-col group relative pb-5">
             <label
               htmlFor="method"
-              className="text-[0.6rem] lg:text-xs pb-1 pl-0.5 font-medium text-gray-500 transition-all duration-500 ease-in-out group-focus-within:text-purple-500"
+              className="text-[0.6rem] lg:text-xs pb-1 pl-0.5 font-medium text-home-text-secondary transition-all duration-500 ease-in-out group-focus-within:text-purple-500"
             >
               HTTP Method
             </label>
             <select
               id="method"
               {...register("method")}
-              className="peer text-sm focus:placeholder-purple-500/80 placeholder:text-xs rounded-lg bg-gray-100 py-2 px-2 font-light outline-none drop-shadow-sm transition-all duration-500 ease-in-out focus:ring-2 focus:ring-purple-400/40"
+              className="peer text-sm focus:placeholder-purple-500/80 placeholder:text-xs rounded-lg bg-home-secondary text-home-text py-2 px-2 font-light outline-none drop-shadow-sm transition-all duration-500 ease-in-out focus:ring-2 focus:ring-purple-400/40"
             >
               <option value="GET">GET</option>
               <option value="POST">POST</option>
@@ -97,15 +101,15 @@ const ApiCodeGenerator = () => {
             <div className="flex flex-col group relative pb-5">
               <label
                 htmlFor="body"
-                className="text-[0.6rem] lg:text-xs pb-1 pl-0.5 font-medium text-gray-500 transition-all duration-500 ease-in-out group-focus-within:text-purple-500"
+                className="text-[0.6rem] text-home-text-secondary lg:text-xs pb-1 pl-0.5 font-medium text-gray-500 transition-all duration-500 ease-in-out group-focus-within:text-purple-500"
               >
                 Request Body
               </label>
               <input
                 id="body"
                 {...register("body")}
-                className="peer focus:placeholder-purple-500/80 placeholder:text-xs rounded-lg bg-gray-100 py-2 px-2 text-sm font-light outline-none drop-shadow-sm transition-all duration-500 ease-in-out focus:ring-2 focus:ring-purple-400/40"
-                placeholder='{"key": "value"}'
+                className="peer focus:placeholder-purple-500/80 placeholder:text-xs rounded-lg bg-home-secondary text-home-text py-2 px-2 text-sm font-light outline-none drop-shadow-sm transition-all duration-500 ease-in-out focus:ring-2 focus:ring-purple-400/40"
+                placeholder="Variable Name"
               />
               {errors.body && (
                 <span className="text-[0.6rem] md:text-[0.65rem] text-red-500 absolute pl-0.5 pt-1 font-semibold bottom-0">
@@ -124,14 +128,14 @@ const ApiCodeGenerator = () => {
           >
             <label
               htmlFor="approach"
-              className="text-[0.6rem] lg:text-xs pb-1 pl-0.5 font-medium text-gray-500 transition-all duration-500 ease-in-out group-focus-within:text-purple-500"
+              className="text-[0.6rem] text-home-text-secondary lg:text-xs pb-1 pl-0.5 font-medium text-gray-500 transition-all duration-500 ease-in-out group-focus-within:text-purple-500"
             >
               Approach
             </label>
             <select
               id="approach"
               {...register("approach")}
-              className="peer focus:placeholder-purple-500/80 placeholder:text-xs rounded-lg bg-gray-100 py-2 px-2 text-sm font-light outline-none drop-shadow-sm transition-all duration-500 ease-in-out focus:ring-2 focus:ring-purple-400/40"
+              className="peer focus:placeholder-purple-500/80 placeholder:text-xs rounded-lg bg-home-secondary text-home-text py-2 px-2 text-sm font-light outline-none drop-shadow-sm transition-all duration-500 ease-in-out focus:ring-2 focus:ring-purple-400/40"
             >
               <option value="RTK Query">RTK Query</option>
               <option value="fetch">fetch</option>
@@ -147,7 +151,7 @@ const ApiCodeGenerator = () => {
 
         <button
           type="submit"
-          className="w-full bg-blue-500 text-white py-2 rounded-xl shadow-sm"
+          className="w-full bg-home-quaternary text-home-text theme-transition font-bold text-xs md:text-sm py-2 rounded-lg shadow-sm px-0.5 md:px-1"
         >
           Generate Code
         </button>
