@@ -7,8 +7,6 @@ import { RiArrowRightDoubleLine } from "react-icons/ri";
 const RecentVisits = () => {
   const { recents } = useSelector((state: RootState) => state.recentlyVisited);
 
-  console.log(recents);
-
   return (
     <div className="bg-slate-200 rounded-xl shadow-xl">
       <h1 className="italic text-center pt-2 pb-1 font-medium lg:tracking-wide text-base lg:text-xl">
