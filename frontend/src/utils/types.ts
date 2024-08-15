@@ -229,14 +229,14 @@ export interface NotesSectionProps {
   data: Note[];
 }
 
-export interface RecentResourcesState {
+export interface RecentsState {
   id: string;
   title: string;
+  type: "roadmap" | "resource";
 }
 
 export interface RecentlyVisitedState {
-  resources: RecentResourcesState[];
-  roadmaps: RecentResourcesState[];
+  recents: RecentsState[];
 }
 
 export interface CreateRoadmapProps {
@@ -335,7 +335,6 @@ export interface SponsorDetailsProps {
   eventLink: string;
 }
 
-
 export type ApiCode = {
   data: {
     fileName: string;
@@ -348,4 +347,3 @@ export interface CodeModalProps {
   onRequestClose: () => void;
   code: ApiCode | null;
 }
-
