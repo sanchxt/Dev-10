@@ -269,7 +269,7 @@ export const generateRtkQueryCode = (
   body?: string
 ) => {
   const isGetRequest = method === "GET";
-  const isMutation = !isGetRequest;
+  const isMutation = ["POST", "PUT", "PATCH", "DELETE"].includes(method);
   const requestBody = body ? `body: ${body},` : "";
   const dataToReturn = {
     data: [
@@ -293,7 +293,7 @@ export const apiSlice = createApi({
             }),
           })`
         : `builder.mutation({
-            query: (${body}) => ({
+            query: (${isMutation && method !== "DELETE" ? body : ""}) => ({
               url: '${url}',
               method: '${method}',
               ${requestBody}
@@ -343,7 +343,6 @@ interface DataFetchingProps {
 }
 
 const DataFetchingComponent: React.FC<DataFetchingProps> = ({ url, method, body }) => {
-  const { data, error, isLoading } = useFetchDataQuery();
   const ${
     isGetRequest
       ? "{ data, isError, isLoading }"
@@ -354,7 +353,7 @@ const DataFetchingComponent: React.FC<DataFetchingProps> = ({ url, method, body 
     isMutation
       ? `const handle${method} = async () => {
     try {
-      await ${method.toLowerCase()}Data(${body});
+      await ${method.toLowerCase()}Data(${method !== "DELETE" ? body : ""});
     } catch (err) {
       console.error(err);
     }
@@ -363,7 +362,7 @@ const DataFetchingComponent: React.FC<DataFetchingProps> = ({ url, method, body 
   }
 
   if (isLoading) return <p>Loading...</p>;
-  if (error) return <p>Error: {error.message}</p>;
+  if (isError) return <p>Error: {error.message}</p>;
 
   return (
     <div>
