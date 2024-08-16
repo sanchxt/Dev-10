@@ -53,7 +53,7 @@ const ResourceBox: React.FC<ResourceCardProps> = ({ resource, index }) => {
         <MultiLineEllipsis text={resource?.description} lines={2} />
       </div>
 
-      {/* tags */}
+      {/* languages */}
       <div className="mt-2 flex justify-start items-center text-[0.6rem] xl:text-xs gap-2 md:gap-4 xl:gap-6 flex-wrap">
         <div className="w-full md:w-fit font-medium tracking-wide">
           <h6 className="text-home-text theme-transition">Languages:</h6>
