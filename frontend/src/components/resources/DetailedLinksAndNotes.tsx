@@ -31,24 +31,6 @@ const DetailedLinksAndNotes = ({
               className="bg-purple-200 group p-1 md:p-2 overflow-hidden text-ellipsis whitespace-pre rounded-xl hover:shadow-md transition-all duration-300 ease-in-out cursor-pointer"
               onClick={() => toggleDescription(idx)}
             >
-              {/* <div className="grid grid-cols-[1fr_auto]">
-                <p className="inline relative after:bg-slate-600 after:absolute after:h-[0.1rem] after:w-0 after:bottom-0 after:left-0 group-hover:after:w-full after:transition-all after:duration-500">
-                  {link.url}
-                </p>
-                <button
-                  onClick={(e) => {
-                    e.stopPropagation();
-                    window.open(
-                      addHttpPrefix(link.url),
-                      "_blank",
-                      "noopener,noreferrer"
-                    );
-                  }}
-                  className="ml-2 text-xs text-white bg-purple-600 hover:bg-purple-800 font-bold py-1 px-2 rounded transition duration-300 ease-in-out shadow-md hover:shadow-lg"
-                >
-                  Open Link
-                </button>
-              </div> */}
               <div className="grid grid-cols-[1fr_auto] content-center">
                 <p className="overflow-hidden whitespace-pre text-ellipsis text-[0.6rem] md:text-xs font-semibold">
                   {link.url}
