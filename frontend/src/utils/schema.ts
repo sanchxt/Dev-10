@@ -51,14 +51,16 @@ export const aboutResourceCollectionSchema = z.object({
     .string()
     .min(3, { message: "Title must contain at least 3 letters" })
     .max(40, { message: "Title can't contain more than 40 letters" }),
-  tags: z
+  languages: z
     .array(
       z
         .string()
-        .max(10, { message: "Each tag can't be more than 10 letters long" })
+        .max(15, {
+          message: "Each language tag can't be more than 15 letters long",
+        })
     )
-    .min(1, { message: "At least one tag is required" })
-    .max(3, { message: "Can't have more than 3 tags" }),
+    .min(1, { message: "At least one language is required" })
+    .max(3, { message: "Can't have more than 3 language" }),
   description: z
     .string()
     .min(4, { message: "Description must be at least 4 letters long" })
@@ -70,18 +72,22 @@ export const aboutResourceCollectionSchema = z.object({
 });
 
 export const linksResourceFormSchema = z.object({
-  essentials: z
+  links: z
     .array(
-      z
-        .string()
-        .max(200, { message: "Each link can't have more than 200 characters" })
+      z.object({
+        url: z.string().url({ message: "Must be a valid URL" }).max(200, {
+          message: "Each URL can't have more than 200 characters",
+        }),
+        description: z
+          .string()
+          .min(10, {
+            message: "Description should contain at least 10 characters",
+          })
+          .max(150, { message: "Description can't exceed 150 characters" }),
+      })
     )
     .min(1, { message: "At least one link is required" })
-    .max(5, { message: "Can't have more than 5 links" }),
-  extras: z
-    .array(z.string())
-    .min(1, { message: "At least 1 extra resource is required" })
-    .max(5, { message: "Cannot have more than 5 extras resource links" }),
+    .max(5, { message: "Can't have more than 10 links" }),
 });
 
 export const reviewSchema = z.object({
@@ -213,4 +219,3 @@ export const updateResourceSchema = z.object({
     .max(500, { message: "Notes can't exceed 500 characters" })
     .optional(),
 });
-
