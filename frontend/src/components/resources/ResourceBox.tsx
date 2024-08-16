@@ -14,23 +14,14 @@ const ResourceBox: React.FC<ResourceCardProps> = ({ resource, index }) => {
     <div
       onClick={() => handleNavigation(resource._id)}
       className={`bg-gradient-to-r from-home-accent via-home-accent to-home-secondary theme-transition cursor-pointer
-      ${index === 0 && "rounded-b-lg h-1/2 md:h-3/5 xl:h-[58%]"} 
+      ${index === 0 && "rounded-b-lg h-1/2"} 
+      ${index === 1 && "rounded-r-lg md:rounded-br-none md:rounded-t-lg h-1/2"}
+      ${index === 2 && "rounded-bl-lg md:rounded-b-lg h-1/2"}
+      ${index === 3 && "rounded-l-lg md:rounded-bl-none md:rounded-tr-lg h-1/2"}
       ${
-        index === 1 &&
-        "rounded-r-lg md:rounded-br-none md:rounded-t-lg h-1/2 md:h-2/5 xl:h-[42%]"
+        index === 4 && "rounded-tr-lg md:rounded-tr-none md:rounded-bl-lg h-1/2"
       }
-      ${
-        index === 2 && "rounded-bl-lg md:rounded-b-lg h-1/2 md:h-2/5 xl:h-[42%]"
-      }
-      ${
-        index === 3 &&
-        "rounded-l-lg md:rounded-bl-none md:rounded-tr-lg h-1/2 md:h-3/5 xl:h-[58%]"
-      }
-      ${
-        index === 4 &&
-        "rounded-tr-lg md:rounded-tr-none md:rounded-bl-lg md:h-1/2 xl:h-3/5"
-      }
-      ${index === 5 && "rounded-tl-lg md:h-1/2 xl:h-2/5"}
+      ${index === 5 && "rounded-tl-lg h-1/2"}
       w-full px-0.5 py-0.5 md:px-1 md:py-1 xl:px-2 grid grid-rows-3 lg:grid-rows-4`}
     >
       {/* heading */}
