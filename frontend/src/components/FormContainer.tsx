@@ -70,7 +70,7 @@ const FormContainer = <T extends FieldValues>({
       <div className="w-full flex-grow md:rounded-b-2xl flex">
         <div className="w-full lg:w-[60%] 2xl:w-1/2 lg:rounded-bl-2xl px-1 sm:px-2 flex flex-col">
           <p
-            className={`w-full sm:w-4/5 md:w-3/4 italic text-secondary-public-text transition-colors duration-300 text-sm lg:text-base 3xl:text-xl pt-1 ${
+            className={`w-full sm:w-4/5 md:w-3/4 italic text-secondary-public-text transition-colors duration-300 text-lg lg:text-xl 3xl:text-3xl pt-1 ${
               isLogin && 'pt-2'
             }`}
           >
@@ -143,7 +143,6 @@ const FormContainer = <T extends FieldValues>({
               </div>
             )}
           </form>
-          <PublicSocialIcons />
         </div>
 
         <div className="w-0 h-[95%] 3xl:w-full lg:w-[40%] 2xl:w-1/2 lg:rounded-2xl flex items-start pt-2">
