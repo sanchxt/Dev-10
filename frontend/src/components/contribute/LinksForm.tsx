@@ -176,8 +176,12 @@ const LinksForm = ({ formData }: LinksFormProps) => {
             </p>
           )}
 
-          <div className="pt-2 pb-1 md:pt-4 md:pb-2 flex justify-center text-home-text tracking-wider text-sm">
-            <button type="button" onClick={handleAddNewLink}>
+          <div className="pt-2 pb-1 md:pt-4 md:pb-2 flex justify-center text-home-text tracking-wider text-sm disabled:text-home-secondary">
+            <button
+              type="button"
+              onClick={handleAddNewLink}
+              disabled={linkFields.length >= 5}
+            >
               Add Link
             </button>
           </div>
