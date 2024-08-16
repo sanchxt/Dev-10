@@ -10,8 +10,8 @@ const LoaderAnimation = ({ onComplete }: { onComplete: () => void }) => {
   useEffect(() => {
     const timer = setTimeout(() => {
       setIsReversing(true);
-      setTimeout(onComplete, 2000); // Delay equal to the reverse animation duration
-    }, 6000); // Duration before reversing the animation
+      setTimeout(onComplete, 1000);
+    }, 3000);
 
     return () => clearTimeout(timer);
   }, [onComplete]);
