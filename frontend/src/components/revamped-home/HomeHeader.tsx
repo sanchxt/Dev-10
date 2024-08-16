@@ -7,7 +7,7 @@ const HomeHeader = ({ name }: { name: string }) => {
       <h3 className="block text-lg sm:text-xl md:text-2xl w-full overflow-hidden font-base text-home-text theme-transition">
         Welcome,
         <br />
-        <span className="block pl-12 md:pl-24 w-full overflow-hidden text-ellipsis capitalize text-2xl sm:text-3xl md:text-4xl font-semibold">
+        <span className="pl-2 w-full overflow-hidden text-ellipsis capitalize text-2xl sm:text-3xl md:text-4xl font-semibold">
           {name}
         </span>
       </h3>
