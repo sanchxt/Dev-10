@@ -107,7 +107,7 @@
   }
 
   .pagination-button {
-    @apply p-2 bg-transparent border border-home-text rounded-md disabled:opacity-50 transition-all duration-200 ease-in-out hover:bg-gray-200 disabled:cursor-not-allowed disabled:bg-transparent;
+    @apply p-2 bg-transparent border border-home-text rounded-md disabled:opacity-50 transition-all duration-200 ease-in-out disabled:cursor-not-allowed disabled:bg-transparent;
   }
 }
 
