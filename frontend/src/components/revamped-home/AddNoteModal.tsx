@@ -104,7 +104,7 @@ const AddNoteModal = ({
             <textarea
               {...register("content")}
               id="content"
-              className="block w-full p-2 text-[0.65rem] md:text-xs rounded bg-home-quaternary resize-none outline-none focus:ring-1 focus:ring-purple-300"
+              className="block w-full p-2 text-[0.65rem] md:text-xs rounded bg-home-quaternary resize-none outline-none focus:ring-1 focus:ring-purple-300 text-home-text"
             />
             {errors.content && (
               <p className="absolute left-0 bottom-0 text-red-600 text-[0.6rem] md:text-[0.7rem] mt-1">

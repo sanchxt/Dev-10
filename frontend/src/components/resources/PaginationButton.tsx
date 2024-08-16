@@ -15,12 +15,12 @@ const PaginationButton = memo(
       <button
         onClick={onClick}
         disabled={disabled}
-        className="pagination-button"
+        className="pagination-button bg-home-text"
       >
         {direction === "prev" ? (
-          <MdKeyboardArrowLeft className="text-pagination-btn" />
+          <MdKeyboardArrowLeft className="text-home-text" />
         ) : (
-          <MdKeyboardArrowRight className="text-pagination-btn" />
+          <MdKeyboardArrowRight className="text-home-text" />
         )}
       </button>
     );

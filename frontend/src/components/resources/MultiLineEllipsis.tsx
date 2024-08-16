@@ -13,7 +13,7 @@ const MultiLineEllipsis = ({ text, lines = 3 }: MultiLineProps) => {
         overflow: "hidden",
         textOverflow: "ellipsis",
       }}
-      className="text-[0.6rem] md:text-xs 2xl:text-sm max-w-32 xl:max-w-xs tracking-wider italic font-light text-resource-box-secondary"
+      className="text-[0.6rem] md:text-xs 2xl:text-sm max-w-32 xl:max-w-xs tracking-wider italic font-light text-home-text"
     >
       {text}
     </div>

@@ -30,18 +30,22 @@ const resourceSchema = mongoose.Schema(
       type: String,
       required: true,
     },
-    tags: {
+    languages: {
       type: [String],
       required: true,
     },
-    essentials: {
-      type: [String],
-      required: true,
-    },
-    extras: {
-      type: [String],
-      required: true,
-    },
+    links: [
+      {
+        url: {
+          type: String,
+          required: true,
+        },
+        description: {
+          type: String,
+          required: true,
+        },
+      },
+    ],
     notes: {
       type: String,
       default: "",
