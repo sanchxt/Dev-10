@@ -53,11 +53,9 @@ export const aboutResourceCollectionSchema = z.object({
     .max(40, { message: "Title can't contain more than 40 letters" }),
   languages: z
     .array(
-      z
-        .string()
-        .max(15, {
-          message: "Each language tag can't be more than 15 letters long",
-        })
+      z.string().max(15, {
+        message: "Each language tag can't be more than 15 letters long",
+      })
     )
     .min(1, { message: "At least one language is required" })
     .max(3, { message: "Can't have more than 3 language" }),
@@ -87,7 +85,7 @@ export const linksResourceFormSchema = z.object({
       })
     )
     .min(1, { message: "At least one link is required" })
-    .max(5, { message: "Can't have more than 10 links" }),
+    .max(5, { message: "Can't have more than 5 links" }),
 });
 
 export const reviewSchema = z.object({
