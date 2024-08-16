@@ -88,15 +88,16 @@ const LinksForm = ({ formData }: LinksFormProps) => {
   };
 
   return (
-    <section className="h-full flex flex-col">
-      <h2 className="text-center py-2 font-bold text-xl md:text-2xl lg:text-3xl">
+    <section className="h-full flex flex-col bg-home-bg px-1 md:px-2">
+      <h2 className="text-center py-4 font-bold text-xl md:text-2xl lg:text-3xl text-home-text">
         Add Links
       </h2>
+
       <form onSubmit={handleSubmit(onSubmit)} className="px-0.5 md:px-1">
-        <div className="bg-slate-200 rounded-lg p-2 max-h-[35rem] overflow-y-auto scrollbar-thin">
+        <div className="bg-home-accent rounded-lg p-2 max-h-[35rem] overflow-y-auto scrollbar-thin">
           {linkFields.map((link, idx) => (
             <React.Fragment key={link.id}>
-              <h4 className="text-center pt-4 text-xs text-gray-500 italic tracking-wider underline underline-offset-4">
+              <h4 className="text-center pt-4 text-xs text-home-text-secondary italic tracking-wider underline underline-offset-4">
                 Link {idx + 1 < 10 ? "0" : ""}
                 {idx + 1}
               </h4>
@@ -106,7 +107,7 @@ const LinksForm = ({ formData }: LinksFormProps) => {
                 <div className="grid gap-0.5 group relative pt-3 pb-5">
                   <label
                     htmlFor={`links.${idx}.url`}
-                    className="text-xs pb-1 pl-0.5 font-medium text-gray-500 transition-all duration-500 ease-in-out group-focus-within:text-purple-500"
+                    className="text-xs pb-1 pl-0.5 font-medium text-home-text transition-all duration-500 ease-in-out group-focus-within:text-purple-500"
                   >
                     {`Link ${idx + 1} URL`}
                   </label>
@@ -115,7 +116,7 @@ const LinksForm = ({ formData }: LinksFormProps) => {
                     {...register(`links.${idx}.url`)}
                     id={`links.${idx}.url`}
                     placeholder={`Link ${idx + 1} URL`}
-                    className="peer focus:placeholder-purple-500/80 placeholder:text-xs rounded-lg bg-gray-100 py-2 px-2 text-sm font-light outline-none drop-shadow-sm transition-all duration-300 ease-in-out focus:ring-2 focus:ring-purple-400/40 focus:shadow-xl focus:shadow-purple-300/20"
+                    className="peer focus:placeholder-purple-500/80 text-home-text placeholder:text-xs rounded-lg bg-home-secondary focus:bg-home-primary py-2 px-2 text-sm font-light outline-none drop-shadow-sm transition-all duration-300 ease-in-out focus:ring-2 focus:ring-purple-400/40 focus:shadow-xl focus:shadow-purple-300/20"
                   />
 
                   {errors.links?.[idx]?.url ? (
@@ -123,7 +124,7 @@ const LinksForm = ({ formData }: LinksFormProps) => {
                       {errors.links?.[idx]?.url.message}
                     </p>
                   ) : (
-                    <span className="absolute italic text-[0.6rem] md:text-[0.65rem] pl-0.5 pt-1 font-semibold text-gray-400 hidden transition-all ease-in-out group-focus-within:block bottom-0">
+                    <span className="absolute text-[0.6rem] md:text-[0.65rem] pl-0.5 pt-1 font-semibold text-home-text-secondary hidden transition-all ease-in-out group-focus-within:block bottom-0">
                       {`Link ${idx + 1} URL`}
                     </span>
                   )}
@@ -133,7 +134,7 @@ const LinksForm = ({ formData }: LinksFormProps) => {
                 <div className="grid gap-0.5 group relative pt-3 pb-5">
                   <label
                     htmlFor={`links.${idx}.description`}
-                    className="text-xs pb-1 pl-0.5 font-medium text-gray-500 transition-all duration-500 ease-in-out group-focus-within:text-purple-500"
+                    className="text-xs pb-1 pl-0.5 font-medium text-home-text transition-all duration-500 ease-in-out group-focus-within:text-purple-500"
                   >
                     {`Link ${idx + 1} Description`}
                   </label>
@@ -142,7 +143,7 @@ const LinksForm = ({ formData }: LinksFormProps) => {
                     {...register(`links.${idx}.description`)}
                     id={`links.${idx}.description`}
                     placeholder={`Link ${idx + 1} Description`}
-                    className="peer focus:placeholder-purple-500/80 placeholder:text-xs rounded-lg bg-gray-100 py-2 px-2 text-sm font-light outline-none drop-shadow-sm transition-all duration-300 ease-in-out focus:ring-2 focus:ring-purple-400/40 focus:shadow-xl focus:shadow-purple-300/20"
+                    className="peer focus:placeholder-purple-500/80 text-home-text placeholder:text-xs rounded-lg bg-home-secondary focus:bg-home-primary py-2 px-2 text-sm font-light outline-none drop-shadow-sm transition-all duration-300 ease-in-out focus:ring-2 focus:ring-purple-400/40 focus:shadow-xl focus:shadow-purple-300/20"
                   />
 
                   {errors.links?.[idx]?.description ? (
@@ -150,8 +151,8 @@ const LinksForm = ({ formData }: LinksFormProps) => {
                       {errors.links?.[idx]?.description.message}
                     </p>
                   ) : (
-                    <span className="absolute italic text-[0.6rem] md:text-[0.65rem] pl-0.5 pt-1 font-semibold text-gray-400 hidden transition-all ease-in-out group-focus-within:block bottom-0">
-                      {`Link ${idx + 1} URL`}
+                    <span className="absolute text-[0.6rem] md:text-[0.65rem] pl-0.5 pt-1 font-semibold text-home-text-secondary hidden transition-all ease-in-out group-focus-within:block bottom-0">
+                      {`Link ${idx + 1} Description`}
                     </span>
                   )}
                 </div>
@@ -159,7 +160,7 @@ const LinksForm = ({ formData }: LinksFormProps) => {
                 {linkFields.length > 1 && (
                   <button
                     type="button"
-                    className="absolute top-0 right-0 text-black text-[0.6rem]"
+                    className="absolute top-0 right-0 text-home-text-secondary text-[0.6rem]"
                     onClick={() => removeLink(idx)}
                   >
                     Remove Link
@@ -175,21 +176,19 @@ const LinksForm = ({ formData }: LinksFormProps) => {
             </p>
           )}
 
-          <div className="pt-2 pb-1 md:pt-4 md:pb-2 flex justify-center">
+          <div className="pt-2 pb-1 md:pt-4 md:pb-2 flex justify-center text-home-text tracking-wider text-sm">
             <button type="button" onClick={handleAddNewLink}>
               Add Link
             </button>
           </div>
         </div>
 
-        <div className="mt-4 w-full">
-          <button
-            className="bg-purple-200 rounded-xl p-3 w-full font-bold tracking-wide text-sm lg:text-base"
-            disabled={isSubmitting || isLoading}
-          >
-            {isSubmitting || isLoading ? "Loading..." : "Submit"}
-          </button>
-        </div>
+        <button
+          className="bg-home-quaternary text-home-text font-bold tracking-wider rounded-lg md:rounded-xl p-3 text-sm lg:text-base w-full mt-4"
+          disabled={isSubmitting || isLoading}
+        >
+          {isSubmitting || isLoading ? "Creating..." : "Submit"}
+        </button>
       </form>
     </section>
   );

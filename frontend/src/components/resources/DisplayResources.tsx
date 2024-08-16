@@ -114,7 +114,7 @@ const DisplayResources = () => {
             type="submit"
             className="mr-1 md:mr-2 border-l-2 border-gray-600/50 pl-1 md:pl-2"
           >
-            <span className="px-2 md:px-4 py-0.5 flex items-center justify-center text-xs md:text-sm font-medium transition-all duration-200 ease-in-out text-home-text bg-home-quaternary hover:bg-search-btn-hover-bg rounded-lg">
+            <span className="px-2 md:px-4 py-0.5 flex items-center justify-center text-xs md:text-sm font-medium transition-all duration-200 ease-in-out text-home-text bg-home-quaternary hover:bg-home-accent rounded-lg">
               Search
             </span>
           </button>

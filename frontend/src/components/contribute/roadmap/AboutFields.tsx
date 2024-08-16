@@ -52,9 +52,9 @@ const AboutFields = ({
   };
 
   return (
-    <div className="bg-slate-200 rounded-lg p-2">
+    <div className="bg-home-accent rounded-lg p-2">
       <RoadmapColumnHeading text="About the Roadmap" />
-      <h4 className="text-center pt-4 text-xs text-gray-500 italic tracking-wide">
+      <h4 className="text-center pt-4 text-xs text-home-text-secondary italic tracking-wide">
         General information about the roadmap you're submitting
       </h4>
       <TextInput
