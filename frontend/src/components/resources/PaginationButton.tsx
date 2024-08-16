@@ -15,7 +15,7 @@ const PaginationButton = memo(
       <button
         onClick={onClick}
         disabled={disabled}
-        className="pagination-button bg-home-text"
+        className="pagination-button bg-transparent"
       >
         {direction === "prev" ? (
           <MdKeyboardArrowLeft className="text-home-text" />
