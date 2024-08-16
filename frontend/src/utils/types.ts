@@ -106,10 +106,9 @@ export interface ResourceProps {
   _id: string;
   title: string;
   isOfficial: boolean;
-  essentials: string[];
-  extras: string[];
+  links: object[];
   description: string;
-  tags: string[];
+  languages: string[];
   authorName: string;
 }
 export interface ResourceCardProps {
@@ -179,8 +178,7 @@ export interface ReportResourceRequest {
 }
 
 export interface DetailedLinksAndNotesProps {
-  essentials: [string];
-  extras: [string];
+  links: [object];
   notes: string;
 }
 
