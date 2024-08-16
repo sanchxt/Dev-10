@@ -2,7 +2,7 @@ import { useState } from "react";
 import { BiMenu, BiMoon, BiX } from "react-icons/bi";
 import { useSelector, useDispatch } from "react-redux";
 
-import logo from "/dev10-logo.webp";
+import logo from "../../../public/Dev10-Logo2.png";
 import { RootState } from "../../store";
 import { navItems } from "../../utils/constants";
 import { setTheme } from "../../slices/themeSlice";
@@ -31,7 +31,7 @@ const PublicNavbar = () => {
           <img
             src={logo}
             alt="Dev-10 Logo"
-            className="w-[4.5rem] md:w-20 xl:w-24"
+            className="w-[4.5rem] md:w-20 xl:w-4"
           />
         </div>
 
