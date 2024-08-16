@@ -30,7 +30,7 @@ const NotesSection = ({
 }: NotesSectionProps) => {
   if (isError) {
     return (
-      <div className="italic w-full flex justify-center items-center h-32 lg:h-48">
+      <div className="italic w-full flex justify-center items-center h-32 lg:h-48 text-home-text">
         <h1>Error fetching notes..</h1>
       </div>
     );

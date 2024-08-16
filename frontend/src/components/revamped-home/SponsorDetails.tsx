@@ -10,7 +10,7 @@ const SponsorDetails = ({
   eventLink,
 }: SponsorDetailsProps) => {
   return (
-    <div className="flex items-center justify-between border-2 border-home-text rounded-xl px-1 text-[0.6rem] md:text-xs">
+    <div className="flex items-center justify-between border-2 border-home-text rounded-xl px-1 md:px-2 xl:px-3 text-[0.6rem] md:text-xs">
       <div className="flex gap-1 items-center">
         <GiPlainCircle className="text-[0.3rem] md:text-[0.4rem] lg:text-[0.5rem] text-home-text" />
         <p className="font-bold capitalize text-home-text theme-transition">

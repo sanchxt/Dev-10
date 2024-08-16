@@ -10,11 +10,19 @@ const DisplayTotalContributions = () => {
   }, []);
 
   if (isError) {
-    return <p>Error fetching stats</p>;
+    return (
+      <p className="text-home-text text-sm flex items-center justify-center h-full italic">
+        Error fetching stats
+      </p>
+    );
   }
 
   if (isLoading) {
-    return <p>Loading stats</p>;
+    return (
+      <p className="text-home-text text-sm flex items-center justify-center h-full italic">
+        Loading stats
+      </p>
+    );
   }
 
   return (
@@ -39,7 +47,7 @@ const DisplayTotalContributions = () => {
       </div>
 
       <div>
-        <p className="col-span-2 text-center italic font-extralight text-[0.67rem] sm:text-xs lg:text-sm p-1 text-home-text-secondary">
+        <p className="col-span-2 text-center italic font-extralight text-[0.67rem] sm:text-xs lg:text-sm p-1 text-home-text">
           Give back to the community by contributing your own{" "}
           <Link
             to="/resources"

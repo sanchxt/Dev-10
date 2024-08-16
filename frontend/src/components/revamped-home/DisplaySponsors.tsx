@@ -15,7 +15,7 @@ const DisplaySponsors = () => {
         eventLink="https://code-cubicle.devfolio.co/"
       />
 
-      <p className="text-center italic font-extralight text-[0.67rem] sm:text-xs lg:text-sm p-1 text-home-text-secondary theme-transition">
+      <p className="text-center italic font-extralight text-[0.67rem] sm:text-xs lg:text-sm p-1 text-home-text theme-transition">
         You can{" "}
         <Link
           to="/contact"
