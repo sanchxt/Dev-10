@@ -202,9 +202,9 @@
 }
 
 .light-theme {
-  --public-nav-bg-1: rgb(234, 226, 222);
-  --public-nav-bg-2: #ded4ea;
-  --public-nav-shadow-1: rgb(87, 45, 102);
+  --public-nav-bg-1: rgb(209, 167, 211);
+  --public-nav-bg-2: #80679c;
+  --public-nav-shadow-1: rgb(123, 69, 142);
   --public-nav-shadow-2: rgba(255, 255, 255, 0.5);
   --loginbackdrop1: rgba(217, 200, 230, 0.8);
   --loginbackdrop2: rgba(63, 9, 143, 0.7);
