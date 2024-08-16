@@ -1,6 +1,6 @@
-import { useState, useEffect } from "react";
-import "../assets/loader_animation.css";
-import { motion } from "framer-motion";
+import { useState, useEffect } from 'react';
+import '../assets/loader_animation.css';
+import { motion } from 'framer-motion';
 
 const LoaderAnimation = ({ onComplete }: { onComplete: () => void }) => {
   const [isMiddleDivAnimated, setIsMiddleDivAnimated] =
@@ -10,8 +10,8 @@ const LoaderAnimation = ({ onComplete }: { onComplete: () => void }) => {
   useEffect(() => {
     const timer = setTimeout(() => {
       setIsReversing(true);
-      setTimeout(onComplete, 1000);
-    }, 3000);
+      setTimeout(onComplete, 2000); // Delay equal to the reverse animation duration
+    }, 6000); // Duration before reversing the animation
 
     return () => clearTimeout(timer);
   }, [onComplete]);
@@ -23,7 +23,7 @@ const LoaderAnimation = ({ onComplete }: { onComplete: () => void }) => {
       transition: {
         delayChildren: 0.5,
         staggerChildren: 0.3,
-        ease: "easeOut",
+        ease: 'easeOut',
       },
       ...(!isReversing && { y: 0 }),
       ...(isReversing && { y: -800, transition: { duration: 1 } }),
@@ -51,13 +51,13 @@ const LoaderAnimation = ({ onComplete }: { onComplete: () => void }) => {
         <motion.div
           custom={isReversing}
           variants={itemVariants(0)}
-          className="h-full bg-indigo-700"
+          className="h-full bg-slate-800"
         />
         <motion.div
           custom={isReversing}
           variants={itemVariants(1)}
           onAnimationComplete={() => setIsMiddleDivAnimated(true)}
-          className="h-full bg-indigo-800 relative blur-[10px] contrast-[10px] flex justify-center items-center"
+          className="h-full bg-slate-800 relative blur-[10px] contrast-[10px] flex justify-center items-center"
         >
           <div className="flex justify-center items-center relative">
             <motion.div
@@ -83,7 +83,7 @@ const LoaderAnimation = ({ onComplete }: { onComplete: () => void }) => {
         <motion.div
           custom={isReversing}
           variants={itemVariants(0.3)}
-          className="h-full bg-indigo-700"
+          className="h-full bg-slate-800"
         />
       </motion.div>
     </div>

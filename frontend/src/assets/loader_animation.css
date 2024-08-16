@@ -2,28 +2,28 @@
   display: inline-block;
   height: 1rem;
   aspect-ratio: 1;
-  background: rgb(194, 90, 16);
+  background: rgb(237, 232, 242);
   background: -moz-linear-gradient(
     90deg,
-    rgb(143, 132, 246) 0%,
-    rgb(97, 90, 240) 50%,
-    rgb(103, 78, 247) 100%
+    rgba(237, 232, 242, 1) 0%,
+    rgba(244, 220, 255, 1) 50%,
+    rgba(234, 191, 252, 1) 100%
   );
   background: -webkit-linear-gradient(
     90deg,
-    rgb(144, 132, 246) 0%,
-    rgb(98, 90, 240) 50%,
-    rgb(104, 78, 247) 100%
+    rgba(237, 232, 242, 1) 0%,
+    rgba(244, 220, 255, 1) 50%,
+    rgba(234, 191, 252, 1) 100%
   );
   background: linear-gradient(
     90deg,
-    rgb(143, 132, 246) 0%,
-    rgb(97, 90, 240) 50%,
-    rgb(103, 78, 247) 100%
+    rgba(237, 232, 242, 1) 0%,
+    rgba(244, 220, 255, 1) 50%,
+    rgba(234, 191, 252, 1) 100%
   );
   filter: progid:DXImageTransform.Microsoft.gradient(startColorstr="#ede8f2",endColorstr="#eabffc",GradientType=1);
   border-radius: 50%;
-  box-shadow: 0 0 5px 5px #7d76cf, 50px 0 50px 10px rgba(142, 130, 211, 0.2);
+  box-shadow: 0 0 5px 5px #dbc1ff, 50px 0 50px 10px rgba(237, 173, 255, 0.2);
 }
 
 .circle:nth-child(1) {
