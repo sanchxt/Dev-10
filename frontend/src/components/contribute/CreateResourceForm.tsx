@@ -9,7 +9,7 @@ const CreateResourceForm = () => {
 
   return (
     <div className="h-full flex flex-col justify-center items-center">
-      <div className="w-[99%] h-[99%] md:w-[95%] md:h-[95%]">
+      <div className="h-full w-full">
         {step === 1 && <AboutCollectionForm onSubmit={nextStep} />}
         {step === 2 && formData && <LinksForm formData={formData} />}
       </div>
