@@ -156,7 +156,7 @@ const DetailedResource: React.FC = () => {
             {currentUserId === data?.user ? (
               <div className="grid grid-rows-2 px-1 md:px-4">
                 <h2 className="text-center text-[0.8rem] md:text-sm lg:text-base xl:text-xl font-medium md:tracking-wide text-home-text theme-transition">
-                  Latest Comments
+                  Update your Resource
                 </h2>
                 <button
                   className="bg-home-quaternary w-full text-white p-1 md:p-2 text-xs md:text-sm font-bold rounded-full shadow-md hover:bg-home-primary focus:outline-none focus:ring-2 focus:ring-purple-500 focus:ring-opacity-50 transition-colors duration-300 h-fit"
