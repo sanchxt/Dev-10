@@ -58,25 +58,23 @@ const getResources = asyncHandler(async (req, res) => {
 // @route POST /api/resources
 // @access Private
 const createResource = asyncHandler(async (req, res) => {
-  const { title, description, tags, essentials, extras, notes } = req.body;
+  const { title, description, languages, links, notes } = req.body;
 
   try {
-    validateResourceFields(title, description, tags, essentials, extras);
+    validateResourceFields(title, description, languages, links);
   } catch (error) {
     res.status(400);
     throw new Error(error.message);
   }
 
   const isAdmin = req.user.isAdmin;
-
   const resource = new Resource({
     user: req.user._id,
     authorName: req.user.name,
     title,
     description,
-    tags,
-    essentials,
-    extras,
+    languages,
+    links,
     notes,
     isOfficial: isAdmin ? true : false,
   });
@@ -113,7 +111,7 @@ const getResourceById = asyncHandler(async (req, res) => {
 // @route PUT /api/resources/:id/modify
 // @access Private
 const updateResource = asyncHandler(async (req, res) => {
-  const { title, description, tags, essentials, extras, notes } = req.body;
+  const { title, description, languages, links, notes } = req.body;
 
   const resource = await Resource.findById(req.params.id);
 
@@ -125,9 +123,8 @@ const updateResource = asyncHandler(async (req, res) => {
 
     resource.title = title || resource.title;
     resource.description = description || resource.description;
-    resource.tags = tags || resource.tags;
-    resource.essentials = essentials || resource.essentials;
-    resource.extras = extras || resource.extras;
+    resource.languages = languages || resource.languages;
+    resource.links = links || resource.links;
     resource.notes = notes || resource.notes;
 
     const updatedResource = await resource.save();
