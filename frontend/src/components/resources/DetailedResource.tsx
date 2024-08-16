@@ -99,14 +99,10 @@ const DetailedResource: React.FC = () => {
             title={data?.title}
             author={data?.authorName}
             description={data?.description}
-            tags={data?.tags}
+            tags={data?.languages}
           />
 
-          <DetailedLinksAndNotes
-            essentials={data?.essentials}
-            extras={data?.extras}
-            notes={data?.notes}
-          />
+          <DetailedLinksAndNotes links={data?.links} notes={data?.notes} />
 
           <div className="max-w-full grid grid-cols-2 pt-1 md:pt-2 md:gap-2 lg:gap-4 xl:gap-6">
             {/* comments */}
@@ -153,9 +149,12 @@ const DetailedResource: React.FC = () => {
 
             {/* review */}
             {currentUserId === data?.user ? (
-              <>
+              <div className="grid grid-rows-2 px-1 md:px-4">
+                <h2 className="text-center text-[0.8rem] md:text-sm lg:text-base xl:text-xl font-medium md:tracking-wide">
+                  Latest Comments
+                </h2>
                 <button
-                  className="bg-purple-600 text-white py-1 px-2 text-sm rounded-full shadow-md hover:bg-purple-700 focus:outline-none focus:ring-2 focus:ring-purple-500 focus:ring-opacity-50 transition-colors duration-300 w-15 h-10"
+                  className="bg-purple-600 w-full text-white p-1 md:p-2 text-xs md:text-sm font-bold rounded-full shadow-md hover:bg-purple-700 focus:outline-none focus:ring-2 focus:ring-purple-500 focus:ring-opacity-50 transition-colors duration-300 h-fit"
                   onClick={handleUpdateFormClick}
                 >
                   Update Resource
@@ -167,7 +166,7 @@ const DetailedResource: React.FC = () => {
                     refetchResources={() => getResourceById(id)}
                   />
                 )}
-              </>
+              </div>
             ) : (
               <ReviewForm id={id!} />
             )}
