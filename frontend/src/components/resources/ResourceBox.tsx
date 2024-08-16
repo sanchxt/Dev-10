@@ -13,7 +13,7 @@ const ResourceBox: React.FC<ResourceCardProps> = ({ resource, index }) => {
   return (
     <div
       onClick={() => handleNavigation(resource._id)}
-      className={`resource-box-gradient theme-transition cursor-pointer
+      className={`bg-gradient-to-r from-home-accent via-home-accent to-home-secondary theme-transition cursor-pointer
       ${index === 0 && "rounded-b-lg h-1/2 md:h-3/5 xl:h-[58%]"} 
       ${
         index === 1 &&
@@ -35,16 +35,16 @@ const ResourceBox: React.FC<ResourceCardProps> = ({ resource, index }) => {
     >
       {/* heading */}
       <div className="flex gap-1 md:gap-2 items-center max-w-[9rem] md:max-w-[10rem] xl:max-w-64">
-        <h1 className="text-[0.68rem] md:text-sm lg:text-base font-medium md:font-bold max-w-2/3 whitespace-nowrap overflow-hidden text-ellipsis text-resource-box-primary theme-transition">
+        <h1 className="text-[0.68rem] md:text-sm lg:text-base font-medium md:font-bold max-w-2/3 whitespace-nowrap overflow-hidden text-ellipsis text-home-text theme-transition">
           {resource?.title}
         </h1>
-        <p className="text-[0.55rem] md:text-[0.65rem] tracking-wide bg-resource-box-by-bg font-medium px-1 md:px-2 md:py-0.5 rounded-3xl text-resource-box-by-text italic theme-transition">
+        <p className="text-[0.55rem] md:text-[0.65rem] tracking-wide bg-home-quaternary font-medium px-1 md:px-2 md:py-0.5 rounded-3xl text-home-text italic theme-transition">
           {resource?.isOfficial ? "Official" : "Community"}
         </p>
       </div>
 
       {/* links */}
-      <div className="hidden lg:flex justify-end text-[0.6rem] md:text-xs pr-2 md:pr-4 xl:pr-6 italic text-resource-box-secondary theme-transition">
+      <div className="hidden lg:flex justify-end text-[0.6rem] md:text-xs pr-2 md:pr-4 xl:pr-6 italic text-home-text-secondary theme-transition">
         ({resource?.links.length} links)
       </div>
 
@@ -56,12 +56,12 @@ const ResourceBox: React.FC<ResourceCardProps> = ({ resource, index }) => {
       {/* tags */}
       <div className="mt-2 flex justify-start items-center text-[0.6rem] xl:text-xs gap-2 md:gap-4 xl:gap-6 flex-wrap">
         <div className="w-full md:w-fit font-medium tracking-wide">
-          <h6 className="text-resource-box-primary theme-transition">Tags:</h6>
+          <h6 className="text-home-text theme-transition">Languages:</h6>
         </div>
         {resource?.languages.map((tag, idx) => (
           <p
             key={idx}
-            className="bg-orange-200 text-[0.5rem] md:text-[0.6rem] xl:text-xs px-1 md:px-2 xl:px-3 xl:py-1 rounded-lg"
+            className="bg-home-quaternary theme-transition text-[0.5rem] md:text-[0.6rem] xl:text-xs px-1 md:px-2 xl:px-3 xl:py-1 rounded-lg"
           >
             {tag}
           </p>
@@ -69,7 +69,7 @@ const ResourceBox: React.FC<ResourceCardProps> = ({ resource, index }) => {
       </div>
 
       {/* author */}
-      <div className="text-[0.52rem] md:text-[0.7rem] xl:text-xs mt-2 md:mt-8 flex justify-end px-1 md:px-2 text-resource-box-primary font-semibold italic">
+      <div className="text-[0.52rem] md:text-[0.7rem] xl:text-xs mt-2 md:mt-8 flex justify-end px-1 md:px-2 text-home-text font-bold tracking-wide italic">
         - {resource?.authorName}
       </div>
     </div>

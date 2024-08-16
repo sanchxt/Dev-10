@@ -55,14 +55,6 @@ const Sidebar = () => {
         },
       };
 
-  // useEffect(() => {
-  //   if (isTab) {
-  //     setSidebarIsOpen(false);
-  //   } else {
-  //     setSidebarIsOpen(true);
-  //   }
-  // }, [isTab]);
-
   return (
     <>
       <div
@@ -71,11 +63,10 @@ const Sidebar = () => {
           sidebarIsOpen ? "block" : "hidden"
         }`}
       ></div>
-      {/* add md:relative */}
       <motion.div
         variants={sidebarAnimation}
         animate={sidebarIsOpen ? "open" : "close"}
-        className="bg-gradient-to-b from-sidebar-bg-1 to-sidebar-bg-2 text-sidebar-text shadow-2xl z-[999] w-[16rem] max-w-[16rem] h-screen overflow-hidden fixed transition-colors duration-300"
+        className="bg-gradient-to-b from-sidebar-bg-1 to-sidebar-bg-2 text-sidebar-text shadow-xl shadow-black/30 z-[999] w-[16rem] max-w-[16rem] h-screen overflow-hidden fixed transition-colors duration-300"
       >
         {/* logo */}
         <div

@@ -53,9 +53,6 @@ const DisplayResources = () => {
           if (error) {
             toast.error(error.message);
           }
-          console.log("refetched");
-          console.log("data:\n", data);
-          console.log("\n");
         });
       }
     },
@@ -91,7 +88,7 @@ const DisplayResources = () => {
   const memoizedData = useMemo(() => data, [data]);
 
   return (
-    <div className="h-full flex flex-col">
+    <div className="h-full flex flex-col bg-home-bg theme-transition">
       <div className="text-center font-light pt-1 md:pt-2 text-sm sm:text-lg lg:text-xl xl:text-2xl">
         <TextFlipAnimated children="The perfect resources curated for devs just like you" />
       </div>
@@ -101,7 +98,7 @@ const DisplayResources = () => {
         className="py-6 md:py-6 lg:py-6 px-2 md:px-4 xl:px-8 flex flex-wrap"
       >
         {/* search */}
-        <div className="w-full relative flex justify-center items-center bg-resource-search-bg rounded-xl">
+        <div className="w-full relative flex justify-center items-center bg-home-primary rounded-xl">
           <label htmlFor="resource-search" className="absolute left-2">
             <SearchIcon isFetching={isFetching} />
           </label>
@@ -111,13 +108,13 @@ const DisplayResources = () => {
             placeholder="Search for resources.."
             value={searchQuery}
             onChange={(e) => setSearchQuery(e.target.value)}
-            className="w-full appearance-none text-resource-search-text bg-transparent rounded-l-xl text-xs tracking-wider font-medium py-1.5 md:py-2 px-1 pl-8 outline-none"
+            className="w-full appearance-none text-home-text bg-transparent rounded-l-xl text-xs tracking-wider font-medium py-1.5 md:py-2 px-1 pl-8 outline-none"
           />
           <button
             type="submit"
             className="mr-1 md:mr-2 border-l-2 border-gray-600/50 pl-1 md:pl-2"
           >
-            <span className="px-2 md:px-4 py-0.5 flex items-center justify-center text-xs md:text-sm font-medium transition-all duration-200 ease-in-out text-search-btn-text bg-search-btn-bg hover:bg-search-btn-hover-bg rounded-lg">
+            <span className="px-2 md:px-4 py-0.5 flex items-center justify-center text-xs md:text-sm font-medium transition-all duration-200 ease-in-out text-home-text bg-home-quaternary hover:bg-search-btn-hover-bg rounded-lg">
               Search
             </span>
           </button>
@@ -125,7 +122,7 @@ const DisplayResources = () => {
 
         <div className="w-full grid grid-cols-2 gap-2 place-items-center">
           <Dropdown
-            label={`${formInputs.sort} Resources`}
+            label={`${formInputs.sort}`}
             items={sortResourceDropdownItems}
             onSelect={handleSortSelect}
           />
@@ -137,7 +134,7 @@ const DisplayResources = () => {
         </div>
       </form>
 
-      <div className="text-black w-full flex-grow">
+      <div className="text-home-text w-full flex-grow">
         {isLoading || isFetching ? (
           <div className="w-full h-full grid grid-cols-2 grid-rows-2">
             {[...Array(4)].map((_, idx) => (
@@ -153,7 +150,7 @@ const DisplayResources = () => {
             <span className="sr-only">Loading...</span>
           </div>
         ) : error ? (
-          <div className="flex justify-center items-center">
+          <div className="flex justify-center items-center text-home-text">
             <p>Error fetching resources</p>
           </div>
         ) : (
@@ -176,7 +173,7 @@ const DisplayResources = () => {
                   />
 
                   <div>
-                    <p className="text-page-text text-xs lg:text-sm font-medium">
+                    <p className="text-home-text text-xs lg:text-sm font-medium">
                       Page <span>{formInputs.pageNumber}</span> of{" "}
                       <span>{data?.pages}</span>
                     </p>

@@ -107,7 +107,7 @@
   }
 
   .pagination-button {
-    @apply p-2 bg-transparent border border-pagination-btn rounded-md disabled:opacity-50 transition-all duration-200 ease-in-out hover:bg-gray-200 disabled:cursor-not-allowed disabled:bg-transparent;
+    @apply p-2 bg-transparent border border-home-text rounded-md disabled:opacity-50 transition-all duration-200 ease-in-out hover:bg-gray-200 disabled:cursor-not-allowed disabled:bg-transparent;
   }
 }
 
@@ -151,10 +151,10 @@
   --sidebar-scrollbar-fg: rgba(36, 4, 49, 0.4);
   --sidebar-menu-btn: #bebe19;
 
-  --text-flip-primary-1: #62a5a4;
-  --text-flip-primary-2: #e1eeee;
-  --text-flip-secondary-1: #d13679;
-  --text-flip-secondary-2: #be1958;
+  --text-flip-primary-1: #cadbe0;
+  --text-flip-primary-2: #e6edef;
+  --text-flip-secondary-1: #88a3be;
+  --text-flip-secondary-2: #88a3be;
 
   --resources-page-bg: #22042e;
   --pagination-btn: #bebe19;
@@ -225,18 +225,18 @@
   --socials-bg: #bb7fd2;
   --socials-icon: #000;
 
-  --sidebar-bg-1: rgb(225, 208, 226);
-  --sidebar-bg-2: rgb(150, 115, 153);
+  --sidebar-bg-1: rgb(245, 244, 244);
+  --sidebar-bg-2: rgb(223, 231, 233);
   --sidebar-text: #400140;
   --sidebar-active-bg: rgba(187, 147, 197, 0.8);
   --sidebar-scrollbar-bg: rgba(32, 1, 40, 0.2);
   --sidebar-scrollbar-fg: rgba(220, 216, 221, 0.4);
   --sidebar-menu-btn: #400140;
 
-  --text-flip-primary-1: #637aa3;
-  --text-flip-primary-2: #11706d;
-  --text-flip-secondary-1: #d13679;
-  --text-flip-secondary-2: #be1958;
+  --text-flip-primary-1: rgb(31, 38, 50);
+  --text-flip-primary-2: #202121;
+  --text-flip-secondary-1: #1b64ad;
+  --text-flip-secondary-2: #2769ab;
 
   --resources-page-bg: rgb(243, 227, 245);
   --pagination-btn: rgb(128, 95, 131);
@@ -277,12 +277,12 @@
 
   --home-text: #0d020c;
   --home-text-secondary: #5f5f5f;
-  --home-text-link: #83bdfe;
+  --home-text-link: #4d9ffd;
   --home-bg: #f0f0f8;
   --home-primary: #d8d6f3;
   --home-secondary: #dbdee9;
   --home-tertiary: #fbfbfb;
-  --home-quaternary: #ced2ff;
+  --home-quaternary: #b7bdf8;
   --home-accent: #e6e6f1;
   --home-note-add: #6767675a;
 }
