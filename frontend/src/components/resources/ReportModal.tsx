@@ -50,16 +50,18 @@ const ReportModal = ({
       onClick={onRequestClose}
     >
       <div
-        className="bg-white p-6 rounded-lg shadow-xl max-w-md w-full"
+        className="bg-home-accent p-6 rounded-lg shadow-xl max-w-md w-full"
         onClick={(e) => e.stopPropagation()}
       >
-        <h2 className="text-xl font-bold mb-4">Report Resource</h2>
+        <h2 className="text-xl font-bold mb-4 text-home-text">
+          Report Resource
+        </h2>
         <form onSubmit={handleSubmit(onSubmit)}>
           {/* reason */}
           <div className="pb-5 relative">
             <label
               htmlFor="reason"
-              className="block text-[0.68rem] md:text-xs font-medium pb-1"
+              className="block text-[0.68rem] md:text-xs font-medium pb-1 text-home-text"
             >
               Reason
             </label>
@@ -67,7 +69,7 @@ const ReportModal = ({
               id="reason"
               type="text"
               {...register("reason")}
-              className="block w-full p-2 border text-[0.65rem] md:text-xs border-gray-300 rounded bg-gray-300 outline-none focus:ring-1 focus:ring-purple-300"
+              className="block w-full p-2 text-[0.65rem] md:text-xs rounded bg-home-quaternary text-home-text-secondary outline-none focus:ring-1 focus:ring-purple-300"
             />
             {errors.reason && (
               <p className="absolute left-0 bottom-1 text-red-600 text-[0.6rem] md:text-xs mt-1">
@@ -80,14 +82,14 @@ const ReportModal = ({
           <div className="py-5 relative">
             <label
               htmlFor="comments"
-              className="block text-[0.68rem] md:text-xs font-medium pb-1"
+              className="block text-[0.68rem] md:text-xs font-medium pb-1 text-home-text"
             >
               Additional Comments
             </label>
             <textarea
               id="comments"
               {...register("comments")}
-              className="block w-full p-2 border text-[0.65rem] md:text-xs border-gray-300 rounded bg-gray-300 resize-none outline-none focus:ring-1 focus:ring-purple-300"
+              className="block w-full p-2 text-[0.65rem] md:text-xs rounded bg-home-quaternary text-home-text-secondary resize-none outline-none focus:ring-1 focus:ring-purple-300"
             />
             {errors.comments && (
               <p className="absolute left-0 bottom-1 text-red-600 text-[0.6rem] md:text-xs mt-1">
@@ -101,13 +103,13 @@ const ReportModal = ({
             <button
               type="button"
               onClick={onRequestClose}
-              className="bg-transparent transition-all duration-500 hover:underline hover:underline-offset-4 hover:decoration-blue-700 text-xs"
+              className="bg-transparent text-home-text transition-all duration-500 hover:underline hover:underline-offset-4 hover:decoration-blue-700 text-xs"
             >
               Cancel
             </button>
             <button
               type="submit"
-              className="px-3 py-2 bg-purple-300 text-gray-950 font-semibold rounded text-xs flex items-center gap-1"
+              className="px-3 py-2 bg-home-quaternary text-home-text text-gray-950 font-semibold rounded text-xs flex items-center gap-1"
             >
               <CiSquareInfo size={18} className="md:mt-0.5" />
               Report
