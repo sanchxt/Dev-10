@@ -123,7 +123,7 @@ const Sidebar = () => {
             )}
           </ul>
 
-          {sidebarIsOpen && (
+          {/* {sidebarIsOpen && (
             <div className="flex-1 text-sm z-50 max-h-48 my-auto whitespace-pre w-full font-medium">
               <div className="flex items-center justify-between border-y border-slate-300 p-4">
                 <div>
@@ -135,7 +135,7 @@ const Sidebar = () => {
                 </p>
               </div>
             </div>
-          )}
+          )} */}
         </div>
 
         {/* sidebar btn */}
