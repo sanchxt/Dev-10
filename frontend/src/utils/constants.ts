@@ -3,7 +3,7 @@ import { FaCirclePlus } from "react-icons/fa6";
 import { GrResources } from "react-icons/gr";
 import { IoHome } from "react-icons/io5";
 import { RxStarFilled } from "react-icons/rx";
-
+import { GrProjects } from "react-icons/gr";
 export const navItems = [
   { href: "/", label: "Login", icon: "/login-icon.svg", width: 24, height: 24 },
   {
@@ -55,6 +55,7 @@ export const sidebarMenu = [
   { name: "Home", href: "/home", size: 23, icon: IoHome },
   { name: "Resources", href: "/resources", size: 23, icon: GrResources },
   { name: "Roadmaps", href: "/roadmaps", size: 23, icon: FaCodeBranch },
+  { name: "Projects", href: "/projects", size: 23, icon: GrProjects },
 ];
 
 export const sortResourceDropdownItems = ["recent", "oldest"];
