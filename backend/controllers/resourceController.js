@@ -21,7 +21,7 @@ const getResources = asyncHandler(async (req, res) => {
     ? {
         $or: [
           { title: { $regex: searchQuery, $options: "i" } },
-          { tags: { $regex: searchQuery, $options: "i" } },
+          { languages: { $regex: searchQuery, $options: "i" } },
         ],
       }
     : {};
