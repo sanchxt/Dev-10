@@ -13,6 +13,7 @@ import DisplaySponsors from "./DisplaySponsors";
 import ApiCodeGenerator from "./ApiCodeGenerator";
 import RecentVisits from "./RecentVisits";
 import FeaturedBlogs from "./FeaturedBlogs";
+import FloatingChatbotButton from "../FloatingChatbotButton";
 
 const HomePage = () => {
   const userInfo = useSelector((state: RootState) => state.auth.userInfo);
@@ -90,6 +91,8 @@ const HomePage = () => {
         onRequestClose={() => setIsAllNotesModalOpen(false)}
         requestRefetch={refetch}
       />
+
+      <FloatingChatbotButton />
     </div>
   );
 };
