@@ -12,9 +12,9 @@ export const maxWords = (value: string | undefined, max: number) => {
 
 export const handleKeyDown = (
   e: React.KeyboardEvent<HTMLInputElement>,
-  inputType: "essentials" | "extras",
+  inputType: "links",
   inputValue: string,
-  watchValue: string[],
+  watchValue: { url: string; description: string }[],
   setValue: (value: any) => void,
   setInputValue: (value: string) => void,
   setError: UseFormSetError<LinkResourceFormFields>,
@@ -27,9 +27,11 @@ export const handleKeyDown = (
       .map((link) => link.trim())
       .filter((link) => link);
 
+    const newLinkObjects = newValues.map((url) => ({ url }));
+
     const validation = linksResourceFormSchema.shape[inputType].safeParse([
       ...watchValue,
-      ...newValues,
+      ...newLinkObjects,
     ]);
 
     if (!validation.success) {
