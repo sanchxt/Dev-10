@@ -176,7 +176,7 @@ const StepsFields = ({
           <button
             type="button"
             onClick={addNewStep}
-            className="py-2 w-full font-medium italic bg-gradient-to-br from-blue-300/50 to-blue-50/40 rounded-lg"
+            className="py-2 w-full italic bg-gradient-to-r from-home-quaternary to-home-primary text-home-text font-semibold rounded-lg"
           >
             Add Step
           </button>
