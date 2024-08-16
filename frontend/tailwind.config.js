@@ -71,6 +71,22 @@ export default {
         "no-resources-btn-2-border": "var(--no-resources-btn-2-border)",
         "home-link-underline": "var(--home-link-underline)",
         "home-link-text": "var(--home-link-text)",
+
+        "home-bg": "var(--home-bg)",
+        "home-primary": "var(--home-primary)",
+        "home-secondary": "var(--home-secondary)",
+        "home-tertiary": "var(--home-tertiary)",
+        "home-quaternary": "var(--home-quaternary)",
+        "home-quinary": "var(--home-quinary)",
+        "home-senary": "var(--home-senary)",
+
+        "home-text": "var(--home-text)",
+        "home-text-secondary": "var(--home-text-secondary)",
+        "home-text-link": "var(--home-text-link)",
+        "home-primary": "var(--home-primary)",
+        "home-secondary": "var(--home-secondary)",
+        "home-accent": "var(--home-accent)",
+        "home-note-add": "var(--home-note-add)",
       },
       keyframes: {
         "carousel-move": {

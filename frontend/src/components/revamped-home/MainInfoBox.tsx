@@ -4,7 +4,7 @@ import mainBannerImage from "../../assets/coding-img.webp";
 
 const MainInfoBox = () => {
   return (
-    <div className="h-full flex justify-between px-1 py-2 bg-gradient-to-r from-blue-100 via-blue-100 to-blue-300 relative rounded-xl">
+    <div className="h-full flex justify-between px-1 py-2 bg-gradient-to-br from-home-primary via-white/10 to-home-secondary shadow-md shadow-black/20 relative rounded-xl">
       <MainBannerHeadings />
       <img
         src={mainBannerImage}

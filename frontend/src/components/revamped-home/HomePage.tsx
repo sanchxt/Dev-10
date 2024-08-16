@@ -11,6 +11,8 @@ import ShowAllNotes from "./ShowAllNotes";
 import DisplayTotalContributions from "./DisplayTotalContributions";
 import DisplaySponsors from "./DisplaySponsors";
 import ApiCodeGenerator from "./ApiCodeGenerator";
+import RecentVisits from "./RecentVisits";
+import FeaturedBlogs from "./FeaturedBlogs";
 
 const HomePage = () => {
   const userInfo = useSelector((state: RootState) => state.auth.userInfo);
@@ -31,20 +33,20 @@ const HomePage = () => {
   }, [userInfo]);
 
   return (
-    <div className="bg-slate-100">
+    <div className="bg-home-bg">
       <HomeHeader name={userInfo?.name!} />
       <div className="grid grid-cols-1 md:grid-cols-[57%_43%] lg:grid-cols-[60%_40%]">
-        <div className="grid grid-cols-2 grid-rows-2">
-          <div className="col-span-2 px-0.5 pt-2 md:px-2 md:pt-3">
+        <div className="grid grid-cols-2 grid-rows-2 px-0.5 pt-2 md:px-2 md:py-3">
+          <div className="col-span-2">
             <MainInfoBox />
           </div>
 
-          <div className="col-span-2 px-0.5 pt-2 md:px-2 md:pt-3 h-fit">
-            <div className="grid grid-cols-1 lg:grid-cols-2 gap-2 px-1">
-              <div className="order-2 md:order-1 bg-slate-200 shadow-md rounded-xl p-1">
+          <div className="col-span-2 px-0.5 pt-2 md:pt-3">
+            <div className="grid grid-cols-1 lg:grid-cols-2 gap-2 h-full">
+              <div className="order-2 md:order-1 bg-gradient-to-br from-home-tertiary to-home-accent shadow-md shadow-black/10 theme-transition rounded-xl p-1">
                 <DisplayTotalContributions />
               </div>
-              <div className="order-1 md:order-2 bg-slate-200 shadow-md rounded-xl p-1">
+              <div className="order-1 md:order-2 bg-gradient-to-br from-home-tertiary to-home-accent shadow-md shadow-black/10 theme-transition rounded-xl p-1">
                 <DisplaySponsors />
               </div>
             </div>
@@ -52,8 +54,8 @@ const HomePage = () => {
         </div>
 
         <div className="px-0.5 py-2 md:px-2 md:py-3">
-          <div className="grid grid-cols-2 md:grid-cols-1 md:grid-rows-2 bg-blue-200 rounded-xl p-1">
-            <div>
+          <div className="grid grid-cols-2 md:grid-cols-1 md:grid-rows-2 gap-1.5">
+            <div className="h-full">
               <NotesSection
                 isError={isError}
                 isLoading={isLoading}
@@ -63,16 +65,18 @@ const HomePage = () => {
               />
             </div>
 
-            <div className="pt-2 md:pt-3 h-fit">
-              <div className="bg-slate-200 rounded-xl p-1">
-                <ApiCodeGenerator />
-              </div>
+            <div className="pt-2 md:pt-3 p-2 bg-gradient-to-b from-home-secondary via-home-bg to-home-accent theme-transition shadow-md shadow-black/10 rounded-xl">
+              <ApiCodeGenerator />
             </div>
           </div>
         </div>
 
-        <div className="bg-blue-400">blogs</div>
-        <div className="bg-blue-300">recents</div>
+        <div className="px-0.5 py-2 md:px-2 md:py-3">
+          <FeaturedBlogs />
+        </div>
+        <div className="px-0.5 py-2 md:px-2 md:py-3">
+          <RecentVisits />
+        </div>
       </div>
 
       <AddNoteModal
