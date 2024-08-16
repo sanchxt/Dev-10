@@ -18,7 +18,7 @@ const DetailedLinksAndNotes = ({
 
   return (
     <div className="flex md:gap-1 flex-wrap md:flex-nowrap p-0.5 max-h-[30rem]">
-      {/* essentials */}
+      {/* links */}
       <div className="w-[60%] flex flex-col py-2 xl:py-4">
         <h2 className="w-full h-fit italic text-center tracking-wide font-light text-sm md:text-base lg:text-lg xl:text-2xl text-home-text theme-transition">
           All Links
@@ -51,7 +51,7 @@ const DetailedLinksAndNotes = ({
                 </button>
               </div>
               {visibleIndex === idx && (
-                <p className="text-xs text-home-text-secondary italic text-[0.5rem] transition-all">
+                <p className="text-xs text-home-text italic theme-transition">
                   {link.description}
                 </p>
               )}
