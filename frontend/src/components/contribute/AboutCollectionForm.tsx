@@ -4,6 +4,7 @@ import { SubmitHandler, useForm } from "react-hook-form";
 
 import { AboutResourceCollectionFields } from "../../utils/types";
 import { aboutResourceCollectionSchema } from "../../utils/schema";
+import { toast } from "react-toastify";
 
 interface AboutCollectionFormProps {
   onSubmit: (data: AboutResourceCollectionFields) => void;
@@ -24,7 +25,7 @@ const AboutCollectionForm = ({ onSubmit }: AboutCollectionFormProps) => {
   } = useForm<AboutResourceCollectionFields>({
     resolver: zodResolver(aboutResourceCollectionSchema),
   });
-  const watchTags = watch("tags", []);
+  const watchLanguages = watch("languages", []);
 
   const handleKeyDown = (e: React.KeyboardEvent<HTMLInputElement>) => {
     if (e.key === "Enter" || e.key === ",") {
@@ -34,18 +35,19 @@ const AboutCollectionForm = ({ onSubmit }: AboutCollectionFormProps) => {
         .map((tag) => tag.trim())
         .filter((tag) => tag);
 
-      const validation = aboutResourceCollectionSchema.shape.tags.safeParse([
-        ...watchTags,
-        ...newTags,
-      ]);
+      const validation =
+        aboutResourceCollectionSchema.shape.languages.safeParse([
+          ...watchLanguages,
+          ...newTags,
+        ]);
 
       if (!validation.success) {
         validation.error.errors.forEach((issue) => {
-          setError("tags", { type: "manual", message: issue.message });
+          setError("languages", { type: "manual", message: issue.message });
         });
       } else {
-        clearErrors("tags");
-        setValue("tags", validation.data);
+        clearErrors("languages");
+        setValue("languages", validation.data);
         setInput("");
       }
     }
@@ -53,8 +55,8 @@ const AboutCollectionForm = ({ onSubmit }: AboutCollectionFormProps) => {
 
   const handleRemoveTag = (index: number) => {
     setValue(
-      "tags",
-      watchTags.filter((_, i) => i !== index)
+      "languages",
+      watchLanguages.filter((_, i) => i !== index)
     );
   };
 
@@ -68,7 +70,7 @@ const AboutCollectionForm = ({ onSubmit }: AboutCollectionFormProps) => {
     try {
       onSubmit(data);
     } catch (error) {
-      console.log("Form submission error:", error);
+      toast.error("An error has occurrred:", error!);
     }
   };
 
@@ -107,13 +109,13 @@ const AboutCollectionForm = ({ onSubmit }: AboutCollectionFormProps) => {
           )}
         </div>
 
-        {/* tags */}
+        {/* languages */}
         <div className="flex flex-col group relative pb-5">
           <label
             htmlFor="tags"
             className="text-xs pb-1 pl-0.5 font-medium text-gray-500 transition-all duration-500 ease-in-out group-focus-within:text-purple-500"
           >
-            Tags
+            Languages
           </label>
 
           <div
@@ -121,12 +123,12 @@ const AboutCollectionForm = ({ onSubmit }: AboutCollectionFormProps) => {
             className="peer rounded-lg bg-gray-300 lg:w-1/2 py-2 px-2 text-sm font-light outline-none drop-shadow-sm transition-all duration-500 ease-in-out focus-within:bg-gray-200 focus-within:ring-2 focus-within:ring-purple-400/40 cursor-text"
           >
             <div className="flex flex-wrap gap-1">
-              {watchTags.map((tag, index) => (
+              {watchLanguages.map((language, index) => (
                 <div
                   key={index}
                   className="flex items-center bg-purple-200 text-purple-700 px-2 py-1 rounded"
                 >
-                  {tag}
+                  {language}
                   <button
                     type="button"
                     className="ml-1 font-bold"
@@ -141,20 +143,20 @@ const AboutCollectionForm = ({ onSubmit }: AboutCollectionFormProps) => {
                 ref={inputRef}
                 value={input}
                 id="tags"
-                disabled={watchTags.length >= 3}
+                disabled={watchLanguages.length >= 3}
                 onChange={(e) => setInput(e.target.value)}
                 onKeyDown={handleKeyDown}
                 className={`bg-transparent outline-none placeholder:text-xs focus:placeholder-purple-500/80 ${
-                  watchTags.length >= 3 && "hidden"
+                  watchLanguages.length >= 3 && "hidden"
                 }`}
                 placeholder="Enter comma separated tags"
               />
             </div>
           </div>
 
-          {errors.tags ? (
+          {errors.languages ? (
             <p className="text-[0.6rem] md:text-[0.65rem] text-red-500 absolute pl-0.5 pt-1 font-semibold bottom-0">
-              {errors.tags.message}
+              {errors.languages.message}
             </p>
           ) : (
             <span className="absolute text-[0.6rem] md:text-[0.65rem] pl-0.5 pt-1 font-semibold text-gray-400 hidden transition-all ease-in-out group-focus-within:block bottom-0">
