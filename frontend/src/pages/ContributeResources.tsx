@@ -1,14 +1,11 @@
-import Sidebar from "../components/shared/Sidebar";
+import MainLayout from "./MainLayout";
 import CreateResourceForm from "../components/contribute/CreateResourceForm";
 
 const ContributeResources = () => {
   return (
-    <section className="flex flex-col md:flex-row h-screen">
-      <Sidebar />
-      <div className="flex-grow md:pl-[4rem]">
-        <CreateResourceForm />
-      </div>
-    </section>
+    <MainLayout>
+      <CreateResourceForm />
+    </MainLayout>
   );
 };
 

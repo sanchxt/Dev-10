@@ -1,14 +1,11 @@
+import MainLayout from "./MainLayout";
 import DisplayResources from "../components/resources/DisplayResources";
-import Sidebar from "../components/shared/Sidebar";
 
 const Resources = () => {
   return (
-    <section className="flex flex-col md:flex-row h-screen">
-      <Sidebar />
-      <div className="flex-grow md:pl-[4rem]">
-        <DisplayResources />
-      </div>
-    </section>
+    <MainLayout>
+      <DisplayResources />
+    </MainLayout>
   );
 };
 
