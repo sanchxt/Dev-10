@@ -133,7 +133,7 @@ const DetailedResource: React.FC = () => {
                             idx === 0
                               ? "bg-home-primary col-span-2"
                               : "bg-home-primary w-full"
-                          } rounded-xl p-1.5 md:p-2 xl:p-2.5 theme-transition`}
+                          } rounded-xl p-1.5 md:p-2 xl:p-2.5 theme-transition text-home-text`}
                         >
                           <p
                             className={`text-[0.6rem] md:text-[0.68rem] xl:text-xs theme-transition ${
@@ -159,7 +159,7 @@ const DetailedResource: React.FC = () => {
                   Update your Resource
                 </h2>
                 <button
-                  className="bg-home-quaternary w-full text-white p-1 md:p-2 text-xs md:text-sm font-bold rounded-full shadow-md hover:bg-home-primary focus:outline-none focus:ring-2 focus:ring-purple-500 focus:ring-opacity-50 transition-colors duration-300 h-fit"
+                  className="bg-home-quaternary w-full text-home-text p-1 md:p-2 text-xs md:text-sm font-bold rounded-full shadow-md hover:bg-home-primary focus:outline-none focus:ring-2 focus:ring-purple-500 focus:ring-opacity-50 transition-colors duration-300 h-fit"
                   onClick={handleUpdateFormClick}
                 >
                   Update Resource

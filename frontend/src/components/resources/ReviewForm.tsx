@@ -113,7 +113,7 @@ const ReviewForm = ({ id }: { id: string }) => {
 
             <textarea
               {...register("comment")}
-              className="bg-home-accent theme-transition font-medium rounded-xl w-full p-2 xl:p-2.5 resize-none focus:outline-none text-[0.6rem] md:text-xs text-white tracking-wide scrollbar-thin scrollbar-thumb-purple-100 scrollbar-track-slate-300/20"
+              className="bg-home-accent theme-transition font-medium rounded-xl w-full p-2 xl:p-2.5 resize-none focus:outline-none text-[0.6rem] md:text-xs text-home-text tracking-wide scrollbar-thin scrollbar-thumb-purple-100 scrollbar-track-slate-300/20"
               disabled={!!userReview}
             ></textarea>
             {errors.comment && (
