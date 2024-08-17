@@ -345,3 +345,7 @@ export interface CodeModalProps {
   onRequestClose: () => void;
   code: ApiCode | null;
 }
+
+export interface LayoutProps {
+  children: ReactNode;
+}
