@@ -104,7 +104,7 @@ const ReviewForm = ({ id }: { id: string }) => {
               </div>
               <button
                 type="submit"
-                className="text-blue-200 text-[0.55rem] sm:text-[0.65rem] md:text-[0.7rem] xl:text-sm font-medium disabled:text-gray-200"
+                className="text-home-text-link text-[0.55rem] sm:text-[0.65rem] md:text-[0.7rem] xl:text-sm font-medium disabled:text-home-text-secondary"
                 disabled={!!userReview}
               >
                 Submit
