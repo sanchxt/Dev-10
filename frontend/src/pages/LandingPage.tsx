@@ -15,7 +15,6 @@ const LandingPage = () => {
         </div>
         <LandingCarousel />
         <LandingParagraph text="We give you the head start that everyone wishes they had. No more pulling your hair out of confusion, trying to find the perfect pathway. We solve that problem for you." />
-        {/* <div className="h-[300vh]"></div> */}
       </main>
     </>
   );
