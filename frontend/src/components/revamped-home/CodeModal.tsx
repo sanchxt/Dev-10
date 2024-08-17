@@ -1,9 +1,14 @@
 import { createPortal } from "react-dom";
 import { useState } from "react";
 import { Prism as SyntaxHighlighter } from "react-syntax-highlighter";
-import { materialLight } from "react-syntax-highlighter/dist/esm/styles/prism";
+import {
+  materialLight,
+  materialDark,
+} from "react-syntax-highlighter/dist/esm/styles/prism";
 
 import { CodeModalProps } from "../../utils/types";
+import { useSelector } from "react-redux";
+import { RootState } from "../../store";
 
 const CodeModal = ({ isOpen, onRequestClose, code }: CodeModalProps) => {
   const [fileIndex, setFileIndex] = useState<number>(0);
@@ -12,6 +17,8 @@ const CodeModal = ({ isOpen, onRequestClose, code }: CodeModalProps) => {
     setFileIndex(Number(e.target.value));
   };
 
+  const theme = useSelector((state: RootState) => state.theme);
+
   if (!isOpen) return null;
   return createPortal(
     <div
@@ -19,17 +26,17 @@ const CodeModal = ({ isOpen, onRequestClose, code }: CodeModalProps) => {
       onClick={onRequestClose}
     >
       <div
-        className="bg-white p-6 rounded-lg shadow-xl w-full md:w-1/2 overflow-hidden"
+        className="bg-home-accent p-6 rounded-lg shadow-xl w-full md:w-1/2 overflow-hidden"
         onClick={(e) => e.stopPropagation()}
       >
-        <h2 className="text-center pb-4 font-medium tracking-wide sm:text-lg md:text-xl">
+        <h2 className="text-center text-home-text pb-4 font-medium tracking-wide sm:text-lg md:text-xl">
           Code
         </h2>
 
         <div className="flex flex-col group relative pb-5">
           <label
             htmlFor="fileName"
-            className="text-xs pb-1 pl-0.5 font-medium text-gray-500 transition-all duration-500 ease-in-out group-focus-within:text-purple-500"
+            className="text-xs pb-1 pl-0.5 font-medium text-home-text-secondary transition-all duration-500 ease-in-out group-focus-within:text-purple-500"
           >
             File Name
           </label>
@@ -37,7 +44,7 @@ const CodeModal = ({ isOpen, onRequestClose, code }: CodeModalProps) => {
             id="fileName"
             value={fileIndex}
             onChange={handleFileChange}
-            className="peer focus:placeholder-purple-500/80 placeholder:text-xs rounded-lg bg-gray-100 py-2 px-2 text-sm font-light outline-none drop-shadow-sm transition-all duration-500 ease-in-out focus:ring-2 focus:ring-purple-400/40"
+            className="peer focus:placeholder-purple-500/80 placeholder:text-xs rounded-lg bg-home-tertiary text-home-text py-2 px-2 text-sm font-light outline-none drop-shadow-sm transition-all duration-500 ease-in-out focus:ring-2 focus:ring-purple-400/40"
           >
             {code?.data.map((code, idx) => (
               <option value={idx} key={idx}>
@@ -55,7 +62,7 @@ const CodeModal = ({ isOpen, onRequestClose, code }: CodeModalProps) => {
                   fontFamily: "cursive",
                   overflowY: "hidden",
                 }}
-                style={materialLight}
+                style={theme.theme === "DARK" ? materialDark : materialLight}
                 showLineNumbers
                 // wrapLongLines
               >
