@@ -107,7 +107,7 @@
   }
 
   .pagination-button {
-    @apply p-2 bg-transparent border border-home-text rounded-md disabled:opacity-50 transition-all duration-200 ease-in-out hover:bg-gray-200 disabled:cursor-not-allowed disabled:bg-transparent;
+    @apply p-2 bg-transparent border border-home-text rounded-md disabled:opacity-50 transition-all duration-200 ease-in-out disabled:cursor-not-allowed disabled:bg-transparent;
   }
 }
 
@@ -146,10 +146,10 @@
   --sidebar-bg-1: rgb(40, 40, 46);
   --sidebar-bg-2: rgb(24, 25, 26);
   --sidebar-text: #d3d2d4;
-  --sidebar-active-bg: rgba(143, 143, 139, 0.5);
+  --sidebar-active-bg: rgba(143, 143, 139, 0.3);
   --sidebar-scrollbar-bg: rgba(194, 190, 195, 0.5);
   --sidebar-scrollbar-fg: rgba(36, 4, 49, 0.4);
-  --sidebar-menu-btn: #bebe19;
+  --sidebar-menu-btn: #f0f0ef;
 
   --text-flip-primary-1: #cadbe0;
   --text-flip-primary-2: #e6edef;
@@ -227,11 +227,11 @@
 
   --sidebar-bg-1: rgb(245, 244, 244);
   --sidebar-bg-2: rgb(223, 231, 233);
-  --sidebar-text: #400140;
-  --sidebar-active-bg: rgba(187, 147, 197, 0.8);
+  --sidebar-text: #08111e;
+  --sidebar-active-bg: rgba(42, 39, 43, 0.3);
   --sidebar-scrollbar-bg: rgba(32, 1, 40, 0.2);
   --sidebar-scrollbar-fg: rgba(220, 216, 221, 0.4);
-  --sidebar-menu-btn: #400140;
+  --sidebar-menu-btn: #060606;
 
   --text-flip-primary-1: rgb(31, 38, 50);
   --text-flip-primary-2: #202121;

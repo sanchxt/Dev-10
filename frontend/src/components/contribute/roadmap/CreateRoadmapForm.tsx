@@ -42,8 +42,8 @@ const CreateRoadmapForm = () => {
   };
 
   return (
-    <section className="h-full flex flex-col">
-      <h1 className="text-center text-2xl lg:text-3xl 2xl:text-4xl py-2 font-semibold">
+    <section className="h-full flex flex-col bg-home-bg">
+      <h1 className="text-center text-2xl lg:text-3xl 2xl:text-4xl py-4 font-semibold text-home-text">
         Create a Roadmap
       </h1>
 
@@ -76,7 +76,7 @@ const CreateRoadmapForm = () => {
           <button
             type="submit"
             disabled={isSubmitting}
-            className="bg-teal-300 w-full hover:bg-teal-400 hover:tracking-wide transition-all duration-300 md:col-span-2 rounded-lg font-semibold py-1 md:py-1.5 xl:py-2 shadow-xl shadow-blue-300/50"
+            className="bg-home-quaternary w-full hover:bg-home-primary text-home-text transition-all duration-300 md:col-span-2 rounded-lg font-semibold py-1 md:py-1.5 xl:py-2 hover:shadow-xl hover:shadow-blue-300/10"
           >
             {isLoading ? "Creating.." : "Create Roadmap"}
           </button>

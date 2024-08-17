@@ -64,7 +64,7 @@ const ReviewForm = ({ id }: { id: string }) => {
 
   return (
     <form onSubmit={handleSubmit(onSubmit)}>
-      <h2 className="text-center text-[0.8rem] md:text-sm lg:text-base xl:text-xl font-medium md:tracking-wide">
+      <h2 className="text-center text-[0.8rem] md:text-sm lg:text-base xl:text-xl font-medium md:tracking-wide text-home-text theme-transition">
         Leave a review
       </h2>
 
@@ -77,7 +77,7 @@ const ReviewForm = ({ id }: { id: string }) => {
       ) : (
         <div className="p-0.5 md:pt-1 xl:pt-2 px-1 md:px-2">
           <div className="pt-1 md:pt-2 flex flex-col gap-1 md:gap-2">
-            <div className="bg-gray-500 rounded-xl w-4/5 sm:w-1/2 p-1.5 md:p-2 xl:p-2.5 flex justify-between items-center">
+            <div className="bg-home-accent theme-transition rounded-xl w-4/5 sm:w-1/2 p-1.5 md:p-2 xl:p-2.5 flex justify-between items-center">
               <div className="flex text-xs">
                 {[...Array(5)].map((_, index) => {
                   const rating = index + 1;
@@ -113,7 +113,7 @@ const ReviewForm = ({ id }: { id: string }) => {
 
             <textarea
               {...register("comment")}
-              className="bg-gray-500 font-medium rounded-xl w-full p-2 xl:p-2.5 resize-none focus:outline-none text-[0.6rem] md:text-xs text-white tracking-wide scrollbar-thin scrollbar-thumb-purple-100 scrollbar-track-slate-300/20"
+              className="bg-home-accent theme-transition font-medium rounded-xl w-full p-2 xl:p-2.5 resize-none focus:outline-none text-[0.6rem] md:text-xs text-white tracking-wide scrollbar-thin scrollbar-thumb-purple-100 scrollbar-track-slate-300/20"
               disabled={!!userReview}
             ></textarea>
             {errors.comment && (

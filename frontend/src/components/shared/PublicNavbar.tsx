@@ -27,12 +27,8 @@ const PublicNavbar = () => {
       } md:shadow-none theme-transition`}
     >
       <nav className="flex justify-between items-center p-1 sm:w-[92%] mx-auto">
-        <div className="">
-          <img
-            src={logo}
-            alt="Dev-10 Logo"
-            className="w-[4.5rem] md:w-20 xl:w-4"
-          />
+        <div className="w-[2rem] sm:w-12 md:w-12 lg:w-16 xl:w-20">
+          <img src={logo} alt="Dev-10 Logo" className="object-contain" />
         </div>
 
         <div

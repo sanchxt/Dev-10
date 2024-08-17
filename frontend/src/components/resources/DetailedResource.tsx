@@ -55,14 +55,19 @@ const DetailedResource: React.FC = () => {
   );
 
   const handleFavoriteClick = async () => {
-    if (isFavoritedData?.isFavorited) {
-      await removeFavoriteResource({ id });
-      toast.success("Removed from favorites");
-    } else {
-      await addFavoriteResource({ id });
-      toast.success("Added to favorites");
+    try {
+      if (isFavoritedData?.isFavorited) {
+        await removeFavoriteResource({ id });
+        toast.success("Removed from favorites");
+      } else {
+        await addFavoriteResource({ id });
+        toast.success("Added to favorites");
+      }
+      refetchFavoriteStatus();
+    } catch (error) {
+      console.error("Error updating favorite status:", error);
+      toast.error("An error occurred while updating favorite status");
     }
-    refetchFavoriteStatus();
   };
 
   const [isReportModalOpen, setIsReportModalOpen] = useState(false);
@@ -92,7 +97,7 @@ const DetailedResource: React.FC = () => {
   if (error) return <div>{error.toString()}</div>;
 
   return (
-    <div className="text-black h-full">
+    <div className="h-full bg-home-bg">
       <div className="h-full flex flex-col justify-between">
         <section>
           <DetailedHeader
@@ -107,16 +112,16 @@ const DetailedResource: React.FC = () => {
           <div className="max-w-full grid grid-cols-2 pt-1 md:pt-2 md:gap-2 lg:gap-4 xl:gap-6">
             {/* comments */}
             <div>
-              <h2 className="text-center text-[0.8rem] md:text-sm lg:text-base xl:text-xl font-medium md:tracking-wide">
+              <h2 className="text-center text-[0.8rem] md:text-sm lg:text-base xl:text-xl font-medium md:tracking-wide text-home-text theme-transition">
                 Latest Comments
               </h2>
 
               <div className="p-0.5 md:pt-1 xl:pt-2 px-1 md:px-2">
                 <div className="pt-1 md:pt-2 grid grid-cols-2 grid-rows-2 gap-1 gap-y-5">
                   {commentsLoading ? (
-                    <div>Loading comments..</div>
+                    <div className="text-home-text">Loading comments..</div>
                   ) : commentsError ? (
-                    <div>
+                    <div className="text-home-text">
                       Some error occured while trying to load the comments
                     </div>
                   ) : (
@@ -126,15 +131,15 @@ const DetailedResource: React.FC = () => {
                           key={idx}
                           className={`${
                             idx === 0
-                              ? "bg-gray-900 col-span-2"
-                              : "bg-gray-800 w-full"
-                          } rounded-xl p-1.5 md:p-2 xl:p-2.5`}
+                              ? "bg-home-primary col-span-2"
+                              : "bg-home-primary w-full"
+                          } rounded-xl p-1.5 md:p-2 xl:p-2.5 theme-transition`}
                         >
                           <p
-                            className={`text-[0.6rem] md:text-[0.68rem] xl:text-xs ${
+                            className={`text-[0.6rem] md:text-[0.68rem] xl:text-xs theme-transition ${
                               comment.placeholder
-                                ? "text-gray-300 italic"
-                                : "text-slate-200"
+                                ? "text-home-text-secondary italic"
+                                : "text-home-text"
                             } font-medium overflow-hidden whitespace-nowrap text-ellipsis`}
                           >
                             {comment.comment}
@@ -150,11 +155,11 @@ const DetailedResource: React.FC = () => {
             {/* review */}
             {currentUserId === data?.user ? (
               <div className="grid grid-rows-2 px-1 md:px-4">
-                <h2 className="text-center text-[0.8rem] md:text-sm lg:text-base xl:text-xl font-medium md:tracking-wide">
-                  Latest Comments
+                <h2 className="text-center text-[0.8rem] md:text-sm lg:text-base xl:text-xl font-medium md:tracking-wide text-home-text theme-transition">
+                  Update your Resource
                 </h2>
                 <button
-                  className="bg-purple-600 w-full text-white p-1 md:p-2 text-xs md:text-sm font-bold rounded-full shadow-md hover:bg-purple-700 focus:outline-none focus:ring-2 focus:ring-purple-500 focus:ring-opacity-50 transition-colors duration-300 h-fit"
+                  className="bg-home-quaternary w-full text-white p-1 md:p-2 text-xs md:text-sm font-bold rounded-full shadow-md hover:bg-home-primary focus:outline-none focus:ring-2 focus:ring-purple-500 focus:ring-opacity-50 transition-colors duration-300 h-fit"
                   onClick={handleUpdateFormClick}
                 >
                   Update Resource
@@ -176,14 +181,14 @@ const DetailedResource: React.FC = () => {
         <div className="px-4 md:px-6 xl:px-8 py-4 md:py-5 xl:py-6 flex justify-end items-center">
           {currentUserId === data?.user ? (
             <div className="flex gap-4 md:gap-5 xl:gap-8 items-center">
-              <div className="flex gap-2 items-center">
+              <div className="flex gap-2 items-center text-home-text theme-transition">
                 <BsEye className="text-xl md:text-2xl xl:text-3xl" />
                 <span className="text-xs md:text-sm">
                   {data?.totalViews || 0}
                 </span>
               </div>
 
-              <div className="flex gap-2 items-center">
+              <div className="flex gap-2 items-center text-home-text theme-transition">
                 <FaRegBookmark className="text-xl md:text-2xl xl:text-3xl" />
                 <span className="text-xs md:text-sm">
                   {data?.favoritesCount}
@@ -191,16 +196,16 @@ const DetailedResource: React.FC = () => {
               </div>
             </div>
           ) : (
-            <div className="flex gap-4 md:gap-5 xl:gap-8 items-center">
+            <div className="flex gap-4 md:gap-5 xl:gap-8 items-center text-home-text">
               <button onClick={handleReportClick}>
                 <GoReport className="text-xl md:text-2xl xl:text-3xl" />
               </button>
 
               <button onClick={handleFavoriteClick}>
                 {isFavoritedData?.isFavorited ? (
-                  <GoBookmarkSlashFill className="text-gray-700 text-xl md:text-2xl xl:text-3xl" />
+                  <GoBookmarkSlashFill className="text-xl md:text-2xl xl:text-3xl" />
                 ) : (
-                  <GoBookmarkFill className="text-gray-700 text-xl md:text-2xl xl:text-3xl" />
+                  <GoBookmarkFill className="text-xl md:text-2xl xl:text-3xl" />
                 )}
               </button>
             </div>

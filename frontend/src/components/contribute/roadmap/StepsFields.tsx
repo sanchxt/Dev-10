@@ -104,13 +104,13 @@ const StepsFields = ({
   };
 
   return (
-    <div className="bg-slate-200 rounded-lg p-2 max-h-[30rem] overflow-y-auto scrollbar-thin scrollbar-track-purple-200 scrollbar-thumb-purple-100">
+    <div className="bg-home-accent rounded-lg p-2 max-h-[30rem] overflow-y-auto scrollbar-thin scrollbar-track-purple-200 scrollbar-thumb-purple-100">
       <RoadmapColumnHeading text="Roadmap's Steps (Minimum 3)" />
 
       <div>
         {stepFields.map((step, idx) => (
           <React.Fragment key={step.id}>
-            <h4 className="text-center pt-4 text-xs text-gray-500 italic tracking-wider underline underline-offset-4">
+            <h4 className="text-center pt-4 text-xs text-home-text-secondary italic tracking-wider underline underline-offset-4">
               Step {idx + 1 < 10 ? "0" : ""}
               {idx + 1}
             </h4>
@@ -176,7 +176,7 @@ const StepsFields = ({
           <button
             type="button"
             onClick={addNewStep}
-            className="py-2 w-full font-medium italic bg-gradient-to-br from-blue-300/50 to-blue-50/40 rounded-lg"
+            className="py-2 w-full italic bg-gradient-to-r from-home-quaternary to-home-primary text-home-text font-semibold rounded-lg"
           >
             Add Step
           </button>

@@ -1,28 +1,28 @@
-import { FormEvent, useCallback, useMemo, useState, useRef } from 'react';
+import { FormEvent, useCallback, useMemo, useState, useRef } from "react";
 
-import TextFlipAnimated from '../TextFlipAnimated';
+import TextFlipAnimated from "../TextFlipAnimated";
 import {
   filterRoadmapDropdownItems,
   sortRoadmapDropdownItems,
-} from '../../utils/constants';
-import { RoadmapByRate, RoadmapSortType } from '../../utils/types';
-import { useGetRoadmapQuery } from '../../slices/roadmapApiSlice';
-import Dropdown from '../resources/Dropdown';
-import { toast } from 'react-toastify';
-import RoadmapCard from './RoadmapCard';
-import NoRoadmapsFound from './NoRoadmapsFound';
-import PaginationButton from '../resources/PaginationButton';
-import { focusAndClearSearch } from '../../utils/helpers';
-import SearchIcon from '../resources/SearchIcon';
+} from "../../utils/constants";
+import { RoadmapByRate, RoadmapSortType } from "../../utils/types";
+import { useGetRoadmapQuery } from "../../slices/roadmapApiSlice";
+import Dropdown from "../resources/Dropdown";
+import { toast } from "react-toastify";
+import RoadmapCard from "./RoadmapCard";
+import NoRoadmapsFound from "./NoRoadmapsFound";
+import PaginationButton from "../resources/PaginationButton";
+import { focusAndClearSearch } from "../../utils/helpers";
+import SearchIcon from "../resources/SearchIcon";
 
 const DisplayRoadmaps = () => {
-  const [searchQuery, setSearchQuery] = useState<string>('');
+  const [searchQuery, setSearchQuery] = useState<string>("");
   const searchInputRef = useRef<HTMLInputElement>(null);
 
   const [formInputs, setFormInputs] = useState({
-    search: '',
-    sort: 'recent' as RoadmapSortType,
-    filter: 'highest' as RoadmapByRate,
+    search: "",
+    sort: "recent" as RoadmapSortType,
+    filter: "highest" as RoadmapByRate,
     pageNumber: 1,
   });
 
@@ -53,9 +53,9 @@ const DisplayRoadmaps = () => {
           if (error) {
             toast.error(error.message);
           }
-          console.log('refetched');
-          console.log('data:\n', data);
-          console.log('\n');
+          console.log("refetched");
+          console.log("data:\n", data);
+          console.log("\n");
         });
       }
     },
@@ -91,7 +91,7 @@ const DisplayRoadmaps = () => {
   const memoizedData = useMemo(() => data, [data]);
 
   return (
-    <div className="h-full flex flex-col">
+    <div className="h-full flex flex-col bg-home-bg theme-transition">
       <div className="text-center font-light pt-1 md:pt-2 text-sm sm:text-lg lg:text-xl xl:text-2xl">
         <TextFlipAnimated children="The perfect roadmaps curated for devs just like you" />
       </div>
@@ -101,7 +101,7 @@ const DisplayRoadmaps = () => {
         className="py-6 md:py-6 lg:py-6 px-2 md:px-4 xl:px-8 flex flex-wrap"
       >
         {/* search */}
-        <div className="w-full relative flex justify-center items-center bg-roadmap-search-bg rounded-xl">
+        <div className="w-full relative flex justify-center items-center bg-home-primary rounded-xl">
           <label htmlFor="roadmap-search" className="absolute left-2">
             <SearchIcon isFetching={isFetching} />
           </label>
@@ -111,13 +111,13 @@ const DisplayRoadmaps = () => {
             placeholder="Search for roadmaps.."
             value={searchQuery}
             onChange={(e) => setSearchQuery(e.target.value)}
-            className="w-full appearance-none text-roadmap-search-text bg-transparent rounded-l-xl text-xs tracking-wider font-medium py-1.5 md:py-2 px-1 pl-8 outline-none"
+            className="w-full appearance-none text-home-text bg-transparent rounded-l-xl text-xs tracking-wider font-medium py-1.5 md:py-2 px-1 pl-8 outline-none"
           />
           <button
             type="submit"
             className="mr-1 md:mr-2 border-l-2 border-gray-600/50 pl-1 md:pl-2"
           >
-            <span className="px-2 md:px-4 py-0.5 flex items-center justify-center text-xs md:text-sm font-medium transition-all duration-200 ease-in-out text-search-btn-text bg-search-btn-bg hover:bg-search-btn-hover-bg rounded-lg">
+            <span className="px-2 md:px-4 py-0.5 flex items-center justify-center text-xs md:text-sm font-medium transition-all duration-200 ease-in-out text-search-btn-text bg-home-quaternary hover:bg-home-accent rounded-lg">
               Search
             </span>
           </button>
@@ -125,7 +125,7 @@ const DisplayRoadmaps = () => {
 
         <div className="w-full grid grid-cols-2 gap-2 place-items-center">
           <Dropdown
-            label={`${formInputs.sort} Roadmaps`}
+            label={`${formInputs.sort}`}
             items={sortRoadmapDropdownItems}
             onSelect={handleSortSelect}
           />
@@ -137,7 +137,7 @@ const DisplayRoadmaps = () => {
         </div>
       </form>
 
-      <div className="text-black w-full flex-grow">
+      <div className="text-home-text w-full flex-grow">
         {isLoading || isFetching ? (
           <div className="w-full h-full grid grid-cols-2 grid-rows-2">
             {[...Array(4)].map((_, idx) => (
@@ -153,7 +153,7 @@ const DisplayRoadmaps = () => {
             <span className="sr-only">Loading...</span>
           </div>
         ) : error ? (
-          <div className="flex justify-center items-center">
+          <div className="flex justify-center items-center text-home-text">
             <p>Error fetching roadmaps</p>
           </div>
         ) : (
@@ -176,8 +176,8 @@ const DisplayRoadmaps = () => {
                   />
 
                   <div>
-                    <p className="text-page-text text-xs lg:text-sm font-medium">
-                      Page <span>{formInputs.pageNumber}</span> of{' '}
+                    <p className="text-home-text text-xs lg:text-sm font-medium">
+                      Page <span>{formInputs.pageNumber}</span> of{" "}
                       <span>{data?.pages}</span>
                     </p>
                   </div>
