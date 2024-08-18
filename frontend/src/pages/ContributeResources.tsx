@@ -1,5 +1,5 @@
 import MainLayout from "./MainLayout";
-import CreateResourceForm from "../components/contribute/CreateResourceForm";
+import CreateResourceForm from "../components/contribute/resource/CreateResourceForm";
 
 const ContributeResources = () => {
   return (
