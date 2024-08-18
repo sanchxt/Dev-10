@@ -3,14 +3,14 @@ import { useRef, useState } from "react";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { SubmitHandler, useForm } from "react-hook-form";
 
-import InputBox from "../InputBox";
-import TextAreaBox from "../TextAreaBox";
-import SeparatedInputsBox from "./SeparatedInputsBox";
-import { aboutResourceCollectionSchema } from "../../utils/schema";
+import InputBox from "../../InputBox";
+import TextAreaBox from "../../TextAreaBox";
+import SeparatedInputsBox from "../../SeparatedInputsBox";
+import { aboutResourceCollectionSchema } from "../../../utils/schema";
 import {
   AboutCollectionFormProps,
   AboutResourceCollectionFields,
-} from "../../utils/types";
+} from "../../../utils/types";
 
 const AboutCollectionForm = ({ onSubmit }: AboutCollectionFormProps) => {
   const [input, setInput] = useState<string>("");

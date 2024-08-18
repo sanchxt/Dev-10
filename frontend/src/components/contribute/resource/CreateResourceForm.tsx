@@ -1,7 +1,7 @@
 import LinksForm from "./LinksForm";
 import AboutCollectionForm from "./AboutCollectionForm";
-import { useMultiStepForm } from "../../hooks/useMultiStepForm";
-import { AboutResourceCollectionFields } from "../../utils/types";
+import { useMultiStepForm } from "../../../hooks/useMultiStepForm";
+import { AboutResourceCollectionFields } from "../../../utils/types";
 
 const CreateResourceForm = () => {
   const { step, formData, nextStep } =
