@@ -349,3 +349,31 @@ export interface CodeModalProps {
 export interface LayoutProps {
   children: ReactNode;
 }
+
+export interface InputBoxProps {
+  label: string;
+  id: string;
+  register: UseFormRegister<any>;
+  type: string;
+  placeholder: string;
+  error?: FieldError;
+  showHelperText: boolean;
+}
+
+export interface SelectBoxProps {
+  label: string;
+  id: string;
+  register: UseFormRegister<any>;
+  error?: FieldError;
+  options: string[];
+}
+
+type LinkData = {
+  to: string;
+  text: string;
+};
+
+export interface TextWithLinksProps {
+  message: string[];
+  links: LinkData[];
+}
