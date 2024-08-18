@@ -169,7 +169,7 @@ export const apiCodeGeneratorSchema = z
       required_error: "HTTP method is required",
     }),
     body: z.string().optional(),
-    approach: z.enum(["RTK Query", "fetch", "axios"], {
+    approach: z.enum(["RTK Query", "Fetch", "Axios"], {
       required_error: "Approach is required",
     }),
   })
