@@ -149,3 +149,16 @@ export const homeMainBannerButtons = [
   { text: "Roadmaps", url: "/roadmaps" },
   { text: "Trending", url: "/trending" },
 ];
+
+export const currentSponsors = [
+  {
+    eventName: "code cubicle 2",
+    eventDate: "April 3, 2024",
+    eventLink: "https://codecubicle2.vercel.app/",
+  },
+  {
+    eventName: "code cubicle 1",
+    eventDate: "May 4, 2024",
+    eventLink: "https://code-cubicle.devfolio.co/",
+  },
+];
