@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import "./FloatingChatbotButton.css";
+import "../assets/FloatingChatbotButton.css";
 
 const FloatingChatbotButton: React.FC = () => {
   const [isOpen, setIsOpen] = useState(false);
@@ -14,7 +14,6 @@ const FloatingChatbotButton: React.FC = () => {
         <iframe
           src="https://devtenchatbot.streamlit.app/?embedded=true"
           title="Streamlit Chatbot"
-          frameBorder="0"
           className="chatbot-iframe"
         ></iframe>
       </div>
