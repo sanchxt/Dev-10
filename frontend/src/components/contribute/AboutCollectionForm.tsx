@@ -1,14 +1,16 @@
+import { toast } from "react-toastify";
 import { useRef, useState } from "react";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { SubmitHandler, useForm } from "react-hook-form";
 
-import { AboutResourceCollectionFields } from "../../utils/types";
+import InputBox from "../InputBox";
+import TextAreaBox from "../TextAreaBox";
+import SeparatedInputsBox from "./SeparatedInputsBox";
 import { aboutResourceCollectionSchema } from "../../utils/schema";
-import { toast } from "react-toastify";
-
-interface AboutCollectionFormProps {
-  onSubmit: (data: AboutResourceCollectionFields) => void;
-}
+import {
+  AboutCollectionFormProps,
+  AboutResourceCollectionFields,
+} from "../../utils/types";
 
 const AboutCollectionForm = ({ onSubmit }: AboutCollectionFormProps) => {
   const [input, setInput] = useState<string>("");
@@ -60,10 +62,6 @@ const AboutCollectionForm = ({ onSubmit }: AboutCollectionFormProps) => {
     );
   };
 
-  const handleDivClick = () => {
-    inputRef.current!.focus();
-  };
-
   const handleFormSubmit: SubmitHandler<AboutResourceCollectionFields> = async (
     data
   ) => {
@@ -86,135 +84,61 @@ const AboutCollectionForm = ({ onSubmit }: AboutCollectionFormProps) => {
       >
         {/* title */}
         <div className="flex flex-col group relative pb-5">
-          <label
-            htmlFor="title"
-            className="text-xs pb-1 pl-0.5 font-medium text-home-text-secondary transition-all duration-500 ease-in-out group-focus-within:text-purple-500"
-          >
-            Title
-          </label>
-          <input
-            {...register("title")}
+          <InputBox
+            label="Title"
             id="title"
-            placeholder="Title of the resource collection"
-            className="peer focus:placeholder-purple-500/80 text-home-text placeholder:text-xs rounded-lg bg-home-secondary py-2 px-2 text-sm xl:w-2/3 font-light outline-none drop-shadow-sm transition-all duration-500 ease-in-out focus:bg-home-accent focus:ring-2 focus:ring-purple-400/40"
+            register={register}
+            type="text"
+            placeholder="Resource collection's title"
+            error={errors.title}
+            showHelperText={true}
+            helperText="Title of the resource collection"
+            className="xl:w-2/3"
           />
-          {errors.title ? (
-            <p className="text-[0.6rem] md:text-[0.65rem] text-red-500 absolute pl-0.5 pt-1 font-semibold bottom-0">
-              {errors.title.message}
-            </p>
-          ) : (
-            <span className="absolute text-[0.6rem] md:text-[0.65rem] pl-0.5 pt-1 font-semibold text-home-text-secondary hidden transition-all ease-in-out group-focus-within:block bottom-0">
-              Title of the Resource Collection
-            </span>
-          )}
         </div>
 
         {/* languages */}
         <div className="flex flex-col group relative pb-5">
-          <label
-            htmlFor="tags"
-            className="text-xs pb-1 pl-0.5 font-medium text-home-text-secondary transition-all duration-500 ease-in-out group-focus-within:text-purple-500"
-          >
-            Languages
-          </label>
-
-          <div
-            onClick={handleDivClick}
-            className="peer rounded-lg bg-home-secondary lg:w-1/2 py-2 px-2 text-sm font-light outline-none drop-shadow-sm transition-all duration-500 ease-in-out focus-within:bg-home-accent focus-within:ring-2 focus-within:ring-purple-400/40 cursor-text"
-          >
-            <div className="flex flex-wrap gap-1">
-              {watchLanguages.map((language, index) => (
-                <div
-                  key={index}
-                  className="flex items-center bg-home-quaternary text-home-text px-2 py-1 rounded"
-                >
-                  {language}
-                  <button
-                    type="button"
-                    className="ml-1 font-bold"
-                    onClick={() => handleRemoveTag(index)}
-                  >
-                    &times;
-                  </button>
-                </div>
-              ))}
-              <input
-                type="text"
-                ref={inputRef}
-                value={input}
-                id="tags"
-                disabled={watchLanguages.length >= 3}
-                onChange={(e) => setInput(e.target.value)}
-                onKeyDown={handleKeyDown}
-                className={`bg-transparent outline-none placeholder:text-xs focus:placeholder-purple-500/80 text-home-text ${
-                  watchLanguages.length >= 3 && "hidden"
-                }`}
-                placeholder="Enter comma separated tags"
-              />
-            </div>
-          </div>
-
-          {errors.languages ? (
-            <p className="text-[0.6rem] md:text-[0.65rem] text-red-500 absolute pl-0.5 pt-1 font-semibold bottom-0">
-              {errors.languages.message}
-            </p>
-          ) : (
-            <span className="absolute text-[0.6rem] md:text-[0.65rem] pl-0.5 pt-1 font-semibold text-home-text-secondary hidden transition-all ease-in-out group-focus-within:block bottom-0">
-              Related Tags
-            </span>
-          )}
+          <SeparatedInputsBox
+            label="Languages"
+            id="languages"
+            inputRef={inputRef}
+            watchField={watchLanguages}
+            value={input}
+            setValue={setInput}
+            type="text"
+            maxInputs={3}
+            handleKeyDown={handleKeyDown}
+            handleRemove={handleRemoveTag}
+            placeholder="Enter comma separated languages"
+            error={errors.languages}
+            helperText="Enter related languages / frameworks"
+            className="lg:w-1/2"
+          />
         </div>
 
         {/* description */}
         <div className="flex flex-col group relative pb-5">
-          <label
-            htmlFor="description"
-            className="text-xs pb-1 pl-0.5 font-medium text-home-text-secondary transition-all duration-500 ease-in-out group-focus-within:text-purple-500"
-          >
-            Short Description
-          </label>
-          <textarea
-            {...register("description")}
+          <TextAreaBox
+            label="Short Description"
             id="description"
+            register={register}
             placeholder="Description of what this resource collection is about"
-            className="peer placeholder:text-xs text-home-text focus:placeholder-purple-600/80 rounded-lg h-[4rem] bg-home-secondary py-2 px-2 text-sm font-light outline-none drop-shadow-sm transition-all duration-500 ease-in-out focus:bg-home-accent focus:ring-2 focus:ring-purple-400/40 resize-none scrollbar-thin scrollbar-thumb-slate-700/20 scrollbar-track-slate-300/40"
-          ></textarea>
-          {errors.description ? (
-            <p className="text-[0.6rem] md:text-[0.65rem] text-red-500 absolute pl-0.5 pt-1 font-semibold bottom-0">
-              {errors.description.message}
-            </p>
-          ) : (
-            <span className="absolute text-[0.6rem] md:text-[0.65rem] pl-0.5 pt-1 font-semibold text-home-text-secondary hidden transition-all ease-in-out group-focus-within:block bottom-0">
-              Short Description About the Collection{" "}
-              <span className="font-extrabold">(Max 150 letters)</span>
-            </span>
-          )}
+            error={errors.description}
+            helperText="Short Description About the Collection (Max 150 letters)"
+          />
         </div>
 
         {/* notes */}
         <div className="flex flex-col group relative pb-5">
-          <label
-            htmlFor="notes"
-            className="text-xs pb-1 pl-0.5 font-medium text-home-text-secondary transition-all duration-500 ease-in-out group-focus-within:text-purple-500"
-          >
-            Additional Notes
-          </label>
-          <textarea
-            {...register("notes")}
+          <TextAreaBox
+            label="Additional Notes"
             id="notes"
-            placeholder="Additonal notes to guide learners"
-            className="peer text-home-text placeholder:text-xs focus:placeholder-purple-600/80 rounded-lg h-[4rem] bg-home-secondary py-2 px-2 text-sm font-light outline-none drop-shadow-sm transition-all duration-500 ease-in-out focus:bg-home-accent focus:ring-2 focus:ring-purple-400/40 resize-none scrollbar-thin scrollbar-thumb-slate-700/20 scrollbar-track-slate-300/40"
-          ></textarea>
-          {errors.notes ? (
-            <p className="text-[0.6rem] md:text-[0.65rem] text-red-500 absolute pl-0.5 pt-1 font-semibold bottom-0">
-              {errors.notes.message}
-            </p>
-          ) : (
-            <span className="absolute text-[0.6rem] md:text-[0.65rem] pl-0.5 pt-1 font-semibold text-home-text-secondary hidden transition-all ease-in-out group-focus-within:block bottom-0">
-              Additional Notes for Learners{" "}
-              <span className="font-extrabold">(Max 200 letters)</span>
-            </span>
-          )}
+            register={register}
+            placeholder="Additional notes to guide learners"
+            error={errors.notes}
+            helperText="Additional Notes for Learners (Max 200 letters)"
+          />
         </div>
 
         <button
