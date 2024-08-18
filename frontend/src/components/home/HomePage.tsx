@@ -1,18 +1,18 @@
 import { useSelector } from "react-redux";
+import { useEffect, useState } from "react";
 
 import HomeHeader from "./HomeHeader";
 import MainInfoBox from "./MainInfoBox";
 import { RootState } from "../../store";
-import { useGetNotesQuery } from "../../slices/notesApiSlice";
 import NotesSection from "./NotesSection";
-import { useEffect, useState } from "react";
 import AddNoteModal from "./AddNoteModal";
 import ShowAllNotes from "./ShowAllNotes";
-import DisplayTotalContributions from "./DisplayTotalContributions";
-import DisplaySponsors from "./DisplaySponsors";
-import ApiCodeGenerator from "./ApiCodeGenerator";
 import RecentVisits from "./RecentVisits";
 import FeaturedBlogs from "./FeaturedBlogs";
+import DisplaySponsors from "./DisplaySponsors";
+import ApiCodeGenerator from "./ApiCodeGenerator";
+import { useGetNotesQuery } from "../../slices/notesApiSlice";
+import DisplayTotalContributions from "./DisplayTotalContributions";
 
 const HomePage = () => {
   const userInfo = useSelector((state: RootState) => state.auth.userInfo);

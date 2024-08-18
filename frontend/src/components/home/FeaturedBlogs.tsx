@@ -1,9 +1,9 @@
+import BoxHeading from "./BoxHeading";
+
 const FeaturedBlogs = () => {
   return (
     <div className="bg-gradient-to-br from-home-tertiary via-home-accent to-home-accent h-full rounded-xl shadow-md shadow-black/15 grid grid-rows-[auto_1fr] theme-transition">
-      <h1 className="italic text-center pt-2 pb-1 font-medium lg:tracking-wide text-base lg:text-xl text-home-text theme-transition">
-        Featured Blogs
-      </h1>
+      <BoxHeading text="Featured Blogs" />
 
       <div className="px-3 py-1 md:py-2">
         <div className="grid grid-cols-2 lg:grid-cols-[20%_60%_20%] h-full">

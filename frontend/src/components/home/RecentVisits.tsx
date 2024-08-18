@@ -1,17 +1,17 @@
+import { Link } from "react-router-dom";
 import { useSelector } from "react-redux";
+import { RiArrowRightDoubleLine } from "react-icons/ri";
+
+import BoxHeading from "./BoxHeading";
 import { RootState } from "../../store";
 import NoRecentsFound from "./NoRecentsFound";
-import { Link } from "react-router-dom";
-import { RiArrowRightDoubleLine } from "react-icons/ri";
 
 const RecentVisits = () => {
   const { recents } = useSelector((state: RootState) => state.recentlyVisited);
 
   return (
     <div className="bg-gradient-to-br from-home-secondary via-home-bg to-home-accent rounded-xl shadow-md shadow-black/10 theme-transition">
-      <h1 className="italic text-center pt-2 pb-1 font-medium lg:tracking-wide text-base lg:text-xl text-home-text">
-        Recently Viewed Resources
-      </h1>
+      <BoxHeading text="Recently Viewed Resources" />
 
       {recents.length !== 0 && (
         <p className="text-[0.65rem] md:text-xs italic text-home-text-secondary font-light text-center tracking-wide">

@@ -1,14 +1,14 @@
-import { createPortal } from "react-dom";
 import { useState } from "react";
+import { createPortal } from "react-dom";
+import { useSelector } from "react-redux";
 import { Prism as SyntaxHighlighter } from "react-syntax-highlighter";
 import {
   materialLight,
   materialDark,
 } from "react-syntax-highlighter/dist/esm/styles/prism";
 
-import { CodeModalProps } from "../../utils/types";
-import { useSelector } from "react-redux";
 import { RootState } from "../../store";
+import { CodeModalProps } from "../../utils/types";
 
 const CodeModal = ({ isOpen, onRequestClose, code }: CodeModalProps) => {
   const [fileIndex, setFileIndex] = useState<number>(0);

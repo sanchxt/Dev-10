@@ -1,6 +1,6 @@
-import { useEffect, useState } from "react";
 import { toast } from "react-toastify";
 import { ChromePicker } from "react-color";
+import { useEffect, useState } from "react";
 import { FaRegTrashCan } from "react-icons/fa6";
 
 import {
