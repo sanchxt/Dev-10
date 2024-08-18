@@ -11,11 +11,17 @@ import {
   signupSchema,
   updateProfileSchema,
 } from "./schema";
-import React, { ComponentType, ReactNode, RefObject } from "react";
+import React, {
+  ComponentType,
+  ReactNode,
+  RefObject,
+  SetStateAction,
+} from "react";
 import {
   Control,
   FieldError,
   FieldErrors,
+  Merge,
   Path,
   UseFormClearErrors,
   UseFormRegister,
@@ -358,6 +364,8 @@ export interface InputBoxProps {
   placeholder: string;
   error?: FieldError;
   showHelperText: boolean;
+  helperText?: string;
+  className?: string;
 }
 
 export interface SelectBoxProps {
@@ -368,6 +376,15 @@ export interface SelectBoxProps {
   options: string[];
 }
 
+export interface TextAreaBoxProps {
+  label: string;
+  id: string;
+  register: UseFormRegister<any>;
+  placeholder: string;
+  error?: FieldError;
+  helperText: string;
+}
+
 type LinkData = {
   to: string;
   text: string;
@@ -376,4 +393,25 @@ type LinkData = {
 export interface TextWithLinksProps {
   message: string[];
   links: LinkData[];
+}
+
+export interface SeparatedInputBoxProps {
+  label: string;
+  id: string;
+  inputRef: RefObject<HTMLInputElement>;
+  watchField: string[];
+  value: string;
+  setValue: React.Dispatch<SetStateAction<string>>;
+  type: string;
+  maxInputs: number;
+  handleKeyDown: (e: React.KeyboardEvent<HTMLInputElement>) => void;
+  handleRemove: (index: number) => void;
+  placeholder: string;
+  error?: FieldError | Merge<FieldError, (FieldError | undefined)[]>;
+  helperText: string;
+  className?: string;
+}
+
+export interface AboutCollectionFormProps {
+  onSubmit: (data: AboutResourceCollectionFields) => void;
 }
