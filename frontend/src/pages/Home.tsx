@@ -1,5 +1,5 @@
 import MainLayout from "./MainLayout";
-import HomePage from "../components/revamped-home/HomePage";
+import HomePage from "../components/home/HomePage";
 
 const Home = () => {
   return (
