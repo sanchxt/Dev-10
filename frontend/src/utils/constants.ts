@@ -4,6 +4,9 @@ import { GrResources } from "react-icons/gr";
 import { IoHome } from "react-icons/io5";
 import { RxStarFilled } from "react-icons/rx";
 import { GrProjects } from "react-icons/gr";
+
+const BASE_URL = import.meta.env.VITE_API_URL;
+
 export const navItems = [
   { href: "/", label: "Login", icon: "/login-icon.svg", width: 24, height: 24 },
   {
@@ -16,10 +19,10 @@ export const navItems = [
   { href: "/", label: "FAQs", icon: "/faq-icon.svg", width: 28, height: 28 },
 ];
 
-export const USERS_URL = "/api/users";
-export const RESOURCS_URL = "/api/resources";
-export const NOTES_URL = "/api/notes";
-export const ROADMAPS_URL = "/api/roadmaps";
+export const USERS_URL = `${BASE_URL}/api/users`;
+export const RESOURCS_URL = `${BASE_URL}/api/resources`;
+export const NOTES_URL = `${BASE_URL}/api/notes`;
+export const ROADMAPS_URL = `${BASE_URL}/api/roadmaps`;
 
 // sidebar
 export const sidebarSubMenusList = [
