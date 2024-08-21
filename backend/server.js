@@ -1,3 +1,4 @@
+import cors from "cors";
 import dotenv from "dotenv";
 import cron from "node-cron";
 import express from "express";
@@ -21,6 +22,15 @@ const port = process.env.PORT || 5000;
 connectDB();
 
 const app = express();
+
+app.use(
+  cors({
+    origin:
+      process.env.NODE_ENV === "development" ? "http://localhost:5173" : "test",
+    methods: ["GET", "PUT", "POST", "DELETE"],
+    credentials: true,
+  })
+);
 
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
