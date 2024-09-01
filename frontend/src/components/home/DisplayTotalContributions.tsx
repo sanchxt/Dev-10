@@ -1,28 +1,57 @@
-import { Link } from "react-router-dom";
+import { useEffect } from "react";
 
-const DisplayTotalContributions = ({
-  contributions,
-}: {
-  contributions: number;
-}) => {
+import BoxHeading from "./BoxHeading";
+import StatsNumber from "./StatsDetails";
+import TextWithLinks from "./TextWithLinks";
+import { useUserStatsMutation } from "../../slices/usersApiSlice";
+
+const DisplayTotalContributions = () => {
+  const [userStats, { data, isError, isLoading }] = useUserStatsMutation();
+
+  useEffect(() => {
+    userStats();
+  }, []);
+
+  if (isError) {
+    return (
+      <p className="text-home-text text-sm flex items-center justify-center h-full italic">
+        Error fetching stats
+      </p>
+    );
+  }
+
+  if (isLoading) {
+    return (
+      <p className="text-home-text text-sm flex items-center justify-center h-full italic">
+        Loading stats
+      </p>
+    );
+  }
+
   return (
-    <>
-      <h2 className="text-center text-4xl md:text-5xl lg:text-6xl xl:text-7xl font-black">
-        {contributions}
-      </h2>
-      <div className="flex items-end text-[0.58rem] md:text-xs italic text-gray-700 px-2 py-1">
-        <p>
-          Add your own{" "}
-          <span className="text-blue-700 cursor-pointer font-medium">
-            <Link to="/resources">resource collection here</Link>
-          </span>
-          , or{" "}
-          <span className="text-blue-700 cursor-pointer font-medium">
-            <Link to="/roadmaps">roadmaps here</Link>
-          </span>
-        </p>
+    <div className="grid grid-rows-[1fr_1fr_1fr] py-2 gap-y-4 h-full">
+      <div className="grid grid-cols-2">
+        <BoxHeading text="Ratings" />
+        <BoxHeading text="Contributions" />
       </div>
-    </>
+
+      <div className="grid grid-cols-2">
+        <StatsNumber number={data?.averageRating} decimal={true} />
+        <StatsNumber number={data?.totalContributions} />
+      </div>
+
+      <TextWithLinks
+        message={[
+          "Give back to the community by contributing your own ",
+          " or ",
+          " for other developers to access.",
+        ]}
+        links={[
+          { to: "/resources", text: "resources" },
+          { to: "/roadmaps", text: "roadmaps" },
+        ]}
+      />
+    </div>
   );
 };
 

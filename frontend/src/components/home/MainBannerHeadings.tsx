@@ -1,5 +1,3 @@
-// import mainBannerImage from "../../assets/coding-img.webp";
-
 const MainBannerHeadings = () => {
   return (
     <div className="p-0.5 sm:p-1 lg:p-2 xl:p-3 grid gap-5 md:gap-7 relative">

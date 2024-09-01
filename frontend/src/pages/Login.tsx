@@ -1,5 +1,5 @@
-import LoginForm from '../components/Login/LoginForm';
-import PublicNavbar from '../components/shared/PublicNavbar';
+import LoginForm from "../components/Login/LoginForm";
+import PublicNavbar from "../components/shared/PublicNavbar";
 
 const Login = () => {
   return (
@@ -9,12 +9,10 @@ const Login = () => {
       </div>
 
       <div
-        className="w-full flex-grow flex items-center !no-repeat !bg-cover"
+        className="w-full flex-grow flex items-center no-repeat bg-cover"
         style={{
           backgroundImage:
             "linear-gradient(var(--loginbackdrop1), var(--loginbackdrop2)), url('/bg.jpg')",
-          backgroundRepeat: 'no-repeat',
-          backgroundSize: 'cover',
         }}
       >
         <LoginForm />

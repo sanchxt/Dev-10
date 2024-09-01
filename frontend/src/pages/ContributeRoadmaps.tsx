@@ -1,14 +1,11 @@
+import MainLayout from "./MainLayout";
 import CreateRoadmapForm from "../components/contribute/roadmap/CreateRoadmapForm";
-import Sidebar from "../components/shared/Sidebar";
 
 const ContributeRoadmaps = () => {
   return (
-    <section className="flex flex-col md:flex-row h-screen">
-      <Sidebar />
-      <div className="flex-grow md:pl-[4rem]">
-        <CreateRoadmapForm />
-      </div>
-    </section>
+    <MainLayout>
+      <CreateRoadmapForm />
+    </MainLayout>
   );
 };
 

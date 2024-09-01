@@ -1,18 +1,17 @@
-import { zodResolver } from '@hookform/resolvers/zod';
+import { zodResolver } from "@hookform/resolvers/zod";
 import {
   useForm,
   SubmitHandler,
   FieldValues,
   Path,
   UseFormSetError,
-} from 'react-hook-form';
-import { FaHandSparkles } from 'react-icons/fa6';
-import { ZodSchema } from 'zod';
+} from "react-hook-form";
+import { FaHandSparkles } from "react-icons/fa6";
+import { ZodSchema } from "zod";
 
-import './image-hover.css';
-import SpotlightButton from './SpotlightButton';
-import PublicSocialIcons from './PublicSocialIcons';
-import { Link } from 'react-router-dom';
+import "../assets/image-hover.css";
+import SpotlightButton from "./SpotlightButton";
+import { Link } from "react-router-dom";
 
 interface FormContainerProps<T extends FieldValues> {
   schema: ZodSchema<T>;
@@ -52,16 +51,16 @@ const FormContainer = <T extends FieldValues>({
 
   const handleFormSubmit: SubmitHandler<T> = (data) => onSubmit(data, setError);
 
-  const isLogin = submitButtonText === 'Login';
+  const isLogin = submitButtonText === "Login";
 
-  const bottomTextArray = bottomText.split(' ');
-  const remainingBottomText = bottomText.slice(0, bottomText.lastIndexOf(' '));
+  const bottomTextArray = bottomText.split(" ");
+  const remainingBottomText = bottomText.slice(0, bottomText.lastIndexOf(" "));
 
   return (
     <section className="mx-auto w-full h-full md:rounded-2xl md:w-[95%] md:h-[95%] glass-container flex flex-col">
       <h1
         className={`text-3xl lg:text-4xl flex justify-center items-center pt-4 3xl:pt-8 text-primary-public-heading font-bold transition-colors duration-300 ${
-          isLogin && 'pb-8'
+          isLogin && "pb-8"
         }`}
       >
         {welcomeText}
@@ -71,7 +70,7 @@ const FormContainer = <T extends FieldValues>({
         <div className="w-full lg:w-[60%] 2xl:w-1/2 lg:rounded-bl-2xl px-1 sm:px-2 flex flex-col">
           <p
             className={`w-full sm:w-4/5 md:w-3/4 italic text-secondary-public-text transition-colors duration-300 text-lg lg:text-xl 3xl:text-3xl pt-1 ${
-              isLogin && 'pt-2'
+              isLogin && "pt-2"
             }`}
           >
             {additionalText}
@@ -79,24 +78,24 @@ const FormContainer = <T extends FieldValues>({
 
           <p
             className={`pt-8 ${
-              isLogin && 'pt-16'
+              isLogin && "pt-16"
             } text-xs md:text-sm text-secondary-public-text font-medium flex gap-2`}
           >
             <span>
               <FaHandSparkles color="#d987fa" />
             </span>
-            {submitButtonText === 'Login'
-              ? 'Please login to continue'
-              : 'Create an account to continue'}
+            {submitButtonText === "Login"
+              ? "Please login to continue"
+              : "Create an account to continue"}
           </p>
 
           <form
             onSubmit={handleSubmit(handleFormSubmit)}
-            className={`flex flex-col gap-2 ${isLogin && 'gap-8'}`}
+            className={`flex flex-col gap-2 ${isLogin && "gap-8"}`}
           >
             {fields.map(({ id, label, type }, idx) => (
               <div
-                className={`relative ${idx === 0 || (isLogin && 'mt-6')} mt-1`}
+                className={`relative ${idx === 0 || (isLogin && "mt-6")} mt-1`}
                 key={String(id)}
               >
                 <input
@@ -115,14 +114,14 @@ const FormContainer = <T extends FieldValues>({
 
                 {errors[id] && (
                   <div className="text-red-400 text-xs">
-                    {(errors[id]?.message as string) || ''}
+                    {(errors[id]?.message as string) || ""}
                   </div>
                 )}
               </div>
             ))}
 
             <p className="text-center text-sm text-gray-300 italic tracking-wide text-tertiary-public-text font-medium">
-              {remainingBottomText}{' '}
+              {remainingBottomText}{" "}
               <span className="text-blue-400">
                 <Link to={redirectTo}>
                   {bottomTextArray[bottomTextArray.length - 1]}
@@ -133,7 +132,7 @@ const FormContainer = <T extends FieldValues>({
             <div className="flex justify-center mt-12 md:mt-8">
               <SpotlightButton
                 isDisabled={isSubmitting}
-                text={isLoading ? 'Loading...' : submitButtonText}
+                text={isLoading ? "Loading..." : submitButtonText}
               />
             </div>
 

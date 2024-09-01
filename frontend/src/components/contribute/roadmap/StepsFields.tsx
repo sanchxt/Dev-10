@@ -2,12 +2,12 @@ import { ImCross } from "react-icons/im";
 import React, { useRef, useState } from "react";
 import { useFieldArray } from "react-hook-form";
 
-import { createRoadmapSchema } from "../../../utils/schema";
-import { CreateRoadmapFieldsProps } from "../../../utils/types";
-import TextInput from "./TextInput";
-import TextArea from "./TextArea";
+import InputBox from "../../InputBox";
+import TextAreaBox from "../../TextAreaBox";
 import ResourceInput from "./ResourceInput";
 import RoadmapColumnHeading from "./RoadmapColumnHeading";
+import { createRoadmapSchema } from "../../../utils/schema";
+import { CreateRoadmapFieldsProps } from "../../../utils/types";
 
 const StepsFields = ({
   register,
@@ -116,28 +116,36 @@ const StepsFields = ({
             </h4>
 
             <div className="relative">
-              <TextInput
-                label={`Step ${idx + 1} Title`}
-                id={`steps.${idx}.title`}
-                placeholder={`Step ${idx + 1} title`}
-                register={register}
-                error={errors.steps?.[idx]?.title}
-              />
+              <div className="grid gap-0.5 group relative pt-3 pb-5">
+                <InputBox
+                  label={`Step ${idx + 1}'s Title`}
+                  id={`steps.${idx}.title`}
+                  register={register}
+                  type="text"
+                  placeholder={`Step ${idx + 1}'s title`}
+                  error={errors.steps?.[idx]?.title}
+                  showHelperText={true}
+                  helperText={`Title of step ${idx + 1}`}
+                />
+              </div>
 
-              <TextArea
-                label={`Step ${idx + 1} Description`}
-                id={`steps.${idx}.description`}
-                placeholder={`Step ${idx + 1} description`}
-                register={register}
-                error={errors.steps?.[idx]?.description}
-              />
+              <div className="grid gap-0.5 group relative pt-3 pb-5">
+                <TextAreaBox
+                  label={`Step ${idx + 1}'s Description`}
+                  id={`steps.${idx}.description`}
+                  register={register}
+                  placeholder={`Step ${idx + 1}'s description`}
+                  error={errors.steps?.[idx]?.description}
+                  helperText="Enter your roadmap's description"
+                />
+              </div>
 
               <ResourceInput
-                label={`Step ${idx + 1} Resoruces`}
+                label={`Step ${idx + 1}'s Resoruces`}
                 id={`steps.${idx}.resources`}
                 resources={watchSteps[idx].resources}
                 resourceInput={resourceInputs[idx] || ""}
-                placeholder={`Step ${idx + 1} Resources`}
+                placeholder={`Step ${idx + 1}'s Resources`}
                 onResourceInputChange={(e) => {
                   const newInputs = [...resourceInputs];
                   newInputs[idx] = e.target.value;
@@ -156,7 +164,7 @@ const StepsFields = ({
               {stepFields.length > 3 && (
                 <button
                   type="button"
-                  className="absolute top-0 right-0 text-black text-[0.6rem]"
+                  className="absolute top-0 right-0 text-home-text text-[0.6rem]"
                   onClick={() => removeStep(idx)}
                 >
                   <ImCross />
@@ -172,13 +180,13 @@ const StepsFields = ({
           </p>
         )}
 
-        <div className="pt-2 pb-1 md:pt-4 md:pb-2 flex justify-center">
+        <div className="pt-2 pb-1 md:pt-4 md:pb-2 flex justify-center text-home-text tracking-wider text-sm disabled:text-home-text-secondary">
           <button
             type="button"
             onClick={addNewStep}
-            className="py-2 w-full italic bg-gradient-to-r from-home-quaternary to-home-primary text-home-text font-semibold rounded-lg"
+            disabled={watchSteps.length >= 15}
           >
-            Add Step
+            Add Link
           </button>
         </div>
       </div>

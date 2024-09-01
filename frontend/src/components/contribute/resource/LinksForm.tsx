@@ -8,9 +8,10 @@ import {
   AboutResourceCollectionFields,
   ApiError,
   LinkResourceFormFields,
-} from "../../utils/types";
-import { linksResourceFormSchema } from "../../utils/schema";
-import { useCreateResourceMutation } from "../../slices/resourcesApiSlice";
+} from "../../../utils/types";
+import { linksResourceFormSchema } from "../../../utils/schema";
+import { useCreateResourceMutation } from "../../../slices/resourcesApiSlice";
+import InputBox from "../../InputBox";
 
 interface LinksFormProps {
   formData: AboutResourceCollectionFields;
@@ -105,56 +106,30 @@ const LinksForm = ({ formData }: LinksFormProps) => {
               <div className="relative">
                 {/* url */}
                 <div className="grid gap-0.5 group relative pt-3 pb-5">
-                  <label
-                    htmlFor={`links.${idx}.url`}
-                    className="text-xs pb-1 pl-0.5 font-medium text-home-text transition-all duration-500 ease-in-out group-focus-within:text-purple-500"
-                  >
-                    {`Link ${idx + 1} URL`}
-                  </label>
-
-                  <input
-                    {...register(`links.${idx}.url`)}
+                  <InputBox
+                    label={`Resource ${idx + 1}'s URL`}
                     id={`links.${idx}.url`}
-                    placeholder={`Link ${idx + 1} URL`}
-                    className="peer focus:placeholder-purple-500/80 text-home-text placeholder:text-xs rounded-lg bg-home-secondary focus:bg-home-primary py-2 px-2 text-sm font-light outline-none drop-shadow-sm transition-all duration-300 ease-in-out focus:ring-2 focus:ring-purple-400/40 focus:shadow-xl focus:shadow-purple-300/20"
+                    register={register}
+                    type="text"
+                    placeholder={`Enter resource ${idx + 1}'s URL`}
+                    error={errors.links?.[idx]?.url}
+                    showHelperText={true}
+                    helperText={`Resource ${idx + 1}'s URL`}
                   />
-
-                  {errors.links?.[idx]?.url ? (
-                    <p className="text-[0.6rem] md:text-[0.65rem] text-red-500 absolute pl-0.5 pt-1 font-semibold bottom-0">
-                      {errors.links?.[idx]?.url.message}
-                    </p>
-                  ) : (
-                    <span className="absolute text-[0.6rem] md:text-[0.65rem] pl-0.5 pt-1 font-semibold text-home-text-secondary hidden transition-all ease-in-out group-focus-within:block bottom-0">
-                      {`Link ${idx + 1} URL`}
-                    </span>
-                  )}
                 </div>
 
                 {/* description */}
                 <div className="grid gap-0.5 group relative pt-3 pb-5">
-                  <label
-                    htmlFor={`links.${idx}.description`}
-                    className="text-xs pb-1 pl-0.5 font-medium text-home-text transition-all duration-500 ease-in-out group-focus-within:text-purple-500"
-                  >
-                    {`Link ${idx + 1} Description`}
-                  </label>
-
-                  <input
-                    {...register(`links.${idx}.description`)}
+                  <InputBox
+                    label={`Resource ${idx + 1}'s Description`}
                     id={`links.${idx}.description`}
-                    placeholder={`Link ${idx + 1} Description`}
-                    className="peer focus:placeholder-purple-500/80 text-home-text placeholder:text-xs rounded-lg bg-home-secondary focus:bg-home-primary py-2 px-2 text-sm font-light outline-none drop-shadow-sm transition-all duration-300 ease-in-out focus:ring-2 focus:ring-purple-400/40 focus:shadow-xl focus:shadow-purple-300/20"
+                    register={register}
+                    type="text"
+                    placeholder={`Enter resource ${idx + 1}'s description`}
+                    error={errors.links?.[idx]?.description}
+                    showHelperText={true}
+                    helperText={`Resource ${idx + 1}'s description`}
                   />
-
-                  {errors.links?.[idx]?.description ? (
-                    <p className="text-[0.6rem] md:text-[0.65rem] text-red-500 absolute pl-0.5 pt-1 font-semibold bottom-0">
-                      {errors.links?.[idx]?.description.message}
-                    </p>
-                  ) : (
-                    <span className="absolute text-[0.6rem] md:text-[0.65rem] pl-0.5 pt-1 font-semibold text-home-text-secondary hidden transition-all ease-in-out group-focus-within:block bottom-0">
-                      {`Link ${idx + 1} Description`}
-                    </span>
-                  )}
                 </div>
 
                 {linkFields.length > 1 && (

@@ -1,36 +1,30 @@
-import HomeHeader from "./HomeHeader";
-import AddNoteModal from "./AddNoteModal";
-import WelcomeBanner from "./WelcomeBanner";
-import { useEffect, useState } from "react";
-import { useGetNotesQuery } from "../../slices/notesApiSlice";
-import ShowAllNotes from "./ShowAllNotes";
 import { useSelector } from "react-redux";
+import { useEffect, useState } from "react";
+
+import HomeHeader from "./HomeHeader";
+import MainInfoBox from "./MainInfoBox";
 import { RootState } from "../../store";
 import NotesSection from "./NotesSection";
-import { useTotalContributionsQuery } from "../../slices/usersApiSlice";
-import FloatingChatbotButton from "../FloatingChatbotButton";
-import NoContributionsMessage from "./NoContributionsMessage";
+import AddNoteModal from "./AddNoteModal";
+import ShowAllNotes from "./ShowAllNotes";
+import RecentVisits from "./RecentVisits";
+import FeaturedBlogs from "./FeaturedBlogs";
+import DisplaySponsors from "./DisplaySponsors";
+import ApiCodeGenerator from "./ApiCodeGenerator";
+import { useGetNotesQuery } from "../../slices/notesApiSlice";
 import DisplayTotalContributions from "./DisplayTotalContributions";
-import RecentResources from "./RecentResources";
-import RecentRoadmaps from "./RecentRoadmaps";
 
 const HomePage = () => {
+  const userInfo = useSelector((state: RootState) => state.auth.userInfo);
   const [isCreateNoteModalOpen, setIsCreateNoteModalOpen] =
     useState<boolean>(false);
   const [isAllNotesModalOpen, setIsAllNotesModalOpen] =
     useState<boolean>(false);
 
+  const { data, isError, isLoading, refetch } = useGetNotesQuery();
+
   const handleCreateNote = () => setIsCreateNoteModalOpen(true);
   const handleViewAllNotes = () => setIsAllNotesModalOpen(true);
-
-  const userInfo = useSelector((state: RootState) => state.auth.userInfo);
-
-  const { data, isError, isLoading, refetch } = useGetNotesQuery();
-  const {
-    data: totalContributions,
-    isError: getContributionsError,
-    isLoading: getContributionsLoading,
-  } = useTotalContributionsQuery();
 
   useEffect(() => {
     if (userInfo) {
@@ -39,15 +33,29 @@ const HomePage = () => {
   }, [userInfo]);
 
   return (
-    <div className="px-1 h-full flex flex-col">
-      <HomeHeader />
-      <WelcomeBanner name={userInfo?.name!} />
+    <div className="bg-home-bg">
+      <HomeHeader name={userInfo?.name!} />
+      <div className="grid grid-cols-1 md:grid-cols-[57%_43%] lg:grid-cols-[60%_40%]">
+        <div className="grid grid-cols-2 grid-rows-2 px-0.5 pt-2 md:px-2 md:py-3">
+          <div className="col-span-2">
+            <MainInfoBox />
+          </div>
 
-      <div className="pt-4 w-full md:pl-2 lg:pl-4 xl:pl-6 pb-4">
-        <div className="w-full grid md:grid-cols-2 xl:grid-cols-3">
-          <div className="w-full xl:col-span-2 px-1 lg:pr-4 xl:pr-8">
-            {/* <h1 className="text-center py-1">Notes</h1> */}
-            <div className="w-full max-w-full bg-slate-100 rounded-lg px-1 lg:px-1.5 pb-1 lg:pb-1.5">
+          <div className="col-span-2 px-0.5 pt-2 md:pt-3">
+            <div className="grid grid-cols-1 lg:grid-cols-2 gap-2 h-full">
+              <div className="order-2 md:order-1 bg-gradient-to-br from-home-tertiary to-home-accent shadow-md shadow-black/10 theme-transition rounded-xl p-1">
+                <DisplayTotalContributions />
+              </div>
+              <div className="order-1 md:order-2 bg-gradient-to-br from-home-tertiary to-home-accent shadow-md shadow-black/10 theme-transition rounded-xl p-1">
+                <DisplaySponsors />
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div className="px-0.5 py-2 md:px-2 md:py-3">
+          <div className="grid grid-cols-2 md:grid-cols-1 md:grid-rows-2 gap-1.5">
+            <div className="h-full">
               <NotesSection
                 isError={isError}
                 isLoading={isLoading}
@@ -56,48 +64,18 @@ const HomePage = () => {
                 data={data?.slice(0, 2)}
               />
             </div>
-          </div>
 
-          <div className="w-full  bg-slate-300">
-            <h1 className="text-center py-1">Game</h1>
+            <div className="pt-2 md:pt-3 p-2 bg-gradient-to-b from-home-secondary via-home-bg to-home-accent theme-transition shadow-md shadow-black/10 rounded-xl">
+              <ApiCodeGenerator />
+            </div>
           </div>
         </div>
-      </div>
 
-      <div className="md:px-2 lg:px-4 xl:px-6 pt-2 flex-grow h-fit grid gap-4 grid-cols-1 grid-rows-3 md:grid-rows-1 md:grid-cols-3">
-        <RecentRoadmaps />
-        <RecentResources />
-
-        <div className="flex items-end">
-          <div className="p-1 w-full h-full md:h-[70%] bg-gradient-to-br from-purple-300 to-purple-500 rounded-lg md:rounded-b-none flex justify-center items-center">
-            {getContributionsError ? (
-              <div>
-                <h3 className="italic font-light text-sm md:text-base xl:text-lg tracking-wider">
-                  Error fetching contributions..
-                </h3>
-                <h3 className="text-red-950 font-medium text-center">
-                  Try again later
-                </h3>
-              </div>
-            ) : getContributionsLoading ? (
-              <div className="italic tracking-widest animate-pulse text-base lg:text-lg">
-                <h3>Loading..</h3>
-              </div>
-            ) : (
-              <div className="h-full w-full grid grid-rows-3">
-                <h1 className="italic text-center py-2 text-lg lg:text-xl tracking-wide font-medium">
-                  Your Total Contributions
-                </h1>
-                {totalContributions?.totalContributions === 0 ? (
-                  <NoContributionsMessage name={userInfo?.name!} />
-                ) : (
-                  <DisplayTotalContributions
-                    contributions={totalContributions?.totalContributions!}
-                  />
-                )}
-              </div>
-            )}
-          </div>
+        <div className="px-0.5 py-2 md:px-2 md:py-3">
+          <FeaturedBlogs />
+        </div>
+        <div className="px-0.5 py-2 md:px-2 md:py-3">
+          <RecentVisits />
         </div>
       </div>
 
@@ -112,8 +90,6 @@ const HomePage = () => {
         onRequestClose={() => setIsAllNotesModalOpen(false)}
         requestRefetch={refetch}
       />
-
-      <FloatingChatbotButton />
     </div>
   );
 };

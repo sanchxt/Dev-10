@@ -7,8 +7,8 @@ const NotesSkeletonLoader = () => {
     <>
       {[1, 2, 3].map((_, idx) => (
         <div
-          className={`h-32 lg:h-48 rounded-lg grid gap-2 grid-cols-1 grid-rows-3 ${
-            idx === 2 ? "col-span-2 md:col-span-1" : ""
+          className={`h-24 sm:h-28 md:h-32 lg:h-40 rounded-lg grid gap-2 grid-cols-1 grid-rows-3 ${
+            idx === 2 ? "col-span-2" : ""
           } w-full bg-slate-100 shadow-md p-2`}
           key={idx}
         >
@@ -30,20 +30,20 @@ const NotesSection = ({
 }: NotesSectionProps) => {
   if (isError) {
     return (
-      <div className="italic w-full flex justify-center items-center h-32 lg:h-48">
+      <div className="italic w-full flex justify-center items-center h-32 lg:h-48 text-home-text">
         <h1>Error fetching notes..</h1>
       </div>
     );
   }
 
   return (
-    <div className="w-full max-w-full">
+    <div className="w-full max-w-full h-full bg-gradient-to-b from-home-secondary via-home-bg to-home-accent shadow-md shadow-black/10 p-1 rounded-xl theme-transition">
       <div className="flex justify-end items-center px-2 py-0.5">
-        <p className="flex-grow text-center text-xs lg:text-sm font-light italic">
+        <h3 className="flex-grow text-center text-xs lg:text-sm font-light italic text-home-text theme-transition">
           Sticky Notes
-        </p>
+        </h3>
         <RiMenu3Line
-          className="cursor-pointer text-xs lg:text-sm"
+          className="cursor-pointer text-xs lg:text-sm text-home-text"
           onClick={handleViewAllNotes}
         />
       </div>

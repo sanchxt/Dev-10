@@ -1,11 +1,11 @@
 import { useRef, useState } from "react";
 
-import TagInput from "./TagInput";
-import TextArea from "./TextArea";
-import TextInput from "./TextInput";
+import InputBox from "../../InputBox";
+import TextAreaBox from "../../TextAreaBox";
+import SeparatedInputsBox from "../../SeparatedInputsBox";
+import RoadmapColumnHeading from "./RoadmapColumnHeading";
 import { createRoadmapSchema } from "../../../utils/schema";
 import { CreateRoadmapFieldsProps } from "../../../utils/types";
-import RoadmapColumnHeading from "./RoadmapColumnHeading";
 
 const AboutFields = ({
   register,
@@ -57,31 +57,48 @@ const AboutFields = ({
       <h4 className="text-center pt-4 text-xs text-home-text-secondary italic tracking-wide">
         General information about the roadmap you're submitting
       </h4>
-      <TextInput
-        label="Title"
-        id="title"
-        placeholder="Enter roadmap's title"
-        register={register}
-        error={errors.title}
-      />
 
-      <TextArea
-        label="Description"
-        id="description"
-        placeholder="Enter roadmap's description"
-        register={register}
-        error={errors.description}
-      />
+      <div className="grid gap-0.5 group relative pt-3 pb-5">
+        <InputBox
+          label="Title"
+          id="title"
+          register={register}
+          type="text"
+          placeholder="Enter roadmap's title"
+          error={errors.title}
+          showHelperText={true}
+          helperText="Enter your roadmap's title here"
+        />
+      </div>
 
-      <TagInput
-        watchTags={watchTags}
-        errors={errors}
-        tagInput={tagInput}
-        setTagInput={setTagInput}
-        tagInputRef={tagInputRef}
-        handleTagKeyDown={handleTagKeyDown}
-        handleRemoveTag={handleRemoveTag}
-      />
+      <div className="grid gap-0.5 group relative pt-3 pb-5">
+        <TextAreaBox
+          label="Description"
+          id="description"
+          register={register}
+          placeholder="Enter roadmap's description"
+          error={errors.description}
+          helperText="Enter your roadmap's description"
+        />
+      </div>
+
+      <div className="grid gap-0.5 group relative pt-3 pb-5">
+        <SeparatedInputsBox
+          label="Tags"
+          id="tags"
+          inputRef={tagInputRef}
+          watchField={watchTags}
+          value={tagInput}
+          setValue={setTagInput}
+          type="text"
+          maxInputs={3}
+          handleKeyDown={handleTagKeyDown}
+          handleRemove={handleRemoveTag}
+          placeholder="Enter comma separated tags"
+          error={errors.tags}
+          helperText="Enter comma separated tags to make your roadmap easily discoverable"
+        />
+      </div>
     </div>
   );
 };
