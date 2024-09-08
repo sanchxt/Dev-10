@@ -13,6 +13,7 @@ import DisplaySponsors from "./DisplaySponsors";
 import ApiCodeGenerator from "./ApiCodeGenerator";
 import { useGetNotesQuery } from "../../slices/notesApiSlice";
 import DisplayTotalContributions from "./DisplayTotalContributions";
+import FloatingChatbotButton from "../FloatingChatbotButton";
 
 const HomePage = () => {
   const userInfo = useSelector((state: RootState) => state.auth.userInfo);
@@ -78,6 +79,8 @@ const HomePage = () => {
           <RecentVisits />
         </div>
       </div>
+
+      <FloatingChatbotButton />
 
       <AddNoteModal
         isOpen={isCreateNoteModalOpen}
