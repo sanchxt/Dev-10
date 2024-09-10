@@ -26,7 +26,9 @@ const app = express();
 app.use(
   cors({
     origin:
-      process.env.NODE_ENV === "development" ? "http://localhost:5173" : "",
+      process.env.NODE_ENV === "development"
+        ? "http://localhost:5173"
+        : "https://dev-10.vercel.app",
     methods: ["GET", "PUT", "POST", "DELETE"],
     credentials: true,
   })
