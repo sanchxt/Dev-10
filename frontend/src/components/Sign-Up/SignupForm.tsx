@@ -1,7 +1,6 @@
 import { useEffect } from "react";
 import { toast } from "react-toastify";
 import { useNavigate } from "react-router-dom";
-import { UseFormSetError } from "react-hook-form";
 import { useDispatch, useSelector } from "react-redux";
 
 import FormContainer from "../FormContainer";
@@ -24,10 +23,7 @@ const SignupForm = () => {
     }
   }, [navigate, userInfo]);
 
-  const onSubmit = async (
-    data: SignupFormFields,
-    setError: UseFormSetError<SignupFormFields>
-  ) => {
+  const onSubmit = async (data: SignupFormFields) => {
     try {
       const { name, email, password } = data;
       const response = await register({ name, email, password }).unwrap();

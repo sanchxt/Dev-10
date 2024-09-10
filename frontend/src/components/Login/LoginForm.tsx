@@ -1,7 +1,6 @@
 import { useEffect } from "react";
 import { toast } from "react-toastify";
 import { useNavigate } from "react-router-dom";
-import { UseFormSetError } from "react-hook-form";
 import { useDispatch, useSelector } from "react-redux";
 
 import { useLoginMutation } from "../../slices/usersApiSlice";
@@ -24,10 +23,7 @@ const LoginForm = () => {
     }
   }, [navigate, userInfo]);
 
-  const onSubmit = async (
-    data: LoginFormFields,
-    setError: UseFormSetError<LoginFormFields>
-  ) => {
+  const onSubmit = async (data: LoginFormFields) => {
     try {
       const response = await login(data).unwrap();
       dispatch(setCredentials({ ...response }));
