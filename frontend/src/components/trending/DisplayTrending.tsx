@@ -1,8 +1,6 @@
-import React from 'react';
-import { useGetTrendingQuery } from '../../slices/resourcesApiSlice';
-import { useNavigate } from 'react-router-dom';
-import TextFlipAnimated from '../TextFlipAnimated';
-
+import { useGetTrendingQuery } from "../../slices/resourcesApiSlice";
+import { useNavigate } from "react-router-dom";
+import TextFlipAnimated from "../TextFlipAnimated";
 
 type Trending = {
   _id: string;

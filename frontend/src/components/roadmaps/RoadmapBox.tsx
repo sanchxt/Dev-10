@@ -6,7 +6,6 @@ import {
   ReactNode,
   ReactPortal,
 } from "react";
-import { RoadmapCardProps } from "../../utils/types";
 import MultiLineEllipsis from "../resources/MultiLineEllipsis";
 import { useNavigate } from "react-router-dom";
 
@@ -24,7 +23,7 @@ const RoadmapBox: React.FC<any> = ({ resource, index }) => {
     <div
       onClick={() => handleNavigation(resource._id)}
       className={`bg-gradient-to-r from-home-accent via-home-accent to-home-secondary theme-transition cursor-pointer
-      ${index === 0 && "rounded-b-lg h-1/2 md:h-3/5 xl:h-[58%]"} 
+      ${index === 0 && "rounded-b-lg h-1/2 md:h-3/5 xl:h-[58%]"}
       ${
         index === 1 &&
         "rounded-r-lg md:rounded-br-none md:rounded-t-lg h-1/2 md:h-2/5 xl:h-[42%]"

@@ -33,11 +33,8 @@ const DetailedResource: React.FC = () => {
     isLoading: commentsLoading,
   } = useGetLatestCommentsQuery(id);
 
-  const {
-    data: isFavoritedData,
-    isLoading: isFavoritedLoading,
-    refetch: refetchFavoriteStatus,
-  } = useCheckIfResourceFavoritedQuery({ id });
+  const { data: isFavoritedData, refetch: refetchFavoriteStatus } =
+    useCheckIfResourceFavoritedQuery({ id });
   const [addFavoriteResource] = useAddFavoriteResourceMutation();
   const [removeFavoriteResource] = useRemoveFavoriteResourceMutation();
 
