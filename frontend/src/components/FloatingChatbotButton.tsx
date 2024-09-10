@@ -12,7 +12,7 @@ const FloatingChatbotButton: React.FC = () => {
     <>
       <div className={`floating-chatbot ${isOpen ? "open" : ""}`}>
         <iframe
-          src="https://devtenchatbot.streamlit.app/?embedded=true"
+          src="https://devten-chatbot.streamlit.app/?embedded=true"
           title="Streamlit Chatbot"
           className="chatbot-iframe"
         ></iframe>

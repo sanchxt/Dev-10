@@ -1,5 +1,5 @@
-import React, { useState } from 'react';
-import { FaTimes, FaArrowLeft, FaArrowRight } from 'react-icons/fa'; // For the close and arrow icons
+import React, { useState } from "react";
+import { FaTimes, FaArrowLeft, FaArrowRight } from "react-icons/fa"; // For the close and arrow icons
 
 interface Step {
   title: string;
@@ -8,7 +8,9 @@ interface Step {
 }
 
 const RoadmapSteps: React.FC<{ steps: Step[] }> = ({ steps }) => {
-  const [selectedStepIndex, setSelectedStepIndex] = useState<number | null>(null);
+  const [selectedStepIndex, setSelectedStepIndex] = useState<number | null>(
+    null
+  );
 
   const openDialog = (index: number) => {
     setSelectedStepIndex(index);
@@ -34,21 +36,21 @@ const RoadmapSteps: React.FC<{ steps: Step[] }> = ({ steps }) => {
     <div className="relative">
       {/* Horizontal scrollable step cards */}
       <div className="flex space-x-6 overflow-x-auto py-4 w-full scrollbar-thin scrollbar-thumb-gray-400 scrollbar-track-gray-200">
-        {steps.map((step, index) => (
+        {steps.map((_, index) => (
           <div
             key={index}
             onClick={() => openDialog(index)}
-            className="flex-shrink-0 w-64 h-48 bg-purple-500 text-white flex items-center justify-center cursor-pointer transition duration-300 hover:bg-purple-600 rounded-lg"
+            className="flex-shrink-0 w-64 h-48 bg-gradient-to-br from-home-quaternary to-home-accent text-white flex items-center justify-center cursor-pointer transition-all duration-300 hover:from-home-primary hover:to-home-accent rounded-lg"
           >
             <h2 className="text-4xl font-bold">
-              {(index + 1).toString().padStart(2, '0')}
+              {(index + 1).toString().padStart(2, "0")}
             </h2>
           </div>
         ))}
       </div>
 
       {/* Thin horizontal scrollbar */}
-      <style jsx>{`
+      <style>{`
         /* Custom scrollbar */
         ::-webkit-scrollbar {
           height: 4px;
@@ -66,14 +68,14 @@ const RoadmapSteps: React.FC<{ steps: Step[] }> = ({ steps }) => {
       {selectedStepIndex !== null && (
         <div className="fixed inset-0 flex items-center justify-center bg-black bg-opacity-50 z-50">
           <div
-            className="bg-white p-8 rounded-2xl shadow-xl relative max-w-lg w-full transform transition-transform duration-300 ease-out scale-100 opacity-100"
-            style={{ animation: 'fadeIn 0.4s ease-out, slideIn 0.4s ease-out' }}
+            className="bg-home-bg p-8 rounded-2xl shadow-xl relative max-w-lg w-full transform transition-transform duration-300 ease-out scale-100 opacity-100"
+            style={{ animation: "fadeIn 0.4s ease-out, slideIn 0.4s ease-out" }}
           >
             {/* Close Button */}
             <button
               className="absolute top-4 right-4 text-gray-500 hover:text-red-500 transition-colors"
               style={{
-                animation: 'fadeOut 0.4s ease-out, slideOut 0.4s ease-out',
+                animation: "fadeOut 0.4s ease-out, slideOut 0.4s ease-out",
               }}
               onClick={closeDialog}
             >
@@ -84,7 +86,7 @@ const RoadmapSteps: React.FC<{ steps: Step[] }> = ({ steps }) => {
             <button
               onClick={prevStep}
               className={`absolute top-1/2 left-4 transform -translate-y-1/2 text-gray-500 hover:text-gray-700 transition-colors ${
-                selectedStepIndex === 0 ? 'opacity-50 cursor-not-allowed' : ''
+                selectedStepIndex === 0 ? "opacity-50 cursor-not-allowed" : ""
               }`}
               disabled={selectedStepIndex === 0}
             >
@@ -94,8 +96,8 @@ const RoadmapSteps: React.FC<{ steps: Step[] }> = ({ steps }) => {
               onClick={nextStep}
               className={`absolute top-1/2 right-4 transform -translate-y-1/2 text-gray-500 hover:text-gray-700 transition-colors ${
                 selectedStepIndex === steps.length - 1
-                  ? 'opacity-50 cursor-not-allowed'
-                  : ''
+                  ? "opacity-50 cursor-not-allowed"
+                  : ""
               }`}
               disabled={selectedStepIndex === steps.length - 1}
             >
@@ -103,10 +105,10 @@ const RoadmapSteps: React.FC<{ steps: Step[] }> = ({ steps }) => {
             </button>
 
             {/* Dialog Content */}
-            <h3 className="text-2xl font-bold mb-4 text-purple-700">
+            <h3 className="text-2xl font-bold mb-4 text-home-text">
               {steps[selectedStepIndex].title}
             </h3>
-            <p className="text-gray-600 mb-6">
+            <p className="text-home-text-secondary mb-6">
               {steps[selectedStepIndex].description}
             </p>
             <ul className="list-disc ml-5 mb-4">
@@ -116,26 +118,26 @@ const RoadmapSteps: React.FC<{ steps: Step[] }> = ({ steps }) => {
                     href={resource}
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="text-blue-500 hover:underline"
+                    className="text-home-text-link hover:underline"
                   >
                     {resource}
                   </a>
                 </li>
               ))}
             </ul>
-            <p className="text-gray-500 mt-4">
+            <p className="text-home-text-secondary mt-4 italic">
               Step {selectedStepIndex + 1} of {steps.length}
             </p>
             <button
               onClick={closeDialog}
-              className="mt-4 bg-purple-500 text-white px-6 py-2 rounded-lg hover:bg-purple-600 transition-colors"
+              className="mt-4 bg-home-primary text-home-text px-6 py-2 rounded-lg hover:bg-home-quaternary theme-transition"
             >
               Close
             </button>
           </div>
 
           {/* Animation Styles */}
-          <style jsx>{`
+          <style>{`
             @keyframes fadeIn {
               from {
                 opacity: 0;
