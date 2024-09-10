@@ -26,7 +26,7 @@ const app = express();
 app.use(
   cors({
     origin:
-      process.env.NODE_ENV === "development" ? "http://localhost:5173" : "test",
+      process.env.NODE_ENV === "development" ? "http://localhost:5173" : "",
     methods: ["GET", "PUT", "POST", "DELETE"],
     credentials: true,
   })
