@@ -31,7 +31,7 @@ const DisplayTrending = () => {
   };
 
   return (
-    <div className="h-full bg-gradient-to-r from-white to-purple-300 p-6">
+    <div className="h-full bg-home-bg p-6">
       <div className="text-base sm:text-lg md:text-xl lg:text-2xl pt-2 md:pt-4 lg:pt-5 w-full mb-4">
         <TextFlipAnimated children=" TRENDING RESOURCES" />
       </div>
